@@ -8,7 +8,6 @@
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
     :root {
-      /* Your brand colors */
       --clr-fuchsia: #ff2d82;
       --clr-deep-teal: #005b63;
       --clr-mauve: #d15694;
@@ -38,39 +37,114 @@
       margin: 0 auto;
     }
 
-    /* Simple header */
+    /* Navigation */
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 15px 0;
+    }
+
+    .home-link {
+      color: var(--clr-cream);
+      text-decoration: none;
+      font-weight: 500;
+      opacity: 0.8;
+      transition: opacity 0.3s ease;
+      font-size: 0.9rem;
+    }
+
+    .home-link:hover {
+      opacity: 1;
+    }
+
+    /* Header - much more compact */
     .header {
       text-align: center;
-      margin-bottom: 40px;
-      padding: 25px;
+      margin-bottom: 25px;
+      padding: 15px;
     }
 
     .header h1 {
-      font-size: 2.5rem;
+      font-size: 1.8rem;
       font-weight: 600;
       color: var(--clr-warm-white);
-      margin-bottom: 10px;
+      margin-bottom: 5px;
+      background: linear-gradient(135deg, var(--clr-warm-white) 0%, var(--clr-cream) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .header p {
-      font-size: 1.1rem;
+      font-size: 0.9rem;
       color: var(--clr-cream);
-      opacity: 0.9;
+      opacity: 0.8;
     }
 
-    /* Search bar */
-    #search {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto 40px;
-      display: block;
-      padding: 16px 24px;
-      border: none;
-      border-radius: 25px;
+    /* Search section with tips */
+    .search-section {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+
+    .tips-toggle {
+      background: rgba(250,248,243,0.1);
+      border: 1px solid rgba(250,248,243,0.2);
+      color: var(--clr-cream);
+      padding: 8px 16px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .tips-toggle:hover {
+      background: rgba(255,45,130,0.2);
+      border-color: var(--clr-fuchsia);
+    }
+
+    .tips-content {
+      position: absolute;
+      top: 100%;
+      left: 0;
       background: var(--clr-warm-white);
       color: #333;
-      font-size: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      padding: 15px;
+      border-radius: 10px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      width: 250px;
+      z-index: 100;
+      display: none;
+      margin-top: 5px;
+    }
+
+    .tips-content.show {
+      display: block;
+    }
+
+    .tips-content p {
+      margin: 0 0 8px 0;
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+
+    #search {
+      width: 100%;
+      max-width: 400px;
+      padding: 12px 20px;
+      border: none;
+      border-radius: 20px;
+      background: var(--clr-warm-white);
+      color: #333;
+      font-size: 0.95rem;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.15);
     }
 
     #search::placeholder {
@@ -227,12 +301,28 @@
 </head>
 <body>
   <div class="container">
+    <nav class="nav">
+      <a href="#" class="home-link">← Back to Home</a>
+      <div></div>
+    </nav>
+
     <header class="header">
-      <h1>DANI'S Crochet Stitch Glossary</h1>
+      <h1>DANI'S Interactive Crochet Stitch Glossary</h1>
       <p>Where Traditional Craft Meets Modern Technology</p>
     </header>
 
-    <input type="text" id="search" placeholder="Try searching for 'single', 'dc', or 'tunisian'...">
+    <div class="search-section">
+      <div class="tips-toggle" onclick="toggleTips()">
+        Tips & Tricks ▼
+        <div class="tips-content" id="tips-content">
+          <p><strong>Browse:</strong> Scroll through all stitches</p>
+          <p><strong>Search:</strong> Type abbreviation or full name</p>
+          <p><strong>Hover:</strong> See full stitch name</p>
+          <p><strong>Click:</strong> View detailed popup with US/UK terms</p>
+        </div>
+      </div>
+      <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
+    </div>
 
     <div id="glossary-grid"></div>
   </div>
@@ -248,8 +338,94 @@
     </div>
   </div>
 
-  <script type="module">
-    import { stitchGlossary } from './glossarydata.js';
+  <script>
+    // Sample data for testing - replace with your full glossarydata.js
+    const stitchGlossary = [
+      {
+        id: "sc",
+        name_us: "Single Crochet",
+        name_uk: "Double Crochet",
+        tags: ["basic", "foundation"],
+        notes: "Foundation stitch, often used in amigurumi."
+      },
+      {
+        id: "dc",
+        name_us: "Double Crochet",
+        name_uk: "Treble Crochet",
+        tags: ["basic", "tall"],
+        notes: "Taller than single crochet, used for height and drape."
+      },
+      {
+        id: "hdc",
+        name_us: "Half Double Crochet",
+        name_uk: "Half Treble Crochet",
+        tags: ["basic", "medium"],
+        notes: "Shorter than double crochet but with more height than single crochet."
+      },
+      {
+        id: "tr",
+        name_us: "Treble Crochet",
+        name_uk: "Double Treble Crochet",
+        tags: ["tall", "advanced"],
+        notes: "Used for tall rows and lacy fabric."
+      },
+      {
+        id: "slst",
+        name_us: "Slip Stitch",
+        name_uk: "Slip Stitch",
+        tags: ["basic", "joining"],
+        notes: "Used for joining, moving across stitches, or finishing."
+      },
+      {
+        id: "ch",
+        name_us: "Chain Stitch",
+        name_uk: "Chain Stitch",
+        tags: ["basic", "foundation"],
+        notes: "Starting point for most crochet projects."
+      },
+      {
+        id: "fpdc",
+        name_us: "Front Post Double Crochet",
+        name_uk: "Front Post Treble Crochet",
+        tags: ["post", "texture", "intermediate"],
+        notes: "Used for ribbing or textured surfaces."
+      },
+      {
+        id: "bpdc",
+        name_us: "Back Post Double Crochet",
+        name_uk: "Back Post Treble Crochet",
+        tags: ["post", "texture", "intermediate"],
+        notes: "Used with FPDC to create ribs or cables."
+      },
+      {
+        id: "mr",
+        name_us: "Magic Ring",
+        name_uk: "Magic Ring",
+        tags: ["amigurumi", "foundation"],
+        notes: "Adjustable loop technique for starting projects in the round."
+      },
+      {
+        id: "pop",
+        name_us: "Popcorn Stitch",
+        name_uk: "Popcorn Stitch",
+        tags: ["texture", "3d", "advanced"],
+        notes: "Creates a puffed, round shape that stands out."
+      },
+      {
+        id: "vst",
+        name_us: "V-Stitch",
+        name_uk: "V-Stitch",
+        tags: ["pattern", "decorative"],
+        notes: "Two stitches worked in the same space, forming a V-shape."
+      },
+      {
+        id: "shell",
+        name_us: "Shell Stitch",
+        name_uk: "Shell Stitch",
+        tags: ["pattern", "decorative"],
+        notes: "Multiple stitches worked into one space to create a fan shape."
+      }
+    ];
 
     const grid = document.getElementById('glossary-grid');
     const popup = document.getElementById('popup');
@@ -297,6 +473,21 @@
     window.closePopup = function() {
       popup.classList.remove('active');
     };
+
+    // Toggle tips dropdown
+    window.toggleTips = function() {
+      const tipsContent = document.getElementById('tips-content');
+      tipsContent.classList.toggle('show');
+    };
+
+    // Close tips when clicking outside
+    document.addEventListener('click', function(e) {
+      const tipsToggle = document.querySelector('.tips-toggle');
+      const tipsContent = document.getElementById('tips-content');
+      if (!tipsToggle.contains(e.target)) {
+        tipsContent.classList.remove('show');
+      }
+    });
 
     // Search functionality
     searchInput.addEventListener('input', function() {
