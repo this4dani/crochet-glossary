@@ -3,132 +3,297 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="DANI'S - Interactive crochet stitch glossary where traditional craft meets modern technology. 30 years of experience, built by a ministry-minded maker.">
-  <meta name="keywords" content="crochet, stitches, glossary, patterns, API, this4dani, interactive tutorial">
-  <title>DANI'S - Interactive Crochet Stitch Glossary</title>
-  
-  <!-- Your Beautiful CSS -->
-  <link rel="stylesheet" href="styles.css">
-  
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <title>DANI'S - Crochet Stitch Glossary</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
+
+    :root {
+      --clr-fuchsia: #ff2d82;
+      --clr-deep-teal: #005b63;
+      --clr-mauve: #d15694;
+      --clr-cream: #f6eedc;
+      --clr-white: #ffffff;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--clr-cream);
+      color: #1a1a1a;
+      line-height: 1.6;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+
+    /* Minimal Header */
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .header h1 {
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: var(--clr-fuchsia);
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+    }
+
+    .header .subtitle {
+      font-size: 1rem;
+      color: var(--clr-deep-teal);
+      font-weight: 400;
+      opacity: 0.8;
+    }
+
+    /* Modern Search */
+    #search {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto 40px;
+      display: block;
+      padding: 16px 20px;
+      border: none;
+      border-radius: 50px;
+      background: var(--clr-white);
+      font-size: 16px;
+      font-weight: 400;
+      color: #333;
+      box-shadow: 
+        0 2px 8px rgba(0,0,0,0.04),
+        0 1px 2px rgba(0,0,0,0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    #search:focus {
+      outline: none;
+      box-shadow: 
+        0 4px 20px rgba(255,45,130,0.15),
+        0 2px 8px rgba(0,0,0,0.08);
+      transform: translateY(-1px);
+    }
+
+    #search::placeholder {
+      color: #999;
+      font-weight: 300;
+    }
+
+    /* Modern Grid */
+    #glossary-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 16px;
+      margin-bottom: 60px;
+    }
+
+    /* Modern Cards */
+    .stitch-card {
+      background: var(--clr-white);
+      border-radius: 16px;
+      padding: 24px 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      box-shadow: 
+        0 1px 3px rgba(0,0,0,0.06),
+        0 1px 2px rgba(0,0,0,0.04);
+      position: relative;
+      min-height: 130px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid rgba(0,0,0,0.02);
+    }
+
+    .stitch-card:hover {
+      transform: translateY(-8px) scale(1.02);
+      box-shadow: 
+        0 8px 25px rgba(0,0,0,0.08),
+        0 3px 10px rgba(0,0,0,0.06);
+      border-color: var(--clr-fuchsia);
+    }
+
+    .stitch-card .symbol {
+      font-size: 2rem;
+      color: var(--clr-mauve);
+      margin-bottom: 12px;
+      font-weight: 600;
+    }
+
+    .stitch-card .abbr {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--clr-deep-teal);
+      margin-bottom: 4px;
+      letter-spacing: 0.5px;
+    }
+
+    .stitch-card .name {
+      font-size: 0.8rem;
+      color: #666;
+      font-weight: 400;
+      line-height: 1.3;
+    }
+
+    /* Modern Lightbox */
+    .popup {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(8px);
+      z-index: 1000;
+      padding: 20px;
+    }
+
+    .popup.active {
+      display: flex;
+    }
+
+    .popup-inner {
+      background: var(--clr-white);
+      border-radius: 24px;
+      padding: 32px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      position: relative;
+      box-shadow: 
+        0 20px 40px rgba(0,0,0,0.15),
+        0 8px 16px rgba(0,0,0,0.1);
+      transform: scale(0.9);
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .popup.active .popup-inner {
+      transform: scale(1);
+    }
+
+    .popup-close {
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: #999;
+      cursor: pointer;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+    }
+
+    .popup-close:hover {
+      background: #f5f5f5;
+      color: var(--clr-fuchsia);
+    }
+
+    .popup h2 {
+      color: var(--clr-fuchsia);
+      font-size: 1.8rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .popup-content p {
+      margin-bottom: 16px;
+      color: #444;
+      line-height: 1.6;
+    }
+
+    .popup-content strong {
+      color: var(--clr-deep-teal);
+      font-weight: 500;
+    }
+
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      body {
+        padding: 16px;
+      }
+      
+      .header h1 {
+        font-size: 2rem;
+      }
+      
+      #glossary-grid {
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        gap: 12px;
+      }
+      
+      .stitch-card {
+        padding: 20px 12px;
+        min-height: 110px;
+      }
+      
+      .popup-inner {
+        padding: 24px;
+        margin: 16px;
+      }
+    }
+
+    /* Loading state */
+    .loading {
+      text-align: center;
+      color: #999;
+      padding: 60px 20px;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
   <div class="container">
     
-    <!-- Header Section -->
     <header class="header">
       <h1>DANI'S</h1>
-      <p class="subtitle">Where Traditional Craft Meets Modern Technology</p>
-      <div class="acronym">
-        <strong>D</strong>esigns • <strong>A</strong>ccoutrements • <strong>N</strong>otions • <strong>I</strong>deas • <strong>S</strong>omething Special
-      </div>
+      <p class="subtitle">Interactive Crochet Stitch Glossary</p>
     </header>
 
-    <!-- About Section -->
-    <section class="about">
-      <h2>The Story Behind the Glossary</h2>
-      <p>After 30 years of crocheting, I've experienced every frustration you can imagine - especially spending <em>hours</em> rewriting patterns for gauge adjustments and yarn substitutions.</p>
-      <p>As a ministry-minded maker and self-taught developer, I'm building tools to solve these problems. This interactive glossary is the first step toward my crochet pattern adjustment API.</p>
-      <p><strong>Because our time should be spent creating, not calculating.</strong></p>
-    </section>
-
-    <!-- Main Glossary Section -->
     <main>
-      <h2 style="text-align: center; color: var(--clr-fuchsia); margin-bottom: 1rem; font-size: 2rem;">Interactive Stitch Glossary</h2>
-      <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem; color: #666;">
-        Click any stitch to learn more. Filter by skill level or technique. This is just the beginning - more features coming soon!
-      </p>
-
-      <!-- Search Bar -->
-      <input type="text" id="search" placeholder="Search stitches by name or abbreviation...">
-
-      <!-- Filter Buttons -->
-      <div id="tag-filter"></div>
-
-      <!-- Stitch Grid -->
-      <div id="glossary-grid"></div>
-    </main>
-
-    <!-- Coming Soon Section -->
-    <section class="coming-soon">
-      <h3>Coming Soon: Pattern Adjustment API</h3>
-      <p>Tired of spending hours recalculating patterns? I'm building an AI-powered tool that will automatically adjust crochet patterns for different:</p>
-      <ul>
-        <li>Yarn weights and gauges</li>
-        <li>Hook sizes and tensions</li>
-        <li>Pattern sizing and fit</li>
-        <li>Stitch substitutions</li>
-      </ul>
-      <p>Join the journey as we revolutionize how crocheters work with patterns!</p>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <h4>About Dani</h4>
-      <p>Ministry worker by day, crochet innovator by night. I've been crocheting for 30 years and coding since the MySpace era. From Uganda missions to mermaid swimming, I believe in using technology to serve communities and solve real problems.</p>
-      
-      <div class="social-links">
-        <p>Connect with me:</p>
-        <a href="https://github.com/this4dani" target="_blank" rel="noopener">GitHub</a> •
-        <a href="https://linktr.ee/this4dani" target="_blank" rel="noopener">LinkTree</a> •
-        <a href="https://linkedin.com/in/ashleydaniellecaldwell" target="_blank" rel="noopener">LinkedIn</a>
+      <input type="text" id="search" placeholder="Search stitches...">
+      <div id="glossary-grid">
+        <div class="loading">Loading stitches...</div>
       </div>
-      
-      <p class="copyright">© 2025 DANI'S • Built with ❤️ and lots of coffee</p>
-    </footer>
+    </main>
 
   </div>
 
-  <!-- Popup Modal -->
+  <!-- Modern Lightbox -->
   <div class="popup" id="popup">
     <div class="popup-inner">
       <button class="popup-close" onclick="closePopup()">&times;</button>
       <h2 id="popup-title"></h2>
-      <div id="popup-content">
-        <p id="popup-us-name"></p>
-        <p id="popup-uk-name"></p>
-        <p id="popup-symbol"></p>
-        <p id="popup-tags"></p>
-        <p id="popup-notes"></p>
-      </div>
+      <div class="popup-content" id="popup-content"></div>
     </div>
   </div>
 
-  <!-- Your JavaScript -->
   <script type="module">
     import { stitchGlossary } from './glossarydata.js';
 
-    const safeSymbol = s => (/^[a-zA-Z_]/.test(s) ? s : `sym_${s}`);
-    const tagSet = [...new Set(stitchGlossary.flatMap(s => s.tags))].sort();
-
-    const filterBar = document.getElementById("tag-filter");
     const grid = document.getElementById("glossary-grid");
     const searchInput = document.getElementById("search");
     const popup = document.getElementById("popup");
 
-    // Create filter buttons
-    function renderFilterButtons() {
-      const all = document.createElement("button");
-      all.textContent = "All";
-      all.dataset.tag = "*";
-      all.className = "filter-btn active";
-      filterBar.appendChild(all);
-      
-      tagSet.forEach(tag => {
-        const b = document.createElement("button");
-        b.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
-        b.dataset.tag = tag;
-        b.className = "filter-btn";
-        filterBar.appendChild(b);
-      });
-    }
-
-    // Render stitch cards
-    function renderCards(filter = "*", searchTerm = "") {
-      grid.innerHTML = "";
-      
-      let list = filter === "*" ? stitchGlossary : stitchGlossary.filter(s => s.tags.includes(filter));
+    function renderCards(searchTerm = "") {
+      let list = stitchGlossary;
       
       if (searchTerm) {
         list = list.filter(s => 
@@ -138,179 +303,61 @@
         );
       }
 
+      grid.innerHTML = "";
+
+      if (list.length === 0) {
+        grid.innerHTML = '<div class="loading">No stitches found. Try a different search.</div>';
+        return;
+      }
+
       list.forEach(stitch => {
         const card = document.createElement("div");
         card.className = "stitch-card";
         card.onclick = () => showPopup(stitch);
 
-        // Create card content
         card.innerHTML = `
-          <div style="font-size: 1.5rem; margin-bottom: 8px;">${stitch.symbol}</div>
-          <h3>${stitch.id.toUpperCase()}</h3>
-          <p class="subtitle">${stitch.name_us}</p>
-          <p class="tag-line">${stitch.tags.slice(0,2).join(", ")}</p>
+          <div class="symbol">${stitch.symbol}</div>
+          <div class="abbr">${stitch.id.toUpperCase()}</div>
+          <div class="name">${stitch.name_us}</div>
         `;
 
         grid.appendChild(card);
       });
-
-      // Show "no results" message if needed
-      if (list.length === 0) {
-        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666; padding: 2rem;">No stitches found. Try adjusting your search or filter.</p>';
-      }
     }
 
-    // Show popup with stitch details
     function showPopup(stitch) {
       document.getElementById("popup-title").textContent = stitch.name_us;
-      document.getElementById("popup-us-name").innerHTML = `<strong>US Term:</strong> ${stitch.name_us}`;
-      document.getElementById("popup-uk-name").innerHTML = `<strong>UK Term:</strong> ${stitch.name_uk}`;
-      document.getElementById("popup-symbol").innerHTML = `<strong>Symbol:</strong> ${stitch.symbol}`;
-      document.getElementById("popup-tags").innerHTML = `<strong>Tags:</strong> ${stitch.tags.join(", ")}`;
-      document.getElementById("popup-notes").innerHTML = `<strong>Notes:</strong> ${stitch.notes}`;
+      document.getElementById("popup-content").innerHTML = `
+        <p><strong>Abbreviation:</strong> ${stitch.id.toUpperCase()}</p>
+        <p><strong>US Term:</strong> ${stitch.name_us}</p>
+        <p><strong>UK Term:</strong> ${stitch.name_uk}</p>
+        <p><strong>Symbol:</strong> ${stitch.symbol}</p>
+        <p><strong>Notes:</strong> ${stitch.notes}</p>
+      `;
       
       popup.classList.add("active");
       document.body.style.overflow = "hidden";
     }
 
-    // Close popup
     window.closePopup = function() {
       popup.classList.remove("active");
       document.body.style.overflow = "auto";
     }
 
-    // Filter functionality
-    function onFilter(e) {
-      if (!e.target.matches(".filter-btn")) return;
-      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
-      e.target.classList.add("active");
-      renderCards(e.target.dataset.tag, searchInput.value);
-    }
-
-    // Search functionality
-    function onSearch() {
-      const activeFilter = document.querySelector(".filter-btn.active").dataset.tag;
-      renderCards(activeFilter, searchInput.value);
-    }
-
-    // Initialize everything
-    function initGlossary() {
-      if (!filterBar || !grid) return;
-      renderFilterButtons();
-      renderCards();
-      filterBar.addEventListener("click", onFilter);
-      searchInput.addEventListener("input", onSearch);
-    }
-
-    // Close popup on outside click
-    popup.addEventListener("click", function(e) {
-      if (e.target === popup) {
-        closePopup();
-      }
+    searchInput.addEventListener("input", () => {
+      renderCards(searchInput.value);
     });
 
-    // Close popup on Escape key
-    document.addEventListener("keydown", function(e) {
-      if (e.key === "Escape") {
-        closePopup();
-      }
+    popup.addEventListener("click", (e) => {
+      if (e.target === popup) closePopup();
     });
 
-    // Start the app
-    document.readyState !== "loading" ? initGlossary() : document.addEventListener("DOMContentLoaded", initGlossary);
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closePopup();
+    });
+
+    // Initialize
+    setTimeout(() => renderCards(), 100);
   </script>
-
-  <!-- Additional CSS for new sections -->
-  <style>
-    .coming-soon {
-      background: linear-gradient(135deg, var(--clr-white), rgba(246,238,220,0.5));
-      padding: 2.5rem 2rem;
-      border-radius: 20px;
-      margin: 4rem 0 3rem 0;
-      text-align: center;
-      box-shadow: 0 8px 16px rgba(0,0,0,0.06);
-    }
-
-    .coming-soon h3 {
-      color: var(--clr-fuchsia);
-      font-size: 1.8rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .coming-soon ul {
-      text-align: left;
-      max-width: 400px;
-      margin: 1.5rem auto;
-      color: #555;
-    }
-
-    .coming-soon li {
-      margin-bottom: 0.5rem;
-      color: var(--clr-deep-teal);
-    }
-
-    .footer {
-      background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-      color: var(--clr-off-white);
-      padding: 3rem 2rem 2rem;
-      border-radius: 20px 20px 0 0;
-      text-align: center;
-      margin-top: 4rem;
-    }
-
-    .footer h4 {
-      color: var(--clr-fuchsia);
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-      font-weight: 600;
-    }
-
-    .footer p {
-      max-width: 600px;
-      margin: 0 auto 1.5rem;
-      opacity: 0.9;
-      line-height: 1.6;
-    }
-
-    .social-links {
-      margin: 2rem 0;
-    }
-
-    .social-links p {
-      margin-bottom: 0.5rem;
-      color: var(--clr-mauve);
-      font-weight: 500;
-    }
-
-    .social-links a {
-      color: var(--clr-fuchsia);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .social-links a:hover {
-      color: var(--clr-mauve);
-    }
-
-    .copyright {
-      font-size: 0.9rem;
-      opacity: 0.7;
-      margin-top: 2rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,0.1);
-    }
-
-    /* Enhanced popup styles */
-    #popup-content p {
-      margin-bottom: 1rem;
-      line-height: 1.5;
-    }
-
-    #popup-content strong {
-      color: var(--clr-deep-teal);
-    }
-  </style>
 </body>
 </html>
