@@ -3,226 +3,314 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Crochet Stitch Glossary</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(135deg, #f8f5f0, #f2e9e4);
-      margin: 0;
-      padding: 20px;
-      position: relative;
-    }
-    h1 {
-      text-align: center;
-      margin-bottom: 10px;
-      color: #4ecdc4;
-    }
-    #search {
-      display: block;
-      margin: 0 auto 20px;
-      padding: 10px;
-      width: 80%;
-      max-width: 400px;
-      border: 2px solid #ccc;
-      border-radius: 10px;
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
-      gap: 10px;
-    }
-    .tile {
-      background: linear-gradient(160deg, #667eea, #a993e0);
-      color: white;
-      border: 2px solid #ff6b6b;
-      border-radius: 12px;
-      padding: 20px 10px;
-      text-align: center;
-      position: relative;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: bold;
-    }
-    .tile:hover {
-      background: linear-gradient(160deg, #4ecdc4, #89e0d0);
-    }
-    .tile::after {
-      content: attr(data-name);
-      position: absolute;
-      top: -25px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: #333;
-      color: white;
-      padding: 2px 6px;
-      font-size: 12px;
-      border-radius: 4px;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.2s ease;
-    }
-    .tile:hover::after {
-      opacity: 1;
-    }
-    .popup {
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      background: white;
-      border: 3px solid #4ecdc4;
-      border-radius: 15px;
-      padding: 20px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.3);
-      max-width: 90%;
-      width: 400px;
-      z-index: 1000;
-      display: none;
-    }
-    .popup img {
-      width: 100%;
-      border-radius: 10px;
-    }
-    .popup .close, .popup .close-btn {
-      position: absolute;
-      top: 10px;
-      right: 15px;
-      font-size: 20px;
-      cursor: pointer;
-      background: none;
-      border: none;
-      color: #4ecdc4;
-    }
-    .popup .close-btn {
-      top: auto;
-      right: auto;
-      bottom: 15px;
-      left: 50%;
-      transform: translateX(-50%);
-      font-size: 16px;
-      padding: 8px 16px;
-      border: 1px solid #4ecdc4;
-      border-radius: 8px;
-    }
-    #scrollTopBtn {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #4ecdc4;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      font-size: 18px;
-      cursor: pointer;
-      box-shadow: 0 0 10px rgba(0,0,0,0.2);
-      z-index: 999;
-      display: none;
-    }
-    @media (max-width: 600px) {
-      .grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-    }
-  </style>
+  <meta name="description" content="DANI'S - Interactive crochet stitch glossary where traditional craft meets modern technology. 30 years of experience, built by a ministry-minded maker.">
+  <meta name="keywords" content="crochet, stitches, glossary, patterns, API, this4dani, interactive tutorial">
+  <title>DANI'S - Interactive Crochet Stitch Glossary</title>
+  
+  <!-- Your Beautiful CSS -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
 </head>
 <body>
-  <h1>Crochet Glossary</h1>
-  <input type="text" id="search" placeholder="Search stitches...">
-  <div class="grid" id="glossary"></div>
+  <div class="container">
+    
+    <!-- Header Section -->
+    <header class="header">
+      <h1>DANI'S</h1>
+      <p class="subtitle">Where Traditional Craft Meets Modern Technology</p>
+      <div class="acronym">
+        <strong>D</strong>esigns • <strong>A</strong>ccoutrements • <strong>N</strong>otions • <strong>I</strong>deas • <strong>S</strong>omething Special
+      </div>
+    </header>
 
-  <div class="popup" id="popup">
-    <span class="close" onclick="closePopup()">&times;</span>
-    <h2 id="popupTitle"></h2>
-    <p id="popupDescription"></p>
-    <img id="popupImage" src="" alt="Stitch visual">
-    <p><a href="#" id="popupLink" target="_blank">Watch video</a></p>
-    <button class="close-btn" onclick="closePopup()">Close</button>
+    <!-- About Section -->
+    <section class="about">
+      <h2>The Story Behind the Glossary</h2>
+      <p>After 30 years of crocheting, I've experienced every frustration you can imagine - especially spending <em>hours</em> rewriting patterns for gauge adjustments and yarn substitutions.</p>
+      <p>As a ministry-minded maker and self-taught developer, I'm building tools to solve these problems. This interactive glossary is the first step toward my crochet pattern adjustment API.</p>
+      <p><strong>Because our time should be spent creating, not calculating.</strong></p>
+    </section>
+
+    <!-- Main Glossary Section -->
+    <main>
+      <h2 style="text-align: center; color: var(--clr-fuchsia); margin-bottom: 1rem; font-size: 2rem;">Interactive Stitch Glossary</h2>
+      <p style="text-align: center; max-width: 600px; margin: 0 auto 2rem; color: #666;">
+        Click any stitch to learn more. Filter by skill level or technique. This is just the beginning - more features coming soon!
+      </p>
+
+      <!-- Search Bar -->
+      <input type="text" id="search" placeholder="Search stitches by name or abbreviation...">
+
+      <!-- Filter Buttons -->
+      <div id="tag-filter"></div>
+
+      <!-- Stitch Grid -->
+      <div id="glossary-grid"></div>
+    </main>
+
+    <!-- Coming Soon Section -->
+    <section class="coming-soon">
+      <h3>Coming Soon: Pattern Adjustment API</h3>
+      <p>Tired of spending hours recalculating patterns? I'm building an AI-powered tool that will automatically adjust crochet patterns for different:</p>
+      <ul>
+        <li>Yarn weights and gauges</li>
+        <li>Hook sizes and tensions</li>
+        <li>Pattern sizing and fit</li>
+        <li>Stitch substitutions</li>
+      </ul>
+      <p>Join the journey as we revolutionize how crocheters work with patterns!</p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <h4>About Dani</h4>
+      <p>Ministry worker by day, crochet innovator by night. I've been crocheting for 30 years and coding since the MySpace era. From Uganda missions to mermaid swimming, I believe in using technology to serve communities and solve real problems.</p>
+      
+      <div class="social-links">
+        <p>Connect with me:</p>
+        <a href="https://github.com/this4dani" target="_blank" rel="noopener">GitHub</a> •
+        <a href="https://linktr.ee/this4dani" target="_blank" rel="noopener">LinkTree</a> •
+        <a href="https://linkedin.com/in/ashleydaniellecaldwell" target="_blank" rel="noopener">LinkedIn</a>
+      </div>
+      
+      <p class="copyright">© 2025 DANI'S • Built with ❤️ and lots of coffee</p>
+    </footer>
+
   </div>
 
-  <button id="scrollTopBtn" onclick="scrollToTop()">↑</button>
+  <!-- Popup Modal -->
+  <div class="popup" id="popup">
+    <div class="popup-inner">
+      <button class="popup-close" onclick="closePopup()">&times;</button>
+      <h2 id="popup-title"></h2>
+      <div id="popup-content">
+        <p id="popup-us-name"></p>
+        <p id="popup-uk-name"></p>
+        <p id="popup-symbol"></p>
+        <p id="popup-tags"></p>
+        <p id="popup-notes"></p>
+      </div>
+    </div>
+  </div>
 
-  <script>
-    const data = [
-      {
-        abbr: "sc",
-        name: "Single Crochet",
-        description: "A simple stitch often used to build structure.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/26/Single_crochet_stitch.svg/200px-Single_crochet_stitch.svg.png",
-        video: "https://www.youtube.com/watch?v=E-ZVyDZ08AA"
-      },
-      {
-        abbr: "dc",
-        name: "Double Crochet",
-        description: "A tall stitch great for airy patterns.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/6/60/Double_crochet_stitch.svg/200px-Double_crochet_stitch.svg.png",
-        video: "https://www.youtube.com/watch?v=QF2D1Kgh_9Y"
-      },
-      {
-        abbr: "ch",
-        name: "Chain Stitch",
-        description: "Forms the foundation of most crochet projects.",
-        image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Chain_stitch.svg/200px-Chain_stitch.svg.png",
-        video: "https://www.youtube.com/watch?v=WZmLtzgDlt8"
-      }
-    ];
+  <!-- Your JavaScript -->
+  <script type="module">
+    import { stitchGlossary } from './glossarydata.js';
 
-    const glossary = document.getElementById("glossary");
+    const safeSymbol = s => (/^[a-zA-Z_]/.test(s) ? s : `sym_${s}`);
+    const tagSet = [...new Set(stitchGlossary.flatMap(s => s.tags))].sort();
+
+    const filterBar = document.getElementById("tag-filter");
+    const grid = document.getElementById("glossary-grid");
+    const searchInput = document.getElementById("search");
     const popup = document.getElementById("popup");
-    const title = document.getElementById("popupTitle");
-    const desc = document.getElementById("popupDescription");
-    const img = document.getElementById("popupImage");
-    const link = document.getElementById("popupLink");
-    const scrollTopBtn = document.getElementById("scrollTopBtn");
 
-    data.forEach(item => {
-      const tile = document.createElement("div");
-      tile.className = "tile";
-      tile.textContent = item.abbr;
-      tile.setAttribute("data-name", item.name);
-      tile.onclick = () => {
-        title.textContent = item.name;
-        desc.textContent = item.description;
-        img.src = item.image;
-        link.href = item.video;
-        popup.style.display = "block";
-      };
-      glossary.appendChild(tile);
-    });
-
-    function closePopup() {
-      popup.style.display = "none";
+    // Create filter buttons
+    function renderFilterButtons() {
+      const all = document.createElement("button");
+      all.textContent = "All";
+      all.dataset.tag = "*";
+      all.className = "filter-btn active";
+      filterBar.appendChild(all);
+      
+      tagSet.forEach(tag => {
+        const b = document.createElement("button");
+        b.textContent = tag.charAt(0).toUpperCase() + tag.slice(1);
+        b.dataset.tag = tag;
+        b.className = "filter-btn";
+        filterBar.appendChild(b);
+      });
     }
 
-    window.addEventListener("click", function(event) {
-      if (event.target === popup) {
+    // Render stitch cards
+    function renderCards(filter = "*", searchTerm = "") {
+      grid.innerHTML = "";
+      
+      let list = filter === "*" ? stitchGlossary : stitchGlossary.filter(s => s.tags.includes(filter));
+      
+      if (searchTerm) {
+        list = list.filter(s => 
+          s.name_us.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          s.name_uk.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          s.id.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      }
+
+      list.forEach(stitch => {
+        const card = document.createElement("div");
+        card.className = "stitch-card";
+        card.onclick = () => showPopup(stitch);
+
+        // Create card content
+        card.innerHTML = `
+          <div style="font-size: 1.5rem; margin-bottom: 8px;">${stitch.symbol}</div>
+          <h3>${stitch.id.toUpperCase()}</h3>
+          <p class="subtitle">${stitch.name_us}</p>
+          <p class="tag-line">${stitch.tags.slice(0,2).join(", ")}</p>
+        `;
+
+        grid.appendChild(card);
+      });
+
+      // Show "no results" message if needed
+      if (list.length === 0) {
+        grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #666; padding: 2rem;">No stitches found. Try adjusting your search or filter.</p>';
+      }
+    }
+
+    // Show popup with stitch details
+    function showPopup(stitch) {
+      document.getElementById("popup-title").textContent = stitch.name_us;
+      document.getElementById("popup-us-name").innerHTML = `<strong>US Term:</strong> ${stitch.name_us}`;
+      document.getElementById("popup-uk-name").innerHTML = `<strong>UK Term:</strong> ${stitch.name_uk}`;
+      document.getElementById("popup-symbol").innerHTML = `<strong>Symbol:</strong> ${stitch.symbol}`;
+      document.getElementById("popup-tags").innerHTML = `<strong>Tags:</strong> ${stitch.tags.join(", ")}`;
+      document.getElementById("popup-notes").innerHTML = `<strong>Notes:</strong> ${stitch.notes}`;
+      
+      popup.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    // Close popup
+    window.closePopup = function() {
+      popup.classList.remove("active");
+      document.body.style.overflow = "auto";
+    }
+
+    // Filter functionality
+    function onFilter(e) {
+      if (!e.target.matches(".filter-btn")) return;
+      document.querySelectorAll(".filter-btn").forEach(b => b.classList.remove("active"));
+      e.target.classList.add("active");
+      renderCards(e.target.dataset.tag, searchInput.value);
+    }
+
+    // Search functionality
+    function onSearch() {
+      const activeFilter = document.querySelector(".filter-btn.active").dataset.tag;
+      renderCards(activeFilter, searchInput.value);
+    }
+
+    // Initialize everything
+    function initGlossary() {
+      if (!filterBar || !grid) return;
+      renderFilterButtons();
+      renderCards();
+      filterBar.addEventListener("click", onFilter);
+      searchInput.addEventListener("input", onSearch);
+    }
+
+    // Close popup on outside click
+    popup.addEventListener("click", function(e) {
+      if (e.target === popup) {
         closePopup();
       }
     });
 
-    window.addEventListener("keydown", closePopup);
-
-    function scrollToTop() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > 200) {
-        scrollTopBtn.style.display = "block";
-      } else {
-        scrollTopBtn.style.display = "none";
+    // Close popup on Escape key
+    document.addEventListener("keydown", function(e) {
+      if (e.key === "Escape") {
+        closePopup();
       }
     });
 
-    document.getElementById("search").addEventListener("input", function() {
-      const value = this.value.toLowerCase();
-      Array.from(glossary.children).forEach(tile => {
-        const name = tile.getAttribute("data-name").toLowerCase();
-        const abbr = tile.textContent.toLowerCase();
-        tile.style.display = name.includes(value) || abbr.includes(value) ? "block" : "none";
-      });
-    });
+    // Start the app
+    document.readyState !== "loading" ? initGlossary() : document.addEventListener("DOMContentLoaded", initGlossary);
   </script>
+
+  <!-- Additional CSS for new sections -->
+  <style>
+    .coming-soon {
+      background: linear-gradient(135deg, var(--clr-white), rgba(246,238,220,0.5));
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      margin: 4rem 0 3rem 0;
+      text-align: center;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.06);
+    }
+
+    .coming-soon h3 {
+      color: var(--clr-fuchsia);
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .coming-soon ul {
+      text-align: left;
+      max-width: 400px;
+      margin: 1.5rem auto;
+      color: #555;
+    }
+
+    .coming-soon li {
+      margin-bottom: 0.5rem;
+      color: var(--clr-deep-teal);
+    }
+
+    .footer {
+      background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
+      color: var(--clr-off-white);
+      padding: 3rem 2rem 2rem;
+      border-radius: 20px 20px 0 0;
+      text-align: center;
+      margin-top: 4rem;
+    }
+
+    .footer h4 {
+      color: var(--clr-fuchsia);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .footer p {
+      max-width: 600px;
+      margin: 0 auto 1.5rem;
+      opacity: 0.9;
+      line-height: 1.6;
+    }
+
+    .social-links {
+      margin: 2rem 0;
+    }
+
+    .social-links p {
+      margin-bottom: 0.5rem;
+      color: var(--clr-mauve);
+      font-weight: 500;
+    }
+
+    .social-links a {
+      color: var(--clr-fuchsia);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .social-links a:hover {
+      color: var(--clr-mauve);
+    }
+
+    .copyright {
+      font-size: 0.9rem;
+      opacity: 0.7;
+      margin-top: 2rem;
+      padding-top: 1rem;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* Enhanced popup styles */
+    #popup-content p {
+      margin-bottom: 1rem;
+      line-height: 1.5;
+    }
+
+    #popup-content strong {
+      color: var(--clr-deep-teal);
+    }
+  </style>
 </body>
 </html>
