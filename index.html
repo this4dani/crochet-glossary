@@ -5,163 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>DANI'S - Where Traditional Craft Meets Modern Technology</title>
   <meta name="description" content="30 years of crochet experience meets self-taught coding expertise. Building the future of pattern adjustment technology.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <style>
-    body {
-  font-family: 'Inter', sans-serif;
-  background: var(--clr-deep-teal);
-  color: var(--clr-warm-white);
-  line-height: 1.6;
-  overflow-x: hidden;
-}
-
-body::before {
-  content: '';
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: 
-    radial-gradient(circle at 25% 25%, rgba(255,45,130,0.08) 0%, transparent 50%),
-    radial-gradient(circle at 75% 75%, rgba(209,86,148,0.06) 0%, transparent 50%),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 2px,
-      rgba(250,248,243,0.02) 2px,
-      rgba(250,248,243,0.02) 4px
-    );
-  z-index: -1;
-  animation: textureShift 20s ease-in-out infinite;
-}
-
-@keyframes textureShift {
-  0%, 100% { transform: translate(0, 0); }
-  50% { transform: translate(-10px, -10px); }
-}
-
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  padding: 20px 40px;
-  background: rgba(0,56,64,0.95);
-  backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(250,248,243,0.1);
-  z-index: 1000;
-}
-
-.nav-container {
-  max-width: 1400px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.logo {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: var(--clr-warm-white);
-  text-decoration: none;
-  position: relative;
-}
-
-.logo::after {
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: var(--clr-fuchsia);
-  transition: width 0.3s ease;
-}
-
-.logo:hover::after {
-  width: 100%;
-}
-
-.nav-links {
-  display: flex;
-  gap: 40px;
-  align-items: center;
-}
-
-.nav-link {
-  color: var(--clr-warm-white);
-  text-decoration: none;
-  font-weight: 500;
-  padding: 8px 20px;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.nav-link::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,45,130,0.2), transparent);
-  transition: left 0.5s ease;
-}
-
-.nav-link:hover::before {
-  left: 100%;
-}
-
-.nav-link:hover {
-  background: rgba(255,45,130,0.1);
-  transform: translateY(-2px);
-}
-
-.float-item {
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, var(--clr-fuchsia), var(--clr-mauve));
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: 600;
-  animation: float 6s ease-in-out infinite;
-  box-shadow: 0 8px 25px rgba(255,45,130,0.3);
-}
-
-.float-item:nth-child(1) { top: 20%; left: 20%; animation-delay: 0s; }
-.float-item:nth-child(2) { top: 60%; left: 70%; animation-delay: 2s; }
-.float-item:nth-child(3) { top: 40%; left: 10%; animation-delay: 4s; }
-.float-item:nth-child(4) { top: 80%; left: 40%; animation-delay: 1s; }
-
-@keyframes float {
-  0%, 100% { transform: translateY(0px) rotate(0deg); }
-  33% { transform: translateY(-20px) rotate(120deg); }
-  66% { transform: translateY(-10px) rotate(240deg); }
-}
-  </style>
+  
+  <!-- Link to your master CSS file -->
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <!-- Ad Zone - Top Banner -->
+  <div class="ad-zone ad-zone-header">
+    [Google AdSense - Leaderboard 728x90]
+  </div>
+
   <!-- Navigation -->
   <nav>
     <div class="nav-container">
       <a href="#" class="logo">DANI'S</a>
       <div class="nav-links">
-        <a href="index.html" class="nav-link">Glossary</a>
+        <a href="glossary.html" class="nav-link">Glossary</a>
         <a href="#story" class="nav-link">Story</a>
         <a href="#mission" class="nav-link">Mission</a>
         <a href="#contact" class="nav-link">Connect</a>
       </div>
     </div>
   </nav>
+
+  <!-- Ad Zone - Sidebar (Desktop) -->
+  <div class="ad-zone ad-zone-sidebar">
+    [Google AdSense - Medium Rectangle 300x250]
+  </div>
 
   <!-- Hero Section -->
   <section class="hero">
@@ -175,7 +45,7 @@ nav {
           manager to pattern adjustment API developer.
         </p>
         <div class="cta-buttons">
-          <a href="index.html" class="btn btn-primary">Explore Stitch Glossary</a>
+          <a href="glossary.html" class="btn btn-primary">Explore Stitch Glossary</a>
           <a href="#story" class="btn btn-secondary">My Story</a>
         </div>
       </div>
@@ -192,25 +62,64 @@ nav {
     </div>
   </section>
 
+  <!-- Affiliate Products Section -->
+  <section class="affiliate-section">
+    <div class="affiliate-container">
+      <h2 style="font-family: var(--font-display); font-size: 2.5rem; margin-bottom: 20px; color: var(--clr-warm-white);">
+        Recommended Crochet Tools
+      </h2>
+      <p style="color: var(--clr-cream); font-size: 1.1rem; margin-bottom: 30px;">
+        These are the tools I actually use and love after 30 years of crocheting. As an Amazon Associate, I earn from qualifying purchases.
+      </p>
+      
+      <div class="affiliate-grid">
+        <div class="affiliate-card">
+          <h4>Ergonomic Crochet Hooks</h4>
+          <p>After 30 years of crocheting, your hands deserve comfort. These hooks reduce strain and improve grip for those long project sessions.</p>
+          <a href="https://amzn.to/YOUR-HOOK-LINK" class="affiliate-link" target="_blank">Shop Hooks</a>
+        </div>
+        
+        <div class="affiliate-card">
+          <h4>Yarn Bowl</h4>
+          <p>Keep your yarn organized and tangle-free. Perfect for those story blankets that travel with you on adventures.</p>
+          <a href="https://amzn.to/YOUR-BOWL-LINK" class="affiliate-link" target="_blank">Shop Bowls</a>
+        </div>
+        
+        <div class="affiliate-card">
+          <h4>Stitch Markers</h4>
+          <p>Never lose your place again. Essential for complex patterns and those ADHD crochet moments when focus jumps around.</p>
+          <a href="https://amzn.to/YOUR-MARKER-LINK" class="affiliate-link" target="_blank">Shop Markers</a>
+        </div>
+        
+        <div class="affiliate-card">
+          <h4>Cotton Yarn</h4>
+          <p>The same cotton I use for those famous washcloths everyone keeps requesting. Soft, durable, and machine washable.</p>
+          <a href="https://amzn.to/YOUR-YARN-LINK" class="affiliate-link" target="_blank">Shop Cotton</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Story Section -->
   <section class="story-section" id="story">
     <div class="story-container">
       <div class="story-visual">🧶</div>
       <div class="story-text">
-        <h2>From Air Force Teacher to Pattern API</h2>
+        <h2>From Curious Student to Pattern API</h2>
         <p>
-          It started in middle school with an <span class="story-highlight">Air Force teacher who introduced me to computers</span>. 
-          Something just clicked. By high school, I was playing with Python and random number games.
+          It started in middle school when <span class="story-highlight">a teacher introduced me to computers</span>. 
+          Something just clicked. By high school, I was playing with Python and random number games, 
+          fascinated by how code could make computers respond.
         </p>
         <p>
           Then came the <span class="story-highlight">MySpace era</span>. I had to have the coolest page, which meant 
           learning HTML and becoming obsessed with hex codes. Little did I know that obsession would lead to 
-          building AI for crochet patterns decades later.
+          building tools for crochet patterns decades later.
         </p>
         <p>
-          <span class="story-highlight">I was a horrible student who hated high school</span>, so college computer science 
-          wasn't happening. But I couldn't stop playing with software. Turns out, being curious and stubborn 
-          about figuring things out is better than any degree.
+          <span class="story-highlight">I was a hands-on learner who learned best by doing</span>, so I taught myself 
+          everything through trial and error. Turns out, being curious and stubborn about figuring things out 
+          is exactly what's needed to solve real-world problems.
         </p>
       </div>
     </div>
@@ -249,6 +158,21 @@ nav {
     </div>
   </section>
 
+  <!-- Newsletter Signup -->
+  <section class="newsletter-section">
+    <h3>Stay Updated on the Pattern Adjustment API</h3>
+    <p>Be the first to know when I launch the tool that will revolutionize crochet pattern adjustments!</p>
+    <form class="newsletter-form" action="#" method="post">
+      <input type="email" class="newsletter-input" placeholder="Enter your email" required>
+      <button type="submit" class="newsletter-btn">Join Waitlist</button>
+    </form>
+  </section>
+
+  <!-- Ad Zone - Footer Banner -->
+  <div class="ad-zone ad-zone-footer">
+    [Google AdSense - Leaderboard 728x90]
+  </div>
+
   <!-- Footer -->
   <footer id="contact">
     <div class="footer-container">
@@ -261,12 +185,15 @@ nav {
         <a href="https://linktr.ee/this4dani" class="social-link" title="Linktree">🔗</a>
         <a href="https://linkedin.com/in/ashleydaniellecaldwell/" class="social-link" title="LinkedIn">💼</a>
         <a href="https://github.com/this4dani" class="social-link" title="GitHub">⚡</a>
-        <a href="#" class="social-link" title="Instagram">📸</a>
+        <a href="https://instagram.com/this4dani" class="social-link" title="Instagram">📸</a>
       </div>
       <div class="footer-bottom">
-  <p>Built with ❤️, prayers, coffee, and determination to solve real problems.</p>
-  <p>&copy; 2024 DANI'S. Where Traditional Craft Meets Modern Technology.</p>
-</div>
+        <p>Built with ❤️, prayers, coffee, and determination to solve real problems.</p>
+        <p>&copy; 2024 DANI'S. Where Traditional Craft Meets Modern Technology.</p>
+        <p style="font-size: 0.8rem; margin-top: 10px;">
+          As an Amazon Associate, I earn from qualifying purchases.
+        </p>
+      </div>
     </div>
   </footer>
 
