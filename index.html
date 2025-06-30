@@ -28,16 +28,21 @@
         
         #nav {
             position: fixed;
-            top: 120px;
+            top: 20px;  /* FIXED: Move to actual top */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 80px;
-            z-index: 100;
+            z-index: 1000;  /* FIXED: Higher z-index */
             align-items: center;
             justify-content: center;
             width: 100%;
             max-width: 700px;
+            background: rgba(0, 56, 64, 0.95);  /* FIXED: Add background */
+            backdrop-filter: blur(10px);  /* FIXED: Blur effect */
+            padding: 15px 30px;  /* FIXED: Add padding */
+            border-radius: 20px;  /* FIXED: Rounded container */
+            transition: all 0.3s ease;
         }
         #nav a {
             display: flex;
@@ -86,7 +91,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 240px 60px 50px;
+            padding: 120px 60px 50px;  /* FIXED: Reduce top padding */
+            margin-top: 60px;  /* FIXED: Add margin for nav space */
             position: relative;
         }
         
@@ -117,8 +123,8 @@
         .intro::before {
             content: '';
             position: absolute;
-            bottom: -200px;
-            left: -200px;
+            bottom: -150px;  /* FIXED: Reduce overlap */
+            left: -150px;    /* FIXED: Reduce overlap */
             width: 700px;
             height: 700px;
             background-image: url('images/crochet-grannysquare.png');
@@ -126,7 +132,7 @@
             background-repeat: no-repeat;
             background-position: center;
             opacity: 0.2;
-            z-index: -1;
+            z-index: -2;  /* FIXED: Ensure it stays behind everything */
             filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(300%) hue-rotate(300deg) brightness(95%) contrast(88%);
         }
         
@@ -184,13 +190,33 @@
             margin-bottom: 20px;
         }
         
-        .footer-text {
-            margin: 140px 0 20px 0;
-            color: rgba(250,248,243,0.8);
-            font-size: 0.9rem;
+        /* FIXED: Consolidate footer */
+        .main-footer {
+            margin-top: 100px;
+            padding: 40px 20px;
             text-align: center;
+            background: rgba(0, 0, 0, 0.3);
+            border-top: 1px solid rgba(250, 248, 243, 0.1);
+        }
+
+        .footer-built {
+            color: rgba(250, 248, 243, 0.8);
+            font-size: 0.9rem;
+            margin: 20px 0;
+            font-family: 'Poppins', sans-serif;
             font-weight: 500;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .footer-links {
+            margin: 20px 0 0 0;
+        }
+
+        .footer-links a {
+            color: #c8b8a8;
+            font-size: 0.75rem;
+            text-decoration: none;
+            opacity: 0.6;
             font-family: 'Poppins', sans-serif;
         }
         
@@ -200,7 +226,6 @@
             color: rgba(255,255,255,0.6);
             font-size: 0.9rem;
             font-family: 'Inter', sans-serif;
-            margin-top: auto;
         }
 
         /* ===== FLOATING STITCH CARDS ===== */
@@ -410,6 +435,27 @@
             100% { top: 100vh; transform: rotateZ(945deg) rotateX(720deg) scale(0.9); opacity: 0; }
         }
 
+        /* FIXED: Mobile considerations */
+        @media (max-width: 768px) {
+            #nav {
+                top: 10px;
+                gap: 40px;  /* Reduce gap between icons */
+            }
+            
+            #nav img {
+                width: 60px !important;  /* Smaller icons */
+                height: 60px !important;
+            }
+            
+            .panel {
+                padding: 80px 30px 30px;  /* Less padding on mobile */
+            }
+            
+            .intro {
+                padding: 40px 30px;  /* Smaller container padding */
+            }
+        }
+
         /* Responsive - hide on mobile */
         @media (max-width: 1200px) {
             .floating-cards { display: none; }
@@ -537,15 +583,14 @@
         </article>
     </div>
     
-    <div class="footer-text">
-        Built with ❤️, prayers, coffee, and determination to solve real problems
-    </div>
-    
-    <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
-        <p style="color: #c8b8a8; font-size: 1.4rem; margin: 0 0 20px 0; font-style: italic; font-family: 'Crimson Text', serif;">
-            Where Traditional Craft Meets Modern Technology
-        </p>
-        <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+    <!-- FIXED: Consolidated footer -->
+    <div class="main-footer">
+        <div class="footer-built">
+            Built with ❤️, prayers, coffee, and determination to solve real problems
+        </div>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy • Terms of Services • Contact</a>
+        </div>
     </div>
     
     <div class="adsense-bottom">
@@ -557,10 +602,6 @@
         <script>
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-    </div>
-
-    <div style="text-align: center; padding: 20px; margin: 0;">
-        <a href="privacy.html" style="color: #c8b8a8; font-size: 0.75rem; text-decoration: none; opacity: 0.6; font-family: 'Poppins', sans-serif;">Privacy Policy • Terms of Services • Contact</a>
     </div>
 
     <script>
