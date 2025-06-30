@@ -28,18 +28,26 @@
         
         #nav {
             position: fixed;
-            top: 0;  /* All the way to the top */
+            top: 120px;  /* Back to original position */
             left: 50%;
             transform: translateX(-50%);
             display: flex;
             gap: 80px;
-            z-index: 1000;
+            z-index: 100;
             align-items: center;
             justify-content: center;
             width: 100%;
             max-width: 700px;
             transition: all 0.3s ease;
-            padding: 10px 0;  /* Minimal padding */
+        }
+        
+        /* Add scroll effect */
+        #nav.scrolled {
+            top: 20px;
+            background: rgba(0, 56, 64, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 10px 20px;
+            border-radius: 15px;
         }
         #nav a {
             display: flex;
@@ -88,7 +96,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 140px 60px 50px;  /* Reduce space from menu to container */
+            padding: 240px 60px 50px;  /* Back to original spacing */
             position: relative;
         }
         
@@ -579,6 +587,16 @@
     </div>
 
     <script>
+        // Scroll effect for navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 100) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+
         // Floating cards click functionality
         document.addEventListener('DOMContentLoaded', function() {
             const stitchCards = document.querySelectorAll('.stitch-card');
