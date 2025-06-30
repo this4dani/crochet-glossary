@@ -1,615 +1,528 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DANI'S - Where Traditional Craft Meets Modern Technology</title>
-  <meta name="description" content="30 years of crochet experience meets self-taught coding expertise. Building tools that solve real crochet problems.">
-  <link rel="stylesheet" href="styles.css">
+    <title>DANI'S - Where Traditional Craft Meets Modern Technology</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Floating Stitch Cards -->
+    <div class="floating-cards">
+        <div class="stitch-card fall-1" data-stitch="sc">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">×</div>
+                    <div class="card-abbr">SC</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stitch-card fall-2" data-stitch="dc">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">T</div>
+                    <div class="card-abbr">DC</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stitch-card fall-3" data-stitch="hdc">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">┬</div>
+                    <div class="card-abbr">HDC</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stitch-card fall-4" data-stitch="ch">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">○</div>
+                    <div class="card-abbr">CH</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stitch-card fall-5" data-stitch="slst">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">—</div>
+                    <div class="card-abbr">SL</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #003840 0%, #001a1f 100%);
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .adsense-top {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            margin-bottom: 10px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+        }
+        
+        #nav {
+            position: fixed;
+            top: 120px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 80px;
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            max-width: 700px;
+        }
+        #nav a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            height: 100px;
+            width: 100px;
+            position: relative;
+        }
+        #nav a:hover {
+            transform: translateY(-3px);
+        }
+        #nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -35px;
+            left: 50%;
+            transform: translateX(-50%) rotate(90deg);
+            width: 300px;
+            height: 80px;
+            background-image: url('images/crochet-hook.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(300%) hue-rotate(300deg) brightness(95%) contrast(88%);
+        }
+
+        #nav img {
+            filter: brightness(0) saturate(100%) invert(85%) sepia(14%) saturate(230%) hue-rotate(317deg) brightness(102%) contrast(92%);
+            opacity: 0.8;
+            drop-shadow: 0 4px 8px rgba(0,0,0,0.3);
+        }
+        #nav a:nth-child(1) img { width: 85px; height: 85px; }
+        #nav a:nth-child(2) img { width: 90px; height: 90px; }
+        #nav a:nth-child(3) img { width: 83px; height: 83px; }
+        #nav a:nth-child(4) img { width: 137px; height: 137px; }
+        #nav img:hover {
+            opacity: 1;
+            filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(300%) hue-rotate(300deg) brightness(95%) contrast(88%);
+        }
+        
+        .panel {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 240px 60px 50px;
+            position: relative;
+        }
+        
+        .intro {
+    background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
+    max-width: 850px;
+    padding: 70px;
+    border-radius: 25px;
+    display: block;
+    position: relative;
+    text-align: left;
+    
+    /* Dome-like 3D effect */
+    box-shadow: 
+        0 15px 35px rgba(79, 43, 58, 0.4),
+        0 8px 20px rgba(0, 0, 0, 0.3),
+        0 3px 8px rgba(0, 0, 0, 0.15),
+        inset 0 3px 6px rgba(255, 255, 255, 0.12),
+        inset 0 -8px 16px rgba(0, 0, 0, 0.2);
+    
+    border: 1px solid rgba(250, 248, 243, 0.15);
+    
+    /* Add subtle curve highlight */
+    background-image: 
+        radial-gradient(ellipse 80% 30% at 50% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+        radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
+}
+        .intro::before {
+            content: '';
+            position: absolute;
+            bottom: -200px;
+            left: -200px;
+            width: 700px;
+            height: 700px;
+            background-image: url('images/crochet-grannysquare.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.2;
+            z-index: -1;
+            filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(300%) hue-rotate(300deg) brightness(95%) contrast(88%);
+        }
+        
+        .intro h1 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 6rem;
+    color: #003840;
+    margin: 0 0 5px 0;
+    font-weight: 800;
+    letter-spacing: -5px;
+    }
+
+        .intro p:first-of-type {
+            font-family: 'Inter', sans-serif;
+            color: #ff6b7a;
+            font-size: 1.2rem;
+            margin-top: -50px;
+            margin-bottom: 15px;
+            font-weight: 600;
+            line-height: 1.4;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+        
+       .intro p:last-of-type {
+    font-family: 'Crimson Text', serif;
+    color: #c8b8a8;  /* Changed from #e8e0d5 */
+    font-size: 1.8rem;
+    margin: 35px 0 0 0;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+    letter-spacing: 1px;
+    text-align: center;
+    line-height: 1.3;
+    font-style: italic;
+}
+        
+        .pic-container {
+            background: #2d1a2b;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid rgba(250,248,243,0.15);
+            box-shadow: inset 0 4px 12px rgba(0,0,0,0.3);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .pic img {
+            width: 180px;
+            height: 180px;
+            border-radius: 8px;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+            filter: sepia(20%) hue-rotate(320deg) saturate(1.3) brightness(1.1);
+            display: block;
+            margin-bottom: 20px;
+        }
+        
+        .footer-text {
+            margin: 40px 0 20px 0;
+            color: rgba(250,248,243,0.8);
+            font-size: 0.9rem;
+            text-align: center;
+            font-weight: 500;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .adsense-bottom {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+            font-family: 'Inter', sans-serif;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: auto;
+        }
+        /* ===== FLOATING STITCH CARDS ===== */
+        .floating-cards {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 15;
+            overflow: hidden;
+        }
+
+        .stitch-card {
+            position: absolute;
+            width: 80px;
+            height: 100px;
+            perspective: 1000px;
+            pointer-events: auto;
+            cursor: pointer;
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.6s ease;
+            transform-style: preserve-3d;
+            border-radius: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .card-front {
+            z-index: 2;
+        }
+
+        .card-back {
+            transform: rotateY(180deg);
+            background: linear-gradient(145deg, #f6eedc, #e8e0d5) !important;
+            border: 2px solid rgba(255, 45, 130, 0.4) !important;
+            box-shadow: 
+                0 8px 25px rgba(0, 0, 0, 0.4),
+                inset 0 2px 4px rgba(255, 255, 255, 0.3),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-back .dani-text {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #ff2d82 !important;
+            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        /* Individual card colors - front side */
+        .fall-1 .card-front {
+            background: linear-gradient(145deg, #ffab7d, #ff9a66);
+        }
+        .fall-2 .card-front {
+            background: linear-gradient(145deg, #ff6b7a, #ff5a69);
+        }
+        .fall-3 .card-front {
+            background: linear-gradient(145deg, #f4d35e, #f0c947);
+        }
+        .fall-4 .card-front {
+            background: linear-gradient(145deg, #8db596, #7aa885);
+        }
+        .fall-5 .card-front {
+            background: linear-gradient(145deg, #d15694, #c74583);
+        }
+
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 18px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Individual icon colors */
+        .fall-1 .card-icon { color: #c17817; }
+        .fall-2 .card-icon { color: #c8553d; }
+        .fall-3 .card-icon { color: #b8950a; }
+        .fall-4 .card-icon { color: #5a7a63; }
+        .fall-5 .card-icon { color: #8f3c5f; }
+
+        .card-abbr {
+            font-family: 'Poppins', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 800;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+            letter-spacing: 1px;
+        }
+
+        /* Individual text colors */
+        .fall-1 .card-abbr { color: #c17817; }
+        .fall-2 .card-abbr { color: #c8553d; }
+        .fall-3 .card-abbr { color: #b8950a; }
+        .fall-4 .card-abbr { color: #5a7a63; }
+        .fall-5 .card-abbr { color: #8f3c5f; }
+
+        /* Individual card animations */
+        .fall-1 {
+            animation: tumble1 16s infinite linear;
+            right: 8%;
+            z-index: 5; /* Behind container */
+        }
+        .fall-2 {
+            animation: tumble2 18s infinite linear;
+            right: 16%;
+            animation-delay: -3s;
+            z-index: 20; /* In front of container */
+        }
+        .fall-3 {
+            animation: tumble3 17s infinite linear;
+            right: 24%;
+            animation-delay: -6s;
+            z-index: 8; /* Behind container */
+        }
+        .fall-4 {
+            animation: tumble4 19s infinite linear;
+            right: 32%;
+            animation-delay: -9s;
+            z-index: 25; /* In front of container */
+        }
+        .fall-5 {
+            animation: tumble5 15s infinite linear;
+            right: 40%;
+            animation-delay: -12s;
+            z-index: 6; /* Behind container */
+        }
+
+        /* Tumbling animations */
+        @keyframes tumble1 {
+            0% { top: -120px; transform: rotate3d(1, 1, 0, 0deg) scale(0.8); opacity: 0; }
+            5% { opacity: 1; }
+            25% { transform: rotate3d(1, 1, 0, 180deg) scale(1.1); }
+            50% { transform: rotate3d(1, 1, 0, 360deg) scale(0.9); }
+            75% { transform: rotate3d(1, 1, 0, 540deg) scale(1.1); }
+            95% { opacity: 1; }
+            100% { top: 100vh; transform: rotate3d(1, 1, 0, 720deg) scale(0.8); opacity: 0; }
+        }
+
+        @keyframes tumble2 {
+            0% { top: -120px; transform: rotateX(0deg) rotateY(0deg) translateX(0); opacity: 0; }
+            8% { opacity: 1; }
+            20% { transform: rotateX(180deg) rotateY(90deg) translateX(30px); }
+            40% { transform: rotateX(360deg) rotateY(270deg) translateX(-30px); }
+            60% { transform: rotateX(540deg) rotateY(450deg) translateX(30px); }
+            80% { transform: rotateX(720deg) rotateY(630deg) translateX(-20px); }
+            92% { opacity: 1; }
+            100% { top: 100vh; transform: rotateX(900deg) rotateY(810deg) translateX(0); opacity: 0; }
+        }
+
+        @keyframes tumble3 {
+            0% { top: -120px; transform: rotateY(0deg) scale(1); opacity: 0; }
+            10% { opacity: 1; }
+            30% { transform: rotateY(240deg) scale(1.2) translateY(-20px); }
+            50% { transform: rotateY(480deg) scale(0.8) translateY(20px); }
+            70% { transform: rotateY(720deg) scale(1.1) translateY(-10px); }
+            90% { opacity: 1; }
+            100% { top: 100vh; transform: rotateY(960deg) scale(1); opacity: 0; }
+        }
+
+        @keyframes tumble4 {
+            0% { top: -120px; transform: rotate3d(0, 1, 1, 0deg); opacity: 0; }
+            7% { opacity: 1; }
+            25% { transform: rotate3d(0, 1, 1, 180deg) translateX(25px); }
+            50% { transform: rotate3d(0, 1, 1, 360deg) translateX(-25px); }
+            75% { transform: rotate3d(0, 1, 1, 540deg) translateX(25px); }
+            93% { opacity: 1; }
+            100% { top: 100vh; transform: rotate3d(0, 1, 1, 720deg); opacity: 0; }
+        }
+
+        @keyframes tumble5 {
+            0% { top: -120px; transform: rotateZ(45deg) rotateX(0deg) scale(0.9); opacity: 0; }
+            12% { opacity: 1; }
+            20% { transform: rotateZ(225deg) rotateX(120deg) scale(1.1); }
+            40% { transform: rotateZ(405deg) rotateX(240deg) scale(0.9); }
+            60% { transform: rotateZ(585deg) rotateX(360deg) scale(1.1); }
+            80% { transform: rotateZ(765deg) rotateX(480deg) scale(0.9); }
+            88% { opacity: 1; }
+            100% { top: 100vh; transform: rotateZ(945deg) rotateX(720deg) scale(0.9); opacity: 0; }
+        }
+
+        /* Responsive - hide on mobile */
+        @media (max-width: 1200px) {
+            .floating-cards { display: none; }
+        }
+    </style>
 </head>
 <body>
-  <!-- Ad Zone - Top Banner -->
-  <div class="ad-zone ad-zone-header">
-    [Google AdSense - Leaderboard 728x90]
-  </div>
-
-  <!-- Navigation -->
-  <nav class="nav-enhanced">
-    <div class="nav-container">
-      <a href="#" class="logo-enhanced">DANI'S</a>
-      <div class="nav-links">
-        <a href="glossary.html" class="nav-link">Glossary</a>
-        <a href="#story" class="nav-link">Story</a>
-      </div>
+    <div class="adsense-top">
+        [Google AdSense - Leaderboard 728x90]
     </div>
-  </nav>
-
-  <!-- Hero Section with Maximum Hierarchy -->
-  <section class="hero-enhanced">
-    <div class="hero-content">
-      <div class="hero-text">
-        <div class="title-container">
-          <h1 class="hero-title-main">DANI'S</h1>
-          <div class="acronym-subtle">Designs • Accoutrements • Notions • Ideas • Something Special</div>
-        </div>
-        <h2 class="hero-tagline">Where Traditional Craft Meets Modern Technology</h2>
-        <div class="hero-description-enhanced">
-          <p class="description-main">
-            After 30 years of crochet experience, I'm building the tools that solve 
-            the problems crocheters have been wanting solutions for.
-          </p>
-          <p class="description-sub">
-            From pattern adjustments to comprehensive references - bridging traditional craft with modern innovation.
-          </p>
-        </div>
-        <div class="cta-container">
-          <a href="glossary.html" class="btn-dimensional">Start with the Interactive Glossary</a>
-        </div>
-      </div>
-      
-      <!-- Floating Elements - Complement Spacing -->
-      <div class="floating-ecosystem">
-        <div class="float-element float-1">SC</div>
-        <div class="float-element float-2">🧶</div>
-        <div class="float-element float-3">DC</div>
-        <div class="float-element float-4">HDC</div>
-        <div class="float-element float-5">TR</div>
-      </div>
+    
+    <nav id="nav">
+        <a href="#" class="active"><img src="images/home-heart-door.png" alt="Home"></a>
+        <a href="#"><img src="images/file-folder-magazne-lable.png" alt="Glossary"></a>
+        <a href="#"><img src="images/slip-knot-first-chain.png" alt="Story"></a>
+        <a href="#"><img src="images/yarn-ball-insert-crochet-hook.png" alt="Social"></a>
+    </nav>
+    
+    <div class="panel">
+        <article class="intro">
+            <header>
+                <h1>DANI'S</h1>
+                <p>Designs • Accoutrements • Notions • Ideas<br>Something Special</p>
+                <p>Where Traditional Craft Meets Modern Technology</p>
+            </header>
+        </article>
     </div>
-  </section>
-
-  <!-- Ad Zone - Sidebar (Desktop) -->
-  <div class="ad-zone ad-zone-sidebar">
-    [Google AdSense - Medium Rectangle 300x250]
-  </div>
-
-  <!-- Story Section with Maximum Visual Hierarchy -->
-  <section class="story-enhanced" id="story">
-    <div class="story-container">
-      <div class="story-header">
-        <div class="story-icon">🧶</div>
-        <div class="story-title-container">
-          <h2 class="story-title-main">From 8-Year-Old Beginner</h2>
-          <h3 class="story-title-sub">to 40-Year-Old Problem Solver</h3>
-        </div>
-      </div>
-      
-      <div class="story-content">
-        <div class="story-card story-card-1">
-          <div class="card-accent"></div>
-          <p>
-            Started crocheting at 8, learned computers in middle school, became obsessed with 
-            <span class="story-highlight">MySpace HTML and hex codes</span>. Thirty years later, 
-            I'm still spending hours rewriting patterns for simple adjustments.
-          </p>
-        </div>
-        
-        <div class="story-card story-card-2">
-          <div class="card-accent"></div>
-          <p>
-            As an <span class="story-highlight">office manager in ministry</span>, I serve church communities 
-            with hands-on and technology solutions. <span class="story-highlight">Life is a hot mess, 
-            but I have Joy in the Lord</span> - and I'm building the crochet tools people have been wanting.
-          </p>
-        </div>
-      </div>
+    
+    <div class="footer-text">
+        Built with ❤️, prayers, coffee, and determination to solve real problems
     </div>
-  </section>
-
-  <!-- Three Visual Cards Section -->
-  <section class="vision-cards">
-    <div class="cards-container">
-      <div class="vision-card card-1">
-        <div class="card-header">
-          <div class="card-icon">🎯</div>
-          <h3>The Problem</h3>
-        </div>
-        <p>30 years of spending hours rewriting patterns for simple adjustments. There has to be a better way.</p>
-      </div>
-      
-      <div class="vision-card card-2">
-        <div class="card-header">
-          <div class="card-icon">⚡</div>
-          <h3>The Solution</h3>
-        </div>
-        <p>Building pattern adjustment tools that automate the math, so crocheters can focus on creating.</p>
-      </div>
-      
-      <div class="vision-card card-3">
-        <div class="card-header">
-          <div class="card-icon">❤️</div>
-          <h3>The Heart</h3>
-        </div>
-        <p>Serving communities with both hands-on and technology solutions. Ministry-minded innovation.</p>
-      </div>
+    
+    <div class="adsense-bottom">
+        [Google AdSense - Leaderboard 728x90]
     </div>
-  </section>
-
-  <!-- Ad Zone - Between Content -->
-  <div class="ad-zone ad-zone-content">
-    [Google AdSense - Banner 728x90]
-  </div>
-
-  <!-- Footer Enhanced -->
-  <footer class="footer-enhanced" id="contact">
-    <div class="footer-container">
-      <div class="footer-content">
-        <p class="footer-text-main">
-          Join me on this journey of bridging traditional craft with modern technology. 
-          I'm one person working to protect this work and make enough to keep building 
-          tools no one else has put on the market yet.
-        </p>
-        
-        <div class="social-enhanced">
-          <a href="https://linktr.ee/this4dani" class="social-link-enhanced">🔗</a>
-          <a href="https://linkedin.com/in/ashleydaniellecaldwell/" class="social-link-enhanced">💼</a>
-          <a href="https://github.com/this4dani" class="social-link-enhanced">⚡</a>
-          <a href="https://instagram.com/this4dani" class="social-link-enhanced">📸</a>
-        </div>
-      </div>
-      
-      <div class="footer-signature">
-        <p class="signature-text">Built with ❤️, prayer, coffee, and determination to solve real problems.</p>
-        <p class="copyright">&copy; 2024 DANI'S. Where Traditional Craft Meets Modern Technology.</p>
-      </div>
-    </div>
-  </footer>
-
-  <style>
-    /* Enhanced Styles for Maximum Visual Hierarchy */
-    
-    /* Remove background textures */
-    body::before { display: none !important; }
-    
-    /* Dark mode with browns and mauve */
-    body {
-      background: linear-gradient(135deg, #4a2c2a 0%, #6b4c57 50%, #2d1b1b 100%);
-      color: var(--clr-warm-white);
-    }
-    
-    /* Enhanced Navigation */
-    .nav-enhanced {
-      background: rgba(74, 44, 42, 0.95);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-    }
-    
-    .logo-enhanced {
-      font-family: var(--font-script);
-      font-size: 2.2rem;
-      font-weight: 700;
-      background: linear-gradient(135deg, var(--clr-fuchsia), var(--clr-mauve));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-    
-    /* Hero with Maximum Hierarchy */
-    .hero-enhanced {
-      padding: 100px 40px;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .title-container {
-      margin-bottom: 30px;
-    }
-    
-    .hero-title-main {
-      font-family: var(--font-display);
-      font-size: clamp(4rem, 8vw, 6rem);
-      font-weight: 900;
-      background: linear-gradient(135deg, var(--clr-warm-white) 0%, var(--clr-fuchsia) 50%, var(--clr-mauve) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      margin: 0;
-      line-height: 0.9;
-      position: relative;
-    }
-    
-    .acronym-subtle {
-      font-family: var(--font-primary);
-      font-size: 0.9rem;
-      color: var(--clr-cream);
-      opacity: 0.7;
-      letter-spacing: 2px;
-      margin-top: 10px;
-      font-weight: 300;
-    }
-    
-    .hero-tagline {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      color: var(--clr-fuchsia);
-      margin: 20px 0 40px 0;
-      font-weight: 600;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-    }
-    
-    .hero-description-enhanced {
-      margin: 30px 0 40px 0;
-    }
-    
-    .description-main {
-      font-size: 1.3rem;
-      line-height: 1.6;
-      margin-bottom: 15px;
-      color: var(--clr-warm-white);
-      font-weight: 500;
-    }
-    
-    .description-sub {
-      font-size: 1.1rem;
-      color: var(--clr-cream);
-      opacity: 0.9;
-      font-weight: 300;
-    }
-    
-    /* Dimensional Button */
-    .btn-dimensional {
-      display: inline-block;
-      padding: 20px 40px;
-      font-size: 1.2rem;
-      font-weight: 700;
-      font-family: var(--font-primary);
-      background: linear-gradient(145deg, var(--clr-fuchsia), var(--clr-mauve));
-      color: white;
-      text-decoration: none;
-      border-radius: 15px;
-      box-shadow: 
-        0 8px 16px rgba(0,0,0,0.3),
-        inset 0 1px 0 rgba(255,255,255,0.2),
-        0 0 20px rgba(255,45,130,0.3);
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-      transform-style: preserve-3d;
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .btn-dimensional::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: -100%;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition: left 0.5s ease;
-    }
-    
-    .btn-dimensional:hover::before {
-      left: 100%;
-    }
-    
-    .btn-dimensional:hover {
-      transform: translateY(-3px) scale(1.02);
-      box-shadow: 
-        0 12px 24px rgba(0,0,0,0.4),
-        inset 0 1px 0 rgba(255,255,255,0.3),
-        0 0 30px rgba(255,45,130,0.5);
-    }
-    
-    /* Floating Elements - Complement Spacing */
-    .floating-ecosystem {
-      position: absolute;
-      top: 0;
-      right: 0;
-      width: 40%;
-      height: 100%;
-      pointer-events: none;
-    }
-    
-    .float-element {
-      position: absolute;
-      background: linear-gradient(135deg, var(--clr-mauve), var(--clr-fuchsia));
-      color: white;
-      padding: 15px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 1.1rem;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-      animation: gentleFloat 8s ease-in-out infinite;
-    }
-    
-    .float-1 { top: 15%; right: 20%; animation-delay: 0s; }
-    .float-2 { top: 35%; right: 60%; animation-delay: 1.5s; }
-    .float-3 { top: 55%; right: 10%; animation-delay: 3s; }
-    .float-4 { top: 75%; right: 45%; animation-delay: 4.5s; }
-    .float-5 { top: 25%; right: 80%; animation-delay: 6s; }
-    
-    @keyframes gentleFloat {
-      0%, 100% { transform: translateY(0px) rotate(0deg); }
-      25% { transform: translateY(-15px) rotate(2deg); }
-      50% { transform: translateY(-10px) rotate(-2deg); }
-      75% { transform: translateY(-20px) rotate(1deg); }
-    }
-    
-    /* Story Section with Maximum Hierarchy */
-    .story-enhanced {
-      padding: 80px 40px;
-      background: linear-gradient(135deg, rgba(107, 76, 87, 0.3), rgba(74, 44, 42, 0.3));
-      backdrop-filter: blur(10px);
-      margin: 40px 0;
-      border-radius: 25px;
-    }
-    
-    .story-header {
-      display: flex;
-      align-items: center;
-      margin-bottom: 40px;
-      gap: 30px;
-    }
-    
-    .story-icon {
-      font-size: 4rem;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-    }
-    
-    .story-title-main {
-      font-family: var(--font-display);
-      font-size: clamp(2.5rem, 5vw, 3.5rem);
-      background: linear-gradient(135deg, var(--clr-warm-white), var(--clr-fuchsia));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin: 0;
-      line-height: 1;
-    }
-    
-    .story-title-sub {
-      font-family: var(--font-display);
-      font-size: clamp(1.8rem, 4vw, 2.5rem);
-      color: var(--clr-mauve);
-      margin: 5px 0 0 0;
-      font-weight: 400;
-    }
-    
-    .story-content {
-      display: grid;
-      gap: 30px;
-      max-width: 800px;
-    }
-    
-    .story-card {
-      background: rgba(250, 248, 243, 0.1);
-      border-radius: 20px;
-      padding: 30px;
-      position: relative;
-      border: 1px solid rgba(255, 45, 130, 0.2);
-      backdrop-filter: blur(10px);
-    }
-    
-    .card-accent {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 5px;
-      height: 100%;
-      background: linear-gradient(180deg, var(--clr-fuchsia), var(--clr-mauve));
-      border-radius: 20px 0 0 20px;
-    }
-    
-    .story-card p {
-      font-size: 1.2rem;
-      line-height: 1.7;
-      margin: 0;
-      color: var(--clr-warm-white);
-    }
-    
-    .story-highlight {
-      color: var(--clr-fuchsia);
-      font-weight: 600;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-    }
-    
-    /* Vision Cards Section */
-    .vision-cards {
-      padding: 80px 40px;
-      background: rgba(45, 27, 27, 0.5);
-    }
-    
-    .cards-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 40px;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    
-    .vision-card {
-      background: linear-gradient(145deg, rgba(107, 76, 87, 0.2), rgba(74, 44, 42, 0.2));
-      border-radius: 20px;
-      padding: 40px 30px;
-      text-align: center;
-      border: 1px solid rgba(255, 45, 130, 0.2);
-      backdrop-filter: blur(15px);
-      transition: all 0.3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    
-    .vision-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(45deg, transparent, rgba(255, 45, 130, 0.1), transparent);
-      transform: translateX(-100%);
-      transition: transform 0.6s ease;
-    }
-    
-    .vision-card:hover::before {
-      transform: translateX(100%);
-    }
-    
-    .vision-card:hover {
-      transform: translateY(-10px);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
-    
-    .card-header {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 20px;
-    }
-    
-    .card-icon {
-      font-size: 3rem;
-      margin-bottom: 15px;
-      filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
-    }
-    
-    .vision-card h3 {
-      font-family: var(--font-display);
-      font-size: 1.5rem;
-      color: var(--clr-fuchsia);
-      margin: 0;
-    }
-    
-    .vision-card p {
-      color: var(--clr-cream);
-      line-height: 1.6;
-      font-size: 1.1rem;
-    }
-    
-    /* Enhanced Footer */
-    .footer-enhanced {
-      background: linear-gradient(135deg, #2d1b1b, #4a2c2a);
-      padding: 60px 40px 40px;
-      border-top: 1px solid rgba(255, 45, 130, 0.2);
-    }
-    
-    .footer-content {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-    
-    .footer-text-main {
-      font-size: 1.2rem;
-      color: var(--clr-cream);
-      line-height: 1.6;
-      max-width: 600px;
-      margin: 0 auto 30px;
-    }
-    
-    .social-enhanced {
-      display: flex;
-      justify-content: center;
-      gap: 20px;
-    }
-    
-    .social-link-enhanced {
-      width: 60px;
-      height: 60px;
-      background: linear-gradient(135deg, var(--clr-fuchsia), var(--clr-mauve));
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.3);
-    }
-    
-    .social-link-enhanced:hover {
-      transform: translateY(-5px) scale(1.1);
-      box-shadow: 0 12px 24px rgba(0,0,0,0.4);
-    }
-    
-    .footer-signature {
-      text-align: center;
-      border-top: 1px solid rgba(255, 45, 130, 0.2);
-      padding-top: 30px;
-    }
-    
-    .signature-text {
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      color: var(--clr-fuchsia);
-      margin-bottom: 10px;
-      font-weight: 500;
-    }
-    
-    .copyright {
-      color: var(--clr-cream);
-      opacity: 0.7;
-      font-size: 0.9rem;
-    }
-    
-    /* Ad Zones - Research-Based Placement */
-    .ad-zone {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(250,248,243,0.05);
-      border: 1px dashed rgba(250,248,243,0.2);
-      border-radius: 10px;
-      color: var(--clr-cream);
-      font-size: 0.9rem;
-      opacity: 0.6;
-    }
-    
-    .ad-zone-header {
-      height: 90px;
-      margin: 20px auto;
-      max-width: 728px;
-    }
-    
-    .ad-zone-sidebar {
-      width: 300px;
-      height: 250px;
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 100;
-    }
-    
-    .ad-zone-content {
-      height: 90px;
-      max-width: 728px;
-      margin: 40px auto;
-    }
-    
-    /* Responsive Design */
-    @media (max-width: 1200px) {
-      .ad-zone-sidebar {
-        display: none;
-      }
-      
-      .floating-ecosystem {
-        width: 50%;
-      }
-    }
-    
-    @media (max-width: 768px) {
-      .hero-enhanced {
-        padding: 60px 20px;
-      }
-      
-      .floating-ecosystem {
-        display: none;
-      }
-      
-      .story-header {
-        flex-direction: column;
-        text-align: center;
-      }
-      
-      .cards-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-      
-      .vision-cards, .story-enhanced {
-        padding: 60px 20px;
-      }
-    }
-  </style>
+    <script>
+        // Floating cards click functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const stitchCards = document.querySelectorAll('.stitch-card');
+            
+            stitchCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const stitchId = this.getAttribute('data-stitch');
+                    // Navigate to glossary page with specific stitch
+                    window.location.href = `glossary.html#${stitchId}`;
+                });
+            });
+        });
+    </script>
 </body>
 </html>
