@@ -1,34 +1,37 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>Privacy Policy - DANI'S</title>
+    <title>Legal & Contact - DANI'S</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        body {
+        * {
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #003840 0%, #001a1f 100%);
+            box-sizing: border-box;
+        }
+        
+        body {
             font-family: 'Poppins', sans-serif;
-            min-height: 100vh;
+            background: linear-gradient(135deg, #003840 0%, #001a1f 100%);
             color: #f6eedc;
+            min-height: 100vh;
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
         }
         
         .container {
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
+            flex: 1;
         }
         
         .header {
             text-align: center;
             margin-bottom: 40px;
-            padding: 30px;
-            background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(79, 43, 58, 0.4);
         }
         
         .header h1 {
@@ -36,7 +39,6 @@
             font-size: 3rem;
             color: #ff6b7a;
             margin-bottom: 10px;
-            font-weight: 700;
         }
         
         .header p {
@@ -44,42 +46,113 @@
             font-size: 1.1rem;
         }
         
-        .content {
-            background: rgba(255,255,255,0.05);
-            padding: 40px;
+        /* Tab Navigation */
+        .tab-nav {
+            display: flex;
+            background: rgba(250, 248, 243, 0.1);
             border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255,255,255,0.1);
+            padding: 5px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(250, 248, 243, 0.2);
         }
         
-        .content h2 {
+        .tab-button {
+            flex: 1;
+            padding: 15px 20px;
+            background: transparent;
+            border: none;
+            color: #c8b8a8;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(135deg, #ff6b7a, #ff2d82);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 122, 0.3);
+        }
+        
+        .tab-button:hover:not(.active) {
+            background: rgba(255, 107, 122, 0.1);
+            color: #ff6b7a;
+        }
+        
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            background: rgba(61, 26, 43, 0.3);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 40px;
+            border: 1px solid rgba(250, 248, 243, 0.1);
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .tab-content h2 {
             font-family: 'Playfair Display', serif;
             color: #ff6b7a;
-            font-size: 1.8rem;
-            margin: 30px 0 15px 0;
-            border-bottom: 2px solid #ff6b7a;
-            padding-bottom: 5px;
+            font-size: 2rem;
+            margin-bottom: 20px;
         }
         
-        .content h3 {
-            color: #ffab7d;
+        .tab-content h3 {
+            color: #ff6b7a;
+            margin-top: 30px;
+            margin-bottom: 15px;
             font-size: 1.3rem;
-            margin: 25px 0 10px 0;
         }
         
-        .content p {
+        .tab-content p {
             margin-bottom: 15px;
             color: #f6eedc;
+            line-height: 1.7;
         }
         
-        .content ul {
-            margin: 15px 0;
-            padding-left: 25px;
-        }
-        
-        .content li {
-            margin-bottom: 8px;
+        .tab-content ul {
+            margin: 15px 0 15px 20px;
             color: #f6eedc;
+        }
+        
+        .tab-content li {
+            margin-bottom: 8px;
+        }
+        
+        .contact-info {
+            background: rgba(255, 107, 122, 0.1);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 107, 122, 0.3);
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item strong {
+            min-width: 100px;
+            color: #ff6b7a;
+        }
+        
+        .contact-item a {
+            color: #ff6b7a;
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            color: #ff2d82;
         }
         
         .highlight {
@@ -90,158 +163,205 @@
             margin: 20px 0;
         }
         
-        .back-link {
-            display: inline-block;
-            background: linear-gradient(145deg, #ff6b7a, #ff2d82);
-            color: white;
-            padding: 12px 25px;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 30px 0;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 122, 0.3);
-        }
-        
-        .back-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 107, 122, 0.4);
-        }
-        
-        .last-updated {
-            font-style: italic;
-            color: #c8b8a8;
+        .footer {
+            margin-top: auto;
             text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-top: 1px solid rgba(250, 248, 243, 0.1);
+            opacity: 0.6;
+        }
+        
+        @media (max-width: 600px) {
+            .tab-nav {
+                flex-direction: column;
+            }
+            
+            .container {
+                padding: 20px 15px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .tab-content {
+                padding: 25px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
-            <h1>Privacy Policy</h1>
-            <p>DANI'S - Where Traditional Craft Meets Modern Technology</p>
+            <h1>Legal & Contact</h1>
+            <p>Required information for DANI'S crochet platform</p>
         </div>
         
-        <div class="content">
-            <div class="highlight">
-                <strong>Effective Date:</strong> December 29, 2024<br>
-                <strong>Website:</strong> this4dani.com
-            </div>
+        <div class="tab-nav">
+            <a href="index.html" class="tab-button">← DANI'S</a>
+            <button class="tab-button active" onclick="openTab(event, 'privacy')">Privacy Policy</button>
+            <button class="tab-button" onclick="openTab(event, 'terms')">Terms of Service</button>
+            <button class="tab-button" onclick="openTab(event, 'contact')">Contact</button>
+        </div>
+        
+        <!-- Privacy Policy Tab -->
+        <div id="privacy" class="tab-content active">
+            <h2>Privacy Policy</h2>
+            <p><strong>Last updated:</strong> December 2024</p>
             
-            <h2>Introduction</h2>
-            <p>Welcome to DANI'S! This privacy policy explains how we collect, use, and protect your information when you visit our crochet resource website. We are committed to protecting your privacy and being transparent about our practices.</p>
+            <h3>Information We Collect</h3>
+            <p>DANI'S operates this4dani.com to provide our crochet glossary and pattern adjustment services. This page informs you of our policies regarding the collection, use, and disclosure of personal data when you use our service.</p>
             
-            <h2>Information We Collect</h2>
+            <h3>Google AdSense</h3>
+            <p>We use Google AdSense to display advertisements on our website. Google may use cookies to serve ads based on your prior visits to our website or other websites. You may opt out of personalized advertising by visiting Google's Ads Settings.</p>
             
-            <h3>Automatically Collected Information</h3>
+            <h3>Cookies and Tracking</h3>
+            <p>Our website uses cookies to enhance your browsing experience:</p>
             <ul>
-                <li><strong>Analytics Data:</strong> We use Google Analytics to understand how visitors use our site, including pages visited, time spent, and general location data</li>
-                <li><strong>Device Information:</strong> Browser type, operating system, and device type to optimize your experience</li>
-                <li><strong>Usage Data:</strong> Which crochet stitches you search for and which pages you visit to improve our content</li>
+                <li><strong>Essential Cookies:</strong> Required for basic site functionality</li>
+                <li><strong>Analytics Cookies:</strong> Help us understand how visitors use our site</li>
+                <li><strong>Advertising Cookies:</strong> Used by Google AdSense for personalized ads</li>
             </ul>
             
-            <h3>Information You Provide</h3>
-            <ul>
-                <li><strong>Contact Information:</strong> If you email us with questions about crochet techniques or our API</li>
-                <li><strong>Newsletter Signup:</strong> Email address if you choose to join our pattern adjustment API waitlist</li>
-                <li><strong>Comments or Feedback:</strong> Any suggestions you share about our crochet glossary or tools</li>
-            </ul>
+            <h3>Email Newsletter</h3>
+            <p>If you subscribe to our newsletter for pattern adjustment API updates, we collect your email address solely for this purpose. You can unsubscribe at any time.</p>
             
-            <h2>How We Use Your Information</h2>
-            <ul>
-                <li>To provide and improve our crochet resources and stitch glossary</li>
-                <li>To understand which crochet content is most helpful to our community</li>
-                <li>To notify you about updates to our pattern adjustment API (if you subscribe)</li>
-                <li>To respond to your questions about crochet techniques and our tools</li>
-                <li>To analyze website traffic and optimize user experience</li>
-            </ul>
+            <h3>Affiliate Links</h3>
+            <p>Our website contains affiliate links to Amazon and other retailers. When you click these links and make purchases, we may earn a commission at no additional cost to you.</p>
             
-            <h2>Google AdSense and Advertising</h2>
-            <div class="highlight">
-                <p><strong>Important:</strong> We use Google AdSense to display advertisements that help support this free crochet resource.</p>
-            </div>
-            
-            <h3>How Google AdSense Works</h3>
-            <ul>
-                <li><strong>Cookies:</strong> Google may use cookies to serve ads based on your visits to our site and other websites</li>
-                <li><strong>Personalized Ads:</strong> Ads may be tailored based on your interests (you can opt out of personalized ads)</li>
-                <li><strong>Third-Party Advertisers:</strong> Ad companies may collect information to provide relevant ads</li>
-            </ul>
-            
-            <h3>Your Advertising Choices</h3>
-            <ul>
-                <li>Visit <a href="https://www.google.com/settings/ads" style="color: #ffab7d;">Google Ad Settings</a> to manage personalized ads</li>
-                <li>Use <a href="http://www.aboutads.info/choices/" style="color: #ffab7d;">AboutAds.info</a> to opt out of interest-based advertising</li>
-                <li>Enable "Do Not Track" in your browser settings</li>
-            </ul>
-            
-            <h2>Cookies and Tracking</h2>
-            <p>We use cookies to:</p>
-            <ul>
-                <li>Remember your preferences for our crochet glossary</li>
-                <li>Analyze website traffic with Google Analytics</li>
-                <li>Display relevant advertisements through Google AdSense</li>
-                <li>Improve our crochet resources based on usage patterns</li>
-            </ul>
-            
-            <h2>Information Sharing</h2>
-            <p>We do not sell or rent your personal information. We may share information with:</p>
-            <ul>
-                <li><strong>Google Analytics:</strong> Anonymous usage data to improve our site</li>
-                <li><strong>Google AdSense:</strong> For displaying relevant advertisements</li>
-                <li><strong>Email Service Provider:</strong> If you subscribe to our API updates (we use reputable services)</li>
-                <li><strong>Legal Requirements:</strong> If required by law or to protect our rights</li>
-            </ul>
-            
-            <h2>Data Security</h2>
-            <p>We implement appropriate security measures to protect your information, including:</p>
-            <ul>
-                <li>Secure hosting with HTTPS encryption</li>
-                <li>Regular security updates and monitoring</li>
-                <li>Limited access to any personal information we collect</li>
-                <li>No storage of sensitive financial information</li>
-            </ul>
-            
-            <h2>Your Rights</h2>
+            <h3>Your Rights</h3>
             <p>You have the right to:</p>
             <ul>
-                <li>Access information we have about you</li>
-                <li>Request correction of inaccurate information</li>
-                <li>Request deletion of your information</li>
+                <li>Access the personal information we hold about you</li>
+                <li>Request correction of inaccurate personal information</li>
+                <li>Request deletion of your personal information</li>
                 <li>Opt out of marketing communications</li>
-                <li>Disable cookies in your browser</li>
             </ul>
             
-            <h2>Children's Privacy</h2>
-            <p>Our crochet resources are designed for all ages, but we do not knowingly collect personal information from children under 13. If you are a parent and believe your child has provided us with personal information, please contact us.</p>
+            <h3>Contact Us</h3>
+            <p>If you have questions about this Privacy Policy, please contact us at this4dani@gmail.com.</p>
+        </div>
+        
+        <!-- Terms of Service Tab -->
+        <div id="terms" class="tab-content">
+            <h2>Terms of Service</h2>
+            <p><strong>Last updated:</strong> December 2024</p>
             
-            <h2>External Links</h2>
-            <p>Our site contains links to crochet supply retailers (Amazon, yarn shops) and other crochet resources. We are not responsible for the privacy practices of these external sites. Please review their privacy policies before providing any information.</p>
+            <h3>Acceptance of Terms</h3>
+            <p>By accessing and using DANI'S website (this4dani.com), you accept and agree to be bound by the terms and provision of this agreement.</p>
             
-            <h2>Changes to This Policy</h2>
-            <p>We may update this privacy policy as our crochet platform grows and evolves. We will post any changes on this page and update the effective date. Significant changes will be highlighted prominently.</p>
-            
-            <h2>Contact Us</h2>
-            <p>If you have questions about this privacy policy or our data practices, please contact us:</p>
+            <h3>Description of Service</h3>
+            <p>DANI'S provides:</p>
             <ul>
-                <li><strong>Website:</strong> this4dani.com</li>
-                <li><strong>Email:</strong> [Your email address]</li>
-                <li><strong>Subject:</strong> Privacy Policy Question</li>
+                <li>Interactive crochet stitch glossary</li>
+                <li>Educational content about crochet techniques</li>
+                <li>Pattern adjustment tools and services (coming soon)</li>
+                <li>Affiliate recommendations for crochet supplies</li>
             </ul>
+            
+            <h3>User Responsibilities</h3>
+            <p>You agree to:</p>
+            <ul>
+                <li>Use the service for lawful purposes only</li>
+                <li>Not attempt to disrupt or damage the website</li>
+                <li>Respect intellectual property rights</li>
+                <li>Provide accurate information when required</li>
+            </ul>
+            
+            <h3>Intellectual Property</h3>
+            <p>The content on this website, including but not limited to text, graphics, logos, and software, is the property of DANI'S and is protected by copyright laws. You may use our content for personal, non-commercial purposes.</p>
+            
+            <h3>Disclaimers</h3>
+            <p>The information provided on this website is for educational purposes. While we strive for accuracy, we make no warranties about the completeness or accuracy of any content.</p>
             
             <div class="highlight">
-                <p><strong>Note:</strong> This privacy policy applies specifically to this4dani.com and our crochet resources. By using our site, you agree to the collection and use of information as described in this policy.</p>
+                <p><strong>Pattern Adjustment Disclaimer:</strong> Our pattern adjustment tools are provided as-is. Always check your work and make test swatches before starting large projects.</p>
             </div>
             
-            <div class="last-updated">
-                Last updated: December 29, 2024
+            <h3>Limitation of Liability</h3>
+            <p>DANI'S shall not be liable for any indirect, incidental, special, consequential, or punitive damages resulting from your use of this website.</p>
+            
+            <h3>Changes to Terms</h3>
+            <p>We reserve the right to modify these terms at any time. Continued use of the website after changes constitutes acceptance of the new terms.</p>
+        </div>
+        
+        <!-- Contact Tab -->
+        <div id="contact" class="tab-content">
+            <h2>Contact DANI'S</h2>
+            <p>Get in touch for crochet questions, pattern help, business inquiries, or technical support.</p>
+            
+            <div class="contact-info">
+                <div class="contact-item">
+                    <strong>Email:</strong>
+                    <span>this4dani@gmail.com</span>
+                </div>
+                <div class="contact-item">
+                    <strong>Website:</strong>
+                    <a href="https://this4dani.com">this4dani.com</a>
+                </div>
+                <div class="contact-item">
+                    <strong>Social:</strong>
+                    <a href="#">@this4dani</a> (Instagram, Pinterest, TikTok)
+                </div>
+                <div class="contact-item">
+                    <strong>Business:</strong>
+                    <a href="#">LinkedIn</a>
+                </div>
             </div>
             
-            <a href="index.html" class="back-link">← Back to DANI'S Homepage</a>
+            <h3>What We Can Help With</h3>
+            <ul>
+                <li><strong>Crochet Questions:</strong> Pattern adjustments, technique help, stitch guidance</li>
+                <li><strong>Website Issues:</strong> Technical problems, bug reports, accessibility concerns</li>
+                <li><strong>Business Inquiries:</strong> Partnerships, collaborations, media requests</li>
+                <li><strong>Privacy Concerns:</strong> Data requests, opt-out requests, privacy questions</li>
+            </ul>
+            
+            <h3>Response Time</h3>
+            <p>We aim to respond to all inquiries within 48 hours during business days. For urgent matters, please mention "URGENT" in your subject line.</p>
+            
+            <div class="highlight">
+                <p><strong>About DANI'S:</strong> I'm a ministry office manager with 30+ years of crochet experience, building tools to solve pattern adjustment frustrations. Life is a hot mess, but I have Joy in the Lord and determination to help fellow crocheters!</p>
+            </div>
+            
+            <h3>Office Hours</h3>
+            <p>Monday - Friday: 9 AM - 5 PM EST<br>
+            <em>Please note: Response times may be longer during mission trips or ministry events.</em></p>
         </div>
     </div>
+    
+    <div class="footer">
+        <p style="color: #c8b8a8; font-size: 0.85rem; margin-bottom: 5px; font-family: 'Poppins', sans-serif;">
+            Built with ❤️, prayers, coffee, and determination to solve real problems
+        </p>
+        <p style="color: #c8b8a8; font-size: 0.75rem; margin-bottom: 3px; font-family: 'Poppins', sans-serif;">
+            DANI'S: Designs • Accoutrements • Notions • Ideas • Something Special
+        </p>
+        <p style="color: #c8b8a8; font-size: 0.7rem; font-family: 'Poppins', sans-serif;">
+            © 2024 DANI'S. All rights reserved.
+        </p>
+    </div>
+    
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Hide all tab content
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].classList.remove("active");
+            }
+            
+            // Remove active class from all tab buttons
+            tablinks = document.getElementsByClassName("tab-button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
+            
+            // Show selected tab and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+        }
+    </script>
 </body>
 </html>
