@@ -5,69 +5,6 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Floating Stitch Cards -->
-    <div class="floating-cards">
-        <div class="stitch-card fall-1" data-stitch="sc">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-icon">×</div>
-                    <div class="card-abbr">SC</div>
-                </div>
-                <div class="card-back">
-                    <div class="dani-text">DANI'S</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="stitch-card fall-2" data-stitch="dc">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-icon">T</div>
-                    <div class="card-abbr">DC</div>
-                </div>
-                <div class="card-back">
-                    <div class="dani-text">DANI'S</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="stitch-card fall-3" data-stitch="hdc">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-icon">┬</div>
-                    <div class="card-abbr">HDC</div>
-                </div>
-                <div class="card-back">
-                    <div class="dani-text">DANI'S</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="stitch-card fall-4" data-stitch="ch">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-icon">○</div>
-                    <div class="card-abbr">CH</div>
-                </div>
-                <div class="card-back">
-                    <div class="dani-text">DANI'S</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="stitch-card fall-5" data-stitch="slst">
-            <div class="card-inner">
-                <div class="card-front">
-                    <div class="card-icon">—</div>
-                    <div class="card-abbr">SL</div>
-                </div>
-                <div class="card-back">
-                    <div class="dani-text">DANI'S</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <style>
         body {
             margin: 0;
@@ -134,7 +71,6 @@
         #nav img {
             filter: brightness(0) saturate(100%) invert(85%) sepia(14%) saturate(230%) hue-rotate(317deg) brightness(102%) contrast(92%);
             opacity: 0.8;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
         }
         #nav a:nth-child(1) img { width: 85px; height: 85px; }
         #nav a:nth-child(2) img { width: 90px; height: 90px; }
@@ -155,29 +91,29 @@
         }
         
         .intro {
-    background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
-    max-width: 850px;
-    padding: 70px;
-    border-radius: 25px;
-    display: block;
-    position: relative;
-    text-align: left;
-    
-    /* Dome-like 3D effect */
-    box-shadow: 
-        0 15px 35px rgba(79, 43, 58, 0.4),
-        0 8px 20px rgba(0, 0, 0, 0.3),
-        0 3px 8px rgba(0, 0, 0, 0.15),
-        inset 0 3px 6px rgba(255, 255, 255, 0.12),
-        inset 0 -8px 16px rgba(0, 0, 0, 0.2);
-    
-    border: 1px solid rgba(250, 248, 243, 0.15);
-    
-    /* Add subtle curve highlight */
-    background-image: 
-        radial-gradient(ellipse 80% 30% at 50% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-        radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
-}
+            background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
+            max-width: 850px;
+            padding: 70px;
+            border-radius: 25px;
+            display: block;
+            position: relative;
+            text-align: left;
+            
+            /* Dome-like 3D effect */
+            box-shadow: 
+                0 15px 35px rgba(79, 43, 58, 0.4),
+                0 8px 20px rgba(0, 0, 0, 0.3),
+                0 3px 8px rgba(0, 0, 0, 0.15),
+                inset 0 3px 6px rgba(255, 255, 255, 0.12),
+                inset 0 -8px 16px rgba(0, 0, 0, 0.2);
+            
+            border: 1px solid rgba(250, 248, 243, 0.15);
+            
+            /* Add subtle curve highlight */
+            background-image: 
+                radial-gradient(ellipse 80% 30% at 50% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
+        }
         .intro::before {
             content: '';
             position: absolute;
@@ -195,13 +131,13 @@
         }
         
         .intro h1 {
-    font-family: 'Poppins', sans-serif;
-    font-size: 6rem;
-    color: #003840;
-    margin: 0 0 5px 0;
-    font-weight: 800;
-    letter-spacing: -5px;
-    }
+            font-family: 'Poppins', sans-serif;
+            font-size: 6rem;
+            color: #003840;
+            margin: 0 0 5px 0;
+            font-weight: 800;
+            letter-spacing: -5px;
+        }
 
         .intro p:first-of-type {
             font-family: 'Inter', sans-serif;
@@ -214,18 +150,18 @@
             text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
         }
         
-       .intro p:last-of-type {
-    font-family: 'Crimson Text', serif;
-    color: #c8b8a8;  /* Changed from #e8e0d5 */
-    font-size: 1.8rem;
-    margin: 35px 0 0 0;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-    letter-spacing: 1px;
-    text-align: center;
-    line-height: 1.3;
-    font-style: italic;
-}
+        .intro p:last-of-type {
+            font-family: 'Crimson Text', serif;
+            color: #c8b8a8;
+            font-size: 1.8rem;
+            margin: 35px 0 0 0;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            letter-spacing: 1px;
+            text-align: center;
+            line-height: 1.3;
+            font-style: italic;
+        }
         
         .pic-container {
             background: #2d1a2b;
@@ -268,6 +204,7 @@
             border-top: 1px solid rgba(255,255,255,0.1);
             margin-top: auto;
         }
+
         /* ===== FLOATING STITCH CARDS ===== */
         .floating-cards {
             position: fixed;
@@ -480,10 +417,19 @@
             .floating-cards { display: none; }
         }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+         crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="adsense-top">
-        [Google AdSense - Leaderboard 728x90]
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
     
     <nav id="nav">
@@ -493,11 +439,74 @@
         <a href="#"><img src="images/yarn-ball-insert-crochet-hook.png" alt="Social"></a>
     </nav>
     
+    <!-- Floating Stitch Cards -->
+    <div class="floating-cards">
+        <div class="stitch-card fall-1" data-stitch="sc">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">×</div>
+                    <div class="card-abbr">SC</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stitch-card fall-2" data-stitch="dc">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">T</div>
+                    <div class="card-abbr">DC</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stitch-card fall-3" data-stitch="hdc">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">┬</div>
+                    <div class="card-abbr">HDC</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stitch-card fall-4" data-stitch="ch">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">○</div>
+                    <div class="card-abbr">CH</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stitch-card fall-5" data-stitch="slst">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-icon">—</div>
+                    <div class="card-abbr">SL</div>
+                </div>
+                <div class="card-back">
+                    <div class="dani-text">DANI'S</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div class="panel">
         <article class="intro">
             <header>
                 <h1>DANI'S</h1>
-                <p>Designs • Accoutrements • Notions • Ideas<br>Something Special</p>
+                <p>Designs • Accoutrements • Notions • Ideas<br>And Something Special</p>
                 <p>Where Traditional Craft Meets Modern Technology</p>
             </header>
         </article>
@@ -508,8 +517,16 @@
     </div>
     
     <div class="adsense-bottom">
-        [Google AdSense - Leaderboard 728x90]
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
+
     <script>
         // Floating cards click functionality
         document.addEventListener('DOMContentLoaded', function() {
