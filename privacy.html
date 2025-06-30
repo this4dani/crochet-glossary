@@ -4,46 +4,37 @@
     <title>Legal & Contact - DANI'S</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        /* Legal page specific overrides */
         body {
-            font-family: 'Poppins', sans-serif;
-            background: linear-gradient(135deg, #003840 0%, #001a1f 100%);
-            color: #f6eedc;
-            min-height: 100vh;
-            line-height: 1.6;
-            display: flex;
-            flex-direction: column;
+            padding: 0;
         }
         
-        .container {
+        .legal-container {
             max-width: 900px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: var(--space-2xl) var(--space-lg);
             flex: 1;
         }
         
-        .header {
+        .legal-header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: var(--space-2xl);
         }
         
-        .header h1 {
-            font-family: 'Playfair Display', serif;
+        .legal-header h1 {
+            font-family: var(--font-display);
             font-size: 3rem;
-            color: #ff6b7a;
-            margin-bottom: 10px;
+            color: var(--clr-coral);
+            margin-bottom: var(--space-sm);
         }
         
-        .header p {
-            color: #c8b8a8;
+        .legal-header p {
+            color: var(--clr-cream);
             font-size: 1.1rem;
+            font-family: var(--font-primary);
         }
         
         /* Tab Navigation */
@@ -52,17 +43,17 @@
             background: rgba(250, 248, 243, 0.1);
             border-radius: 15px;
             padding: 5px;
-            margin-bottom: 30px;
+            margin-bottom: var(--space-xl);
             border: 1px solid rgba(250, 248, 243, 0.2);
         }
         
         .tab-button {
             flex: 1;
-            padding: 15px 20px;
+            padding: var(--space-md) var(--space-lg);
             background: transparent;
             border: none;
-            color: #c8b8a8;
-            font-family: 'Poppins', sans-serif;
+            color: var(--clr-cream);
+            font-family: var(--font-primary);
             font-weight: 500;
             cursor: pointer;
             border-radius: 12px;
@@ -74,23 +65,23 @@
         }
         
         .tab-button.active {
-            background: linear-gradient(135deg, #ff6b7a, #ff2d82);
+            background: var(--gradient-primary);
             color: white;
-            box-shadow: 0 4px 15px rgba(255, 107, 122, 0.3);
+            box-shadow: var(--shadow-glow);
         }
         
         .tab-button:hover:not(.active) {
             background: rgba(255, 107, 122, 0.1);
-            color: #ff6b7a;
+            color: var(--clr-coral);
         }
         
         /* Tab Content */
         .tab-content {
             display: none;
-            background: rgba(61, 26, 43, 0.3);
+            background: var(--clr-secondary-dark);
             backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 40px;
+            border-radius: var(--space-lg);
+            padding: var(--space-2xl);
             border: 1px solid rgba(250, 248, 243, 0.1);
         }
         
@@ -99,100 +90,123 @@
         }
         
         .tab-content h2 {
-            font-family: 'Playfair Display', serif;
-            color: #ff6b7a;
+            font-family: var(--font-display);
+            color: var(--clr-coral);
             font-size: 2rem;
-            margin-bottom: 20px;
+            margin-bottom: var(--space-lg);
         }
         
         .tab-content h3 {
-            color: #ff6b7a;
-            margin-top: 30px;
-            margin-bottom: 15px;
+            color: var(--clr-coral);
+            margin-top: var(--space-xl);
+            margin-bottom: var(--space-md);
             font-size: 1.3rem;
+            font-family: var(--font-display);
         }
         
         .tab-content p {
-            margin-bottom: 15px;
-            color: #f6eedc;
+            margin-bottom: var(--space-md);
+            color: var(--clr-cream);
             line-height: 1.7;
+            font-family: var(--font-primary);
         }
         
         .tab-content ul {
-            margin: 15px 0 15px 20px;
-            color: #f6eedc;
+            margin: var(--space-md) 0 var(--space-md) var(--space-lg);
+            color: var(--clr-cream);
         }
         
         .tab-content li {
-            margin-bottom: 8px;
+            margin-bottom: var(--space-xs);
+            font-family: var(--font-primary);
         }
         
         .contact-info {
             background: rgba(255, 107, 122, 0.1);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 20px 0;
-            border: 1px solid rgba(255, 107, 122, 0.3);
+            border-radius: var(--space-md);
+            padding: var(--space-xl);
+            margin: var(--space-lg) 0;
+            border: 1px solid var(--clr-coral);
         }
         
         .contact-item {
             display: flex;
             align-items: center;
-            margin-bottom: 15px;
+            margin-bottom: var(--space-md);
         }
         
         .contact-item strong {
             min-width: 100px;
-            color: #ff6b7a;
+            color: var(--clr-coral);
+            font-family: var(--font-primary);
         }
         
         .contact-item a {
-            color: #ff6b7a;
+            color: var(--clr-coral);
             text-decoration: none;
+            transition: color 0.3s ease;
         }
         
         .contact-item a:hover {
-            color: #ff2d82;
+            color: var(--clr-fuchsia);
         }
         
         .highlight {
             background: rgba(255, 107, 122, 0.2);
-            padding: 20px;
-            border-radius: 10px;
-            border-left: 4px solid #ff6b7a;
-            margin: 20px 0;
+            padding: var(--space-lg);
+            border-radius: var(--space-sm);
+            border-left: 4px solid var(--clr-coral);
+            margin: var(--space-lg) 0;
         }
         
-        .footer {
+        .legal-footer {
             margin-top: auto;
             text-align: center;
-            padding: 20px;
+            padding: var(--space-lg);
             border-top: 1px solid rgba(250, 248, 243, 0.1);
             opacity: 0.6;
         }
         
-        @media (max-width: 600px) {
+        .legal-footer p {
+            color: var(--clr-cream);
+            font-family: var(--font-primary);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .legal-footer p:first-child {
+            font-size: 0.85rem;
+        }
+        
+        .legal-footer p:nth-child(2) {
+            font-size: 0.75rem;
+        }
+        
+        .legal-footer p:last-child {
+            font-size: 0.7rem;
+        }
+        
+        @media (max-width: 768px) {
             .tab-nav {
                 flex-direction: column;
             }
             
-            .container {
-                padding: 20px 15px;
+            .legal-container {
+                padding: var(--space-lg) var(--space-md);
             }
             
-            .header h1 {
+            .legal-header h1 {
                 font-size: 2rem;
             }
             
             .tab-content {
-                padding: 25px;
+                padding: var(--space-lg);
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
+    <div class="legal-container">
+        <div class="legal-header">
             <h1>Legal & Contact</h1>
             <p>Required information for DANI'S crochet platform</p>
         </div>
@@ -330,16 +344,10 @@
         </div>
     </div>
     
-    <div class="footer">
-        <p style="color: #c8b8a8; font-size: 0.85rem; margin-bottom: 5px; font-family: 'Poppins', sans-serif;">
-            Built with ❤️, prayers, coffee, and determination to solve real problems
-        </p>
-        <p style="color: #c8b8a8; font-size: 0.75rem; margin-bottom: 3px; font-family: 'Poppins', sans-serif;">
-            DANI'S: Designs • Accoutrements • Notions • Ideas • Something Special
-        </p>
-        <p style="color: #c8b8a8; font-size: 0.7rem; font-family: 'Poppins', sans-serif;">
-            © 2024 DANI'S. All rights reserved.
-        </p>
+    <div class="legal-footer">
+        <p>Built with ❤️, prayers, coffee, and determination to solve real problems</p>
+        <p>DANI'S: Designs • Accoutrements • Notions • Ideas • Something Special</p>
+        <p>© 2024 DANI'S. All rights reserved.</p>
     </div>
     
     <script>
