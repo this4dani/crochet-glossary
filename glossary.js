@@ -1,40 +1,50 @@
-import { stitchGlossary } from "./glossarydata.js";
+import { stitchGlossary } from './glossarydata.js';
 
 const searchInput = document.getElementById("search");
 const grid = document.getElementById("glossary-grid");
 const popup = document.getElementById("popup");
-const popupTitle = document.getElementById("popupTitle");
-const popupDesc = document.getElementById("popupDescription");
-const popupClose = document.getElementById("popupClose");
+const popupTitle = document.getElementById("popup-title");
+const popupDesc = document.getElementById("popup-description");
+const popupUK = document.getElementById("popup-uk");
+const popupTags = document.getElementById("popup-tags");
+const popupClose = document.querySelector(".popup-close");
 
 const safeSymbol = (sym) => (/^[a-zA-Z_]/.test(sym) ? sym : `sym_${sym}`);
 
 function buildCards() {
+  grid.innerHTML = '';
   stitchGlossary.forEach((s) => {
     const card = document.createElement("div");
     card.className = "stitch-card";
     card.setAttribute("data-name", s.name_us);
+    card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
 
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("width", 40);
-    svg.setAttribute("height", 40);
-    const use = document.createElementNS("http://www.w3.org/2000/svg", "use");
-    use.setAttribute("href", `#${safeSymbol(s.symbol)}`);
-    svg.appendChild(use);
-
-    const abbr = document.createElement("span");
+    const abbr = document.createElement("div");
     abbr.className = "abbr";
-    abbr.textContent = s.id;
+    abbr.textContent = s.id.toUpperCase();
 
-    const full = document.createElement("span");
-    full.className = "fullword";
+    const full = document.createElement("div");
+    full.className = "name";
     full.textContent = s.name_us;
 
-    card.append(svg, abbr, full);
+    card.append(abbr, full);
 
     card.onclick = () => {
       popupTitle.textContent = s.name_us;
-      popupDesc.textContent = s.notes || "";
+      popupUK.textContent = `UK: ${s.name_uk}`;
+      popupDesc.textContent = s.notes || "No description available.";
+      
+      // Render tags
+      popupTags.innerHTML = '';
+      if (s.tags && s.tags.length > 0) {
+        s.tags.forEach(tag => {
+          const tagEl = document.createElement('span');
+          tagEl.className = 'tag';
+          tagEl.textContent = tag;
+          popupTags.appendChild(tagEl);
+        });
+      }
+      
       popup.classList.add("active");
     };
 
@@ -45,21 +55,56 @@ function buildCards() {
 function initGlossary() {
   buildCards();
 
-  // live search
+  // FIXED SEARCH WITH HIGHLIGHTING
   searchInput.addEventListener("input", () => {
-    const v = searchInput.value.toLowerCase();
-    Array.from(grid.children).forEach((c) => {
-      const name = c.getAttribute("data-name").toLowerCase();
-      const abbr = c.querySelector(".abbr").textContent.toLowerCase();
-      c.style.display = name.includes(v) || abbr.includes(v) ? "" : "none";
+    const query = searchInput.value.toLowerCase().trim();
+    
+    Array.from(grid.children).forEach((card) => {
+      const name = card.getAttribute("data-name").toLowerCase();
+      const tags = card.getAttribute("data-tags").toLowerCase();
+      const abbr = card.querySelector(".abbr").textContent.toLowerCase();
+      
+      const matches = name.includes(query) || 
+                     abbr.includes(query) || 
+                     tags.includes(query);
+      
+      // Remove existing highlight first
+      card.classList.remove("search-highlight");
+      
+      // Add highlight if query exists and matches
+      if (query !== "" && matches) {
+        card.classList.add("search-highlight");
+      }
     });
   });
 
-  // popup close
+  // Popup close
   popupClose.onclick = () => popup.classList.remove("active");
   popup.onclick = (e) => {
     if (e.target === popup) popup.classList.remove("active");
   };
+
+  // Tips toggle - FIXED
+  window.toggleTips = function() {
+    const tipsContent = document.getElementById('tips-content');
+    tipsContent.classList.toggle('show');
+  };
+
+  // Close tips when clicking outside - FIXED
+  document.addEventListener('click', function(e) {
+    const tipsToggle = document.querySelector('.tips-toggle');
+    const tipsContent = document.getElementById('tips-content');
+    if (tipsToggle && !tipsToggle.contains(e.target)) {
+      tipsContent.classList.remove('show');
+    }
+  });
+
+  // ESC key to close popup
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      popup.classList.remove('active');
+    }
+  });
 }
 
 document.readyState !== "loading"
