@@ -1,4 +1,21 @@
-<style>
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>My Story - DANI'S</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Remove fixed nav positioning - let it scroll naturally */
+        #nav {
+            position: static !important;
+            transform: none !important;
+            top: auto !important;
+            left: auto !important;
+        }
+        
         .story-title {
             font-family: var(--font-display);
             font-size: 2.5rem;
@@ -26,21 +43,67 @@
             opacity: 0.8;
             color: var(--clr-cream);
         }
-    </style><!DOCTYPE HTML>
-<html>
-<head>
-    <title>My Story - DANI'S</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+        
+        /* Sanctification under construction element */
+        .sanctification-box {
+            background: var(--clr-rich-brown);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px dashed var(--clr-coral);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sanctification-box::before {
+            content: '🔨';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+        
+        .sanctification-title {
+            color: var(--clr-coral);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: var(--font-display);
+        }
+        
+        .sanctification-verse {
+            color: var(--clr-cream);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .sanctification-text {
+            color: var(--clr-warm-white);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Navigation -->
-        <nav class="nav">
-            <a href="index.html" class="btn btn-primary">← Back to Home</a>
-            <div></div>
+        <!-- Navigation with correct ID to match CSS -->
+        <nav id="nav">
+            <a href="index.html">
+                <img src="images/home-heart-door.png" alt="Home">
+            </a>
+            <a href="glossary.html">
+                <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+            </a>
+            <a href="story.html" class="active">
+                <img src="images/slip-knot-first-chain.png" alt="Story">
+            </a>
+            <a href="follow.html">
+                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+            </a>
         </nav>
 
         <!-- Header -->
@@ -51,8 +114,10 @@
 
         <!-- Coming Soon Content -->
         <div class="story-section">
-            <div class="story-container">
-                <div class="story-text" style="text-align: center;">
+            <div class="story-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start;">
+                
+                <!-- Left Column - Your existing content -->
+                <div class="story-text">
                     <h2 class="story-title">Stories, Social Feeds & More</h2>
                     
                     <p class="story-description">I'm building something special here - a place where my 30-year crochet journey meets modern storytelling.</p>
@@ -81,20 +146,27 @@
                     
                     <p class="story-launch-date">Expected launch: July 2025</p>
                 </div>
+                
+                <!-- Right Column - Single Sanctification Box -->
+                <div class="sanctification-section">
+                    <div class="sanctification-box">
+                        <h3 class="sanctification-title">Being Sanctified...</h3>
+                        <p class="sanctification-verse">"...knit together in love, to reach all the riches of full assurance of understanding and the knowledge of God's mystery."<br>— Colossians 2:2</p>
+                        <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith. ✨</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer>
-            <div class="footer-container">
-                <div class="footer-bottom">
-                    <p>Built with ❤️, prayers, coffee, and determination to solve real problems</p>
-                    <p><strong>DANI'S:</strong> Designs • Accoutrements • Notions • Ideas • Something Special</p>
-                    <p>© 2024 DANI'S. All rights reserved.</p>
-                    <p><a href="privacy.html" style="color: #c8b8a8; font-size: 0.75rem; text-decoration: none; opacity: 0.6;">Privacy & Legal</a></p>
-                </div>
-            </div>
-        </footer>
+        <!-- Footer - Fixed to match your homepage style -->
+        <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
+            <p style="color: #c8b8a8; font-size: 0.9rem; margin: 20px 0; font-family: 'Poppins', sans-serif;">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+            <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
+            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+            <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
+        </div>
     </div>
 </body>
 </html>
