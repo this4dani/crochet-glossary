@@ -9,6 +9,58 @@
   <!-- Link to your master CSS file -->
   <link rel="stylesheet" href="styles.css">
   
+  <!-- Navigation styling from homepage -->
+  <style>
+    #nav {
+      position: fixed;
+      top: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 80px;
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    
+    #nav a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      height: 100px;
+      width: 100px;
+      position: relative;
+    }
+    
+    #nav a:hover {
+      transform: translateY(-3px);
+    }
+    
+    #nav img {
+      filter: brightness(0) saturate(100%) invert(98%) sepia(5%) saturate(50%) hue-rotate(20deg) brightness(105%) contrast(98%);
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+    
+    #nav a:nth-child(1) img { width: 85px; height: 85px; }
+    #nav a:nth-child(2) img { width: 90px; height: 90px; }
+    #nav a:nth-child(3) img { width: 83px; height: 83px; }
+    #nav a:nth-child(4) img { width: 137px; height: 137px; }
+    
+    #nav img:hover {
+      opacity: 1;
+      filter: brightness(0) saturate(100%) invert(65%) sepia(30%) saturate(500%) hue-rotate(340deg) brightness(110%) contrast(90%);
+    }
+    
+    /* Adjust container to account for fixed nav */
+    .container {
+      padding-top: 200px;
+    }
+  </style>
+  
   <!-- SVG Symbol Definitions -->
   <svg style="display: none;">
     <defs>
