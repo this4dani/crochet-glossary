@@ -90,30 +90,25 @@
       <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
     </div>
 
-    <!-- Affiliate Tools Section -->
-    <div class="affiliate-tools">
-      <h3>Essential Crochet Tools</h3>
-      <p>The tools I actually use after 30 years of crocheting. As an Amazon Associate, I earn from qualifying purchases.</p>
-      <div class="tool-links">
-        <a href="https://amzn.to/YOUR-HOOK-LINK" class="tool-link" target="_blank">Ergonomic Hooks</a>
-        <a href="https://amzn.to/YOUR-YARN-LINK" class="tool-link" target="_blank">Cotton Yarn</a>
-        <a href="https://amzn.to/YOUR-MARKER-LINK" class="tool-link" target="_blank">Stitch Markers</a>
-        <a href="https://amzn.to/YOUR-BOWL-LINK" class="tool-link" target="_blank">Yarn Bowls</a>
-      </div>
-    </div>
-
     <div id="glossary-grid"></div>
 
-    <!-- Newsletter Signup -->
-    <div class="newsletter-section">
-      <h3>Stay Updated on the Pattern Adjustment API</h3>
-      <p>Be the first to know when I launch the tool that will revolutionize crochet pattern adjustments!</p>
-      <form class="newsletter-form" action="#" method="post">
-        <input type="email" class="newsletter-input" placeholder="Enter your email" required>
-        <button type="submit" class="newsletter-btn">Join Waitlist</button>
-      </form>
+    <!-- Ad Zone - Footer Banner -->
+    <div class="ad-zone ad-zone-footer">
+      [Google AdSense - Footer Banner 728x90]
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <p class="footer-text">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
 
   <!-- Popup Modal -->
   <div class="popup" id="popup">
@@ -196,7 +191,7 @@
     function initGlossary() {
       buildCards();
 
-      // Enhanced search - includes tags
+      // Search with highlighting instead of hiding
       searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase();
         Array.from(grid.children).forEach((c) => {
@@ -208,7 +203,12 @@
                          abbr.includes(query) || 
                          tags.includes(query);
           
-          c.style.display = matches ? "" : "none";
+          // Add highlight frame instead of hiding
+          if (query !== "" && matches) {
+            c.classList.add("search-highlight");
+          } else {
+            c.classList.remove("search-highlight");
+          }
         });
       });
 
