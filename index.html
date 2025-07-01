@@ -28,26 +28,24 @@
         
         #nav {
             position: fixed;
-            top: 120px;  /* Back to original position */
-            left: 50%;
-            transform: translateX(-50%);
+            top: 120px;
+            left: 0;  /* Full width */
+            right: 0;  /* Full width */
             display: flex;
             gap: 80px;
             z-index: 100;
             align-items: center;
             justify-content: center;
             width: 100%;
-            max-width: 700px;
             transition: all 0.3s ease;
         }
         
         /* Add scroll effect */
         #nav.scrolled {
-            top: 20px;
-            background: rgba(0, 56, 64, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 10px 20px;
-            border-radius: 15px;
+            top: 0;  /* All the way to top when scrolled */
+            background: linear-gradient(135deg, #003840 0%, #001a1f 100%);  /* Same as body background */
+            padding: 15px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
         }
         #nav a {
             display: flex;
@@ -573,6 +571,10 @@
     
     <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
               <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+              <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+              <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
+              <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+              <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
     </div>
     
     <div class="adsense-bottom">
@@ -590,7 +592,7 @@
         // Scroll effect for navigation
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
-            if (window.scrollY > 100) {
+            if (window.scrollY > 50) {  // Scroll sooner
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
