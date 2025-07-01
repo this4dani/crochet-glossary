@@ -11,9 +11,12 @@
   
   <!-- Additional glossary-specific styling -->
   <style>
-    /* Adjust container to account for fixed nav */
-    .container {
-      padding-top: 200px;
+    /* Remove fixed nav positioning - let it scroll naturally */
+    #nav {
+      position: static !important;
+      transform: none !important;
+      top: auto !important;
+      left: auto !important;
     }
     
     /* Title styling - bigger and bolder */
@@ -104,13 +107,23 @@
       <p>Your comprehensive guide to crochet stitches and techniques</p>
     </header>
 
-    <!-- Container for glossary content -->
-    <div class="glossary-content-container">
-
     <!-- Ad Zone - Sidebar (Desktop) -->
     <div class="ad-zone ad-zone-sidebar">
       [Google AdSense - Medium Rectangle 300x250]
     </div>
+
+    <!-- Container for glossary content with your brand colors -->
+    <div class="glossary-content-container" style="
+      background: var(--clr-secondary-dark);
+      border-radius: 25px;
+      padding: 40px;
+      margin: 30px 0;
+      box-shadow: 
+        0 15px 35px rgba(79, 43, 58, 0.4),
+        0 8px 20px rgba(0, 0, 0, 0.3),
+        inset 0 3px 6px rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(250, 248, 243, 0.15);
+    ">
 
     <div class="search-section">
       <div class="tips-toggle" onclick="toggleTips()">
@@ -127,24 +140,23 @@
 
     <div id="glossary-grid"></div>
 
+    </div> <!-- Close glossary-content-container -->
+
     <!-- Ad Zone - Footer Banner -->
     <div class="ad-zone ad-zone-footer">
       [Google AdSense - Footer Banner 728x90]
     </div>
-    </div> <!-- Close glossary-content-container -->
   </div>
 
   <!-- Footer -->
-  <footer>
-    <div class="footer-container">
-      <p class="footer-text">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-      <div class="footer-links">
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-        <a href="contact.html">Contact</a>
-      </div>
-    </div>
-  </footer>
+  <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
+    <p style="color: #c8b8a8; font-size: 0.9rem; margin: 20px 0; font-family: 'Poppins', sans-serif;">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+    <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+    <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+    <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
+    <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+    <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
+  </div>
 
   <!-- Popup Modal -->
   <div class="popup" id="popup">
