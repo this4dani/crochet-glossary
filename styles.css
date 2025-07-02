@@ -83,6 +83,7 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   letter-spacing: 0.01em;
+  transition: padding-top 0.3s ease;
 }
 
 /* ===== LAYOUT CONTAINERS ===== */
@@ -90,7 +91,6 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-lg);
-  /* FIXED: Remove any top padding/margin that creates gaps */
   padding-top: 0;
   margin-top: 0;
 }
@@ -101,24 +101,52 @@ body {
   padding: 0 var(--space-lg);
 }
 
-/* ===== PROPER NAVIGATION SYSTEM - APPLIES TO ALL PAGES ===== */
+/* ===== ADSENSE HEADER SPACING ===== */
+.adsense-top,
+.ad-zone-header {
+  margin: 0 0 20px 0;
+  padding: 15px;
+  text-align: center;
+}
+
+/* ===== FIXED NAVIGATION SYSTEM - PROPER SCROLL BEHAVIOR ===== */
 #nav {
-  /* FIXED: Static positioning, no gaps, proper spacing */
-  position: static;
+  /* FIXED: Start with proper spacing, becomes sticky on scroll */
+  position: relative;
   transform: none;
   top: auto;
   left: auto;
-  margin: 0;
-  padding: 20px 0;
+  margin: 60px 0 40px 0;  /* Generous top space initially */
+  padding: 25px 0;
   
   /* Layout */
   display: flex;
-  gap: 60px;
+  gap: 70px;
   align-items: center;
   justify-content: center;
   width: 100%;
   transition: all 0.3s ease;
-  z-index: 100;
+  z-index: 1000;
+  background: transparent;
+}
+
+/* FIXED: Sticky behavior when scrolled */
+#nav.scrolled {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  margin: 0 !important;
+  background: linear-gradient(135deg, var(--clr-primary-dark) 0%, rgba(0, 26, 31, 0.95) 100%);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
+  border-bottom: 1px solid rgba(250, 248, 243, 0.1);
+  padding: 15px 0;
+}
+
+/* FIXED: Body padding when nav becomes sticky */
+body.nav-sticky {
+  padding-top: 90px;  /* Space for fixed nav */
 }
 
 #nav a {
@@ -170,11 +198,10 @@ body {
 /* ===== HEADER STYLES - PROPER SPACING ===== */
 .header {
   text-align: center;
-  /* FIXED: Remove excessive top spacing */
   margin-top: 0;
   padding-top: 0;
   margin-bottom: 30px;
-  padding: var(--space-lg) 0;
+  padding: 0 0 var(--space-lg) 0;
 }
 
 .header h1 {
@@ -514,25 +541,26 @@ body, p, span, div, input, button, textarea {
 @media (max-width: 768px) {
   .container {
     padding: 0 var(--space-md);
-    /* FIXED: Maintain no top spacing on mobile */
     padding-top: 0;
     margin-top: 0;
   }
 
   #nav {
-    /* FIXED: Reduce gaps on mobile */
-    gap: 40px;
-    padding: 15px 0;
+    gap: 50px;
+    margin: 40px 0 30px 0;
+    padding: 20px 0;
+  }
+  
+  #nav.scrolled {
+    padding: 10px 0;
   }
   
   #nav img {
-    /* FIXED: Smaller icons on mobile */
     width: 60px !important;
     height: 60px !important;
   }
 
   .header {
-    /* FIXED: Maintain proper spacing on mobile */
     margin-top: 0;
     padding-top: 0;
     margin-bottom: 20px;
@@ -557,6 +585,10 @@ body, p, span, div, input, button, textarea {
     padding: var(--space-lg);
     margin: var(--space-lg);
   }
+  
+  body.nav-sticky {
+    padding-top: 70px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -572,6 +604,27 @@ body, p, span, div, input, button, textarea {
   .stitch-card svg {
     width: 20px;
     height: 20px;
+  }
+  
+  #nav {
+    gap: 40px;
+    margin: 30px 0 20px 0;
+    padding: 15px 0;
+  }
+  
+  #nav.scrolled {
+    padding: 8px 0;
+  }
+  
+  #nav img {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  
+  #nav a:nth-child(4) img { width: 70px !important; height: 70px !important; }
+  
+  body.nav-sticky {
+    padding-top: 60px;
   }
 }
 
