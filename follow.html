@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Follow - DANI'S</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* FIX 1: NAVIGATION SPACING - REMOVE GAPS AND TOP SPACING */
+        #nav {
+            position: static !important;
+            transform: none !important;
+            top: auto !important;
+            left: auto !important;
+            margin: 0 !important;
+            padding: 20px 0 !important; /* Reduce padding */
+            gap: 60px !important; /* Reduce gap between icons */
+        }
+        
+        /* FIX 2: CONTAINER TOP SPACING - REMOVE EXCESSIVE PADDING */
+        .container {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        .header {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+            margin-bottom: 30px !important; /* Reduce bottom margin */
+        }
+        
+        /* FOLLOW PAGE SPECIFIC STYLES */
+        .follow-hero {
+            background: var(--clr-rich-brown);
+            border-radius: 25px;
+            padding: 40px;
+            margin: 30px 0;
+            box-shadow: 
+                0 15px 35px rgba(74, 44, 42, 0.4),
+                0 8px 20px rgba(0, 0, 0, 0.3),
+                inset 0 3px 6px rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(250, 248, 243, 0.15);
+            text-align: center;
+        }
+        
+        .follow-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            color: var(--clr-warm-white);
+            margin-bottom: 15px;
+        }
+        
+        .follow-subtitle {
+            color: var(--clr-coral);
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        .follow-description {
+            color: var(--clr-cream);
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* SOCIAL MEDIA GRID */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .social-card {
+            background: var(--clr-cream);
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 
+                0 6px 12px rgba(0, 0, 0, 0.15),
+                0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5);
+        }
+        
+        .social-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 
+                0 12px 24px rgba(0, 0, 0, 0.2),
+                0 6px 12px rgba(0, 0, 0, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.6);
+            border-color: var(--clr-coral);
+        }
+        
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 15px auto;
+            background: var(--clr-primary-dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: var(--clr-warm-white);
+        }
+        
+        .social-card h3 {
+            color: var(--clr-primary-dark);
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            font-family: var(--font-display);
+        }
+        
+        .social-handle {
+            color: var(--clr-mauve);
+            font-size: 1rem;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .social-description {
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 15px;
+        }
+        
+        .social-link {
+            display: inline-block;
+            background: var(--clr-primary-dark);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--clr-coral);
+            transform: translateY(-2px);
+        }
+        
+        /* EMAIL & BUSINESS CONTACT */
+        .contact-section {
+            background: rgba(61, 26, 43, 0.8);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            text-align: center;
+        }
+        
+        .contact-title {
+            color: var(--clr-coral);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            font-family: var(--font-display);
+        }
+        
+        .contact-description {
+            color: var(--clr-cream);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        .contact-item {
+            background: var(--clr-cream);
+            padding: 15px 25px;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 200px;
+        }
+        
+        .contact-item h4 {
+            color: var(--clr-primary-dark);
+            font-size: 0.9rem;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .contact-item p {
+            color: var(--clr-mauve);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* PERSONAL TOUCH SECTION */
+        .personal-note {
+            background: var(--clr-warm-white);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid var(--clr-coral);
+            color: #333;
+        }
+        
+        .personal-note p {
+            font-style: italic;
+            line-height: 1.6;
+            margin-bottom: 0;
+        }
+        
+        .personal-note .signature {
+            text-align: right;
+            margin-top: 15px;
+            color: var(--clr-mauve);
+            font-weight: 600;
+        }
+        
+        /* MOBILE RESPONSIVE */
+        @media (max-width: 768px) {
+            .follow-hero {
+                padding: 25px;
+                margin: 20px 0;
+            }
+            
+            .follow-title {
+                font-size: 2rem;
+            }
+            
+            .social-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            #nav {
+                gap: 40px !important;
+            }
+            
+            #nav img {
+                width: 60px !important;
+                height: 60px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Navigation with FIXED spacing -->
+        <nav id="nav">
+            <a href="index.html">
+                <img src="images/home-heart-door.png" alt="Home">
+            </a>
+            <a href="glossary.html">
+                <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+            </a>
+            <a href="story.html">
+                <img src="images/slip-knot-first-chain.png" alt="Story">
+            </a>
+            <a href="follow.html" class="active">
+                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+            </a>
+        </nav>
+
+        <!-- Header with FIXED spacing -->
+        <header class="header">
+            <h1>Follow & Connect</h1>
+            <p style="color: var(--clr-coral); font-size: 1.2rem; font-weight: 600;">Let's stay connected!</p>
+        </header>
+
+        <!-- Follow Page Content -->
+        <div class="follow-hero">
+            <h2 class="follow-title">Follow My Journey</h2>
+            <p class="follow-subtitle">One person building tools for the crochet community</p>
+            <p class="follow-description">
+                I'm just one person working on this passion project alongside my day job and ministry work. 
+                Following me on social media is the best way to stay updated on new tools, behind-the-scenes development, 
+                and connect with other crocheters who are excited about making patterns easier to adjust!
+            </p>
+        </div>
+
+        <!-- Social Media Grid -->
+        <div class="social-grid">
+            <div class="social-card">
+                <div class="social-icon">📷</div>
+                <h3>Instagram</h3>
+                <p class="social-handle">@this4dani</p>
+                <p class="social-description">Daily life, crochet projects, and behind-the-scenes development updates</p>
+                <a href="https://instagram.com/this4dani" class="social-link" target="_blank">Follow on Instagram</a>
+            </div>
+
+            <div class="social-card">
+                <div class="social-icon">📌</div>
+                <h3>Pinterest</h3>
+                <p class="social-handle">@this4dani</p>
+                <p class="social-description">Crochet inspiration, pattern ideas, and stitch tutorials</p>
+                <a href="https://pinterest.com/this4dani" class="social-link" target="_blank">Follow on Pinterest</a>
+            </div>
+
+            <div class="social-card">
+                <div class="social-icon">🎵</div>
+                <h3>TikTok</h3>
+                <p class="social-handle">@this4dani</p>
+                <p class="social-description">Quick crochet tips, progress videos, and coding moments</p>
+                <a href="https://tiktok.com/@this4dani" class="social-link" target="_blank">Follow on TikTok</a>
+            </div>
+
+            <div class="social-card">
+                <div class="social-icon">📺</div>
+                <h3>YouTube</h3>
+                <p class="social-handle">@this4dani</p>
+                <p class="social-description">Longer tutorials, pattern walkthroughs, and API development logs</p>
+                <a href="https://youtube.com/@this4dani" class="social-link" target="_blank">Subscribe on YouTube</a>
+            </div>
+
+            <div class="social-card">
+                <div class="social-icon">💼</div>
+                <h3>LinkedIn</h3>
+                <p class="social-handle">Ashley Danielle Caldwell</p>
+                <p class="social-description">Professional updates and tech industry insights</p>
+                <a href="https://linkedin.com/in/ashleydaniellecaldwell" class="social-link" target="_blank">Connect on LinkedIn</a>
+            </div>
+
+            <div class="social-card">
+                <div class="social-icon">🐦</div>
+                <h3>X (Twitter)</h3>
+                <p class="social-handle">@I_wonder</p>
+                <p class="social-description">Quick thoughts, industry news, and real-time updates</p>
+                <a href="https://x.com/I_wonder" class="social-link" target="_blank">Follow on X</a>
+            </div>
+        </div>
+
+        <!-- Business Contact Section -->
+        <div class="contact-section">
+            <h3 class="contact-title">Business Inquiries</h3>
+            <p class="contact-description">
+                For business partnerships, press inquiries, or collaboration opportunities, please reach out through the appropriate channel below.
+            </p>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <h4>General Inquiries</h4>
+                    <p>Available via social media</p>
+                </div>
+                <div class="contact-item">
+                    <h4>Response Time</h4>
+                    <p>24-48 hours typical</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Personal Note -->
+        <div class="personal-note">
+            <p>
+                I'm just one person juggling this passion project with my day job in ministry and family life. 
+                I do my best to respond to messages, but please be patient! I love connecting with fellow crocheters 
+                and hearing how these tools are helping your projects. Your encouragement keeps me motivated to keep building! ❤️
+            </p>
+            <p class="signature">- Dani</p>
+        </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
+            <p style="color: #c8b8a8; font-size: 0.9rem; margin: 20px 0; font-family: 'Poppins', sans-serif;">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+            <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
+            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+            <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
+        </div>
+    </div>
+
+    <!-- CSS FOR FIXING GLOSSARY AND STORY PAGES -->
+    <style>
+        /* 
+        COPY THIS CSS TO BOTH GLOSSARY.HTML AND STORY.HTML 
+        TO FIX THEIR MENU SPACING ISSUES:
+        */
+        
+        /* 
+        ADD TO EXISTING <style> SECTIONS IN GLOSSARY.HTML AND STORY.HTML:
+        
+        #nav {
+            position: static !important;
+            transform: none !important;
+            top: auto !important;
+            left: auto !important;
+            margin: 0 !important;
+            padding: 20px 0 !important;
+            gap: 60px !important;
+        }
+        
+        .container {
+            padding-top: 0 !important;
+            margin-top: 0 !important;
+        }
+        
+        .header {
+            margin-top: 0 !important;
+            padding-top: 0 !important;
+            margin-bottom: 30px !important;
+        }
+        
+        @media (max-width: 768px) {
+            #nav {
+                gap: 40px !important;
+            }
+            
+            #nav img {
+                width: 60px !important;
+                height: 60px !important;
+            }
+        }
+        */
+    </style>
+</body>
+</html>
