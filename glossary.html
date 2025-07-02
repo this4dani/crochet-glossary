@@ -9,16 +9,8 @@
   <!-- Link to your master CSS file -->
   <link rel="stylesheet" href="styles.css">
   
-  <!-- Additional glossary-specific styling -->
+  <!-- Enhanced glossary-specific styling -->
   <style>
-    /* Remove fixed nav positioning - let it scroll naturally */
-    #nav {
-      position: static !important;
-      transform: none !important;
-      top: auto !important;
-      left: auto !important;
-    }
-    
     /* Title styling - bigger and bolder */
     .header h1 {
       font-size: 3.5rem !important;
@@ -50,7 +42,7 @@
       color: var(--clr-primary-dark) !important;
       border: 1px solid rgba(0, 56, 64, 0.2) !important;
       position: relative !important;
-      z-index: 1000 !important; /* CRITICAL FIX */
+      z-index: 1000 !important;
     }
     
     .tips-toggle:hover {
@@ -60,77 +52,175 @@
     
     /* FIX TIPS DROPDOWN Z-INDEX */
     .tips-content {
-      z-index: 1001 !important; /* CRITICAL FIX - Above everything */
+      z-index: 1001 !important;
       position: absolute !important;
       background: var(--clr-warm-white) !important;
       box-shadow: 0 8px 25px rgba(0,0,0,0.3) !important;
     }
     
-    /* Real 3D cards with texture */
+    /* PAPER TEXTURE CARDS WITH HAND-DRAWN AESTHETIC */
     .stitch-card {
-      background: var(--clr-cream) !important;
+      /* Paper texture background */
+      background: 
+        /* Subtle paper grain */
+        radial-gradient(circle at 25% 25%, rgba(255,255,255,0.3) 0.5px, transparent 0.5px),
+        radial-gradient(circle at 75% 75%, rgba(0,0,0,0.05) 0.5px, transparent 0.5px),
+        /* Base paper color */
+        var(--clr-cream) !important;
+      background-size: 15px 15px, 12px 12px !important;
+      
       color: var(--clr-primary-dark) !important;
-      box-shadow: 
-        0 6px 12px rgba(0, 0, 0, 0.15),
-        0 2px 4px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      border-radius: 8px !important;
-      transform: translateY(0) rotateX(0deg) !important;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      border: 2px solid rgba(0, 0, 0, 0.1) !important;
+      border-radius: 12px !important;
+      padding: 20px 15px !important;
+      text-align: center !important;
+      cursor: pointer !important;
       position: relative !important;
-      z-index: 1 !important; /* Lower than tips dropdown */
+      z-index: 1 !important;
+      
+      /* Enhanced 3D Effects - ALL 4 */
+      /* 1. Floating effect */
+      transform: translateY(0) rotateX(2deg) !important;
+      /* 2. Embossed text effect */
+      text-shadow: 1px 1px 0 rgba(255,255,255,0.8), -1px -1px 0 rgba(0,0,0,0.1) !important;
+      /* 3. Layered depth with multiple shadows */
+      box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.1),
+        0 4px 8px rgba(0, 0, 0, 0.08),
+        0 8px 16px rgba(0, 0, 0, 0.06),
+        inset 1px 1px 2px rgba(255, 255, 255, 0.8),
+        inset -1px -1px 2px rgba(0, 0, 0, 0.1) !important;
+      /* 4. Subtle animations */
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+      overflow: hidden !important;
     }
     
+    /* Hand-drawn border effect */
     .stitch-card::before {
       content: '';
       position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 50%, rgba(0,0,0,0.05) 100%);
+      top: 3px;
+      left: 3px;
+      right: 3px;
+      bottom: 3px;
+      border: 1px dashed rgba(0, 0, 0, 0.2);
       border-radius: 8px;
       pointer-events: none;
+      /* Slight irregularity to mimic hand-drawn */
+      transform: rotate(0.2deg);
     }
     
+    /* Enhanced hover with all 4 effects */
     .stitch-card:hover {
-      transform: translateY(-6px) rotateX(5deg) !important;
+      /* 1. More dramatic floating */
+      transform: translateY(-8px) rotateX(8deg) scale(1.03) !important;
+      /* 2. Enhanced embossed text */
+      text-shadow: 2px 2px 0 rgba(255,255,255,0.9), -2px -2px 0 rgba(0,0,0,0.15) !important;
+      /* 3. Deeper layered shadows */
       box-shadow: 
-        0 12px 24px rgba(0, 0, 0, 0.2),
         0 6px 12px rgba(0, 0, 0, 0.15),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6),
-        inset 0 -1px 0 rgba(0, 0, 0, 0.1) !important;
+        0 12px 24px rgba(0, 0, 0, 0.12),
+        0 20px 40px rgba(0, 0, 0, 0.08),
+        inset 2px 2px 4px rgba(255, 255, 255, 0.9),
+        inset -2px -2px 4px rgba(0, 0, 0, 0.15) !important;
+      /* 4. Color animation */
       border-color: var(--clr-coral) !important;
     }
     
-    /* SEARCH HIGHLIGHT EFFECT - FIXED */
-    .stitch-card.search-highlight {
-      border: 3px solid var(--clr-coral) !important;
-      box-shadow: 
-        0 0 0 2px rgba(255, 107, 122, 0.3),
-        0 12px 24px rgba(0, 0, 0, 0.2),
-        0 6px 12px rgba(0, 0, 0, 0.15) !important;
-      transform: translateY(-3px) scale(1.02) !important;
-      z-index: 10 !important;
+    /* COLOR-CODED BY STITCH CATEGORY */
+    
+    /* Foundation & Basic Stitches - Warm Brown */
+    .stitch-card[data-category="basic"] .abbr {
+      color: #8B4513 !important; /* Saddle Brown */
+      font-weight: 800 !important;
     }
     
+    /* Shaping & Techniques - Coral */
+    .stitch-card[data-category="shaping"] .abbr {
+      color: var(--clr-coral) !important;
+      font-weight: 800 !important;
+    }
+    
+    /* Texture & 3D Stitches - Deep Mauve */
+    .stitch-card[data-category="texture"] .abbr {
+      color: #8B008B !important; /* Dark Magenta */
+      font-weight: 800 !important;
+    }
+    
+    /* Advanced & Specialty - Deep Teal */
+    .stitch-card[data-category="advanced"] .abbr {
+      color: var(--clr-primary-dark) !important;
+      font-weight: 800 !important;
+    }
+    
+    /* Default for uncategorized */
     .stitch-card .abbr {
+      font-size: 1.2rem !important;
+      font-weight: 800 !important;
       color: var(--clr-primary-dark) !important;
       position: relative !important;
       z-index: 2 !important;
+      /* Hand-lettered effect */
+      font-family: 'Poppins', sans-serif !important;
+      letter-spacing: 0.1em !important;
     }
     
     .stitch-card .name {
       color: var(--clr-mauve) !important;
       position: relative !important;
       z-index: 2 !important;
+      font-size: 0.9rem !important;
+      font-weight: 500 !important;
+      /* Slightly faded like pencil sketch */
+      opacity: 0.8 !important;
+    }
+    
+    /* SEARCH HIGHLIGHT EFFECT - Hand-drawn style */
+    .stitch-card.search-highlight {
+      border: 3px solid var(--clr-coral) !important;
+      background: 
+        /* Highlighted paper effect */
+        radial-gradient(circle at 30% 30%, rgba(255, 107, 122, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 70% 70%, rgba(255,255,255,0.4) 0.5px, transparent 0.5px),
+        var(--clr-warm-white) !important;
+      box-shadow: 
+        0 0 0 3px rgba(255, 107, 122, 0.2),
+        0 8px 16px rgba(255, 107, 122, 0.2),
+        0 16px 32px rgba(0, 0, 0, 0.1) !important;
+      transform: translateY(-5px) scale(1.05) !important;
+      z-index: 10 !important;
+    }
+    
+    /* Hand-drawn highlight border */
+    .stitch-card.search-highlight::before {
+      border: 2px solid var(--clr-coral);
+      opacity: 0.6;
+      transform: rotate(-0.3deg);
     }
     
     /* Completely hide SVG symbols on cards */
     .stitch-card svg {
       display: none !important;
+    }
+    
+    /* Enhanced grid with better spacing */
+    #glossary-grid {
+      display: grid !important;
+      grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)) !important;
+      gap: 20px !important;
+      margin-bottom: 60px !important;
+      padding: 20px 0 !important;
+    }
+    
+    /* Paper texture for main container */
+    .glossary-content-container {
+      background: 
+        /* Paper grain texture */
+        radial-gradient(circle at 20% 20%, rgba(255,255,255,0.3) 1px, transparent 1px),
+        radial-gradient(circle at 80% 80%, rgba(0,0,0,0.03) 1px, transparent 1px),
+        /* Base rich brown */
+        var(--clr-rich-brown) !important;
+      background-size: 20px 20px, 25px 25px !important;
     }
   </style>
   
@@ -187,7 +277,7 @@
       [Google AdSense - Leaderboard 728x90]
     </div>
 
-    <!-- Navigation with correct ID to match CSS -->
+    <!-- Navigation - styles.css handles the scrolling behavior -->
     <nav id="nav">
         <a href="index.html">
             <img src="images/home-heart-door.png" alt="Home">
@@ -213,9 +303,8 @@
       [Google AdSense - Medium Rectangle 300x250]
     </div>
 
-    <!-- Container with warmer color - using rich brown -->
+    <!-- Container with paper texture -->
     <div class="glossary-content-container" style="
-      background: var(--clr-rich-brown);
       border-radius: 25px;
       padding: 40px;
       margin: 30px 0;
@@ -270,6 +359,19 @@
       <div class="tags" id="popup-tags"></div>
     </div>
   </div>
+
+  <!-- Navigation scroll effect script -->
+  <script>
+    // Navigation scroll effect - icons go to edge then page scrolls underneath
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
+  </script>
 
   <!-- Link to external JavaScript file -->
   <script type="module" src="./glossary.js"></script>
