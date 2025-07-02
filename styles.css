@@ -7,7 +7,7 @@
 :root {
   /* ===== CORE BRAND COLORS ===== */
   --clr-fuchsia: #ff2d82;           /* Primary accent - CTA buttons */
-  --clr-deep-teal: #003840;         /* Primary background - rich, dark teal */
+  --clr-deep-teal: #005b63;         /* Primary background - rich, dark teal */
   --clr-mauve: #d15694;             /* Secondary accent - sophisticated mauve */
   --clr-coral: #ff6b7a;             /* Warm highlight */
   
@@ -83,7 +83,6 @@ body {
   overflow-x: hidden;
   min-height: 100vh;
   letter-spacing: 0.01em;
-  transition: padding-top 0.3s ease;
 }
 
 /* ===== LAYOUT CONTAINERS ===== */
@@ -91,7 +90,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-lg);
-  padding-top: 200px;  /* FIXED: Space for fixed navigation */
+  /* FIXED: No padding-top - let content flow naturally */
 }
 
 .container-wide {
@@ -100,19 +99,20 @@ body {
   padding: 0 var(--space-lg);
 }
 
-/* ===== ADSENSE HEADER SPACING ===== */
+/* ===== ADSENSE HEADER SPACING - CONSISTENT ACROSS ALL PAGES ===== */
 .adsense-top,
 .ad-zone-header {
-  margin: 0 0 10px 0;  /* FIXED: Reduced bottom margin */
+  margin: 0 0 20px 0;
   padding: 15px;
   text-align: center;
+  min-height: 60px; /* Ensures consistent space even when ad isn't loaded */
 }
 
-/* ===== FIXED NAVIGATION SYSTEM - MATCHES HOMEPAGE ===== */
+/* ===== FIXED NAVIGATION SYSTEM - MATCHES HOMEPAGE EXACTLY ===== */
 #nav {
-  /* FIXED: Start like homepage - fixed position with space from AdSense */
+  /* CRITICAL: Starts lower like homepage, with space for AdSense */
   position: fixed !important;
-  top: 120px !important;  /* Same as homepage */
+  top: 120px !important;  /* Same as homepage - space from AdSense */
   left: 50% !important;
   transform: translateX(-50%) !important;
   
@@ -124,13 +124,11 @@ body {
   width: auto;
   z-index: 1000;
   
-  /* Smooth transitions */
+  /* Transitions */
   transition: all 0.3s ease;
   background: transparent;
   backdrop-filter: none;
   padding: 25px 0;
-  border: none;
-  box-shadow: none;
 }
 
 /* FIXED: Scrolled state - smooth transition to top */
@@ -189,11 +187,11 @@ body {
   filter: brightness(0) saturate(100%) invert(65%) sepia(30%) saturate(500%) hue-rotate(340deg) brightness(110%) contrast(90%);
 }
 
-/* ===== HEADER STYLES - PROPER SPACING ===== */
+/* ===== HEADER STYLES - PROPERLY SPACED BELOW NAVIGATION ===== */
 .header {
   text-align: center;
-  margin-top: 0 !important;
-  padding-top: 0 !important;
+  margin-top: 200px;  /* FIXED: Space for navigation starting at 120px + nav height */
+  padding-top: 0;
   margin-bottom: 30px;
   padding: 0 0 var(--space-lg) 0;
 }
@@ -534,36 +532,30 @@ body, p, span, div, input, button, textarea {
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .container {
-    padding-left: var(--space-md);
-    padding-right: var(--space-md);
-    padding-top: 140px !important;  /* FIXED: Less padding on mobile */
+    padding: 0 var(--space-md);
   }
 
   #nav {
-    gap: 50px !important;
-    top: 80px !important;
+    gap: 50px;
+    top: 80px !important;  /* Closer on mobile */
   }
   
   #nav.scrolled {
     top: 0 !important;
     padding: 10px 0;
   }
-
+  
+  .header {
+    margin-top: 160px;  /* FIXED: Adjusted for mobile nav position */
+    margin-bottom: 20px;
+  }
+  
   #nav img {
     width: 60px !important;
     height: 60px !important;
   }
   
-  #nav a:nth-child(4) img { 
-    width: 90px !important; 
-    height: 90px !important; 
-  }
-
-  .header {
-    margin-top: 0;
-    padding-top: 0;
-    margin-bottom: 20px;
-  }
+  #nav a:nth-child(4) img { width: 90px !important; height: 90px !important; }
 
   #glossary-grid {
     grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
@@ -587,15 +579,6 @@ body, p, span, div, input, button, textarea {
 }
 
 @media (max-width: 480px) {
-  .container {
-    padding-top: 120px !important;  /* FIXED: Even less padding for small mobile */
-  }
-
-  #nav {
-    gap: 40px !important;
-    top: 60px !important;
-  }
-
   .header h1 {
     font-size: 1.5rem;
   }
@@ -610,15 +593,26 @@ body, p, span, div, input, button, textarea {
     height: 20px;
   }
   
+  #nav {
+    gap: 40px;
+    top: 60px !important;
+  }
+  
+  #nav.scrolled {
+    top: 0 !important;
+    padding: 8px 0;
+  }
+  
+  .header {
+    margin-top: 140px;  /* FIXED: Adjusted for smallest mobile nav */
+  }
+  
   #nav img {
     width: 50px !important;
     height: 50px !important;
   }
   
-  #nav a:nth-child(4) img { 
-    width: 70px !important; 
-    height: 70px !important; 
-  }
+  #nav a:nth-child(4) img { width: 70px !important; height: 70px !important; }
 }
 
 /* ===== CONSISTENT FOOTER - USED ACROSS ALL PAGES ===== */
