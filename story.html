@@ -191,7 +191,7 @@
     </style>
 </head>
 <body>
-    <!-- ADDED: STANDARDIZED ADSENSE HEADER -->
+    <!-- ADDED: Missing AdSense header for spacing consistency -->
     <div class="adsense-top">
         <ins class="adsbygoogle"
              style="display:block"
@@ -277,17 +277,16 @@
         </div>
     </div>
 
-    <!-- UPDATED: SYNCHRONIZED NAVIGATION JAVASCRIPT -->
+    <!-- UPDATED: Synchronized navigation JavaScript -->
     <script>
-        // SYNCHRONIZED NAVIGATION BEHAVIOR - UPDATED
+        // SYNCHRONIZED NAVIGATION BEHAVIOR - IMPROVED PERFORMANCE
         let navigationTicking = false;
 
         function updateNavigationState() {
             const nav = document.getElementById('nav');
             const scrollY = window.scrollY;
             
-            // CONSISTENT 40px trigger across all pages
-            if (scrollY > 40) {
+            if (scrollY > 40) {  // Consistent trigger point
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');

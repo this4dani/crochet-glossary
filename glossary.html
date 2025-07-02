@@ -3,250 +3,270 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Crochet Glossary - DANI'S</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet" type="text/css" />
+  <title>DANI'S - Crochet Stitch Glossary</title>
+  <meta name="description" content="Interactive crochet stitch glossary with US/UK terminology. 60+ stitches with search and detailed descriptions.">
+  
+  <!-- Link to your master CSS file -->
+  <link rel="stylesheet" href="styles.css">
+  
+  <!-- SVG Symbol Definitions -->
+  <svg style="display: none;">
+    <defs>
+      <!-- Basic stitches -->
+      <symbol id="x" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="3" fill="currentColor"/>
+        <path d="M8 8l8 8m-8 0l8-8" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="T" viewBox="0 0 24 24">
+        <path d="M12 2v20M6 6h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="H" viewBox="0 0 24 24">
+        <path d="M12 2v20M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="TT" viewBox="0 0 24 24">
+        <path d="M12 2v20M6 4h12M6 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <symbol id="o" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <symbol id="-" viewBox="0 0 24 24">
+        <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+      </symbol>
+      <!-- Advanced stitches -->
+      <symbol id="V" viewBox="0 0 24 24">
+        <path d="M8 6l4 12 4-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </symbol>
+      <symbol id="Sh" viewBox="0 0 24 24">
+        <path d="M6 18c3-6 9-6 12 0" stroke="currentColor" stroke-width="2" fill="none"/>
+        <path d="M8 18l2-4 2 4 2-4 2 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
+      </symbol>
+      <symbol id="pc" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="6" fill="currentColor"/>
+        <circle cx="12" cy="12" r="3" fill="white"/>
+      </symbol>
+      <symbol id="cl" viewBox="0 0 24 24">
+        <path d="M8 6v12M12 6v12M16 6v12M6 18h12" stroke="currentColor" stroke-width="2"/>
+      </symbol>
+      <!-- Generic symbol for others -->
+      <symbol id="default" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
+        <path d="M9 9h6v6H9z" fill="currentColor"/>
+      </symbol>
+    </defs>
+  </svg>
 </head>
 <body>
-  <!-- STANDARDIZED ADSENSE HEADER -->
-  <div class="adsense-top">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9422928756201532"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-         (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
+  <div class="container">
+    <!-- FIXED: Changed from "ad-zone ad-zone-header" to "adsense-top" -->
+    <div class="adsense-top">
+      [Google AdSense - Leaderboard 728x90]
+    </div>
+
+    <!-- Navigation - Uses images from your main design -->
+    <nav id="nav">
+        <a href="index.html">
+            <img src="images/home-heart-door.png" alt="Home">
+        </a>
+        <a href="glossary.html" class="active">
+            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+        </a>
+        <a href="story.html">
+            <img src="images/slip-knot-first-chain.png" alt="Story">
+        </a>
+        <a href="follow.html">
+            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+        </a>
+    </nav>
+
+    <header class="header">
+      <h1>Interactive Crochet Glossary</h1>
+      <p>Your comprehensive guide to crochet stitches and techniques</p>
+    </header>
+
+    <!-- Ad Zone - Sidebar (Desktop) -->
+    <div class="ad-zone ad-zone-sidebar">
+      [Google AdSense - Medium Rectangle 300x250]
+    </div>
+
+    <!-- Container with warmer color - using rich brown -->
+    <div class="glossary-content-container" style="
+      background: var(--clr-rich-brown);
+      border-radius: 25px;
+      padding: 40px;
+      margin: 30px 0;
+      box-shadow: 
+        0 15px 35px rgba(74, 44, 42, 0.4),
+        0 8px 20px rgba(0, 0, 0, 0.3),
+        inset 0 3px 6px rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(250, 248, 243, 0.15);
+    ">
+
+    <div class="search-section">
+      <div class="tips-toggle" onclick="toggleTips()">
+        Tips & Tricks ▼
+        <div class="tips-content" id="tips-content">
+          <p><strong>Browse:</strong> Scroll through all stitches</p>
+          <p><strong>Search:</strong> Type abbreviation or full name</p>
+          <p><strong>Hover:</strong> See full stitch name</p>
+          <p><strong>Click:</strong> View detailed popup with US/UK terms</p>
+        </div>
+      </div>
+      <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
+    </div>
+
+    <div id="glossary-grid"></div>
+
+    </div> <!-- Close glossary-content-container -->
+
+    <!-- Ad Zone - Footer Banner -->
+    <div class="ad-zone ad-zone-footer">
+      [Google AdSense - Footer Banner 728x90]
+    </div>
   </div>
 
-  <!-- Navigation -->
-  <nav id="nav">
-    <a href="index.html">Home</a>
-    <a href="glossary.html">Glossary</a>
-    <a href="story.html">Story</a>
-    <a href="follow.html">Follow</a>
-  </nav>
-
-  <!-- Main Content -->
-  <div class="header">
-    <h1>Interactive Crochet Glossary</h1>
-    <p class="subtitle">Your comprehensive guide to crochet stitches and techniques</p>
-  </div>
-
-  <main class="container">
-    <!-- Search and Filter Section -->
-    <div class="glossary-controls">
-      <div class="search-container">
-        <input type="text" id="searchInput" placeholder="Search stitches..." class="search-input">
-        <button class="search-btn">🔍</button>
-      </div>
-      
-      <div class="filter-container">
-        <select id="categoryFilter" class="filter-select">
-          <option value="">All Categories</option>
-          <option value="basic">Basic Stitches</option>
-          <option value="intermediate">Intermediate</option>
-          <option value="advanced">Advanced</option>
-          <option value="decorative">Decorative</option>
-        </select>
-        
-        <select id="difficultyFilter" class="filter-select">
-          <option value="">All Difficulties</option>
-          <option value="beginner">Beginner</option>
-          <option value="intermediate">Intermediate</option>
-          <option value="advanced">Advanced</option>
-        </select>
-      </div>
-    </div>
-
-    <!-- Quick Reference Card -->
-    <div class="quick-reference">
-      <h3>Quick Reference</h3>
-      <div class="abbreviation-grid">
-        <div class="abbrev-item">
-          <span class="abbrev">sc</span>
-          <span class="full">single crochet</span>
-        </div>
-        <div class="abbrev-item">
-          <span class="abbrev">dc</span>
-          <span class="full">double crochet</span>
-        </div>
-        <div class="abbrev-item">
-          <span class="abbrev">hdc</span>
-          <span class="full">half double crochet</span>
-        </div>
-        <div class="abbrev-item">
-          <span class="abbrev">tr</span>
-          <span class="full">treble crochet</span>
-        </div>
-        <div class="abbrev-item">
-          <span class="abbrev">sl st</span>
-          <span class="full">slip stitch</span>
-        </div>
-        <div class="abbrev-item">
-          <span class="abbrev">ch</span>
-          <span class="full">chain</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Glossary Grid -->
-    <div id="glossaryGrid" class="glossary-grid">
-      <!-- Stitch cards will be populated by JavaScript -->
-    </div>
-
-    <!-- Loading indicator -->
-    <div id="loadingIndicator" class="loading-indicator">
-      <div class="spinner"></div>
-      <p>Loading stitches...</p>
-    </div>
-
-    <!-- No results message -->
-    <div id="noResults" class="no-results" style="display: none;">
-      <h3>No stitches found</h3>
-      <p>Try adjusting your search or filter criteria.</p>
-    </div>
-  </main>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <p>&copy; 2025 DANI'S - Where Traditional Craft Meets Modern Technology</p>
-      <div class="social-links">
-        <a href="#" aria-label="Facebook">📘</a>
-        <a href="#" aria-label="Instagram">📸</a>
-        <a href="#" aria-label="Pinterest">📌</a>
-      </div>
-    </div>
-  </footer>
-
-  <!-- Scripts -->
+  <!-- Glossary Data -->
   <script src="glossarydata.js"></script>
+
+  <!-- FIXED: Updated JavaScript for better scroll performance -->
   <script>
-    // SYNCHRONIZED NAVIGATION BEHAVIOR - UPDATED
+    // SYNCHRONIZED NAVIGATION BEHAVIOR - IMPROVED PERFORMANCE
     let navigationTicking = false;
 
     function updateNavigationState() {
-      const nav = document.getElementById('nav');
-      const scrollY = window.scrollY;
-      
-      // CONSISTENT 40px trigger across all pages
-      if (scrollY > 40) {
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-      navigationTicking = false;
+        const nav = document.getElementById('nav');
+        const scrollY = window.scrollY;
+        
+        if (scrollY > 40) {  // Consistent trigger point
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+        navigationTicking = false;
     }
 
     function requestNavigationTick() {
-      if (!navigationTicking) {
-        requestAnimationFrame(updateNavigationState);
-        navigationTicking = true;
-      }
+        if (!navigationTicking) {
+            requestAnimationFrame(updateNavigationState);
+            navigationTicking = true;
+        }
     }
 
     window.addEventListener('scroll', requestNavigationTick, { passive: true });
 
-    // Glossary functionality
-    document.addEventListener('DOMContentLoaded', function() {
-      const searchInput = document.getElementById('searchInput');
-      const categoryFilter = document.getElementById('categoryFilter');
-      const difficultyFilter = document.getElementById('difficultyFilter');
-      const glossaryGrid = document.getElementById('glossaryGrid');
-      const loadingIndicator = document.getElementById('loadingIndicator');
-      const noResults = document.getElementById('noResults');
+    // Tips toggle functionality
+    function toggleTips() {
+      const tipsContent = document.getElementById('tips-content');
+      tipsContent.style.display = tipsContent.style.display === 'block' ? 'none' : 'block';
+    }
 
-      let allStitches = [];
-      let filteredStitches = [];
+    // Glossary search and display functionality
+    let allStitches = [];
+    let filteredStitches = [];
 
-      // Initialize glossary
-      function initGlossary() {
-        loadingIndicator.style.display = 'block';
-        
-        // Use the stitches data from glossarydata.js
-        if (typeof stitchesData !== 'undefined') {
-          allStitches = stitchesData;
-          filteredStitches = [...allStitches];
-          renderStitches();
-          loadingIndicator.style.display = 'none';
-        } else {
-          console.error('Stitches data not loaded');
-          loadingIndicator.innerHTML = '<p>Error loading stitch data</p>';
+    function initGlossary() {
+      // Use stitches data from glossarydata.js
+      if (typeof stitchesData !== 'undefined') {
+        allStitches = stitchesData;
+        filteredStitches = [...allStitches];
+        displayStitches();
+        setupSearch();
+      } else {
+        document.getElementById('glossary-grid').innerHTML = '<p>Error: Stitch data not loaded</p>';
+      }
+    }
+
+    function displayStitches() {
+      const grid = document.getElementById('glossary-grid');
+      grid.innerHTML = '';
+
+      if (filteredStitches.length === 0) {
+        grid.innerHTML = '<p style="text-align: center; color: var(--clr-cream); margin: 40px 0;">No stitches found. Try a different search term.</p>';
+        return;
+      }
+
+      filteredStitches.forEach(stitch => {
+        const stitchElement = createStitchElement(stitch);
+        grid.appendChild(stitchElement);
+      });
+    }
+
+    function createStitchElement(stitch) {
+      const stitchDiv = document.createElement('div');
+      stitchDiv.className = 'stitch-item';
+      stitchDiv.onclick = () => showStitchDetail(stitch);
+      
+      // Get symbol for the stitch
+      const symbolId = getStitchSymbol(stitch.abbreviation);
+      
+      stitchDiv.innerHTML = `
+        <div class="stitch-symbol">
+          <svg><use href="#${symbolId}"></use></svg>
+        </div>
+        <div class="stitch-info">
+          <div class="stitch-abbrev">${stitch.abbreviation}</div>
+          <div class="stitch-name">${stitch.name}</div>
+        </div>
+      `;
+      
+      return stitchDiv;
+    }
+
+    function getStitchSymbol(abbreviation) {
+      const symbolMap = {
+        'sc': 'x',
+        'dc': 'T', 
+        'hdc': 'H',
+        'tr': 'TT',
+        'sl st': '-',
+        'ch': 'o',
+        'inc': 'V',
+        'dec': 'cl',
+        'shell': 'Sh',
+        'pc': 'pc'
+      };
+      return symbolMap[abbreviation.toLowerCase()] || 'default';
+    }
+
+    function showStitchDetail(stitch) {
+      const modal = document.createElement('div');
+      modal.className = 'stitch-modal';
+      modal.onclick = (e) => {
+        if (e.target === modal) {
+          document.body.removeChild(modal);
         }
-      }
+      };
 
-      // Render stitches to the grid
-      function renderStitches() {
-        if (filteredStitches.length === 0) {
-          glossaryGrid.style.display = 'none';
-          noResults.style.display = 'block';
-          return;
-        }
+      modal.innerHTML = `
+        <div class="modal-content">
+          <span class="close-modal" onclick="document.body.removeChild(this.closest('.stitch-modal'))">&times;</span>
+          <h2>${stitch.name}</h2>
+          <p><strong>Abbreviation:</strong> ${stitch.abbreviation}</p>
+          <p><strong>Description:</strong> ${stitch.description}</p>
+          ${stitch.instructions ? `<p><strong>Instructions:</strong> ${stitch.instructions}</p>` : ''}
+          ${stitch.usTerms ? `<p><strong>US Terms:</strong> ${stitch.usTerms}</p>` : ''}
+          ${stitch.ukTerms ? `<p><strong>UK Terms:</strong> ${stitch.ukTerms}</p>` : ''}
+          ${stitch.tips ? `<p><strong>Tips:</strong> ${stitch.tips}</p>` : ''}
+        </div>
+      `;
 
-        glossaryGrid.style.display = 'grid';
-        noResults.style.display = 'none';
+      document.body.appendChild(modal);
+    }
 
-        glossaryGrid.innerHTML = filteredStitches.map(stitch => `
-          <div class="stitch-card" data-category="${stitch.category}" data-difficulty="${stitch.difficulty}">
-            <div class="stitch-header">
-              <h3 class="stitch-name">${stitch.name}</h3>
-              <span class="abbreviation">${stitch.abbreviation}</span>
-            </div>
-            <div class="stitch-meta">
-              <span class="category">${stitch.category}</span>
-              <span class="difficulty ${stitch.difficulty}">${stitch.difficulty}</span>
-            </div>
-            <p class="description">${stitch.description}</p>
-            <div class="instructions">
-              <h4>Instructions:</h4>
-              <ol>
-                ${stitch.instructions.map(step => `<li>${step}</li>`).join('')}
-              </ol>
-            </div>
-            ${stitch.tips ? `
-              <div class="tips">
-                <h4>Tips:</h4>
-                <p>${stitch.tips}</p>
-              </div>
-            ` : ''}
-          </div>
-        `).join('');
-      }
+    function setupSearch() {
+      const searchInput = document.getElementById('search');
+      searchInput.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        filteredStitches = allStitches.filter(stitch => 
+          stitch.name.toLowerCase().includes(searchTerm) ||
+          stitch.abbreviation.toLowerCase().includes(searchTerm) ||
+          stitch.description.toLowerCase().includes(searchTerm)
+        );
+        displayStitches();
+      });
+    }
 
-      // Filter stitches based on search and filters
-      function filterStitches() {
-        const searchTerm = searchInput.value.toLowerCase();
-        const selectedCategory = categoryFilter.value;
-        const selectedDifficulty = difficultyFilter.value;
-
-        filteredStitches = allStitches.filter(stitch => {
-          const matchesSearch = stitch.name.toLowerCase().includes(searchTerm) ||
-                               stitch.abbreviation.toLowerCase().includes(searchTerm) ||
-                               stitch.description.toLowerCase().includes(searchTerm);
-          
-          const matchesCategory = !selectedCategory || stitch.category === selectedCategory;
-          const matchesDifficulty = !selectedDifficulty || stitch.difficulty === selectedDifficulty;
-
-          return matchesSearch && matchesCategory && matchesDifficulty;
-        });
-
-        renderStitches();
-      }
-
-      // Event listeners
-      searchInput.addEventListener('input', filterStitches);
-      categoryFilter.addEventListener('change', filterStitches);
-      difficultyFilter.addEventListener('change', filterStitches);
-
-      // Initialize the glossary
-      initGlossary();
-    });
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', initGlossary);
   </script>
-
-  <!-- Google AdSense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
-       crossorigin="anonymous"></script>
 </body>
 </html>
