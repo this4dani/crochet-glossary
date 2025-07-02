@@ -3,437 +3,250 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interactive Crochet Glossary - Comprehensive Stitch Guide</title>
-  <meta name="description" content="Interactive crochet glossary with US/UK terminology. 70+ stitches with search and detailed descriptions.">
-  
-  <!-- Link to your master CSS file -->
-  <link rel="stylesheet" href="styles.css">
-  
-  <!-- Glossary-specific styling -->
-  <style>
-    /* Title styling - bigger and bolder */
-    .header h1 {
-      font-size: 3.5rem !important;
-      font-weight: 900 !important;
-      letter-spacing: -2px;
-    }
-    
-    /* Search bar - warm colors */
-    #search {
-      background: var(--clr-cream) !important;
-      color: var(--clr-primary-dark) !important;
-      border: 1px solid rgba(0, 56, 64, 0.2) !important;
-    }
-    
-    #search::placeholder {
-      color: var(--clr-mauve) !important;
-      opacity: 0.7 !important;
-    }
-    
-    /* Tips & Tricks to match search bar */
-    .tips-toggle {
-      background: var(--clr-cream) !important;
-      color: var(--clr-primary-dark) !important;
-      border: 1px solid rgba(0, 56, 64, 0.2) !important;
-    }
-    
-    .tips-toggle:hover {
-      background: var(--clr-warm-white) !important;
-      border-color: var(--clr-coral) !important;
-    }
-    
-    /* Enhanced 3D cards with better texture and depth */
-    .stitch-card {
-      background: linear-gradient(145deg, var(--clr-cream) 0%, #f0e8d6 100%) !important;
-      color: var(--clr-primary-dark) !important;
-      box-shadow: 
-        0 8px 16px rgba(0, 0, 0, 0.2),
-        0 4px 8px rgba(0, 0, 0, 0.15),
-        inset 0 2px 4px rgba(255, 255, 255, 0.7),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.1) !important;
-      border: 1px solid rgba(0, 0, 0, 0.1) !important;
-      border-radius: 12px !important;
-      transform: translateY(0) rotateX(2deg) rotateY(1deg) !important;
-      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-      position: relative !important;
-      perspective: 1000px !important;
-    }
-    
-    .stitch-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, 
-        rgba(255,255,255,0.4) 0%, 
-        rgba(255,255,255,0.1) 30%, 
-        transparent 50%, 
-        rgba(0,0,0,0.05) 70%,
-        rgba(0,0,0,0.1) 100%);
-      border-radius: 12px;
-      pointer-events: none;
-      opacity: 0.8;
-    }
-    
-    .stitch-card::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      right: 2px;
-      height: 40%;
-      background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
-      border-radius: 10px 10px 0 0;
-      pointer-events: none;
-    }
-    
-    .stitch-card:hover {
-      transform: translateY(-12px) rotateX(8deg) rotateY(3deg) scale(1.05) !important;
-      box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.25),
-        0 12px 24px rgba(0, 0, 0, 0.2),
-        inset 0 3px 6px rgba(255, 255, 255, 0.8),
-        inset 0 -3px 6px rgba(0, 0, 0, 0.15),
-        0 0 20px rgba(255, 107, 122, 0.3) !important;
-      border-color: var(--clr-coral) !important;
-    }
-    
-    .stitch-card .abbr {
-      color: var(--clr-primary-dark) !important;
-      position: relative !important;
-      z-index: 3 !important;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
-      font-weight: 800 !important;
-    }
-    
-    .stitch-card .name {
-      color: var(--clr-mauve) !important;
-      position: relative !important;
-      z-index: 3 !important;
-      text-shadow: 0 1px 2px rgba(255,255,255,0.6) !important;
-      font-weight: 600 !important;
-    }
-    
-    /* Completely hide SVG symbols on cards */
-    .stitch-card svg {
-      display: none !important;
-    }
-    
-    /* Search highlight effect */
-    .stitch-card.search-highlight {
-      transform: translateY(-8px) rotateX(5deg) rotateY(2deg) scale(1.03) !important;
-      box-shadow: 
-        0 16px 32px rgba(255, 45, 130, 0.3),
-        0 8px 16px rgba(0, 0, 0, 0.2),
-        inset 0 2px 4px rgba(255, 255, 255, 0.8),
-        inset 0 -2px 4px rgba(0, 0, 0, 0.1),
-        0 0 30px rgba(255, 45, 130, 0.4) !important;
-      border-color: var(--clr-fuchsia) !important;
-      background: linear-gradient(145deg, #fff5f8 0%, var(--clr-cream) 100%) !important;
-    }
-    
-    /* Glossary content container - CHANGED to darkest mauve */
-    .glossary-content-container {
-      background: var(--clr-secondary-dark) !important;
-      border-radius: 25px;
-      padding: 40px;
-      margin: 30px 0;
-      box-shadow: 
-        0 15px 35px rgba(61, 26, 43, 0.5),
-        0 8px 20px rgba(0, 0, 0, 0.3),
-        inset 0 3px 6px rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(250, 248, 243, 0.15);
-    }
-    
-    /* Ad zones */
-    .ad-zone {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background: rgba(250,248,243,0.05);
-      border: 1px dashed rgba(250,248,243,0.2);
-      border-radius: 8px;
-      min-height: 90px;
-      color: var(--clr-cream);
-      font-size: 0.9rem;
-      opacity: 0.6;
-      margin: 20px 0;
-      padding: 15px;
-    }
-    
-    .ad-zone-header {
-      margin: 0 0 20px 0;
-    }
-    
-    .ad-zone-sidebar {
-      position: fixed;
-      right: 20px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 300px;
-      height: 250px;
-      z-index: 100;
-    }
-    
-    .ad-zone-footer {
-      margin: 40px 0 0 0;
-    }
-  </style>
-  
-  <!-- SVG Symbol Definitions -->
-  <svg style="display: none;">
-    <defs>
-      <!-- Basic stitches -->
-      <symbol id="x" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="3" fill="currentColor"/>
-        <path d="M8 8l8 8m-8 0l8-8" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-      <symbol id="T" viewBox="0 0 24 24">
-        <path d="M12 2v20M6 6h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </symbol>
-      <symbol id="H" viewBox="0 0 24 24">
-        <path d="M12 2v20M6 12h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </symbol>
-      <symbol id="TT" viewBox="0 0 24 24">
-        <path d="M12 2v20M6 4h12M6 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </symbol>
-      <symbol id="o" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-      <symbol id="-" viewBox="0 0 24 24">
-        <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </symbol>
-      <!-- Advanced stitches -->
-      <symbol id="V" viewBox="0 0 24 24">
-        <path d="M8 6l4 12 4-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </symbol>
-      <symbol id="Sh" viewBox="0 0 24 24">
-        <path d="M6 18c3-6 9-6 12 0" stroke="currentColor" stroke-width="2" fill="none"/>
-        <path d="M8 18l2-4 2 4 2-4 2 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-      </symbol>
-      <symbol id="pc" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="6" fill="currentColor"/>
-        <circle cx="12" cy="12" r="3" fill="white"/>
-      </symbol>
-      <symbol id="cl" viewBox="0 0 24 24">
-        <path d="M8 6v12M12 6v12M16 6v12M6 18h12" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-      <!-- Generic symbol for others -->
-      <symbol id="default" viewBox="0 0 24 24">
-        <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M9 9h6v6H9z" fill="currentColor"/>
-      </symbol>
-    </defs>
-  </svg>
+  <title>Interactive Crochet Glossary - DANI'S</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="styles.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
-  <div class="container">
-    <!-- Ad Zone - Top Banner -->
-    <div class="ad-zone ad-zone-header">
-      [Google AdSense - Leaderboard 728x90]
-    </div>
+  <!-- STANDARDIZED ADSENSE HEADER -->
+  <div class="adsense-top">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9422928756201532"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
 
-    <!-- Navigation - Now uses styles.css for consistent spacing -->
-    <nav id="nav">
-        <a href="index.html">
-            <img src="images/home-heart-door.png" alt="Home">
-        </a>
-        <a href="glossary.html" class="active">
-            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
-        </a>
-        <a href="story.html">
-            <img src="images/slip-knot-first-chain.png" alt="Story">
-        </a>
-        <a href="follow.html">
-            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-        </a>
-    </nav>
+  <!-- Navigation -->
+  <nav id="nav">
+    <a href="index.html">Home</a>
+    <a href="glossary.html">Glossary</a>
+    <a href="story.html">Story</a>
+    <a href="follow.html">Follow</a>
+  </nav>
 
-    <!-- Header - Now uses styles.css for consistent spacing -->
-    <header class="header">
-      <h1>Interactive Crochet Glossary</h1>
-      <p>Your comprehensive guide to crochet stitches and techniques</p>
-    </header>
+  <!-- Main Content -->
+  <div class="header">
+    <h1>Interactive Crochet Glossary</h1>
+    <p class="subtitle">Your comprehensive guide to crochet stitches and techniques</p>
+  </div>
 
-    <!-- Ad Zone - Sidebar (Desktop) -->
-    <div class="ad-zone ad-zone-sidebar">
-      [Google AdSense - Medium Rectangle 300x250]
-    </div>
-
-    <!-- Glossary Content Container -->
-    <div class="glossary-content-container">
-      <div class="search-section">
-        <div class="tips-toggle" onclick="toggleTips()">
-          Tips & Tricks ▼
-          <div class="tips-content" id="tips-content">
-            <p><strong>Browse:</strong> Scroll through all stitches</p>
-            <p><strong>Search:</strong> Type abbreviation or full name</p>
-            <p><strong>Hover:</strong> See full stitch name</p>
-            <p><strong>Click:</strong> View detailed popup with US/UK terms</p>
-          </div>
-        </div>
-        <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
+  <main class="container">
+    <!-- Search and Filter Section -->
+    <div class="glossary-controls">
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search stitches..." class="search-input">
+        <button class="search-btn">🔍</button>
       </div>
-
-      <div id="glossary-grid"></div>
-    </div>
-
-    <!-- Ad Zone - Footer Banner -->
-    <div class="ad-zone ad-zone-footer">
-      [Google AdSense - Footer Banner 728x90]
-    </div>
-
-    <!-- Standard Footer - Now uses styles.css classes -->
-    <div class="standard-footer">
-        <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-        <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a>
-            <span class="footer-separator">•</span>
-            <a href="privacy.html#terms">Terms of Service</a>
-            <span class="footer-separator">•</span>
-            <a href="privacy.html#contact">Contact</a>
-        </div>
-    </div>
-  </div>
-
-  <!-- Popup Modal -->
-  <div class="popup" id="popup">
-    <div class="popup-inner">
-      <button class="popup-close" onclick="closePopup()">&times;</button>
-      <h2 id="popup-title"></h2>
-      <div class="uk-name" id="popup-uk"></div>
-      <div class="description" id="popup-description"></div>
-      <div class="tags" id="popup-tags"></div>
-    </div>
-  </div>
-
-  <script type="module">
-    import { stitchGlossary } from './glossarydata.js';
-
-    const searchInput = document.getElementById("search");
-    const grid = document.getElementById("glossary-grid");
-    const popup = document.getElementById("popup");
-    const popupTitle = document.getElementById("popup-title");
-    const popupDesc = document.getElementById("popup-description");
-    const popupUK = document.getElementById("popup-uk");
-    const popupTags = document.getElementById("popup-tags");
-    const popupClose = document.querySelector(".popup-close");
-
-    const safeSymbol = (sym) => (/^[a-zA-Z_]/.test(sym) ? sym : `sym_${sym}`);
-
-    function buildCards() {
-      grid.innerHTML = '';
-      stitchGlossary.forEach((s) => {
-        const card = document.createElement("div");
-        card.className = "stitch-card";
-        card.setAttribute("data-name", s.name_us);
-        card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
-
-        const abbr = document.createElement("div");
-        abbr.className = "abbr";
-        abbr.textContent = s.id.toUpperCase();
-
-        const full = document.createElement("div");
-        full.className = "name";
-        full.textContent = s.name_us;
-
-        card.append(abbr, full);
-
-        card.onclick = () => {
-          popupTitle.textContent = s.name_us;
-          popupUK.textContent = `UK: ${s.name_uk}`;
-          popupDesc.textContent = s.notes || "No description available.";
-          
-          // Render tags
-          popupTags.innerHTML = '';
-          if (s.tags && s.tags.length > 0) {
-            s.tags.forEach(tag => {
-              const tagEl = document.createElement('span');
-              tagEl.className = 'tag';
-              tagEl.textContent = tag;
-              popupTags.appendChild(tagEl);
-            });
-          }
-          
-          popup.classList.add("active");
-        };
-
-        grid.appendChild(card);
-      });
-    }
-
-    function initGlossary() {
-      buildCards();
-
-      // Search with highlighting
-      searchInput.addEventListener("input", () => {
-        const query = searchInput.value.toLowerCase();
-        Array.from(grid.children).forEach((c) => {
-          const name = c.getAttribute("data-name").toLowerCase();
-          const tags = c.getAttribute("data-tags").toLowerCase();
-          const abbr = c.querySelector(".abbr").textContent.toLowerCase();
-          
-          const matches = name.includes(query) || 
-                         abbr.includes(query) || 
-                         tags.includes(query);
-          
-          // Add highlight frame instead of hiding
-          if (query !== "" && matches) {
-            c.classList.add("search-highlight");
-          } else {
-            c.classList.remove("search-highlight");
-          }
-        });
-      });
-
-      // Popup close
-      popupClose.onclick = () => popup.classList.remove("active");
-      popup.onclick = (e) => {
-        if (e.target === popup) popup.classList.remove("active");
-      };
-
-      // Tips toggle
-      window.toggleTips = function() {
-        const tipsContent = document.getElementById('tips-content');
-        tipsContent.classList.toggle('show');
-      };
-
-      // Close tips when clicking outside
-      document.addEventListener('click', function(e) {
-        const tipsToggle = document.querySelector('.tips-toggle');
-        const tipsContent = document.getElementById('tips-content');
-        if (tipsToggle && !tipsToggle.contains(e.target)) {
-          tipsContent.classList.remove('show');
-        }
-      });
-
-      // ESC key to close popup
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          popup.classList.remove('active');
-        }
-      });
-    }
-
-    document.readyState !== "loading"
-      ? initGlossary()
-      : document.addEventListener("DOMContentLoaded", initGlossary);
-  </script>
-
-  <!-- NAVIGATION SCROLL BEHAVIOR SCRIPT -->
-  <script>
-    // Navigation scroll behavior - matches styles.css
-    window.addEventListener('scroll', function() {
-        const nav = document.getElementById('nav');
+      
+      <div class="filter-container">
+        <select id="categoryFilter" class="filter-select">
+          <option value="">All Categories</option>
+          <option value="basic">Basic Stitches</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+          <option value="decorative">Decorative</option>
+        </select>
         
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
+        <select id="difficultyFilter" class="filter-select">
+          <option value="">All Difficulties</option>
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Quick Reference Card -->
+    <div class="quick-reference">
+      <h3>Quick Reference</h3>
+      <div class="abbreviation-grid">
+        <div class="abbrev-item">
+          <span class="abbrev">sc</span>
+          <span class="full">single crochet</span>
+        </div>
+        <div class="abbrev-item">
+          <span class="abbrev">dc</span>
+          <span class="full">double crochet</span>
+        </div>
+        <div class="abbrev-item">
+          <span class="abbrev">hdc</span>
+          <span class="full">half double crochet</span>
+        </div>
+        <div class="abbrev-item">
+          <span class="abbrev">tr</span>
+          <span class="full">treble crochet</span>
+        </div>
+        <div class="abbrev-item">
+          <span class="abbrev">sl st</span>
+          <span class="full">slip stitch</span>
+        </div>
+        <div class="abbrev-item">
+          <span class="abbrev">ch</span>
+          <span class="full">chain</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Glossary Grid -->
+    <div id="glossaryGrid" class="glossary-grid">
+      <!-- Stitch cards will be populated by JavaScript -->
+    </div>
+
+    <!-- Loading indicator -->
+    <div id="loadingIndicator" class="loading-indicator">
+      <div class="spinner"></div>
+      <p>Loading stitches...</p>
+    </div>
+
+    <!-- No results message -->
+    <div id="noResults" class="no-results" style="display: none;">
+      <h3>No stitches found</h3>
+      <p>Try adjusting your search or filter criteria.</p>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>&copy; 2025 DANI'S - Where Traditional Craft Meets Modern Technology</p>
+      <div class="social-links">
+        <a href="#" aria-label="Facebook">📘</a>
+        <a href="#" aria-label="Instagram">📸</a>
+        <a href="#" aria-label="Pinterest">📌</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="glossarydata.js"></script>
+  <script>
+    // SYNCHRONIZED NAVIGATION BEHAVIOR - UPDATED
+    let navigationTicking = false;
+
+    function updateNavigationState() {
+      const nav = document.getElementById('nav');
+      const scrollY = window.scrollY;
+      
+      // CONSISTENT 40px trigger across all pages
+      if (scrollY > 40) {
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      navigationTicking = false;
+    }
+
+    function requestNavigationTick() {
+      if (!navigationTicking) {
+        requestAnimationFrame(updateNavigationState);
+        navigationTicking = true;
+      }
+    }
+
+    window.addEventListener('scroll', requestNavigationTick, { passive: true });
+
+    // Glossary functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const searchInput = document.getElementById('searchInput');
+      const categoryFilter = document.getElementById('categoryFilter');
+      const difficultyFilter = document.getElementById('difficultyFilter');
+      const glossaryGrid = document.getElementById('glossaryGrid');
+      const loadingIndicator = document.getElementById('loadingIndicator');
+      const noResults = document.getElementById('noResults');
+
+      let allStitches = [];
+      let filteredStitches = [];
+
+      // Initialize glossary
+      function initGlossary() {
+        loadingIndicator.style.display = 'block';
+        
+        // Use the stitches data from glossarydata.js
+        if (typeof stitchesData !== 'undefined') {
+          allStitches = stitchesData;
+          filteredStitches = [...allStitches];
+          renderStitches();
+          loadingIndicator.style.display = 'none';
         } else {
-            nav.classList.remove('scrolled');
+          console.error('Stitches data not loaded');
+          loadingIndicator.innerHTML = '<p>Error loading stitch data</p>';
         }
+      }
+
+      // Render stitches to the grid
+      function renderStitches() {
+        if (filteredStitches.length === 0) {
+          glossaryGrid.style.display = 'none';
+          noResults.style.display = 'block';
+          return;
+        }
+
+        glossaryGrid.style.display = 'grid';
+        noResults.style.display = 'none';
+
+        glossaryGrid.innerHTML = filteredStitches.map(stitch => `
+          <div class="stitch-card" data-category="${stitch.category}" data-difficulty="${stitch.difficulty}">
+            <div class="stitch-header">
+              <h3 class="stitch-name">${stitch.name}</h3>
+              <span class="abbreviation">${stitch.abbreviation}</span>
+            </div>
+            <div class="stitch-meta">
+              <span class="category">${stitch.category}</span>
+              <span class="difficulty ${stitch.difficulty}">${stitch.difficulty}</span>
+            </div>
+            <p class="description">${stitch.description}</p>
+            <div class="instructions">
+              <h4>Instructions:</h4>
+              <ol>
+                ${stitch.instructions.map(step => `<li>${step}</li>`).join('')}
+              </ol>
+            </div>
+            ${stitch.tips ? `
+              <div class="tips">
+                <h4>Tips:</h4>
+                <p>${stitch.tips}</p>
+              </div>
+            ` : ''}
+          </div>
+        `).join('');
+      }
+
+      // Filter stitches based on search and filters
+      function filterStitches() {
+        const searchTerm = searchInput.value.toLowerCase();
+        const selectedCategory = categoryFilter.value;
+        const selectedDifficulty = difficultyFilter.value;
+
+        filteredStitches = allStitches.filter(stitch => {
+          const matchesSearch = stitch.name.toLowerCase().includes(searchTerm) ||
+                               stitch.abbreviation.toLowerCase().includes(searchTerm) ||
+                               stitch.description.toLowerCase().includes(searchTerm);
+          
+          const matchesCategory = !selectedCategory || stitch.category === selectedCategory;
+          const matchesDifficulty = !selectedDifficulty || stitch.difficulty === selectedDifficulty;
+
+          return matchesSearch && matchesCategory && matchesDifficulty;
+        });
+
+        renderStitches();
+      }
+
+      // Event listeners
+      searchInput.addEventListener('input', filterStitches);
+      categoryFilter.addEventListener('change', filterStitches);
+      difficultyFilter.addEventListener('change', filterStitches);
+
+      // Initialize the glossary
+      initGlossary();
     });
   </script>
+
+  <!-- Google AdSense -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+       crossorigin="anonymous"></script>
 </body>
 </html>

@@ -67,80 +67,84 @@
             overflow: hidden;
         }
 
+        .mission-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--clr-coral);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
         .mission-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,107,122,0.1), transparent);
-            transition: left 0.6s ease;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--clr-coral) 0%, var(--clr-teal) 100%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
         }
 
         .mission-card:hover::before {
-            left: 100%;
+            opacity: 1;
         }
 
-        .mission-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--clr-coral);
-            box-shadow: var(--shadow-mauve);
-            background: rgba(61, 26, 43, 0.9);
-        }
-
-        .mission-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: var(--space-lg);
+        .mission-title {
             color: var(--clr-coral);
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: var(--space-lg);
             font-family: var(--font-display);
         }
 
-        .mission-card p {
-            color: var(--clr-cream);
-            opacity: 0.95;
-            line-height: 1.7;
-            font-family: var(--font-primary);
+        .mission-text {
+            color: var(--clr-warm-white);
+            line-height: 1.6;
+            font-size: 1.1rem;
         }
-        
-        /* Feature list styling */
-        .mission-card div {
-            display: flex;
-            align-items: center;
-            margin: var(--space-md) 0;
-        }
-        
-        .mission-card img {
-            width: 24px;
-            height: 24px;
-            margin-right: var(--space-sm);
-            filter: brightness(0) saturate(100%) invert(85%) sepia(15%) saturate(200%) hue-rotate(20deg) brightness(95%) contrast(90%);
-        }
-        
-        .mission-card span {
-            color: var(--clr-cream);
-            font-family: var(--font-primary);
-        }
-        
-        /* Sanctification under construction element */
+
+        /* Sanctification section */
         .sanctification-box {
             background: var(--clr-rich-brown);
             border-radius: 20px;
             padding: 30px;
-            margin: 40px 0;
-            border: 2px dashed var(--clr-coral);
-            text-align: center;
+            margin: var(--space-2xl) 0;
+            border: 1px solid rgba(250,248,243,0.1);
             position: relative;
             overflow: hidden;
         }
-        
+
         .sanctification-box::before {
-            content: '🔨';
+            content: '';
             position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent 30%, rgba(250,248,243,0.05) 50%, transparent 70%);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+
+        .sanctification-header {
+            border-bottom: 2px solid var(--clr-mauve);
+            padding-bottom: 15px;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .sanctification-subtitle {
+            color: var(--clr-mauve);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
             opacity: 0.7;
         }
         
@@ -164,6 +168,8 @@
             color: var(--clr-warm-white);
             font-size: 1rem;
             line-height: 1.5;
+            position: relative;
+            z-index: 1;
         }
         
         /* Mobile responsive */
@@ -185,6 +191,18 @@
     </style>
 </head>
 <body>
+    <!-- ADDED: STANDARDIZED ADSENSE HEADER -->
+    <div class="adsense-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
     <div class="container">
         <!-- Navigation - Now uses styles.css for consistent spacing -->
         <nav id="nav">
@@ -212,72 +230,83 @@
         <div class="story-section">
             <div class="story-container">
                 
-                <!-- Left Column - Your existing content -->
-                <div class="story-text">
-                    <h2 class="story-title">Stories, Social Feeds & More</h2>
-                    
-                    <p class="story-description">I'm building something special here - a place where my 30-year crochet journey meets modern storytelling.</p>
-                    
-                    <div class="mission-card">
-                        <h3>What's Coming:</h3>
-                        <div>
-                            <img src="images/slip-knot-first-chain.png" alt="Story">
-                            <span>Deep-dive blog stories about my crochet and tech journey</span>
-                        </div>
-                        <div>
-                            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-                            <span>Live social media feeds from all my @this4dani accounts</span>
-                        </div>
-                        <div>
-                            <img src="images/file-folder-magazne-lable.png" alt="API">
-                            <span>Behind-the-scenes content from building the pattern adjustment API</span>
-                        </div>
-                        <div>
-                            <img src="images/home-heart-door.png" alt="Faith">
-                            <span>Faith and ministry moments that shape everything I create</span>
-                        </div>
-                    </div>
-                    
-                    <p class="story-highlight">Where traditional craft meets modern innovation, and every story has a purpose.</p>
-                    
-                    <p class="story-launch-date">Expected launch: July 2025</p>
+                <!-- Left Column - Your Story Preview -->
+                <div class="mission-card">
+                    <h2 class="mission-title">My Journey</h2>
+                    <p class="mission-text">
+                        Over the years, I've discovered that crochet isn't just about following patterns—it's about understanding the <em>why</em> behind every stitch. 
+                        When patterns don't fit quite right or when you want to use different yarn, that's where the real artistry begins.
+                    </p>
+                    <p class="mission-text">
+                        I'm building tools that bridge the gap between traditional craft wisdom and modern technology, 
+                        helping fellow crocheters spend more time creating and less time calculating.
+                    </p>
                 </div>
-                
-                <!-- Right Column - Single Sanctification Box -->
-                <div class="sanctification-section">
-                    <div class="sanctification-box">
-                        <h3 class="sanctification-title">Being Sanctified...</h3>
-                        <p class="sanctification-verse">"...knit together in love, to reach all the riches of full assurance of understanding and the knowledge of God's mystery."<br>— Colossians 2:2</p>
-                        <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith. ✨</p>
-                    </div>
+
+                <!-- Right Column - Coming Soon Details -->
+                <div>
+                    <h2 class="story-title">Behind the Stitches</h2>
+                    <p class="story-description">
+                        This page will share the complete journey—from learning to crochet as a child to developing 
+                        pattern adjustment technology that solves real problems for makers everywhere.
+                    </p>
+                    
+                    <p class="story-highlight">
+                        "Every stitch tells a story. Mine starts with curiosity and leads to innovation."
+                    </p>
+                    
+                    <p class="story-launch-date">
+                        Full story launches with the site on <strong>July 16, 2025</strong>
+                    </p>
                 </div>
             </div>
         </div>
 
-        <!-- Standard Footer - Now uses styles.css classes -->
-        <div class="standard-footer">
-            <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <span class="footer-separator">•</span>
-                <a href="privacy.html#terms">Terms of Service</a>
-                <span class="footer-separator">•</span>
-                <a href="privacy.html#contact">Contact</a>
+        <!-- Sanctification Under Construction -->
+        <div class="sanctification-box">
+            <div class="sanctification-header">
+                <div class="sanctification-subtitle">Under Construction</div>
+                <h3 class="sanctification-title">Sanctification Through Creation</h3>
+                <p class="sanctification-verse">"She considers a field and buys it; from her earnings she plants a vineyard." - Proverbs 31:16</p>
             </div>
+            <p class="sanctification-text">
+                This section will explore how creative work becomes an act of worship, 
+                and how building something meaningful reflects God's image in us as creators. 
+                The intersection of faith, craft, and technology offers unique opportunities for growth and service.
+            </p>
         </div>
     </div>
 
-    <!-- FIXED: Navigation scroll behavior script - ONLY CHANGE -->
+    <!-- UPDATED: SYNCHRONIZED NAVIGATION JAVASCRIPT -->
     <script>
-        window.addEventListener('scroll', function() {
+        // SYNCHRONIZED NAVIGATION BEHAVIOR - UPDATED
+        let navigationTicking = false;
+
+        function updateNavigationState() {
             const nav = document.getElementById('nav');
+            const scrollY = window.scrollY;
             
-            if (window.scrollY > 50) {
+            // CONSISTENT 40px trigger across all pages
+            if (scrollY > 40) {
                 nav.classList.add('scrolled');
             } else {
                 nav.classList.remove('scrolled');
             }
-        });
+            navigationTicking = false;
+        }
+
+        function requestNavigationTick() {
+            if (!navigationTicking) {
+                requestAnimationFrame(updateNavigationState);
+                navigationTicking = true;
+            }
+        }
+
+        window.addEventListener('scroll', requestNavigationTick, { passive: true });
     </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+         crossorigin="anonymous"></script>
 </body>
 </html>
