@@ -91,8 +91,7 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-lg);
-  padding-top: 0;
-  margin-top: 0;
+  padding-top: 200px;  /* FIXED: Space for fixed navigation */
 }
 
 .container-wide {
@@ -104,49 +103,44 @@ body {
 /* ===== ADSENSE HEADER SPACING ===== */
 .adsense-top,
 .ad-zone-header {
-  margin: 0 0 20px 0;
+  margin: 0 0 10px 0;  /* FIXED: Reduced bottom margin */
   padding: 15px;
   text-align: center;
 }
 
-/* ===== FIXED NAVIGATION SYSTEM - PROPER SCROLL BEHAVIOR ===== */
+/* ===== FIXED NAVIGATION SYSTEM - MATCHES HOMEPAGE ===== */
 #nav {
-  /* FIXED: Start with proper spacing, becomes sticky on scroll */
-  position: relative;
-  transform: none;
-  top: auto;
-  left: auto;
-  margin: 60px 0 40px 0;  /* Generous top space initially */
-  padding: 25px 0;
+  /* FIXED: Start like homepage - fixed position with space from AdSense */
+  position: fixed !important;
+  top: 120px !important;  /* Same as homepage */
+  left: 50% !important;
+  transform: translateX(-50%) !important;
   
-  /* Layout */
+  /* Layout exactly like homepage */
   display: flex;
   gap: 70px;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  transition: all 0.3s ease;
+  width: auto;
   z-index: 1000;
+  
+  /* Smooth transitions */
+  transition: all 0.3s ease;
   background: transparent;
+  backdrop-filter: none;
+  padding: 25px 0;
+  border: none;
+  box-shadow: none;
 }
 
-/* FIXED: Sticky behavior when scrolled */
+/* FIXED: Scrolled state - smooth transition to top */
 #nav.scrolled {
-  position: fixed !important;
   top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  margin: 0 !important;
   background: linear-gradient(135deg, var(--clr-primary-dark) 0%, rgba(0, 26, 31, 0.95) 100%);
   backdrop-filter: blur(10px);
   box-shadow: 0 2px 20px rgba(0,0,0,0.3);
   border-bottom: 1px solid rgba(250, 248, 243, 0.1);
   padding: 15px 0;
-}
-
-/* FIXED: Body padding when nav becomes sticky */
-body.nav-sticky {
-  padding-top: 90px;  /* Space for fixed nav */
 }
 
 #nav a {
@@ -198,8 +192,8 @@ body.nav-sticky {
 /* ===== HEADER STYLES - PROPER SPACING ===== */
 .header {
   text-align: center;
-  margin-top: 0;
-  padding-top: 0;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
   margin-bottom: 30px;
   padding: 0 0 var(--space-lg) 0;
 }
@@ -540,24 +534,29 @@ body, p, span, div, input, button, textarea {
 /* ===== RESPONSIVE DESIGN ===== */
 @media (max-width: 768px) {
   .container {
-    padding: 0 var(--space-md);
-    padding-top: 0;
-    margin-top: 0;
+    padding-left: var(--space-md);
+    padding-right: var(--space-md);
+    padding-top: 140px !important;  /* FIXED: Less padding on mobile */
   }
 
   #nav {
-    gap: 50px;
-    margin: 40px 0 30px 0;
-    padding: 20px 0;
+    gap: 50px !important;
+    top: 80px !important;
   }
   
   #nav.scrolled {
+    top: 0 !important;
     padding: 10px 0;
   }
-  
+
   #nav img {
     width: 60px !important;
     height: 60px !important;
+  }
+  
+  #nav a:nth-child(4) img { 
+    width: 90px !important; 
+    height: 90px !important; 
   }
 
   .header {
@@ -585,13 +584,18 @@ body, p, span, div, input, button, textarea {
     padding: var(--space-lg);
     margin: var(--space-lg);
   }
-  
-  body.nav-sticky {
-    padding-top: 70px;
-  }
 }
 
 @media (max-width: 480px) {
+  .container {
+    padding-top: 120px !important;  /* FIXED: Even less padding for small mobile */
+  }
+
+  #nav {
+    gap: 40px !important;
+    top: 60px !important;
+  }
+
   .header h1 {
     font-size: 1.5rem;
   }
@@ -606,25 +610,14 @@ body, p, span, div, input, button, textarea {
     height: 20px;
   }
   
-  #nav {
-    gap: 40px;
-    margin: 30px 0 20px 0;
-    padding: 15px 0;
-  }
-  
-  #nav.scrolled {
-    padding: 8px 0;
-  }
-  
   #nav img {
     width: 50px !important;
     height: 50px !important;
   }
   
-  #nav a:nth-child(4) img { width: 70px !important; height: 70px !important; }
-  
-  body.nav-sticky {
-    padding-top: 60px;
+  #nav a:nth-child(4) img { 
+    width: 70px !important; 
+    height: 70px !important; 
   }
 }
 
