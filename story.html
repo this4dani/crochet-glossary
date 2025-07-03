@@ -1,41 +1,214 @@
 <!DOCTYPE HTML>
-<html lang="en">
+<html>
 <head>
+    <title>My Story - DANI'S</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <title>My Story - DANI'S</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Story-specific styling */
+        .story-title {
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            margin-bottom: var(--space-xl);
+            color: var(--clr-warm-white);
+            line-height: 1.2;
+        }
+        
+        .story-description {
+            font-size: 1.2rem; 
+            margin: var(--space-2xl) 0;
+            color: var(--clr-cream);
+            line-height: 1.6;
+        }
+        
+        .story-highlight {
+            font-style: italic; 
+            color: var(--clr-cream); 
+            margin: var(--space-2xl) 0;
+            font-size: 1.1rem;
+        }
+        
+        .story-launch-date {
+            font-size: 0.9rem; 
+            opacity: 0.8;
+            color: var(--clr-cream);
+        }
+        
+        /* Story section container */
+        .story-section {
+            padding: var(--space-2xl) var(--space-2xl);
+            background: rgba(61, 26, 43, 0.8);
+            backdrop-filter: blur(20px);
+            margin: var(--space-2xl) 0;
+            border-radius: var(--space-lg);
+        }
+        
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        /* Mission card styling */
+        .mission-card {
+            background: rgba(61, 26, 43, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(250,248,243,0.15);
+            border-radius: var(--space-lg);
+            padding: var(--space-2xl) var(--space-xl);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,107,122,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .mission-card:hover::before {
+            left: 100%;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--clr-coral);
+            box-shadow: var(--shadow-mauve);
+            background: rgba(61, 26, 43, 0.9);
+        }
+
+        .mission-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: var(--space-lg);
+            color: var(--clr-coral);
+            font-family: var(--font-display);
+        }
+
+        .mission-card p {
+            color: var(--clr-cream);
+            opacity: 0.95;
+            line-height: 1.7;
+            font-family: var(--font-primary);
+        }
+        
+        /* Feature list styling */
+        .mission-card div {
+            display: flex;
+            align-items: center;
+            margin: var(--space-md) 0;
+        }
+        
+        .mission-card img {
+            width: 24px;
+            height: 24px;
+            margin-right: var(--space-sm);
+            filter: brightness(0) saturate(100%) invert(85%) sepia(15%) saturate(200%) hue-rotate(20deg) brightness(95%) contrast(90%);
+        }
+        
+        .mission-card span {
+            color: var(--clr-cream);
+            font-family: var(--font-primary);
+        }
+        
+        /* Sanctification under construction element */
+        .sanctification-box {
+            background: var(--clr-rich-brown);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px dashed var(--clr-coral);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sanctification-box::before {
+            content: '🔨';
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 1.5rem;
+            opacity: 0.7;
+        }
+        
+        .sanctification-title {
+            color: var(--clr-coral);
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            font-family: var(--font-display);
+        }
+        
+        .sanctification-verse {
+            color: var(--clr-cream);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+        
+        .sanctification-text {
+            color: var(--clr-warm-white);
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .story-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+            
+            .story-title {
+                font-size: 2rem;
+            }
+            
+            .story-section {
+                padding: var(--space-xl) var(--space-lg);
+            }
+        }
+    </style>
 </head>
 <body>
-  <!-- AdSense Top -->
-  <div class="adsense-top">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9422928756201532"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+    <div class="container">
+        <!-- Navigation - Now uses styles.css for consistent spacing -->
+        <nav id="nav">
+            <a href="index.html">
+                <img src="images/home-heart-door.png" alt="Home">
+            </a>
+            <a href="glossary.html">
+                <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+            </a>
+            <a href="story.html" class="active">
+                <img src="images/slip-knot-first-chain.png" alt="Story">
+            </a>
+            <a href="follow.html">
+                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+            </a>
+        </nav>
 
-    <!-- Navigation -->
-    <nav id="nav">
-      <a href="index.html">
-        <img src="images/home-heart-door.png" alt="Home">
-      </a>
-      <a href="glossary.html">
-        <img src="images/file-folder-magazne-lable.png" alt="Glossary">
-      </a>
-      <a href="story.html" class="active">
-        <img src="images/slip-knot-first-chain.png" alt="Story">
-      </a>
-      <a href="follow.html">
-        <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-      </a>
-    </nav>
-  </div>
+        <!-- Header - Now uses styles.css for consistent spacing -->
+        <header class="header">
+            <h1>My Story</h1>
+            <p style="color: var(--clr-coral); font-size: 1.4rem; font-weight: 600;">COMING SOON</p>
+        </header>
 
-  <div class="container">
-    <!-- Coming Soon Content -->
+        <!-- Coming Soon Content -->
         <div class="story-section">
             <div class="story-container">
                 
@@ -93,16 +266,10 @@
             </div>
         </div>
     </div>
-
-    <!-- AdSense Footer -->
-    <div class="adsense-footer">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9422928756201532"
-             data-ad-slot="1234567890"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <!-- AdSense Footer -->
+        <div class="ad-zone ad-zone-footer">
+            [Google AdSense - Responsive]
+        </div>
     </div>
 </body>
 </html>
