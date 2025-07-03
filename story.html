@@ -10,7 +10,7 @@
     <style>
         /* Story-specific styling */
         .story-title {
-            font-family: var(--font-display);
+            font-family: var(--font-accent);
             font-size: 2.5rem;
             margin-bottom: var(--space-xl);
             color: var(--clr-warm-white);
@@ -19,7 +19,7 @@
         
         .story-description {
             font-size: 1.2rem; 
-            margin: var(--space-2xl) 0;
+            margin: var(--space-lg) 0;
             color: var(--clr-cream);
             line-height: 1.6;
         }
@@ -27,7 +27,7 @@
         .story-highlight {
             font-style: italic; 
             color: var(--clr-cream); 
-            margin: var(--space-2xl) 0;
+            margin: var(--space-lg) 0;
             font-size: 1.1rem;
         }
         
@@ -37,64 +37,12 @@
             color: var(--clr-cream);
         }
         
-        /* Story section container */
-        .story-section {
-            padding: var(--space-2xl) var(--space-2xl);
-            background: rgba(61, 26, 43, 0.8);
-            backdrop-filter: blur(20px);
-            margin: var(--space-2xl) 0;
-            border-radius: var(--space-lg);
-        }
-        
-        .story-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
-            align-items: start;
-        }
-        
-        /* Mission card styling */
-        .mission-card {
-            background: rgba(61, 26, 43, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(250,248,243,0.15);
-            border-radius: var(--space-lg);
-            padding: var(--space-2xl) var(--space-xl);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mission-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,107,122,0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .mission-card:hover::before {
-            left: 100%;
-        }
-
-        .mission-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--clr-coral);
-            box-shadow: var(--shadow-mauve);
-            background: rgba(61, 26, 43, 0.9);
-        }
-
         .mission-card h3 {
             font-size: 1.5rem;
             font-weight: 600;
             margin-bottom: var(--space-lg);
             color: var(--clr-coral);
-            font-family: var(--font-display);
+            font-family: var(--font-accent);
         }
 
         .mission-card p {
@@ -104,7 +52,6 @@
             font-family: var(--font-primary);
         }
         
-        /* Feature list styling */
         .mission-card div {
             display: flex;
             align-items: center;
@@ -123,18 +70,6 @@
             font-family: var(--font-primary);
         }
         
-        /* Sanctification under construction element */
-        .sanctification-box {
-            background: var(--clr-rich-brown);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 40px 0;
-            border: 2px dashed var(--clr-coral);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
         .sanctification-box::before {
             content: '🔨';
             position: absolute;
@@ -149,11 +84,11 @@
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 10px;
-            font-family: var(--font-display);
+            font-family: var(--font-accent);
         }
         
         .sanctification-verse {
-            color: var(--clr-cream);
+            color: var(--clr-deep-chocolate);
             font-size: 0.9rem;
             font-style: italic;
             margin-bottom: 15px;
@@ -161,7 +96,7 @@
         }
         
         .sanctification-text {
-            color: var(--clr-warm-white);
+            color: var(--clr-deep-chocolate);
             font-size: 1rem;
             line-height: 1.5;
         }
@@ -185,8 +120,6 @@
     </style>
 </head>
 <body>
-    <!-- Header Container with AdSense and Navigation -->
-<div class="header-container">
     <!-- AdSense Top Banner -->
     <div class="adsense-top">
         <!-- AdSense code -->
@@ -201,40 +134,27 @@
         </script>
     </div>
     
-    <!-- Navigation Container -->
-    <nav id="nav">
-        <a href="index.html">
-            <img src="images/icon-home.png" alt="Home">
-        </a>
-        <a href="glossary.html">
-            <img src="images/icon-glossary.png" alt="Glossary">
-        </a>
-        <a href="story.html">
-            <img src="images/icon-story.png" alt="My Story">
-        </a>
-        <a href="follow.html">
-            <img src="images/icon-follow.png" alt="Follow">
-        </a>
-    </nav>
-</div>
-    <div class="container">
-        <!-- Navigation - Now uses styles.css for consistent spacing -->
+    <!-- Navigation Wrapper -->
+    <div class="nav-wrapper">
         <nav id="nav">
             <a href="index.html">
-                <img src="images/home-heart-door.png" alt="Home">
+                <img src="images/icon-home.png" alt="Home">
             </a>
             <a href="glossary.html">
-                <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+                <img src="images/icon-glossary.png" alt="Glossary">
             </a>
             <a href="story.html" class="active">
-                <img src="images/slip-knot-first-chain.png" alt="Story">
+                <img src="images/icon-story.png" alt="My Story">
             </a>
             <a href="follow.html">
-                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+                <img src="images/icon-follow.png" alt="Follow">
             </a>
         </nav>
-
-        <!-- Header - Now uses styles.css for consistent spacing -->
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container main-content">
+        <!-- Header -->
         <header class="header">
             <h1>My Story</h1>
             <p style="color: var(--clr-coral); font-size: 1.4rem; font-weight: 600;">COMING SOON</p>
@@ -244,7 +164,7 @@
         <div class="story-section">
             <div class="story-container">
                 
-                <!-- Left Column - Your existing content -->
+                <!-- Left Column -->
                 <div class="story-text">
                     <h2 class="story-title">Stories, Social Feeds & More</h2>
                     
@@ -275,7 +195,7 @@
                     <p class="story-launch-date">Expected launch: July 2025</p>
                 </div>
                 
-                <!-- Right Column - Single Sanctification Box -->
+                <!-- Right Column -->
                 <div class="sanctification-section">
                     <div class="sanctification-box">
                         <h3 class="sanctification-title">Being Sanctified...</h3>
@@ -286,22 +206,46 @@
             </div>
         </div>
 
-        <!-- Standard Footer - Now uses styles.css classes -->
-        <div class="standard-footer">
-            <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <div class="footer-links">
+        <!-- Footer -->
+        <div class="footer">
+            <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <div style="margin-top: 20px;">
                 <a href="privacy.html">Privacy Policy</a>
-                <span class="footer-separator">•</span>
+                <span style="margin: 0 10px;">•</span>
                 <a href="privacy.html#terms">Terms of Service</a>
-                <span class="footer-separator">•</span>
+                <span style="margin: 0 10px;">•</span>
                 <a href="privacy.html#contact">Contact</a>
             </div>
         </div>
     </div>
-        <!-- AdSense Footer -->
-        <div class="ad-zone ad-zone-footer">
-            [Google AdSense - Responsive]
-        </div>
+    
+    <!-- AdSense Footer -->
+    <div class="adsense-bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
+
+    <script>
+        // Smooth scroll-then-stick navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            const navWrapper = document.querySelector('.nav-wrapper');
+            const wrapperTop = navWrapper.getBoundingClientRect().top;
+            
+            if (wrapperTop <= 0) {
+                nav.classList.add('stuck');
+                navWrapper.classList.add('stuck');
+            } else {
+                nav.classList.remove('stuck');
+                navWrapper.classList.remove('stuck');
+            }
+        });
+    </script>
 </body>
 </html>

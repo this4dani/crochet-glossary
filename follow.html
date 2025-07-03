@@ -6,13 +6,104 @@
     <title>Follow DANI'S - Social Media & Updates</title>
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Follow page specific styles */
+        .social-list {
+            list-style: none;
+            padding: 40px;
+            margin: 40px 0;
+            background: rgba(61, 26, 43, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+        
+        .social-list li {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(250, 248, 243, 0.1);
+        }
+        
+        .social-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .social-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .social-info svg {
+            width: 24px;
+            height: 24px;
+        }
+        
+        .social-info h3 {
+            color: var(--clr-cream);
+            font-size: 1.1rem;
+            margin: 0;
+            font-weight: 600;
+        }
+        
+        .social-info p {
+            color: var(--clr-warm-white);
+            font-size: 0.9rem;
+            margin: 2px 0 0 0;
+            opacity: 0.8;
+        }
+        
+        .social-link {
+            background: transparent;
+            padding: 8px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            min-width: 80px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid;
+        }
+        
+        .social-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .note-box {
+            background: transparent;
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            border-left: 4px solid var(--clr-coral);
+        }
+        
+        .note-box p {
+            color: var(--clr-cream);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin: 0;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <!-- AdSense Header -->
-        <div class="ad-zone ad-zone-header">
-            [Google AdSense - Leaderboard 728x90]
-        <!-- Navigation -->
+    <!-- AdSense Top Banner -->
+    <div class="adsense-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <!-- Navigation Wrapper -->
+    <div class="nav-wrapper">
         <nav id="nav">
             <a href="index.html">
                 <img src="images/home-heart-door.png" alt="Home">
@@ -27,9 +118,10 @@
                 <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
             </a>
         </nav>
-        </div>
     </div>
-    <div class="container">     
+    
+    <!-- Main Content -->
+    <div class="container main-content">     
         <!-- Header -->
         <header class="header">
             <h1>Follow</h1>
@@ -37,143 +129,170 @@
         </header>
 
         <!-- Social Media List -->
-        <ul style="list-style: none; padding: 40px; margin: 40px 0;">
+        <ul class="social-list">
             
-            <li style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(250, 248, 243, 0.1);">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <svg style="width: 24px; height: 24px; color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
                         <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
                         <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
                     </svg>
                     <div>
-                        <h3 style="color: var(--clr-cream); font-size: 1.1rem; margin: 0; font-weight: 600;">Instagram</h3>
-                        <p style="color: var(--clr-warm-white); font-size: 0.9rem; margin: 2px 0 0 0; opacity: 0.8;">@this4dani</p>
+                        <h3>Instagram</h3>
+                        <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://instagram.com/this4dani" target="_blank" style="background: transparent; color: var(--clr-fuchsia); border: 2px solid var(--clr-fuchsia); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; min-width: 80px; text-align: center; transition: all 0.3s ease;">Follow</a>
+                <a href="https://instagram.com/this4dani" target="_blank" class="social-link" style="color: var(--clr-fuchsia); border-color: var(--clr-fuchsia);">Follow</a>
             </li>
 
-            <li style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(250, 248, 243, 0.1);">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <svg style="width: 24px; height: 24px; color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
                         <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
                         <path d="M8 14s1.5 2 4 2 4-2 4-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         <line x1="9" y1="9" x2="9.01" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         <line x1="15" y1="9" x2="15.01" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                     <div>
-                        <h3 style="color: var(--clr-cream); font-size: 1.1rem; margin: 0; font-weight: 600;">Pinterest</h3>
-                        <p style="color: var(--clr-warm-white); font-size: 0.9rem; margin: 2px 0 0 0; opacity: 0.8;">@this4dani</p>
+                        <h3>Pinterest</h3>
+                        <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://pinterest.com/this4dani" target="_blank" style="background: transparent; color: var(--clr-mauve); border: 2px solid var(--clr-mauve); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; min-width: 80px; text-align: center; transition: all 0.3s ease;">Follow</a>
+                <a href="https://pinterest.com/this4dani" target="_blank" class="social-link" style="color: var(--clr-mauve); border-color: var(--clr-mauve);">Follow</a>
             </li>
 
-            <li style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(250, 248, 243, 0.1);">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <svg style="width: 24px; height: 24px; color: var(--clr-coral);" viewBox="0 0 24 24" fill="none">
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-coral);" viewBox="0 0 24 24" fill="none">
                         <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" stroke="currentColor" stroke-width="2"/>
                         <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="currentColor"/>
                     </svg>
                     <div>
-                        <h3 style="color: var(--clr-cream); font-size: 1.1rem; margin: 0; font-weight: 600;">YouTube</h3>
-                        <p style="color: var(--clr-warm-white); font-size: 0.9rem; margin: 2px 0 0 0; opacity: 0.8;">@this4dani</p>
+                        <h3>YouTube</h3>
+                        <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://youtube.com/@this4dani" target="_blank" style="background: transparent; color: var(--clr-coral); border: 2px solid var(--clr-coral); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; min-width: 80px; text-align: center; transition: all 0.3s ease;">Subscribe</a>
+                <a href="https://youtube.com/@this4dani" target="_blank" class="social-link" style="color: var(--clr-coral); border-color: var(--clr-coral);">Subscribe</a>
             </li>
 
-            <li style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(250, 248, 243, 0.1);">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <svg style="width: 24px; height: 24px; color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
                         <path d="M9 12a4 4 0 1 0 4 4V8a5 5 0 0 0 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                     <div>
-                        <h3 style="color: var(--clr-cream); font-size: 1.1rem; margin: 0; font-weight: 600;">TikTok</h3>
-                        <p style="color: var(--clr-warm-white); font-size: 0.9rem; margin: 2px 0 0 0; opacity: 0.8;">@this4dani</p>
+                        <h3>TikTok</h3>
+                        <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://tiktok.com/@this4dani" target="_blank" style="background: transparent; color: var(--clr-fuchsia); border: 2px solid var(--clr-fuchsia); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; min-width: 80px; text-align: center; transition: all 0.3s ease;">Follow</a>
+                <a href="https://tiktok.com/@this4dani" target="_blank" class="social-link" style="color: var(--clr-fuchsia); border-color: var(--clr-fuchsia);">Follow</a>
             </li>
 
-            <li style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(250, 248, 243, 0.1);">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <svg style="width: 24px; height: 24px; color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
                         <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" stroke-width="2"/>
                         <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2"/>
                         <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"/>
                     </svg>
                     <div>
-                        <h3 style="color: var(--clr-cream); font-size: 1.1rem; margin: 0; font-weight: 600;">LinkedIn</h3>
-                        <p style="color: var(--clr-warm-white); font-size: 0.9rem; margin: 2px 0 0 0; opacity: 0.8;">Ashley Danielle Caldwell</p>
+                        <h3>LinkedIn</h3>
+                        <p>Ashley Danielle Caldwell</p>
                     </div>
                 </div>
-                <a href="https://linkedin.com/in/ashleydaniellecaldwell" target="_blank" style="background: transparent; color: var(--clr-mauve); border: 2px solid var(--clr-mauve); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; min-width: 80px; text-align: center; transition: all 0.3s ease;">Connect</a>
+                <a href="https://linkedin.com/in/ashleydaniellecaldwell" target="_blank" class="social-link" style="color: var(--clr-mauve); border-color: var(--clr-mauve);">Connect</a>
             </li>
 
-            <li style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(250, 248, 243, 0.1);">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <svg style="width: 24px; height: 24px; color: var(--clr-coral);" viewBox="0 0 24 24" fill="none">
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-coral);" viewBox="0 0 24 24" fill="none">
                         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2"/>
                     </svg>
                     <div>
-                        <h3 style="color: var(--clr-cream); font-size: 1.1rem; margin: 0; font-weight: 600;">Facebook</h3>
-                        <p style="color: var(--clr-warm-white); font-size: 0.9rem; margin: 2px 0 0 0; opacity: 0.8;">Ashley Caldwell</p>
+                        <h3>Facebook</h3>
+                        <p>Ashley Caldwell</p>
                     </div>
                 </div>
-                <a href="https://facebook.com/caldwelleppes" target="_blank" style="background: transparent; color: var(--clr-coral); border: 2px solid var(--clr-coral); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; min-width: 80px; text-align: center; transition: all 0.3s ease;">Follow</a>
+                <a href="https://facebook.com/caldwelleppes" target="_blank" class="social-link" style="color: var(--clr-coral); border-color: var(--clr-coral);">Follow</a>
             </li>
 
-            <li style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid rgba(250, 248, 243, 0.1);">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <svg style="width: 24px; height: 24px; color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
                         <circle cx="9" cy="12" r="1" fill="currentColor"/>
                         <circle cx="15" cy="12" r="1" fill="currentColor"/>
                         <path d="M7.5 7.5c3.5-2.5 9.5-2.5 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         <path d="M7 16.5c3.5 2.5 9.5 2.5 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                     <div>
-                        <h3 style="color: var(--clr-cream); font-size: 1.1rem; margin: 0; font-weight: 600;">Discord</h3>
-                        <p style="color: var(--clr-warm-white); font-size: 0.9rem; margin: 2px 0 0 0; opacity: 0.8;">@this4dani</p>
+                        <h3>Discord</h3>
+                        <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="#" target="_blank" style="background: transparent; color: var(--clr-fuchsia); border: 2px solid var(--clr-fuchsia); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; min-width: 80px; text-align: center; transition: all 0.3s ease;">Join</a>
+                <a href="#" target="_blank" class="social-link" style="color: var(--clr-fuchsia); border-color: var(--clr-fuchsia);">Join</a>
             </li>
 
-            <li style="display: flex; align-items: center; justify-content: space-between; padding: 15px 0;">
-                <div style="display: flex; align-items: center; gap: 15px;">
-                    <svg style="width: 24px; height: 24px; color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
                         <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="2"/>
                     </svg>
                     <div>
-                        <h3 style="color: var(--clr-cream); font-size: 1.1rem; margin: 0; font-weight: 600;">GitHub</h3>
-                        <p style="color: var(--clr-warm-white); font-size: 0.9rem; margin: 2px 0 0 0; opacity: 0.8;">@this4dani</p>
+                        <h3>GitHub</h3>
+                        <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://github.com/this4dani" target="_blank" style="background: transparent; color: var(--clr-mauve); border: 2px solid var(--clr-mauve); padding: 8px 20px; border-radius: 6px; text-decoration: none; font-weight: 600; font-size: 0.9rem; min-width: 80px; text-align: center; transition: all 0.3s ease;">View Code</a>
+                <a href="https://github.com/this4dani" target="_blank" class="social-link" style="color: var(--clr-mauve); border-color: var(--clr-mauve);">View Code</a>
             </li>
 
         </ul>
 
         <!-- Limitations Note -->
-        <div style="background: transparent; border-radius: 12px; padding: 30px; margin: 30px 0; border-left: 4px solid var(--clr-coral);">
-            <p style="color: var(--clr-cream); font-size: 0.95rem; line-height: 1.6; margin: 0;"><strong>Please note:</strong> I'm just one person juggling a day job in ministry, 5 children, a big church family, and special friends while building these tools and sharing this journey. My posting may be inconsistent as I focus on development work around real life, but I'll share the progress, challenges, and victories as authentically as possible. Currently working with AI assistance to build faster, but all the vision, decisions, and crochet expertise come from 30+ years of hands-on experience.</p>
+        <div class="note-box">
+            <p><strong>Please note:</strong> I'm just one person juggling a day job in ministry, 5 children, a big church family, and special friends while building these tools and sharing this journey. My posting may be inconsistent as I focus on development work around real life, but I'll share the progress, challenges, and victories as authentically as possible. Currently working with AI assistance to build faster, but all the vision, decisions, and crochet expertise come from 30+ years of hands-on experience.</p>
         </div>
 
         <!-- Footer -->
-        <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
-            <p style="color: #c8b8a8; font-size: 0.9rem; margin: 20px 0; font-family: 'Poppins', sans-serif;">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
-            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
-            <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
-            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
-            <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
+        <div class="footer">
+            <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <div style="margin-top: 20px;">
+                <a href="privacy.html">Privacy Policy</a>
+                <span style="margin: 0 10px;">•</span>
+                <a href="privacy.html#terms">Terms of Service</a>
+                <span style="margin: 0 10px;">•</span>
+                <a href="privacy.html#contact">Contact</a>
+            </div>
         </div>
     </div>
-        <!-- AdSense Footer -->
-        <div class="ad-zone ad-zone-footer">
-            [Google AdSense - Responsive]
-        </div>
+    
+    <!-- AdSense Footer -->
+    <div class="adsense-bottom">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <script>
+        // Smooth scroll-then-stick navigation
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            const navWrapper = document.querySelector('.nav-wrapper');
+            const wrapperTop = navWrapper.getBoundingClientRect().top;
+            
+            if (wrapperTop <= 0) {
+                nav.classList.add('stuck');
+                navWrapper.classList.add('stuck');
+            } else {
+                nav.classList.remove('stuck');
+                navWrapper.classList.remove('stuck');
+            }
+        });
+    </script>
 </body>
 </html>

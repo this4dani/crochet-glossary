@@ -84,37 +84,37 @@ body {
   padding: 0 var(--space-lg);
 }
 
-/* ===== NAVIGATION HEADER STYLES ===== */
-.header-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 80px var(--space-lg);
-  background: var(--clr-primary-dark);
-  box-shadow: none;
-}
-
-/* ===== ADSENSE HEADER SPACING - CONSISTENT ACROSS ALL PAGES ===== */
+/* ===== ADSENSE SPACING ===== */
 .adsense-top {
-  margin: 0 0 20px 0;
-  padding: 15px;
   text-align: center;
-  min-height: 80px;
+  padding: 15px;
+  min-height: 100px;
+  margin-bottom: 0;
 }
 
 .adsense-bottom {
   text-align: center;
   padding: 15px;
-  margin-bottom: 20px;
+  margin-top: 40px;
 }
 
-/* ===== FIXED NAVIGATION SYSTEM - SYNCHRONIZED SMOOTH SCROLLING ===== */
+/* ===== NAVIGATION WRAPPER FOR SMOOTH SCROLL-THEN-STICK ===== */
+.nav-wrapper {
+  position: relative;
+  height: 140px; /* Space for nav when it's not stuck */
+  margin-top: 20px; /* Space below AdSense */
+}
+
+.nav-wrapper.stuck {
+  height: 140px; /* Maintain space when nav sticks */
+}
+
+/* ===== NAVIGATION SYSTEM - SEAMLESS BACKGROUND ===== */
 #nav {
-  position: fixed !important;
-  top: 120px !important;  /* Space for AdSense header */
-  left: 50% !important;
-  transform: translateX(-50%) !important;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   
   /* Layout */
   display: flex;
@@ -124,27 +124,23 @@ body {
   width: auto;
   z-index: 1000;
   
-  /* NAVIGATION FIX: Faster transition with hardware acceleration */
-  transition: all 0.1s ease-out !important;
-  will-change: transform, top;
+  /* No background - seamless with page */
   background: transparent;
-  backdrop-filter: none;
   padding: 25px 0;
+  
+  /* Smooth transition for sticking */
+  transition: none;
 }
 
-/* FIXED: Scrolled state - matches page background */
-#nav.scrolled {
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  transform: none !important;
-  background: var(--clr-primary-dark);
+/* When stuck to top */
+#nav.stuck {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  /* Still no background - maintains seamless look */
+  background: transparent;
   padding: 15px 0;
-  border-radius: 0 !important;
-  box-shadow: none !important;
-  backdrop-filter: none !important;
-  display: flex;
-  justify-content: center;
 }
 
 #nav a {
@@ -193,11 +189,15 @@ body {
   filter: brightness(0) saturate(100%) invert(65%) sepia(30%) saturate(500%) hue-rotate(340deg) brightness(110%) contrast(90%);
 }
 
-/* ===== HEADER STYLES - PROPERLY SPACED BELOW NAVIGATION ===== */
+/* ===== MAIN CONTENT AREA ===== */
+.main-content {
+  padding-top: 40px; /* Space after navigation */
+}
+
+/* ===== HEADER STYLES ===== */
 .header {
   text-align: center;
-  margin-top: 240px;
-  padding-top: 20px;
+  margin-bottom: var(--space-xl);
 }
 
 .header h1 {
@@ -275,7 +275,7 @@ a:hover {
   color: var(--clr-warm-white);
 }
 
-/* ===== CARD SYSTEM - 3D EFFECT ===== */
+/* ===== CARD SYSTEM ===== */
 .card {
   background: var(--clr-cream);
   color: var(--clr-primary-dark);
@@ -308,85 +308,6 @@ a:hover {
     0 6px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* ===== POPUP MODAL STYLES ===== */
-.popup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  visibility: hidden;
-  transition: all 0.3s ease;
-  z-index: 2000;
-  backdrop-filter: blur(5px);
-}
-
-.popup.active {
-  opacity: 1;
-  visibility: visible;
-}
-
-.popup-inner {
-  background: var(--clr-warm-white);
-  color: var(--clr-primary-dark);
-  padding: 40px;
-  border-radius: 20px;
-  max-width: 600px;
-  width: 90%;
-  max-height: 80vh;
-  overflow-y: auto;
-  position: relative;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
-  transform: scale(0.9);
-  transition: transform 0.3s ease;
-}
-
-.popup.active .popup-inner {
-  transform: scale(1);
-}
-
-.popup-close {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 40px;
-  height: 40px;
-  background: var(--clr-coral);
-  color: var(--clr-warm-white);
-  border: none;
-  border-radius: 50%;
-  font-size: 24px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 1;
-}
-
-.popup-close:hover {
-  background: var(--clr-fuchsia);
-  transform: rotate(90deg);
-}
-
-/* ===== AD ZONES ===== */
-.ad-zone {
-  margin: var(--space-xl) 0;
-  padding: var(--space-lg);
-  background: rgba(255, 255, 255, 0.02);
-  border-radius: 15px;
-  min-height: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px dashed rgba(255, 255, 255, 0.1);
-}
-
 /* ===== FOOTER STYLES ===== */
 .footer {
   text-align: center;
@@ -402,39 +323,48 @@ a:hover {
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
+  .nav-wrapper {
+    height: 100px;
+    margin-top: 10px;
+  }
+  
   #nav {
     gap: 50px;
-    top: 80px !important;
+    padding: 15px 0;
   }
   
-  #nav.scrolled {
-    top: 0 !important;
+  #nav.stuck {
     padding: 10px 0;
-  }
-  
-  .header {
-    margin-top: 150px;
   }
   
   #nav img {
     width: 60px !important;
     height: 60px !important;
   }
+  
+  #nav a {
+    height: 70px;
+    width: 70px;
+  }
+  
+  .main-content {
+    padding-top: 20px;
+  }
 }
 
 @media (max-width: 480px) {
   #nav {
     gap: 40px;
-    top: 60px !important;
-  }
-  
-  .header {
-    margin-top: 120px;
   }
   
   #nav img {
     width: 50px !important;
     height: 50px !important;
+  }
+  
+  #nav a {
+    height: 60px;
+    width: 60px;
   }
   
   .header h1 {
@@ -467,18 +397,45 @@ a:hover {
 .flex { display: flex; }
 .grid { display: grid; }
 
-/* ===== GLOSSARY CONTAINER & STORY SECTION ===== */
-.glossary-content-container {
-  background: var(--clr-cream);
-  border-left: 6px solid var(--clr-fuchsia);
-  border-radius: 20px;
-  padding: 40px;
-  margin: 30px 0;
-  font-family: var(--font-primary);
-  box-shadow: none;
-  color: var(--clr-primary-dark);
+/* ===== PAGE-SPECIFIC STYLES ===== */
+/* Story page styles */
+.story-section {
+  padding: var(--space-xl) var(--space-lg);
+  background: rgba(61, 26, 43, 0.8);
+  backdrop-filter: blur(20px);
+  margin: var(--space-xl) 0;
+  border-radius: var(--space-lg);
 }
 
+.story-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 40px;
+  align-items: start;
+}
+
+/* Mission card styling */
+.mission-card {
+  background: rgba(61, 26, 43, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(250,248,243,0.15);
+  border-radius: var(--space-lg);
+  padding: var(--space-xl);
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.mission-card:hover {
+  transform: translateY(-10px);
+  border-color: var(--clr-coral);
+  box-shadow: var(--shadow-mauve);
+  background: rgba(61, 26, 43, 0.9);
+}
+
+/* Sanctification box */
 .sanctification-box {
   background: var(--clr-cream);
   border-left: 8px solid var(--clr-fuchsia);
@@ -487,12 +444,8 @@ a:hover {
   margin: 40px 0;
   font-family: var(--font-primary);
   color: var(--clr-deep-chocolate);
-}
-
-.stitch-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-  border-color: var(--clr-coral);
+  text-align: center;
+  border: 2px dashed var(--clr-coral);
 }
 
 /* ===== ANIMATIONS ===== */
@@ -528,4 +481,3 @@ a:hover {
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
-

@@ -4,92 +4,15 @@
     <title>DANI'S - Where Traditional Craft Meets Modern Technology</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(135deg, #003840 0%, #02515c 50%, #005b67 100%);
-            min-height: 100vh;
-            color: #faf8f3;
-            font-family: 'Inter', sans-serif;
-            overflow-x: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        /* Fixed navigation styles */
-        #nav {
-            position: fixed;
-            top: 140px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 70px;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-        }
-        #nav.scrolled {
-  top: 20px;
-  background: #003840;
-  backdrop-filter: none;
-  box-shadow: none;
-}
-        #nav a {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            height: 100px;
-            width: 100px;
-            position: relative;
-        }
-        #nav a:hover {
-            transform: translateY(-3px);
-        }
-        #nav a.active::after {
-            content: '';
-            position: absolute;
-            bottom: -35px;
-            left: 50%;
-            transform: translateX(-50%) rotate(90deg);
-            width: 300px;
-            height: 80px;
-            background-image: url('images/crochet-hook.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(300%) hue-rotate(300deg) brightness(95%) contrast(88%);
-        }
-
-        #nav img {
-            filter: brightness(0) saturate(100%) invert(98%) sepia(5%) saturate(50%) hue-rotate(20deg) brightness(105%) contrast(98%);
-            opacity: 0.9;
-            transition: all 0.3s ease;
-        }
-        #nav a:nth-child(1) img { width: 85px; height: 85px; }
-        #nav a:nth-child(2) img { width: 90px; height: 90px; }
-        #nav a:nth-child(3) img { width: 83px; height: 83px; }
-        #nav a:nth-child(4) img { width: 137px; height: 137px; }
-        #nav img:hover {
-            opacity: 1;
-            filter: brightness(0) saturate(100%) invert(65%) sepia(30%) saturate(500%) hue-rotate(340deg) brightness(110%) contrast(90%);
-        }
-        
-        .panel {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 140px 60px 50px;
-            position: relative;
-        }
-        
+        /* Home page specific styles */
         .intro {
             background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
             max-width: 850px;
+            margin: 0 auto;
             padding: 70px;
             border-radius: 25px;
             display: block;
@@ -111,6 +34,7 @@
                 radial-gradient(ellipse 80% 30% at 50% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
                 radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
         }
+        
         .intro::before {
             content: '';
             position: absolute;
@@ -160,50 +84,7 @@
             font-style: italic;
         }
         
-        .pic-container {
-            background: #2d1a2b;
-            padding: 20px;
-            border-radius: 12px;
-            border: 2px solid rgba(250,248,243,0.15);
-            box-shadow: inset 0 4px 12px rgba(0,0,0,0.3);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .pic img {
-            width: 180px;
-            height: 180px;
-            border-radius: 8px;
-            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
-            filter: sepia(20%) hue-rotate(320deg) saturate(1.3) brightness(1.1);
-            display: block;
-            margin-bottom: 20px;
-        }
-        
-        .footer-text {
-            margin: 140px 0 20px 0;
-            color: rgba(250,248,243,0.8);
-            font-size: 0.9rem;
-            text-align: center;
-            font-weight: 500;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
-            font-family: 'Poppins', sans-serif;
-        }
-        
-        .adsense-bottom {
-            text-align: center;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        
-        .adsense-top {
-            text-align: center;
-            padding: 15px;
-            margin-bottom: 0;
-        }
-
-        /* Floating cards from original file */
+        /* Floating cards */
         .floating-cards {
             position: fixed;
             top: 0;
@@ -400,32 +281,22 @@
             100% { top: 100vh; transform: rotateZ(945deg) rotateX(720deg) scale(0.9); opacity: 0; }
         }
 
-        /* Mobile considerations */
-        @media (max-width: 768px) {
-            #nav {
-                top: 10px;
-                gap: 40px;
-            }
-            
-            #nav img {
-                width: 60px !important;
-                height: 60px !important;
-            }
-            
-            .panel {
-                padding: 80px 30px 30px;
-            }
-            
-            .intro {
-                padding: 40px 30px;
-            }
-        }
-
-        /* Responsive - hide on mobile */
+        /* Responsive - hide cards on mobile */
         @media (max-width: 1200px) {
             .floating-cards { display: none; }
         }
+        
+        @media (max-width: 768px) {
+            .intro {
+                padding: 40px 30px;
+            }
+            
+            .intro h1 {
+                font-size: 4rem;
+            }
+        }
     </style>
+    
     <script async src="https://fundingchoicesmessages.google.com/i/pub-9422928756201532?ers=1"></script>
     <script>
       (function() {
@@ -449,6 +320,7 @@
          crossorigin="anonymous"></script>
 </head>
 <body>
+    <!-- AdSense Top Banner -->
     <div class="adsense-top">
         <ins class="adsbygoogle"
              style="display:block"
@@ -460,20 +332,23 @@
         </script>
     </div>
     
-    <nav id="nav">
-        <a href="index.html" class="active">
-            <img src="images/home-heart-door.png" alt="Home">
-        </a>
-        <a href="glossary.html">
-            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
-        </a>
-        <a href="story.html">
-            <img src="images/slip-knot-first-chain.png" alt="Story">
-        </a>
-        <a href="follow.html">
-            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-        </a>
-    </nav>
+    <!-- Navigation Wrapper -->
+    <div class="nav-wrapper">
+        <nav id="nav">
+            <a href="index.html" class="active">
+                <img src="images/home-heart-door.png" alt="Home">
+            </a>
+            <a href="glossary.html">
+                <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+            </a>
+            <a href="story.html">
+                <img src="images/slip-knot-first-chain.png" alt="Story">
+            </a>
+            <a href="follow.html">
+                <img src="images/yarn-ball-insert-crochet-hook" alt="Social">
+            </a>
+        </nav>
+    </div>
     
     <!-- Floating Stitch Cards -->
     <div class="floating-cards">
@@ -538,7 +413,8 @@
         </div>
     </div>
     
-    <div class="panel">
+    <!-- Main Content -->
+    <div class="container main-content">
         <article class="intro">
             <header>
                 <h1>DANI'S</h1>
@@ -546,20 +422,21 @@
                 <p>Where Traditional Craft Meets Modern Technology</p>
             </header>
         </article>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Built with ❤️, prayers, coffee, and determination to solve real problems</p>
+            <div style="margin-top: 20px;">
+                <a href="privacy.html">Privacy Policy</a>
+                <span style="margin: 0 10px;">•</span>
+                <a href="privacy.html#terms">Terms of Service</a>
+                <span style="margin: 0 10px;">•</span>
+                <a href="privacy.html#contact">Contact</a>
+            </div>
+        </div>
     </div>
     
-    <div class="footer-text">
-        Built with ❤️, prayers, coffee, and determination to solve real problems
-    </div>
-    
-    <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
-        <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
-        <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
-        <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
-        <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
-        <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
-    </div>
-    
+    <!-- AdSense Footer -->
     <div class="adsense-bottom">
         <ins class="adsbygoogle"
              style="display:block"
@@ -572,29 +449,20 @@
     </div>
 
     <script>
-        // SYNCHRONIZED SCROLL BEHAVIOR
-        let navigationTicking = false;
-
-        function updateNavigationState() {
+        // Smooth scroll-then-stick navigation
+        window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
-            const scrollY = window.scrollY;
+            const navWrapper = document.querySelector('.nav-wrapper');
+            const wrapperTop = navWrapper.getBoundingClientRect().top;
             
-            if (scrollY > 40) {  // Consistent trigger point
-                nav.classList.add('scrolled');
+            if (wrapperTop <= 0) {
+                nav.classList.add('stuck');
+                navWrapper.classList.add('stuck');
             } else {
-                nav.classList.remove('scrolled');
+                nav.classList.remove('stuck');
+                navWrapper.classList.remove('stuck');
             }
-            navigationTicking = false;
-        }
-
-        function requestNavigationTick() {
-            if (!navigationTicking) {
-                requestAnimationFrame(updateNavigationState);
-                navigationTicking = true;
-            }
-        }
-
-        window.addEventListener('scroll', requestNavigationTick, { passive: true });
+        });
 
         // Floating cards click functionality
         document.addEventListener('DOMContentLoaded', function() {
@@ -609,15 +477,5 @@
             });
         });
     </script>
-<!-- Optional right-side ad zone -->
-    <div style="position: fixed; right: 0; top: 180px; width: 160px; height: 600px; z-index: 999; display: none;" class="adsense-side">
-        <ins class="adsbygoogle"
-             style="display:block;width:160px;height:600px"
-             data-ad-client="ca-pub-9422928756201532"
-             data-ad-slot="1234567890"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
 </body>
 </html>
