@@ -8,58 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Home page specific styles */
-        .intro {
-            background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
-            max-width: 850px;
-            margin: 0 auto;
-            padding: 70px;
-            border-radius: 25px;
-            display: block;
-            position: relative;
-            text-align: left;
-            
-            /* Dome-like 3D effect */
-            box-shadow: 
-                0 15px 35px rgba(79, 43, 58, 0.4),
-                0 8px 20px rgba(0, 0, 0, 0.3),
-                0 3px 8px rgba(0, 0, 0, 0.15),
-                inset 0 3px 6px rgba(255, 255, 255, 0.12),
-                inset 0 -8px 16px rgba(0, 0, 0, 0.2);
-            
-            border: 1px solid rgba(250, 248, 243, 0.15);
-            
-            /* Add subtle curve highlight */
-            background-image: 
-                radial-gradient(ellipse 80% 30% at 50% 20%, rgba(255, 255, 255, 0.08) 0%, transparent 50%),
-                radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
-        }
-        
-        .intro::before {
-            content: '';
-            position: absolute;
-            bottom: -150px;
-            left: -150px;
-            width: 700px;
-            height: 700px;
-            background-image: url('images/crochet-grannysquare.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            background-position: center;
-            opacity: 0.2;
-            z-index: -2;
-            filter: brightness(0) saturate(100%) invert(76%) sepia(20%) saturate(300%) hue-rotate(300deg) brightness(95%) contrast(88%);
-        }
-        
-        .intro h1 {
-            font-family: 'Poppins', sans-serif;
-            font-size: 6rem;
-            color: #003840;
-            margin: 0 0 5px 0;
-            font-weight: 800;
-            letter-spacing: -5px;
-        }
-
+        /* Home page additional styles */
         .intro p:first-of-type {
             font-family: 'Inter', sans-serif;
             color: #ff6b7a;
@@ -113,10 +62,7 @@
             transform-style: preserve-3d;
             border-radius: 12px;
             border: 2px solid rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.4),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
         }
 
         .card-front, .card-back {
@@ -132,18 +78,10 @@
             gap: 8px;
         }
 
-        .card-front {
-            z-index: 2;
-        }
-
         .card-back {
             transform: rotateY(180deg);
             background: linear-gradient(145deg, #f6eedc, #e8e0d5) !important;
             border: 2px solid rgba(255, 45, 130, 0.4) !important;
-            box-shadow: 
-                0 8px 25px rgba(0, 0, 0, 0.4),
-                inset 0 2px 4px rgba(255, 255, 255, 0.3),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .card-back .dani-text {
@@ -156,27 +94,16 @@
             text-align: center;
         }
 
-        /* Individual card colors - front side */
-        .fall-1 .card-front {
-            background: linear-gradient(145deg, #ffab7d, #ff9a66);
-        }
-        .fall-2 .card-front {
-            background: linear-gradient(145deg, #ff6b7a, #ff5a69);
-        }
-        .fall-3 .card-front {
-            background: linear-gradient(145deg, #f4d35e, #f0c947);
-        }
-        .fall-4 .card-front {
-            background: linear-gradient(145deg, #8db596, #7aa885);
-        }
-        .fall-5 .card-front {
-            background: linear-gradient(145deg, #d15694, #c74583);
-        }
+        /* Card colors */
+        .fall-1 .card-front { background: linear-gradient(145deg, #ffab7d, #ff9a66); }
+        .fall-2 .card-front { background: linear-gradient(145deg, #ff6b7a, #ff5a69); }
+        .fall-3 .card-front { background: linear-gradient(145deg, #f4d35e, #f0c947); }
+        .fall-4 .card-front { background: linear-gradient(145deg, #8db596, #7aa885); }
+        .fall-5 .card-front { background: linear-gradient(145deg, #d15694, #c74583); }
 
         .card-icon {
             width: 40px;
             height: 40px;
-            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -185,7 +112,6 @@
             text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
         }
 
-        /* Individual icon colors */
         .fall-1 .card-icon { color: #c17817; }
         .fall-2 .card-icon { color: #c8553d; }
         .fall-3 .card-icon { color: #b8950a; }
@@ -200,88 +126,40 @@
             letter-spacing: 1px;
         }
 
-        /* Individual text colors */
         .fall-1 .card-abbr { color: #c17817; }
         .fall-2 .card-abbr { color: #c8553d; }
         .fall-3 .card-abbr { color: #b8950a; }
         .fall-4 .card-abbr { color: #5a7a63; }
         .fall-5 .card-abbr { color: #8f3c5f; }
 
-        /* Individual card animations */
-        .fall-1 {
-            animation: tumble1 16s infinite linear;
-            right: 8%;
-            z-index: 5;
-        }
-        .fall-2 {
-            animation: tumble2 18s infinite linear;
-            right: 16%;
-            animation-delay: -3s;
-            z-index: 20;
-        }
-        .fall-3 {
-            animation: tumble3 17s infinite linear;
-            right: 24%;
-            animation-delay: -6s;
-            z-index: 8;
-        }
-        .fall-4 {
-            animation: tumble4 19s infinite linear;
-            right: 32%;
-            animation-delay: -9s;
-            z-index: 25;
-        }
-        .fall-5 {
-            animation: tumble5 15s infinite linear;
-            right: 40%;
-            animation-delay: -12s;
-            z-index: 6;
-        }
+        /* Animations */
+        .fall-1 { animation: tumble1 16s infinite linear; right: 8%; z-index: 5; }
+        .fall-2 { animation: tumble2 18s infinite linear; right: 16%; animation-delay: -3s; z-index: 20; }
+        .fall-3 { animation: tumble3 17s infinite linear; right: 24%; animation-delay: -6s; z-index: 8; }
+        .fall-4 { animation: tumble4 19s infinite linear; right: 32%; animation-delay: -9s; z-index: 25; }
+        .fall-5 { animation: tumble5 15s infinite linear; right: 40%; animation-delay: -12s; z-index: 6; }
 
-        /* Tumbling animations */
         @keyframes tumble1 {
             from { top: -120px; transform: rotateZ(0deg) rotateX(0deg) scale(1); }
-            20% { transform: rotateZ(180deg) rotateX(120deg) scale(1.1); }
-            40% { transform: rotateZ(360deg) rotateX(240deg) scale(0.95); }
-            60% { transform: rotateZ(540deg) rotateX(360deg) scale(1.05); }
-            80% { transform: rotateZ(720deg) rotateX(480deg) scale(0.9); }
             to { top: 100vh; transform: rotateZ(900deg) rotateX(600deg) scale(1); }
         }
         @keyframes tumble2 {
-            from { top: -120px; transform: rotateZ(0deg) rotateX(0deg) scale(1); opacity: 1; }
-            25% { transform: rotateZ(-225deg) rotateX(180deg) scale(1.15); }
-            50% { transform: rotateZ(-450deg) rotateX(360deg) scale(0.85); }
-            75% { transform: rotateZ(-675deg) rotateX(540deg) scale(1.1); }
-            88% { opacity: 1; }
-            100% { top: 100vh; transform: rotateZ(-900deg) rotateX(720deg) scale(0.95); opacity: 0; }
+            from { top: -120px; transform: rotateZ(0deg) rotateX(0deg) scale(1); }
+            to { top: 100vh; transform: rotateZ(-900deg) rotateX(720deg) scale(0.95); }
         }
         @keyframes tumble3 {
             from { top: -120px; transform: rotateZ(0deg) rotateY(0deg) scale(1); }
-            33% { transform: rotateZ(240deg) rotateY(240deg) scale(0.9); }
-            66% { transform: rotateZ(480deg) rotateY(480deg) scale(1.1); }
             to { top: 100vh; transform: rotateZ(720deg) rotateY(720deg) scale(1); }
         }
         @keyframes tumble4 {
             from { top: -120px; transform: rotateZ(0deg) rotateX(0deg) rotateY(0deg) scale(1); }
-            20% { transform: rotateZ(-144deg) rotateX(72deg) rotateY(36deg) scale(1.05); }
-            40% { transform: rotateZ(-288deg) rotateX(144deg) rotateY(72deg) scale(0.95); }
-            60% { transform: rotateZ(-432deg) rotateX(216deg) rotateY(108deg) scale(1.05); }
-            80% { transform: rotateZ(-576deg) rotateX(288deg) rotateY(144deg) scale(0.95); }
             to { top: 100vh; transform: rotateZ(-720deg) rotateX(360deg) rotateY(180deg) scale(1); }
         }
         @keyframes tumble5 {
-            from { top: -120px; transform: rotateZ(0deg) rotateX(0deg) scale(1); opacity: 1; }
-            15% { transform: rotateZ(135deg) rotateX(120deg) scale(1.2); }
-            30% { transform: rotateZ(270deg) rotateX(240deg) scale(0.8); }
-            45% { transform: rotateZ(405deg) rotateX(360deg) scale(1.15); }
-            60% { transform: rotateZ(540deg) rotateX(480deg) scale(0.85); }
-            75% { transform: rotateZ(675deg) rotateX(600deg) scale(1.1); }
-            80% { transform: rotateZ(765deg) rotateX(480deg) scale(0.9); }
-            88% { opacity: 1; }
-            100% { top: 100vh; transform: rotateZ(945deg) rotateX(720deg) scale(0.9); opacity: 0; }
+            from { top: -120px; transform: rotateZ(0deg) rotateX(0deg) scale(1); }
+            to { top: 100vh; transform: rotateZ(945deg) rotateX(720deg) scale(0.9); }
         }
 
-        /* Responsive - hide cards on mobile */
         @media (max-width: 1200px) {
             .floating-cards { display: none; }
         }
@@ -297,25 +175,6 @@
         }
     </style>
     
-    <script async src="https://fundingchoicesmessages.google.com/i/pub-9422928756201532?ers=1"></script>
-    <script>
-      (function() {
-        function signalGooglefcPresent() {
-          if (!window.frames['googlefcPresent']) {
-            if (document.body) {
-              const iframe = document.createElement('iframe');
-              iframe.style = 'width: 0; height: 0; border: none; z-index: -1000; left: -1000px; top: -1000px;';
-              iframe.style.display = 'none';
-              iframe.name = 'googlefcPresent';
-              document.body.appendChild(iframe);
-            } else {
-              setTimeout(signalGooglefcPresent, 0);
-            }
-          }
-        }
-        signalGooglefcPresent();
-      })();
-    </script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
          crossorigin="anonymous"></script>
 </head>
@@ -332,8 +191,8 @@
         </script>
     </div>
     
-    <!-- Navigation Wrapper -->
-    <div class="nav-wrapper">
+    <!-- Navigation Container -->
+    <div class="nav-container">
         <nav id="nav">
             <a href="index.html" class="active">
                 <img src="images/home-heart-door.png" alt="Home">
@@ -345,7 +204,7 @@
                 <img src="images/slip-knot-first-chain.png" alt="Story">
             </a>
             <a href="follow.html">
-                <img src="images/yarn-ball-insert-crochet-hook" alt="Social">
+                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
             </a>
         </nav>
     </div>
@@ -449,18 +308,13 @@
     </div>
 
     <script>
-        // Smooth scroll-then-stick navigation
+        // Simple sticky navigation
         window.addEventListener('scroll', function() {
-            const nav = document.getElementById('nav');
-            const navWrapper = document.querySelector('.nav-wrapper');
-            const wrapperTop = navWrapper.getBoundingClientRect().top;
-            
-            if (wrapperTop <= 0) {
-                nav.classList.add('stuck');
-                navWrapper.classList.add('stuck');
+            const navContainer = document.querySelector('.nav-container');
+            if (window.scrollY > 50) {
+                navContainer.classList.add('scrolled');
             } else {
-                nav.classList.remove('stuck');
-                navWrapper.classList.remove('stuck');
+                navContainer.classList.remove('scrolled');
             }
         });
 
@@ -471,7 +325,6 @@
             stitchCards.forEach(card => {
                 card.addEventListener('click', function() {
                     const stitchId = this.getAttribute('data-stitch');
-                    // Navigate to glossary page with specific stitch
                     window.location.href = `glossary.html#${stitchId}`;
                 });
             });
