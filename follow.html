@@ -11,9 +11,11 @@
         /* Navigation scroll override - brand safe, flat transition */
         #nav.scrolled {
             top: 20px;
-            background: #003840;
-            backdrop-filter: none;
+            background: var(--clr-primary-dark);
+            transition: none !important;
+            transform: none !important;
             box-shadow: none;
+            backdrop-filter: none;
         }
 
         /* Button hover effects */
@@ -96,7 +98,7 @@
 
         <!-- Header - FIXED SPACING -->
         <header class="header" style="margin-top: 240px;">
-            <h1>Follow</h1>
+            <h1 style="color: var(--clr-cream);">Follow</h1>
             <p style="color: var(--clr-coral); font-size: 1.2rem; font-weight: 600;">@this4dani across platforms</p>
         </header>
 
@@ -217,12 +219,12 @@
             </li>
         </ul>
 
-        <!-- Limitations Note - SIMPLE, CLEAN VERSION -->
-        <div style="max-width: 700px; margin: 60px auto; padding: 35px; background: #f6eedc; border-left: 8px solid var(--clr-fuchsia); border-radius: 15px; font-family: 'Poppins', sans-serif; color: #2d1810;">
-            <p style="color: var(--clr-cream); font-size: 0.95rem; line-height: 1.7; text-align: center; font-style: italic;">
-                "Please note: I'm just one person juggling a day job in ministry, 5 children, a big church family, and special friends while building these tools and sharing this journey. My posting may be inconsistent as I focus on development work around real life, but I'll share the progress, challenges, and victories as authentically as possible. Currently working with AI assistance to build faster, but all the vision, decisions, and crochet expertise come from 30+ years of hands-on experience."
-            </p>
-        </div>
+        <!-- Limitations Note - Brand-aligned version -->
+<div style="max-width: 700px; margin: 60px auto; padding: 35px; background: var(--clr-cream); border-left: 8px solid var(--clr-coral); border-radius: 15px; font-family: 'Poppins', sans-serif; color: var(--clr-primary-dark);">
+    <p style="color: var(--clr-primary-dark); font-size: 0.95rem; line-height: 1.7; text-align: center; font-style: italic;">
+        "Please note: I'm just one person juggling a day job in ministry, 5 children, a big church family, and special friends while building these tools and sharing this journey. My posting may be inconsistent as I focus on development work around real life, but I'll share the progress, challenges, and victories as authentically as possible. Currently working with AI assistance to build faster, but all the vision, decisions, and crochet expertise come from 30+ years of hands-on experience."
+    </p>
+</div>
 
         <!-- Footer -->
         <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
@@ -260,5 +262,27 @@
 
     window.addEventListener('scroll', requestNavigationTick, { passive: true });
     </script>
+<!-- Optional right-side ad zone -->
+<div style="position: fixed; right: 0; top: 180px; width: 160px; height: 600px; z-index: 999; display: none;" class="adsense-side">
+    <ins class="adsbygoogle"
+         style="display:block;width:160px;height:600px"
+         data-ad-client="ca-pub-9422928756201532"
+         data-ad-slot="1234567890"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
+<div class="adsense-bottom">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9422928756201532"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</div>
+
 </body>
 </html>

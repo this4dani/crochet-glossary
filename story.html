@@ -1,157 +1,80 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>My Story - DANI'S</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dani’s Story - this4dani.com</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- AdSense Top - ADDED MISSING HEADER -->
-    <div class="adsense-top">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9422928756201532"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
+  <div class="adsense-top">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9422928756201532"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
 
-    <div class="container">
-        <!-- Navigation - Now uses styles.css for consistent spacing -->
-        <nav id="nav">
-            <a href="index.html">
-                <img src="images/home-heart-door.png" alt="Home">
-            </a>
-            <a href="glossary.html">
-                <img src="images/file-folder-magazne-lable.png" alt="Glossary">
-            </a>
-            <a href="story.html" class="active">
-                <img src="images/slip-knot-first-chain.png" alt="Story">
-            </a>
-            <a href="follow.html">
-                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-            </a>
-        </nav>
+  <div class="container" style="display: grid; grid-template-columns: 1fr 2fr; gap: 40px; margin-top: 240px;">
+    <!-- LEFT: Menu or Blog Index -->
+    <aside style="background: var(--clr-secondary-dark); padding: 30px; border-radius: 20px; box-shadow: var(--shadow-mixed); color: var(--clr-warm-white);">
+      <h2 style="font-family: var(--font-accent); font-size: 1.5rem; margin-bottom: 1.5rem; color: var(--clr-coral);">Blog Index</h2>
+      <ul style="list-style: none; padding: 0;">
+        <li style="margin-bottom: 1rem;"><a href="#origin" style="color: var(--clr-cream); text-decoration: none; font-weight: 600;">Origin Story</a></li>
+        <li style="margin-bottom: 1rem;"><a href="#vision" style="color: var(--clr-cream); text-decoration: none; font-weight: 600;">The Vision</a></li>
+        <li style="margin-bottom: 1rem;"><a href="#faith" style="color: var(--clr-cream); text-decoration: none; font-weight: 600;">Faith + Function</a></li>
+        <li style="margin-bottom: 1rem;"><a href="#tech" style="color: var(--clr-cream); text-decoration: none; font-weight: 600;">Crochet + Tech</a></li>
+      </ul>
+    </aside>
 
-        <!-- Header - Now uses styles.css for consistent spacing -->
-        <header class="header" style="margin-top: 240px;">
-            <h1>My Story</h1>
-            <p style="color: var(--clr-coral); font-size: 1.4rem; font-weight: 600;">COMING SOON</p>
-        </header>
+    <!-- RIGHT: Story / Sanctification -->
+    <section id="origin">
+      <h2 style="color: var(--clr-cream); font-family: var(--font-accent); font-size: 1.4rem;">Origin Story</h2>
+      <p style="color: var(--clr-warm-white);">This is where my creative journey began. More to come...</p>
+      <br>
 
-        <!-- Coming Soon Content -->
-        <div class="story-section">
-            <div class="story-container">
-                
-                <!-- Left Column - Your existing content -->
-                <div class="story-text">
-                    <h2 class="story-title">Stories, Social Feeds & More</h2>
-                    
-                    <p class="story-description">I'm building something special here - a place where my 30-year crochet journey meets modern storytelling.</p>
-                    
-                    <div style="max-width: 700px; margin: 40px 0; padding: 35px; background: #f6eedc; border-left: 8px solid var(--clr-fuchsia); border-radius: 15px; font-family: 'Poppins', sans-serif; color: #2d1810;">
-    <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: var(--space-lg); color: var(--clr-coral); font-family: var(--font-accent);">What's Coming:</h3>
-    <div style="display: flex; align-items: center; margin: var(--space-md) 0;">
-        <img src="images/slip-knot-first-chain.png" alt="Story" style="width: 24px; height: 24px; margin-right: var(--space-sm);">
-        <span>Deep-dive blog stories about my crochet and tech journey</span>
-    </div>
-    <div style="display: flex; align-items: center; margin: var(--space-md) 0;">
-        <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social" style="width: 24px; height: 24px; margin-right: var(--space-sm);">
-        <span>Live social media feeds from all my @this4dani accounts</span>
-    </div>
-    <div style="display: flex; align-items: center; margin: var(--space-md) 0;">
-        <img src="images/file-folder-magazne-lable.png" alt="API" style="width: 24px; height: 24px; margin-right: var(--space-sm);">
-        <span>Behind-the-scenes content from building the pattern adjustment API</span>
-    </div>
-    <div style="display: flex; align-items: center; margin: var(--space-md) 0;">
-        <img src="images/home-heart-door.png" alt="Faith" style="width: 24px; height: 24px; margin-right: var(--space-sm);">
-        <span>Faith and ministry moments that shape everything I create</span>
-    </div>
+      <section id="vision">
+        <h2 style="color: var(--clr-cream); font-family: var(--font-accent); font-size: 1.4rem;">The Vision</h2>
+        <p style="color: var(--clr-warm-white);">Building something useful and spirit-led. This will evolve with the project.</p>
+      </section>
+
+      <section id="faith">
+        <h2 style="color: var(--clr-cream); font-family: var(--font-accent); font-size: 1.4rem;">Faith + Function</h2>
+        <p style="color: var(--clr-warm-white);">Everything I make flows from faith. Including this tech tool.</p>
+      </section>
+
+      <section id="tech">
+        <h2 style="color: var(--clr-cream); font-family: var(--font-accent); font-size: 1.4rem;">Crochet + Tech</h2>
+        <p style="color: var(--clr-warm-white);">This project blends analog art and digital logic. More stories soon.</p>
+      </section>
+
+      <!-- Sanctification Box -->
+      <header class="header" style="margin-top: 0;">
+        <h1 style="color: var(--clr-cream);">The Story</h1>
+        <p style="color: var(--clr-coral); font-weight: 500; max-width: 90%; font-size: 1.1rem;">How my ministry calling, creative spirit, and years of crochet experience led to a surprising project with deep purpose.</p>
+      </header>
+
+      <div class="sanctification-box">
+  <h3 class="sanctification-title">Being Sanctified.</h3>
+  <p class="sanctification-verse">"...knit together in love, to reach all the riches of full assurance of understanding and the knowledge of God's mystery."<br>— Colossians 2:2</p>
+  <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together — whether in yarn or in faith. ✨</p>
 </div>
-                        <div>
-                            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-                            <span>Live social media feeds from all my @this4dani accounts</span>
-                        </div>
-                        <div>
-                            <img src="images/file-folder-magazne-lable.png" alt="API">
-                            <span>Behind-the-scenes content from building the pattern adjustment API</span>
-                        </div>
-                        <div>
-                            <img src="images/home-heart-door.png" alt="Faith">
-                            <span>Faith and ministry moments that shape everything I create</span>
-                        </div>
-                    </div>
-                    
-                    <p class="story-highlight">Where traditional craft meets modern innovation, and every story has a purpose.</p>
-                    
-                    <p class="story-launch-date">Expected launch: July 2025</p>
-                </div>
-                
-                <!-- Right Column - Single Sanctification Box -->
-                <div class="sanctification-section">
-                    <div class="sanctification-box">
-                        <h3 class="sanctification-title">Being Sanctified...</h3>
-                        <p class="sanctification-verse">"...knit together in love, to reach all the riches of full assurance of understanding and the knowledge of God's mystery."<br>— Colossians 2:2</p>
-                        <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith.</p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
+    </section>
+  </div>
 
-        <!-- Footer -->
-        <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
-            <p style="color: #c8b8a8; font-size: 0.9rem; margin: 20px 0; font-family: 'Poppins', sans-serif;">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
-            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
-            <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
-            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
-            <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
-        </div>
+  <div class="adsense-bottom">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9422928756201532"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  </div>
+<footer class="footer">
+  <p>© 2025 this4dani.com | Built with faith, yarn, and code ✨</p>
+</footer>
 
-        <!-- AdSense Middle -->
-        <div class="ad-zone ad-zone-mid" style="margin: 40px 0;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9422928756201532"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
-
-    <script>
-    // SYNCHRONIZED NAVIGATION BEHAVIOR
-    let navigationTicking = false;
-
-    function updateNavigationState() {
-        const nav = document.getElementById('nav');
-        const scrollY = window.scrollY;
-        
-        if (scrollY > 40) {  // Consistent trigger point
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-        navigationTicking = false;
-    }
-
-    function requestNavigationTick() {
-        if (!navigationTicking) {
-            requestAnimationFrame(updateNavigationState);
-            navigationTicking = true;
-        }
-    }
-
-    window.addEventListener('scroll', requestNavigationTick, { passive: true });
-    </script>
 </body>
 </html>
