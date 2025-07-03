@@ -8,7 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Story-specific styling */
+        /* NAVIGATION FIX REMOVED - Now uses styles.css */
+        
         .story-title {
             font-family: var(--font-display);
             font-size: 2.5rem;
@@ -37,59 +38,104 @@
             color: var(--clr-cream);
         }
         
-        /* Story section container */
+        /* Story container styling */
         .story-section {
-            padding: var(--space-2xl) var(--space-2xl);
-            background: rgba(61, 26, 43, 0.8);
-            backdrop-filter: blur(20px);
-            margin: var(--space-2xl) 0;
-            border-radius: var(--space-lg);
+            text-align: center;
+            padding: var(--space-2xl) var(--space-xl);
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
         .story-container {
-            max-width: 1200px;
-            margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
             align-items: start;
+            margin-top: var(--space-2xl);
+        }
+        
+        .story-text {
+            text-align: left;
+        }
+        
+        .sanctification-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 400px;
         }
         
         /* Mission card styling */
         .mission-card {
-            background: rgba(61, 26, 43, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(250,248,243,0.15);
-            border-radius: var(--space-lg);
-            padding: var(--space-2xl) var(--space-xl);
-            transition: all 0.4s ease;
+            background: rgba(61, 26, 43, 0.4);
+            border: 2px solid rgba(255, 107, 122, 0.3);
+            border-radius: 20px;
+            padding: var(--space-xl);
+            margin: var(--space-lg) 0;
+            text-align: left;
             position: relative;
             overflow: hidden;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,107,122,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .mission-card:hover::before {
+            left: 100%;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--clr-coral);
+            box-shadow: var(--shadow-mauve);
+            background: rgba(61, 26, 43, 0.9);
         }
 
         .mission-card h3 {
-            color: var(--clr-coral);
-            font-size: 1.4rem;
+            font-size: 1.5rem;
+            font-weight: 600;
             margin-bottom: var(--space-lg);
-            font-weight: 700;
+            color: var(--clr-coral);
+            font-family: var(--font-display);
         }
 
+        .mission-card p {
+            color: var(--clr-cream);
+            opacity: 0.95;
+            line-height: 1.7;
+            font-family: var(--font-primary);
+        }
+        
+        /* Feature list styling */
         .mission-card div {
             display: flex;
             align-items: center;
-            margin-bottom: var(--space-md);
-            color: var(--clr-cream);
-            line-height: 1.5;
-        }
-
-        .mission-card img {
-            width: 30px;
-            height: 30px;
-            margin-right: var(--space-md);
-            opacity: 0.9;
+            margin: var(--space-md) 0;
         }
         
-        /* Single sanctification box */
+        .mission-card img {
+            width: 24px;
+            height: 24px;
+            margin-right: var(--space-sm);
+            filter: brightness(0) saturate(100%) invert(85%) sepia(15%) saturate(200%) hue-rotate(20deg) brightness(95%) contrast(90%);
+        }
+        
+        .mission-card span {
+            color: var(--clr-cream);
+            font-family: var(--font-primary);
+        }
+        
+        /* Sanctification under construction element */
         .sanctification-box {
             background: var(--clr-rich-brown);
             border-radius: 20px;
@@ -151,19 +197,19 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- ADDED: Missing AdSense header -->
-        <div class="adsense-top">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9422928756201532"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+    <!-- AdSense Top - ADDED MISSING HEADER -->
+    <div class="adsense-top">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
+    <div class="container">
         <!-- Navigation - Now uses styles.css for consistent spacing -->
         <nav id="nav">
             <a href="index.html">
@@ -229,46 +275,57 @@
                         <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith.</p>
                     </div>
                 </div>
+                
             </div>
         </div>
-        
-        <!-- Standard Footer -->
-        <div class="standard-footer">
-            <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <span class="footer-separator">•</span>
-                <a href="privacy.html#terms">Terms of Service</a>
-                <span class="footer-separator">•</span>
-                <a href="privacy.html#contact">Contact</a>
-            </div>
+
+        <!-- Footer -->
+        <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
+            <p style="color: #c8b8a8; font-size: 0.9rem; margin: 20px 0; font-family: 'Poppins', sans-serif;">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+            <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
+            <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+            <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
+        </div>
+
+        <!-- AdSense Middle -->
+        <div class="ad-zone ad-zone-mid" style="margin: 40px 0;">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9422928756201532"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
 
-    <!-- SYNCHRONIZED SCROLL BEHAVIOR - NAVIGATION FIX -->
     <script>
-        let navigationTicking = false;
+    // SYNCHRONIZED NAVIGATION BEHAVIOR
+    let navigationTicking = false;
 
-        function updateNavigationState() {
-            const nav = document.getElementById('nav');
-            const scrollY = window.scrollY;
-            
-            if (scrollY > 40) {  // Consistent trigger point
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-            navigationTicking = false;
+    function updateNavigationState() {
+        const nav = document.getElementById('nav');
+        const scrollY = window.scrollY;
+        
+        if (scrollY > 40) {  // Consistent trigger point
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
         }
+        navigationTicking = false;
+    }
 
-        function requestNavigationTick() {
-            if (!navigationTicking) {
-                requestAnimationFrame(updateNavigationState);
-                navigationTicking = true;
-            }
+    function requestNavigationTick() {
+        if (!navigationTicking) {
+            requestAnimationFrame(updateNavigationState);
+            navigationTicking = true;
         }
+    }
 
-        window.addEventListener('scroll', requestNavigationTick, { passive: true });
+    window.addEventListener('scroll', requestNavigationTick, { passive: true });
     </script>
 </body>
 </html>

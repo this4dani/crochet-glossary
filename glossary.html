@@ -3,11 +3,154 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DANI'S - Crochet Stitch Glossary</title>
-  <meta name="description" content="Interactive crochet stitch glossary with US/UK terminology. 60+ stitches with search and detailed descriptions.">
+  <title>Interactive Crochet Glossary - Comprehensive Stitch Guide</title>
+  <meta name="description" content="Interactive crochet glossary with US/UK terminology. 60+ stitches with search and detailed descriptions.">
   
   <!-- Link to your master CSS file -->
   <link rel="stylesheet" href="styles.css">
+  
+  <!-- Additional glossary-specific styling -->
+  <style>
+    /* NAVIGATION FIX REMOVED - Now uses styles.css */
+    
+    /* Title styling - bigger and bolder */
+    .header h1 {
+      font-size: 3.5rem !important;
+      font-weight: 900 !important;
+      letter-spacing: -2px;
+    }
+    
+    /* AdSense spacing fix */
+    .adsense-top {
+      margin: 0 0 20px 0;
+      padding: 15px;
+      text-align: center;
+      min-height: 60px;
+    }
+    
+    /* Search bar - warm colors */
+    #search {
+      background: var(--clr-cream) !important;
+      color: var(--clr-primary-dark) !important;
+      border: 1px solid rgba(0, 56, 64, 0.2) !important;
+    }
+    
+    #search::placeholder {
+      color: var(--clr-mauve) !important;
+      opacity: 0.7 !important;
+    }
+    
+    /* Tips & Tricks to match search bar */
+    .tips-toggle {
+      background: var(--clr-cream) !important;
+      color: var(--clr-primary-dark) !important;
+      border: 1px solid rgba(0, 56, 64, 0.2) !important;
+    }
+    
+    .tips-toggle:hover {
+      background: var(--clr-warm-white) !important;
+      border-color: var(--clr-coral) !important;
+    }
+    
+    /* Enhanced 3D cards with multiple shadows */
+    .stitch-card {
+      background: linear-gradient(145deg, var(--clr-warm-white) 0%, var(--clr-cream) 100%) !important;
+      color: var(--clr-primary-dark) !important;
+      box-shadow: 
+        0 8px 16px rgba(0, 0, 0, 0.15),
+        0 4px 8px rgba(0, 0, 0, 0.12),
+        0 2px 4px rgba(0, 0, 0, 0.08),
+        inset 0 2px 4px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.05) !important;
+      border: 1px solid rgba(0, 0, 0, 0.08) !important;
+      border-radius: 12px !important;
+      transform: translateY(0) rotateX(0deg) rotateY(0deg) !important;
+      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+    
+    .stitch-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, transparent 40%, rgba(0,0,0,0.06) 100%);
+      border-radius: 12px;
+      pointer-events: none;
+    }
+    
+    .stitch-card::after {
+      content: '';
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      right: 2px;
+      height: 40%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3) 0%, transparent 100%);
+      border-radius: 10px 10px 0 0;
+      pointer-events: none;
+    }
+    
+    .stitch-card:hover {
+      transform: translateY(-12px) rotateX(8deg) rotateY(3deg) scale(1.05) !important;
+      box-shadow: 
+        0 20px 40px rgba(0, 0, 0, 0.25),
+        0 12px 24px rgba(0, 0, 0, 0.2),
+        inset 0 3px 6px rgba(255, 255, 255, 0.8),
+        inset 0 -3px 6px rgba(0, 0, 0, 0.15),
+        0 0 20px rgba(255, 107, 122, 0.3) !important;
+      border-color: var(--clr-coral) !important;
+    }
+    
+    .stitch-card .abbr {
+      color: var(--clr-primary-dark) !important;
+      position: relative !important;
+      z-index: 3 !important;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.8) !important;
+      font-weight: 800 !important;
+    }
+    
+    .stitch-card .name {
+      color: var(--clr-mauve) !important;
+      position: relative !important;
+      z-index: 3 !important;
+      text-shadow: 0 1px 2px rgba(255,255,255,0.6) !important;
+      font-weight: 600 !important;
+    }
+    
+    /* Completely hide SVG symbols on cards */
+    .stitch-card svg {
+      display: none !important;
+    }
+    
+    /* Search highlight effect */
+    .stitch-card.search-highlight {
+      transform: translateY(-8px) rotateX(5deg) rotateY(2deg) scale(1.03) !important;
+      box-shadow: 
+        0 16px 32px rgba(255, 45, 130, 0.3),
+        0 8px 16px rgba(0, 0, 0, 0.2),
+        inset 0 2px 4px rgba(255, 255, 255, 0.8),
+        inset 0 -2px 4px rgba(0, 0, 0, 0.1),
+        0 0 30px rgba(255, 45, 130, 0.4) !important;
+      border-color: var(--clr-fuchsia) !important;
+      background: linear-gradient(145deg, #fff5f8 0%, var(--clr-cream) 100%) !important;
+    }
+    
+    /* Glossary content container - CHANGED to darkest mauve */
+    .glossary-content-container {
+      background: var(--clr-secondary-dark) !important;
+      border-radius: 25px;
+      padding: 40px;
+      margin: 30px 0;
+      box-shadow: 
+        0 15px 35px rgba(61, 26, 43, 0.5),
+        0 8px 20px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+  </style>
   
   <!-- SVG Symbol Definitions -->
   <svg style="display: none;">
@@ -26,103 +169,103 @@
       <symbol id="TT" viewBox="0 0 24 24">
         <path d="M12 2v20M6 4h12M6 8h12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
       </symbol>
-      <symbol id="o" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-      <symbol id="-" viewBox="0 0 24 24">
-        <path d="M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-      </symbol>
-      <!-- Advanced stitches -->
-      <symbol id="V" viewBox="0 0 24 24">
-        <path d="M8 6l4 12 4-12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </symbol>
-      <symbol id="Sh" viewBox="0 0 24 24">
-        <path d="M6 18c3-6 9-6 12 0" stroke="currentColor" stroke-width="2" fill="none"/>
-        <path d="M8 18l2-4 2 4 2-4 2 4" stroke="currentColor" stroke-width="1.5" fill="none"/>
-      </symbol>
-      <symbol id="pc" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="6" fill="currentColor"/>
-        <circle cx="12" cy="12" r="3" fill="white"/>
-      </symbol>
-      <symbol id="cl" viewBox="0 0 24 24">
-        <path d="M8 6v12M12 6v12M16 6v12M6 18h12" stroke="currentColor" stroke-width="2"/>
-      </symbol>
-      <!-- Generic symbol for others -->
       <symbol id="default" viewBox="0 0 24 24">
-        <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="2"/>
-        <path d="M9 9h6v6H9z" fill="currentColor"/>
+        <circle cx="12" cy="12" r="2" fill="currentColor"/>
       </symbol>
     </defs>
   </svg>
 </head>
+
 <body>
+  <!-- AdSense Top - STANDARDIZED CLASS NAME -->
+  <div class="adsense-top">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9422928756201532"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- Navigation -->
+  <nav id="nav">
+    <a href="index.html"><img src="images/yarn-ball.png" alt="Home" width="100" height="100"></a>
+    <a href="glossary.html" class="active"><img src="images/hook.png" alt="Stitch Glossary" width="120" height="120"></a>
+    <a href="story.html"><img src="images/sheep.png" alt="Story & Mission" width="95" height="95"></a>
+    <a href="follow.html"><img src="images/llama.png" alt="Follow DANI'S" width="180" height="180"></a>
+  </nav>
+
+  <!-- Main Container -->
   <div class="container">
-    <!-- Ad Zone - Top Banner - FIXED CLASS NAME -->
-    <div class="adsense-top">
-      [Google AdSense - Leaderboard 728x90]
-    </div>
-
-    <!-- Navigation - Now uses styles.css for consistent spacing -->
-    <nav id="nav">
-        <a href="index.html">
-            <img src="images/home-heart-door.png" alt="Home">
-        </a>
-        <a href="glossary.html" class="active">
-            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
-        </a>
-        <a href="story.html">
-            <img src="images/slip-knot-first-chain.png" alt="Story">
-        </a>
-        <a href="follow.html">
-            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-        </a>
-    </nav>
-
-    <!-- Header - Now uses styles.css for consistent spacing -->
-    <header class="header">
+    <!-- Header -->
+    <div class="header">
       <h1>Interactive Crochet Glossary</h1>
-      <p>Your comprehensive guide to crochet stitches and techniques</p>
-    </header>
-
-    <!-- Ad Zone - Sidebar (Desktop) -->
-    <div class="ad-zone ad-zone-sidebar">
-      [Google AdSense - Medium Rectangle 300x250]
+      <p style="color: var(--clr-cream); font-size: 1.2rem; margin-bottom: 30px;">
+        A comprehensive guide to crochet stitches in US & UK terminology
+      </p>
     </div>
 
-    <!-- Glossary Content Container - REMOVED INLINE STYLES -->
+    <!-- Content Container with DARKEST MAUVE background -->
     <div class="glossary-content-container">
-      <div class="search-section">
-        <div class="tips-toggle" onclick="toggleTips()">
-          Tips & Tricks ▼
-          <div class="tips-content" id="tips-content">
-            <p><strong>Browse:</strong> Scroll through all stitches</p>
-            <p><strong>Search:</strong> Type abbreviation or full name</p>
-            <p><strong>Hover:</strong> See full stitch name</p>
-            <p><strong>Click:</strong> View detailed popup with US/UK terms</p>
-          </div>
-        </div>
-        <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
+      <!-- Search Bar -->
+      <div style="text-align: center; margin-bottom: 30px;">
+        <input type="text" id="search" placeholder="Search stitches (e.g., 'double crochet' or 'dc')..." 
+               style="width: 100%; max-width: 600px; padding: 15px 20px; font-size: 1.1rem; 
+                      border-radius: 12px; outline: none;">
       </div>
 
-      <div id="glossary-grid"></div>
+      <!-- Tips & Tricks Toggle -->
+      <div style="text-align: center; margin-bottom: 30px;">
+        <button class="tips-toggle" id="tips-toggle" 
+                style="padding: 10px 20px; font-size: 1rem; font-weight: 600; 
+                       border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
+          💡 Show Tips & Tricks
+        </button>
+      </div>
+
+      <!-- Tips Content (Hidden by default) -->
+      <div id="tips-content" style="display: none; background: rgba(255, 255, 255, 0.05); 
+                                     border-radius: 15px; padding: 25px; margin-bottom: 30px;
+                                     border: 1px solid rgba(255, 255, 255, 0.1);">
+        <h3 style="color: var(--clr-coral); margin-bottom: 15px;">Pro Tips:</h3>
+        <ul style="color: var(--clr-cream); line-height: 1.8; padding-left: 20px;">
+          <li>US and UK terminology can be confusing - UK double crochet = US single crochet!</li>
+          <li>Click any stitch card to see detailed information and the UK equivalent</li>
+          <li>Use the search to find stitches by name or abbreviation</li>
+          <li>Advanced stitches often combine basic stitches - master the basics first</li>
+        </ul>
+      </div>
+
+      <!-- Glossary Grid -->
+      <div id="glossary-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); 
+                                     gap: 20px; margin-bottom: 40px;">
+        <!-- Cards will be dynamically inserted here -->
+      </div>
     </div>
 
-    <!-- Ad Zone - Footer Banner -->
-    <div class="ad-zone ad-zone-footer">
-      [Google AdSense - Footer Banner 728x90]
+    <!-- AdSense Mid -->
+    <div class="ad-zone ad-zone-mid" style="margin: 40px 0;">
+      <ins class="adsbygoogle"
+           style="display:block"
+           data-ad-client="ca-pub-9422928756201532"
+           data-ad-format="auto"
+           data-full-width-responsive="true"></ins>
+      <script>
+           (adsbygoogle = window.adsbygoogle || []).push({});
+      </script>
     </div>
+  </div>
 
-    <!-- Standard Footer - Now uses styles.css classes -->
-    <div class="standard-footer">
-        <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-        <div class="footer-links">
-            <a href="privacy.html">Privacy Policy</a>
-            <span class="footer-separator">•</span>
-            <a href="privacy.html#terms">Terms of Service</a>
-            <span class="footer-separator">•</span>
-            <a href="privacy.html#contact">Contact</a>
-        </div>
-    </div>
+  <!-- Footer -->
+  <div style="text-align: center; margin: 60px 0 80px 0; padding: 40px 20px; opacity: 0.7;">
+    <p style="color: #c8b8a8; font-size: 0.9rem; margin: 20px 0; font-family: 'Poppins', sans-serif;">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+    <a href="privacy.html" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Privacy Policy</a>
+    <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+    <a href="privacy.html#terms" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Terms of Service</a>
+    <span style="color: #c8b8a8; font-size: 0.8rem; opacity: 0.4; margin: 0 10px;">•</span>
+    <a href="privacy.html#contact" style="color: #c8b8a8; font-size: 0.8rem; text-decoration: none; opacity: 0.6;">Contact</a>
   </div>
 
   <!-- Popup Modal -->
@@ -172,7 +315,18 @@
           popupTitle.textContent = s.name_us;
           popupUK.textContent = `UK: ${s.name_uk}`;
           popupDesc.textContent = s.notes || "No description available.";
-          popupTags.textContent = s.tags ? `Tags: ${s.tags.join(', ')}` : "";
+          
+          // Render tags
+          popupTags.innerHTML = '';
+          if (s.tags && s.tags.length > 0) {
+            s.tags.forEach(tag => {
+              const tagEl = document.createElement('span');
+              tagEl.className = 'tag';
+              tagEl.textContent = tag;
+              popupTags.appendChild(tagEl);
+            });
+          }
+          
           popup.classList.add("active");
         };
 
@@ -180,66 +334,78 @@
       });
     }
 
-    function filterCards(query) {
-      const lowerQuery = query.toLowerCase();
-      const cards = grid.querySelectorAll('.stitch-card');
+    function initGlossary() {
+      buildCards();
 
-      cards.forEach(card => {
-        const name = card.getAttribute('data-name').toLowerCase();
-        const tags = card.getAttribute('data-tags').toLowerCase();
-        const abbr = card.querySelector('.abbr').textContent.toLowerCase();
+      // Enhanced search - includes tags
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase();
+        Array.from(grid.children).forEach((c) => {
+          const name = c.getAttribute("data-name").toLowerCase();
+          const tags = c.getAttribute("data-tags").toLowerCase();
+          const abbr = c.querySelector(".abbr").textContent.toLowerCase();
+          
+          const matches = name.includes(query) || 
+                         abbr.includes(query) || 
+                         tags.includes(query);
+          
+          c.style.display = matches ? "" : "none";
+          
+          // Add highlight effect to matching cards
+          if (matches && query.length > 0) {
+            c.classList.add("search-highlight");
+          } else {
+            c.classList.remove("search-highlight");
+          }
+        });
+      });
 
-        if (name.includes(lowerQuery) || tags.includes(lowerQuery) || abbr.includes(lowerQuery)) {
-          card.style.display = 'block';
+      // Tips toggle
+      document.getElementById("tips-toggle").addEventListener("click", () => {
+        const content = document.getElementById("tips-content");
+        const toggle = document.getElementById("tips-toggle");
+        if (content.style.display === "none") {
+          content.style.display = "block";
+          toggle.textContent = "💡 Hide Tips & Tricks";
         } else {
-          card.style.display = 'none';
+          content.style.display = "none";
+          toggle.textContent = "💡 Show Tips & Tricks";
         }
       });
+
+      // Popup close
+      popupClose.addEventListener("click", closePopup);
+      popup.addEventListener("click", (e) => {
+        if (e.target === popup) closePopup();
+      });
+
+      window.closePopup = () => {
+        popup.classList.remove("active");
+      };
     }
 
-    searchInput.addEventListener('input', (e) => {
-      filterCards(e.target.value);
-    });
+    initGlossary();
 
-    popup.addEventListener('click', (e) => {
-      if (e.target === popup || e.target.classList.contains('popup-close')) {
-        closePopup();
-      }
-    });
-
-    window.closePopup = function() {
-      popup.classList.remove("active");
-    };
-
-    window.toggleTips = function() {
-      const tips = document.getElementById('tips-content');
-      tips.classList.toggle('show');
-    };
-
-    buildCards();
-  </script>
-
-  <!-- SYNCHRONIZED SCROLL BEHAVIOR - NAVIGATION FIX -->
-  <script>
+    // SYNCHRONIZED NAVIGATION BEHAVIOR
     let navigationTicking = false;
 
     function updateNavigationState() {
-      const nav = document.getElementById('nav');
-      const scrollY = window.scrollY;
-      
-      if (scrollY > 40) {  // Consistent trigger point
-        nav.classList.add('scrolled');
-      } else {
-        nav.classList.remove('scrolled');
-      }
-      navigationTicking = false;
+        const nav = document.getElementById('nav');
+        const scrollY = window.scrollY;
+        
+        if (scrollY > 40) {  // Consistent trigger point
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+        navigationTicking = false;
     }
 
     function requestNavigationTick() {
-      if (!navigationTicking) {
-        requestAnimationFrame(updateNavigationState);
-        navigationTicking = true;
-      }
+        if (!navigationTicking) {
+            requestAnimationFrame(updateNavigationState);
+            navigationTicking = true;
+        }
     }
 
     window.addEventListener('scroll', requestNavigationTick, { passive: true });
