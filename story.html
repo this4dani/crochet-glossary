@@ -7,194 +7,7 @@
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <style>
-        /* NAVIGATION FIX REMOVED - Now uses styles.css */
-        
-        .story-title {
-            font-family: var(--font-display);
-            font-size: 2.5rem;
-            margin-bottom: var(--space-xl);
-            color: var(--clr-warm-white);
-            line-height: 1.2;
-        }
-        
-        .story-description {
-            font-size: 1.2rem; 
-            margin: var(--space-2xl) 0;
-            color: var(--clr-cream);
-            line-height: 1.6;
-        }
-        
-        .story-highlight {
-            font-style: italic; 
-            color: var(--clr-cream); 
-            margin: var(--space-2xl) 0;
-            font-size: 1.1rem;
-        }
-        
-        .story-launch-date {
-            font-size: 0.9rem; 
-            opacity: 0.8;
-            color: var(--clr-cream);
-        }
-        
-        /* Story container styling */
-        .story-section {
-            text-align: center;
-            padding: var(--space-2xl) var(--space-xl);
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        
-        .story-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-2xl);
-            align-items: start;
-            margin-top: var(--space-2xl);
-        }
-        
-        .story-text {
-            text-align: left;
-        }
-        
-        .sanctification-section {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 400px;
-        }
-        
-        /* Mission card styling */
-        .mission-card {
-            background: rgba(61, 26, 43, 0.4);
-            border: 2px solid rgba(255, 107, 122, 0.3);
-            border-radius: 20px;
-            padding: var(--space-xl);
-            margin: var(--space-lg) 0;
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .mission-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,107,122,0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .mission-card:hover::before {
-            left: 100%;
-        }
-
-        .mission-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--clr-coral);
-            box-shadow: var(--shadow-mauve);
-            background: rgba(61, 26, 43, 0.9);
-        }
-
-        .mission-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: var(--space-lg);
-            color: var(--clr-coral);
-            font-family: var(--font-display);
-        }
-
-        .mission-card p {
-            color: var(--clr-cream);
-            opacity: 0.95;
-            line-height: 1.7;
-            font-family: var(--font-primary);
-        }
-        
-        /* Feature list styling */
-        .mission-card div {
-            display: flex;
-            align-items: center;
-            margin: var(--space-md) 0;
-        }
-        
-        .mission-card img {
-            width: 24px;
-            height: 24px;
-            margin-right: var(--space-sm);
-            filter: brightness(0) saturate(100%) invert(85%) sepia(15%) saturate(200%) hue-rotate(20deg) brightness(95%) contrast(90%);
-        }
-        
-        .mission-card span {
-            color: var(--clr-cream);
-            font-family: var(--font-primary);
-        }
-        
-        /* Sanctification under construction element */
-        .sanctification-box {
-            background: var(--clr-rich-brown);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 40px 0;
-            border: 2px dashed var(--clr-coral);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .sanctification-box::before {
-            content: '🔨';
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
-            opacity: 0.7;
-        }
-        
-        .sanctification-title {
-            color: var(--clr-coral);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-family: var(--font-display);
-        }
-        
-        .sanctification-verse {
-            color: var(--clr-cream);
-            font-size: 0.9rem;
-            font-style: italic;
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-        
-        .sanctification-text {
-            color: var(--clr-warm-white);
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .story-container {
-                grid-template-columns: 1fr;
-                gap: var(--space-xl);
-                text-align: center;
-            }
-            
-            .story-title {
-                font-size: 2rem;
-            }
-            
-            .story-section {
-                padding: var(--space-xl) var(--space-lg);
-            }
-        }
-    </style>
+    
 </head>
 <body>
     <!-- AdSense Top - ADDED MISSING HEADER -->
@@ -227,7 +40,7 @@
         </nav>
 
         <!-- Header - Now uses styles.css for consistent spacing -->
-        <header class="header">
+        <header class="header" style="margin-top: 240px;">
             <h1>My Story</h1>
             <p style="color: var(--clr-coral); font-size: 1.4rem; font-weight: 600;">COMING SOON</p>
         </header>
@@ -242,12 +55,25 @@
                     
                     <p class="story-description">I'm building something special here - a place where my 30-year crochet journey meets modern storytelling.</p>
                     
-                    <div class="mission-card">
-                        <h3>What's Coming:</h3>
-                        <div>
-                            <img src="images/slip-knot-first-chain.png" alt="Story">
-                            <span>Deep-dive blog stories about my crochet and tech journey</span>
-                        </div>
+                    <div style="max-width: 700px; margin: 40px 0; padding: 35px; background: #f6eedc; border-left: 8px solid var(--clr-fuchsia); border-radius: 15px; font-family: 'Poppins', sans-serif; color: #2d1810;">
+    <h3 style="font-size: 1.5rem; font-weight: 600; margin-bottom: var(--space-lg); color: var(--clr-coral); font-family: var(--font-accent);">What's Coming:</h3>
+    <div style="display: flex; align-items: center; margin: var(--space-md) 0;">
+        <img src="images/slip-knot-first-chain.png" alt="Story" style="width: 24px; height: 24px; margin-right: var(--space-sm);">
+        <span>Deep-dive blog stories about my crochet and tech journey</span>
+    </div>
+    <div style="display: flex; align-items: center; margin: var(--space-md) 0;">
+        <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social" style="width: 24px; height: 24px; margin-right: var(--space-sm);">
+        <span>Live social media feeds from all my @this4dani accounts</span>
+    </div>
+    <div style="display: flex; align-items: center; margin: var(--space-md) 0;">
+        <img src="images/file-folder-magazne-lable.png" alt="API" style="width: 24px; height: 24px; margin-right: var(--space-sm);">
+        <span>Behind-the-scenes content from building the pattern adjustment API</span>
+    </div>
+    <div style="display: flex; align-items: center; margin: var(--space-md) 0;">
+        <img src="images/home-heart-door.png" alt="Faith" style="width: 24px; height: 24px; margin-right: var(--space-sm);">
+        <span>Faith and ministry moments that shape everything I create</span>
+    </div>
+</div>
                         <div>
                             <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
                             <span>Live social media feeds from all my @this4dani accounts</span>

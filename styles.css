@@ -63,7 +63,7 @@ html {
 
 body {
   font-family: var(--font-primary);
-  background: var(--clr-primary-dark);
+  background: var(--clr-primary-dark);  /* Solid teal background */
   color: var(--clr-warm-white);
   line-height: 1.6;
   overflow-x: hidden;
@@ -76,7 +76,6 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-lg);
-  /* FIXED: No padding-top - let content flow naturally */
 }
 
 .container-wide {
@@ -86,23 +85,27 @@ body {
 }
 
 /* ===== ADSENSE HEADER SPACING - CONSISTENT ACROSS ALL PAGES ===== */
-.adsense-top,
-.ad-zone-header {
+.adsense-top {
   margin: 0 0 20px 0;
   padding: 15px;
   text-align: center;
   min-height: 60px; /* Ensures consistent space even when ad isn't loaded */
 }
 
+.adsense-bottom {
+  text-align: center;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
 /* ===== FIXED NAVIGATION SYSTEM - SYNCHRONIZED SMOOTH SCROLLING ===== */
 #nav {
-  /* CRITICAL: Starts lower like homepage, with space for AdSense */
   position: fixed !important;
-  top: 120px !important;  /* Same as homepage - space from AdSense */
+  top: 120px !important;  /* Space for AdSense header */
   left: 50% !important;
   transform: translateX(-50%) !important;
   
-  /* Layout exactly like homepage */
+  /* Layout */
   display: flex;
   gap: 70px;
   align-items: center;
@@ -111,22 +114,23 @@ body {
   z-index: 1000;
   
   /* NAVIGATION FIX: Faster transition with hardware acceleration */
-  transition: all 0.1s ease-out !important;  /* FASTER response */
-  will-change: transform, top;               /* Hardware acceleration */
+  transition: all 0.1s ease-out !important;
+  will-change: transform, top;
   background: transparent;
   backdrop-filter: none;
   padding: 25px 0;
 }
 
-/* FIXED: Scrolled state - smooth transition to top */
+/* FIXED: Scrolled state - matches page background */
 #nav.scrolled {
   top: 0 !important;
-  background: linear-gradient(135deg, var(--clr-primary-dark) 0%, rgba(0, 26, 31, 0.95) 100%);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 2px 20px rgba(0,0,0,0.3);
-  border-bottom: 1px solid rgba(250, 248, 243, 0.1);
+  left: 0 !important;
+  width: 100% !important;
+  transform: none !important;  /* Remove centering transform */
+  background: var(--clr-primary-dark);  /* Same as body background */
   padding: 15px 0;
-  transform: translateX(-50%) translate3d(0, 0, 0);  /* Hardware acceleration */
+  display: flex;
+  justify-content: center;  /* Center the icons within full-width bar */
 }
 
 #nav a {
@@ -178,11 +182,7 @@ body {
 /* ===== HEADER STYLES - PROPERLY SPACED BELOW NAVIGATION ===== */
 .header {
   text-align: center;
-  margin-top: 200px;  /* FIXED: Space for navigation starting at 120px + nav height */
-  padding-top: 0;
-  margin-bottom: 30px;
-  padding: 0 0 var(--space-lg) 0;
-}
+  margin-top: 240px;$1
 
 .header h1 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -396,8 +396,8 @@ a:hover {
     padding: 10px 0;
   }
   
-  .container {
-    padding-top: 140px;
+  .header {
+    margin-top: 150px;
   }
   
   #nav img {
@@ -412,8 +412,8 @@ a:hover {
     top: 60px !important;
   }
   
-  .container {
-    padding-top: 120px;
+  .header {
+    margin-top: 120px;
   }
   
   #nav img {
@@ -451,6 +451,34 @@ a:hover {
 .flex { display: flex; }
 .grid { display: grid; }
 
+/* ===== GLOSSARY CONTAINER & STORY SECTION ===== */
+.glossary-content-container {
+  background: var(--clr-cream);
+  border-left: 6px solid var(--clr-fuchsia);
+  border-radius: 20px;
+  padding: 40px;
+  margin: 30px 0;
+  font-family: var(--font-primary);
+  box-shadow: none;
+  color: var(--clr-primary-dark);
+}
+
+.sanctification-box {
+  background: var(--clr-cream);
+  border-left: 8px solid var(--clr-fuchsia);
+  border-radius: 15px;
+  padding: 35px;
+  margin: 40px 0;
+  font-family: var(--font-primary);
+  color: var(--clr-deep-chocolate);
+}
+
+.stitch-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+  border-color: var(--clr-coral);
+}
+
 /* ===== ANIMATIONS ===== */
 @keyframes fadeIn {
   from {
@@ -484,3 +512,4 @@ a:hover {
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
+
