@@ -57,12 +57,12 @@
 </head>
 <body>
   <div class="container">
-    <!-- FIXED: Changed from "ad-zone ad-zone-header" to "adsense-top" -->
+    <!-- Ad Zone - Top Banner - FIXED CLASS NAME -->
     <div class="adsense-top">
       [Google AdSense - Leaderboard 728x90]
     </div>
 
-    <!-- Navigation - Uses images from your main design -->
+    <!-- Navigation - Now uses styles.css for consistent spacing -->
     <nav id="nav">
         <a href="index.html">
             <img src="images/home-heart-door.png" alt="Home">
@@ -78,6 +78,7 @@
         </a>
     </nav>
 
+    <!-- Header - Now uses styles.css for consistent spacing -->
     <header class="header">
       <h1>Interactive Crochet Glossary</h1>
       <p>Your comprehensive guide to crochet stitches and techniques</p>
@@ -88,185 +89,160 @@
       [Google AdSense - Medium Rectangle 300x250]
     </div>
 
-    <!-- Container with warmer color - using rich brown -->
-    <div class="glossary-content-container" style="
-      background: var(--clr-rich-brown);
-      border-radius: 25px;
-      padding: 40px;
-      margin: 30px 0;
-      box-shadow: 
-        0 15px 35px rgba(74, 44, 42, 0.4),
-        0 8px 20px rgba(0, 0, 0, 0.3),
-        inset 0 3px 6px rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(250, 248, 243, 0.15);
-    ">
-
-    <div class="search-section">
-      <div class="tips-toggle" onclick="toggleTips()">
-        Tips & Tricks ▼
-        <div class="tips-content" id="tips-content">
-          <p><strong>Browse:</strong> Scroll through all stitches</p>
-          <p><strong>Search:</strong> Type abbreviation or full name</p>
-          <p><strong>Hover:</strong> See full stitch name</p>
-          <p><strong>Click:</strong> View detailed popup with US/UK terms</p>
+    <!-- Glossary Content Container - REMOVED INLINE STYLES -->
+    <div class="glossary-content-container">
+      <div class="search-section">
+        <div class="tips-toggle" onclick="toggleTips()">
+          Tips & Tricks ▼
+          <div class="tips-content" id="tips-content">
+            <p><strong>Browse:</strong> Scroll through all stitches</p>
+            <p><strong>Search:</strong> Type abbreviation or full name</p>
+            <p><strong>Hover:</strong> See full stitch name</p>
+            <p><strong>Click:</strong> View detailed popup with US/UK terms</p>
+          </div>
         </div>
+        <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
       </div>
-      <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
+
+      <div id="glossary-grid"></div>
     </div>
-
-    <div id="glossary-grid"></div>
-
-    </div> <!-- Close glossary-content-container -->
 
     <!-- Ad Zone - Footer Banner -->
     <div class="ad-zone ad-zone-footer">
       [Google AdSense - Footer Banner 728x90]
     </div>
+
+    <!-- Standard Footer - Now uses styles.css classes -->
+    <div class="standard-footer">
+        <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+        <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <span class="footer-separator">•</span>
+            <a href="privacy.html#terms">Terms of Service</a>
+            <span class="footer-separator">•</span>
+            <a href="privacy.html#contact">Contact</a>
+        </div>
+    </div>
   </div>
 
-  <!-- Glossary Data -->
-  <script src="glossarydata.js"></script>
+  <!-- Popup Modal -->
+  <div class="popup" id="popup">
+    <div class="popup-inner">
+      <button class="popup-close" onclick="closePopup()">&times;</button>
+      <h2 id="popup-title"></h2>
+      <div class="uk-name" id="popup-uk"></div>
+      <div class="description" id="popup-description"></div>
+      <div class="tags" id="popup-tags"></div>
+    </div>
+  </div>
 
-  <!-- FIXED: Updated JavaScript for better scroll performance -->
+  <script type="module">
+    import { stitchGlossary } from './glossarydata.js';
+
+    const searchInput = document.getElementById("search");
+    const grid = document.getElementById("glossary-grid");
+    const popup = document.getElementById("popup");
+    const popupTitle = document.getElementById("popup-title");
+    const popupDesc = document.getElementById("popup-description");
+    const popupUK = document.getElementById("popup-uk");
+    const popupTags = document.getElementById("popup-tags");
+    const popupClose = document.querySelector(".popup-close");
+
+    const safeSymbol = (sym) => (/^[a-zA-Z_]/.test(sym) ? sym : `sym_${sym}`);
+
+    function buildCards() {
+      grid.innerHTML = '';
+      stitchGlossary.forEach((s) => {
+        const card = document.createElement("div");
+        card.className = "stitch-card";
+        card.setAttribute("data-name", s.name_us);
+        card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
+
+        const abbr = document.createElement("div");
+        abbr.className = "abbr";
+        abbr.textContent = s.id.toUpperCase();
+
+        const full = document.createElement("div");
+        full.className = "name";
+        full.textContent = s.name_us;
+
+        card.append(abbr, full);
+
+        card.onclick = () => {
+          popupTitle.textContent = s.name_us;
+          popupUK.textContent = `UK: ${s.name_uk}`;
+          popupDesc.textContent = s.notes || "No description available.";
+          popupTags.textContent = s.tags ? `Tags: ${s.tags.join(', ')}` : "";
+          popup.classList.add("active");
+        };
+
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCards(query) {
+      const lowerQuery = query.toLowerCase();
+      const cards = grid.querySelectorAll('.stitch-card');
+
+      cards.forEach(card => {
+        const name = card.getAttribute('data-name').toLowerCase();
+        const tags = card.getAttribute('data-tags').toLowerCase();
+        const abbr = card.querySelector('.abbr').textContent.toLowerCase();
+
+        if (name.includes(lowerQuery) || tags.includes(lowerQuery) || abbr.includes(lowerQuery)) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    searchInput.addEventListener('input', (e) => {
+      filterCards(e.target.value);
+    });
+
+    popup.addEventListener('click', (e) => {
+      if (e.target === popup || e.target.classList.contains('popup-close')) {
+        closePopup();
+      }
+    });
+
+    window.closePopup = function() {
+      popup.classList.remove("active");
+    };
+
+    window.toggleTips = function() {
+      const tips = document.getElementById('tips-content');
+      tips.classList.toggle('show');
+    };
+
+    buildCards();
+  </script>
+
+  <!-- SYNCHRONIZED SCROLL BEHAVIOR - NAVIGATION FIX -->
   <script>
-    // SYNCHRONIZED NAVIGATION BEHAVIOR - IMPROVED PERFORMANCE
     let navigationTicking = false;
 
     function updateNavigationState() {
-        const nav = document.getElementById('nav');
-        const scrollY = window.scrollY;
-        
-        if (scrollY > 40) {  // Consistent trigger point
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-        navigationTicking = false;
+      const nav = document.getElementById('nav');
+      const scrollY = window.scrollY;
+      
+      if (scrollY > 40) {  // Consistent trigger point
+        nav.classList.add('scrolled');
+      } else {
+        nav.classList.remove('scrolled');
+      }
+      navigationTicking = false;
     }
 
     function requestNavigationTick() {
-        if (!navigationTicking) {
-            requestAnimationFrame(updateNavigationState);
-            navigationTicking = true;
-        }
+      if (!navigationTicking) {
+        requestAnimationFrame(updateNavigationState);
+        navigationTicking = true;
+      }
     }
 
     window.addEventListener('scroll', requestNavigationTick, { passive: true });
-
-    // Tips toggle functionality
-    function toggleTips() {
-      const tipsContent = document.getElementById('tips-content');
-      tipsContent.style.display = tipsContent.style.display === 'block' ? 'none' : 'block';
-    }
-
-    // Glossary search and display functionality
-    let allStitches = [];
-    let filteredStitches = [];
-
-    function initGlossary() {
-      // Use stitches data from glossarydata.js
-      if (typeof stitchesData !== 'undefined') {
-        allStitches = stitchesData;
-        filteredStitches = [...allStitches];
-        displayStitches();
-        setupSearch();
-      } else {
-        document.getElementById('glossary-grid').innerHTML = '<p>Error: Stitch data not loaded</p>';
-      }
-    }
-
-    function displayStitches() {
-      const grid = document.getElementById('glossary-grid');
-      grid.innerHTML = '';
-
-      if (filteredStitches.length === 0) {
-        grid.innerHTML = '<p style="text-align: center; color: var(--clr-cream); margin: 40px 0;">No stitches found. Try a different search term.</p>';
-        return;
-      }
-
-      filteredStitches.forEach(stitch => {
-        const stitchElement = createStitchElement(stitch);
-        grid.appendChild(stitchElement);
-      });
-    }
-
-    function createStitchElement(stitch) {
-      const stitchDiv = document.createElement('div');
-      stitchDiv.className = 'stitch-item';
-      stitchDiv.onclick = () => showStitchDetail(stitch);
-      
-      // Get symbol for the stitch
-      const symbolId = getStitchSymbol(stitch.abbreviation);
-      
-      stitchDiv.innerHTML = `
-        <div class="stitch-symbol">
-          <svg><use href="#${symbolId}"></use></svg>
-        </div>
-        <div class="stitch-info">
-          <div class="stitch-abbrev">${stitch.abbreviation}</div>
-          <div class="stitch-name">${stitch.name}</div>
-        </div>
-      `;
-      
-      return stitchDiv;
-    }
-
-    function getStitchSymbol(abbreviation) {
-      const symbolMap = {
-        'sc': 'x',
-        'dc': 'T', 
-        'hdc': 'H',
-        'tr': 'TT',
-        'sl st': '-',
-        'ch': 'o',
-        'inc': 'V',
-        'dec': 'cl',
-        'shell': 'Sh',
-        'pc': 'pc'
-      };
-      return symbolMap[abbreviation.toLowerCase()] || 'default';
-    }
-
-    function showStitchDetail(stitch) {
-      const modal = document.createElement('div');
-      modal.className = 'stitch-modal';
-      modal.onclick = (e) => {
-        if (e.target === modal) {
-          document.body.removeChild(modal);
-        }
-      };
-
-      modal.innerHTML = `
-        <div class="modal-content">
-          <span class="close-modal" onclick="document.body.removeChild(this.closest('.stitch-modal'))">&times;</span>
-          <h2>${stitch.name}</h2>
-          <p><strong>Abbreviation:</strong> ${stitch.abbreviation}</p>
-          <p><strong>Description:</strong> ${stitch.description}</p>
-          ${stitch.instructions ? `<p><strong>Instructions:</strong> ${stitch.instructions}</p>` : ''}
-          ${stitch.usTerms ? `<p><strong>US Terms:</strong> ${stitch.usTerms}</p>` : ''}
-          ${stitch.ukTerms ? `<p><strong>UK Terms:</strong> ${stitch.ukTerms}</p>` : ''}
-          ${stitch.tips ? `<p><strong>Tips:</strong> ${stitch.tips}</p>` : ''}
-        </div>
-      `;
-
-      document.body.appendChild(modal);
-    }
-
-    function setupSearch() {
-      const searchInput = document.getElementById('search');
-      searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        filteredStitches = allStitches.filter(stitch => 
-          stitch.name.toLowerCase().includes(searchTerm) ||
-          stitch.abbreviation.toLowerCase().includes(searchTerm) ||
-          stitch.description.toLowerCase().includes(searchTerm)
-        );
-        displayStitches();
-      });
-    }
-
-    // Initialize when page loads
-    document.addEventListener('DOMContentLoaded', initGlossary);
   </script>
 </body>
 </html>
