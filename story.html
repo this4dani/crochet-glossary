@@ -37,6 +37,58 @@
             color: var(--clr-cream);
         }
         
+        /* Story section container */
+        .story-section {
+            padding: var(--space-xl) var(--space-lg);
+            background: rgba(61, 26, 43, 0.8);
+            backdrop-filter: blur(20px);
+            margin: var(--space-xl) 0;
+            border-radius: 20px;
+        }
+        
+        .story-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 40px;
+            align-items: start;
+        }
+        
+        /* Mission card styling */
+        .mission-card {
+            background: rgba(61, 26, 43, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(250,248,243,0.15);
+            border-radius: 20px;
+            padding: var(--space-xl);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mission-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,107,122,0.1), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .mission-card:hover::before {
+            left: 100%;
+        }
+
+        .mission-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--clr-coral);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            background: rgba(61, 26, 43, 0.9);
+        }
+
         .mission-card h3 {
             font-size: 1.5rem;
             font-weight: 600;
@@ -52,6 +104,7 @@
             font-family: var(--font-primary);
         }
         
+        /* Feature list styling */
         .mission-card div {
             display: flex;
             align-items: center;
@@ -68,6 +121,18 @@
         .mission-card span {
             color: var(--clr-cream);
             font-family: var(--font-primary);
+        }
+        
+        /* Sanctification under construction element */
+        .sanctification-box {
+            background: var(--clr-rich-brown);
+            border-radius: 20px;
+            padding: 30px;
+            margin: 40px 0;
+            border: 2px dashed var(--clr-coral);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         
         .sanctification-box::before {
@@ -88,7 +153,7 @@
         }
         
         .sanctification-verse {
-            color: var(--clr-deep-chocolate);
+            color: var(--clr-cream);
             font-size: 0.9rem;
             font-style: italic;
             margin-bottom: 15px;
@@ -96,9 +161,14 @@
         }
         
         .sanctification-text {
-            color: var(--clr-deep-chocolate);
+            color: var(--clr-warm-white);
             font-size: 1rem;
             line-height: 1.5;
+        }
+        
+        /* AdSense in story section */
+        .story-ad {
+            margin: 30px 0;
         }
         
         /* Mobile responsive */
@@ -118,15 +188,20 @@
             }
         }
     </style>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+         crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- AdSense Top Banner -->
     <div class="adsense-top">
-        <!-- AdSense code -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+             crossorigin="anonymous"></script>
+        <!-- Generic ad unit - replace with story-specific if you create one -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9422928756201532"
-             data-ad-slot="YOUR-AD-SLOT-ID"
+             data-ad-slot="1904186528"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -134,26 +209,24 @@
         </script>
     </div>
     
-    <!-- Navigation Wrapper -->
-    <div class="nav-wrapper">
-        <nav id="nav">
-            <a href="index.html">
-                <img src="images/icon-home.png" alt="Home">
-            </a>
-            <a href="glossary.html">
-                <img src="images/icon-glossary.png" alt="Glossary">
-            </a>
-            <a href="story.html" class="active">
-                <img src="images/icon-story.png" alt="My Story">
-            </a>
-            <a href="follow.html">
-                <img src="images/icon-follow.png" alt="Follow">
-            </a>
-        </nav>
-    </div>
-    
+    <!-- Navigation -->
+    <nav id="nav">
+        <a href="index.html">
+            <img src="images/home-heart-door.png" alt="Home">
+        </a>
+        <a href="glossary.html">
+            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+        </a>
+        <a href="story.html" class="active">
+            <img src="images/slip-knot-first-chain.png" alt="Story">
+        </a>
+        <a href="follow.html">
+            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+        </a>
+    </nav>
+
     <!-- Main Content -->
-    <div class="container main-content">
+    <div class="container content-wrapper">
         <!-- Header -->
         <header class="header">
             <h1>My Story</h1>
@@ -164,7 +237,7 @@
         <div class="story-section">
             <div class="story-container">
                 
-                <!-- Left Column -->
+                <!-- Left Column - Your existing content with AdSense -->
                 <div class="story-text">
                     <h2 class="story-title">Stories, Social Feeds & More</h2>
                     
@@ -195,12 +268,27 @@
                     <p class="story-launch-date">Expected launch: July 2025</p>
                 </div>
                 
-                <!-- Right Column -->
+                <!-- Right Column - Single Sanctification Box -->
                 <div class="sanctification-section">
                     <div class="sanctification-box">
                         <h3 class="sanctification-title">Being Sanctified...</h3>
                         <p class="sanctification-verse">"...knit together in love, to reach all the riches of full assurance of understanding and the knowledge of God's mystery."<br>— Colossians 2:2</p>
                         <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith. ✨</p>
+                    </div>
+                    
+                    <!-- AdSense in-article ad for right column -->
+                    <div class="story-ad">
+                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+                             crossorigin="anonymous"></script>
+                        <ins class="adsbygoogle"
+                             style="display:block; text-align:center;"
+                             data-ad-layout="in-article"
+                             data-ad-format="fluid"
+                             data-ad-client="ca-pub-9422928756201532"
+                             data-ad-slot="5237761028"></ins>
+                        <script>
+                             (adsbygoogle = window.adsbygoogle || []).push({});
+                        </script>
                     </div>
                 </div>
             </div>
@@ -221,9 +309,13 @@
     
     <!-- AdSense Footer -->
     <div class="adsense-bottom">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+             crossorigin="anonymous"></script>
+        <!-- Generic ad unit - replace with story-specific if you create one -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9422928756201532"
+             data-ad-slot="1904186528"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -232,18 +324,13 @@
     </div>
 
     <script>
-        // Smooth scroll-then-stick navigation
+        // Simple sticky navigation
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
-            const navWrapper = document.querySelector('.nav-wrapper');
-            const wrapperTop = navWrapper.getBoundingClientRect().top;
-            
-            if (wrapperTop <= 0) {
-                nav.classList.add('stuck');
-                navWrapper.classList.add('stuck');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
             } else {
-                nav.classList.remove('stuck');
-                navWrapper.classList.remove('stuck');
+                nav.classList.remove('scrolled');
             }
         });
     </script>
