@@ -25,11 +25,10 @@
   --space-xl: 3rem;
   --space-xxl: 5rem;
   
-  /* Shadows - Enhanced for 3D Effect */
+  /* Shadows */
   --shadow-sm: 0 2px 4px rgba(61, 26, 43, 0.1);
-  --shadow-md: 0 4px 8px rgba(61, 26, 43, 0.15), 0 2px 4px rgba(74, 44, 42, 0.06);
-  --shadow-lg: 0 10px 15px rgba(61, 26, 43, 0.2), 0 4px 6px rgba(74, 44, 42, 0.1);
-  --shadow-xl: 0 20px 25px rgba(61, 26, 43, 0.25), 0 10px 10px rgba(74, 44, 42, 0.1);
+  --shadow-md: 0 4px 8px rgba(61, 26, 43, 0.15);
+  --shadow-lg: 0 10px 15px rgba(61, 26, 43, 0.2);
 }
 
 /* ===== RESET & BASE STYLES ===== */
@@ -53,46 +52,37 @@ body {
   min-height: 100vh;
 }
 
-/* ===== LAYOUT CONTAINERS ===== */
+/* ===== CONTAINER ===== */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 var(--space-lg);
 }
 
-/* ===== ADSENSE HEADER ===== */
+/* ===== ADSENSE TOP ===== */
 .adsense-top {
+  background: var(--clr-primary-dark);
   text-align: center;
   padding: 15px;
   min-height: 100px;
-  background: var(--clr-primary-dark);
-  position: relative;
-  z-index: 10;
-}
-
-/* ===== NAVIGATION CONTAINER ===== */
-.nav-container {
-  background: var(--clr-primary-dark);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  padding: 25px 0;
-  transition: padding 0.3s ease;
-}
-
-.nav-container.scrolled {
-  padding: 15px 0;
 }
 
 /* ===== NAVIGATION ===== */
 #nav {
+  background: var(--clr-primary-dark);
+  padding: 25px 0;
   display: flex;
   gap: 70px;
   align-items: center;
   justify-content: center;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: padding 0.3s ease;
+}
+
+#nav.scrolled {
+  padding: 15px 0;
 }
 
 #nav a {
@@ -141,19 +131,19 @@ body {
   filter: brightness(0) saturate(100%) invert(65%) sepia(30%) saturate(500%) hue-rotate(340deg) brightness(110%) contrast(90%);
 }
 
-/* ===== MAIN CONTENT ===== */
-.main-content {
+/* ===== CONTENT SPACING ===== */
+.content-wrapper {
   padding-top: 40px;
-  min-height: calc(100vh - 300px);
+  min-height: calc(100vh - 400px);
 }
 
-/* ===== PAGE HEADER ===== */
-.page-header {
+/* ===== HEADERS ===== */
+.header {
   text-align: center;
   margin-bottom: var(--space-xl);
 }
 
-.page-header h1 {
+.header h1 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   font-weight: 700;
   color: var(--clr-warm-white);
@@ -208,42 +198,62 @@ a:hover {
 
 .footer a:hover {
   opacity: 1;
+  text-decoration: none;
 }
 
-/* ===== ADSENSE FOOTER ===== */
+/* ===== ADSENSE BOTTOM ===== */
 .adsense-bottom {
+  background: var(--clr-primary-dark);
   text-align: center;
   padding: 15px;
   margin-top: 40px;
-  background: var(--clr-primary-dark);
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
-@media (max-width: 768px) {
-  #nav {
-    gap: 30px;
-  }
-  
-  #nav img {
-    width: 60px !important;
-    height: 60px !important;
-  }
-  
-  #nav a {
-    height: 70px;
-    width: 70px;
-  }
-  
-  .nav-container {
-    padding: 15px 0;
-  }
-  
-  .nav-container.scrolled {
-    padding: 10px 0;
-  }
+/* ===== HOME PAGE INTRO ===== */
+.intro {
+  background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 70px;
+  border-radius: 25px;
+  text-align: left;
+  box-shadow: 
+    0 15px 35px rgba(79, 43, 58, 0.4),
+    0 8px 20px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(250, 248, 243, 0.15);
 }
 
-/* ===== STORY PAGE SPECIFIC ===== */
+.intro h1 {
+  font-family: 'Poppins', sans-serif;
+  font-size: 6rem;
+  color: #003840;
+  margin: 0 0 5px 0;
+  font-weight: 800;
+  letter-spacing: -5px;
+}
+
+.intro p:first-of-type {
+  color: #ff6b7a;
+  font-size: 1.2rem;
+  margin-top: -50px;
+  margin-bottom: 15px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+.intro p:last-of-type {
+  font-family: 'Crimson Text', serif;
+  color: #c8b8a8;
+  font-size: 1.8rem;
+  margin: 35px 0 0 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-align: center;
+  line-height: 1.3;
+  font-style: italic;
+}
+
+/* ===== STORY PAGE ===== */
 .story-section {
   padding: var(--space-xl) var(--space-lg);
   background: rgba(61, 26, 43, 0.8);
@@ -288,24 +298,110 @@ a:hover {
   position: relative;
 }
 
-/* ===== HOME PAGE SPECIFIC ===== */
-.intro {
-  background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
-  max-width: 850px;
-  margin: 0 auto;
-  padding: 70px;
-  border-radius: 25px;
-  text-align: left;
-  box-shadow: 
-    0 15px 35px rgba(79, 43, 58, 0.4),
-    0 8px 20px rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(250, 248, 243, 0.15);
+/* ===== FOLLOW PAGE ===== */
+.social-list {
+  list-style: none;
+  padding: 40px;
+  margin: 40px 0;
+  background: rgba(61, 26, 43, 0.3);
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
 }
 
-.intro h1 {
-  font-family: 'Poppins', sans-serif;
-  font-size: 6rem;
-  color: #003840;
-  margin: 0 0 5px 0;
-  font-weight: 800;
-  letter-spacing: -5px;
+.social-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 0;
+  border-bottom: 1px solid rgba(250, 248, 243, 0.1);
+}
+
+.social-list li:last-child {
+  border-bottom: none;
+}
+
+.social-info {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.social-info svg {
+  width: 24px;
+  height: 24px;
+}
+
+.social-info h3 {
+  color: var(--clr-cream);
+  font-size: 1.1rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.social-info p {
+  color: var(--clr-warm-white);
+  font-size: 0.9rem;
+  margin: 2px 0 0 0;
+  opacity: 0.8;
+}
+
+.social-link {
+  background: transparent;
+  padding: 8px 20px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  min-width: 80px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: 2px solid;
+}
+
+.social-link:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  text-decoration: none;
+}
+
+.note-box {
+  background: transparent;
+  border-radius: 12px;
+  padding: 30px;
+  margin: 30px 0;
+  border-left: 4px solid var(--clr-coral);
+}
+
+/* ===== MOBILE RESPONSIVE ===== */
+@media (max-width: 768px) {
+  #nav {
+    gap: 30px;
+    padding: 15px 0;
+  }
+  
+  #nav.scrolled {
+    padding: 10px 0;
+  }
+  
+  #nav img {
+    width: 60px !important;
+    height: 60px !important;
+  }
+  
+  #nav a {
+    height: 70px;
+    width: 70px;
+  }
+  
+  .intro {
+    padding: 40px 30px;
+  }
+  
+  .intro h1 {
+    font-size: 4rem;
+  }
+  
+  .story-container {
+    grid-template-columns: 1fr;
+  }
+}

@@ -8,32 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
     
     <style>
-        /* Home page additional styles */
-        .intro p:first-of-type {
-            font-family: 'Inter', sans-serif;
-            color: #ff6b7a;
-            font-size: 1.2rem;
-            margin-top: -50px;
-            margin-bottom: 15px;
-            font-weight: 600;
-            line-height: 1.4;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-        }
-        
-        .intro p:last-of-type {
-            font-family: 'Crimson Text', serif;
-            color: #c8b8a8;
-            font-size: 1.8rem;
-            margin: 35px 0 0 0;
-            font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
-            letter-spacing: 1px;
-            text-align: center;
-            line-height: 1.3;
-            font-style: italic;
-        }
-        
-        /* Floating cards */
+        /* Floating cards styles */
         .floating-cards {
             position: fixed;
             top: 0;
@@ -163,16 +138,6 @@
         @media (max-width: 1200px) {
             .floating-cards { display: none; }
         }
-        
-        @media (max-width: 768px) {
-            .intro {
-                padding: 40px 30px;
-            }
-            
-            .intro h1 {
-                font-size: 4rem;
-            }
-        }
     </style>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
@@ -191,23 +156,21 @@
         </script>
     </div>
     
-    <!-- Navigation Container -->
-    <div class="nav-container">
-        <nav id="nav">
-            <a href="index.html" class="active">
-                <img src="images/home-heart-door.png" alt="Home">
-            </a>
-            <a href="glossary.html">
-                <img src="images/file-folder-magazne-lable.png" alt="Glossary">
-            </a>
-            <a href="story.html">
-                <img src="images/slip-knot-first-chain.png" alt="Story">
-            </a>
-            <a href="follow.html">
-                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-            </a>
-        </nav>
-    </div>
+    <!-- Navigation -->
+    <nav id="nav">
+        <a href="index.html" class="active">
+            <img src="images/home-heart-door.png" alt="Home">
+        </a>
+        <a href="glossary.html">
+            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+        </a>
+        <a href="story.html">
+            <img src="images/slip-knot-first-chain.png" alt="Story">
+        </a>
+        <a href="follow.html">
+            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+        </a>
+    </nav>
     
     <!-- Floating Stitch Cards -->
     <div class="floating-cards">
@@ -273,7 +236,7 @@
     </div>
     
     <!-- Main Content -->
-    <div class="container main-content">
+    <div class="container content-wrapper">
         <article class="intro">
             <header>
                 <h1>DANI'S</h1>
@@ -310,11 +273,11 @@
     <script>
         // Simple sticky navigation
         window.addEventListener('scroll', function() {
-            const navContainer = document.querySelector('.nav-container');
+            const nav = document.getElementById('nav');
             if (window.scrollY > 50) {
-                navContainer.classList.add('scrolled');
+                nav.classList.add('scrolled');
             } else {
-                navContainer.classList.remove('scrolled');
+                nav.classList.remove('scrolled');
             }
         });
 
