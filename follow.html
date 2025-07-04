@@ -11,18 +11,16 @@
         /* Follow page specific styles */
         .social-list {
             list-style: none;
-            padding: 40px;
-            margin: 40px 0;
-            background: rgba(61, 26, 43, 0.3);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
+            padding: 0;
+            margin: 40px auto;
+            max-width: 800px;
         }
         
         .social-list li {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 15px 0;
+            padding: 20px 0;
             border-bottom: 1px solid rgba(250, 248, 243, 0.1);
         }
         
@@ -39,16 +37,17 @@
         .social-info svg {
             width: 24px;
             height: 24px;
+            flex-shrink: 0;
         }
         
-        .social-info h3 {
+        .social-details h3 {
             color: var(--clr-cream);
             font-size: 1.1rem;
             margin: 0;
             font-weight: 600;
         }
         
-        .social-info p {
+        .social-details p {
             color: var(--clr-warm-white);
             font-size: 0.9rem;
             margin: 2px 0 0 0;
@@ -62,22 +61,49 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            min-width: 80px;
+            width: 100px; /* Fixed width for all buttons */
             text-align: center;
             transition: all 0.3s ease;
             border: 2px solid;
+            display: inline-block;
+            flex-shrink: 0;
         }
         
         .social-link:hover {
             transform: translateY(-2px);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
         }
         
+        /* Individual button colors */
+        .instagram-link { color: var(--clr-fuchsia); border-color: var(--clr-fuchsia); }
+        .instagram-link:hover { background: var(--clr-fuchsia); color: var(--clr-warm-white); }
+        
+        .pinterest-link { color: var(--clr-mauve); border-color: var(--clr-mauve); }
+        .pinterest-link:hover { background: var(--clr-mauve); color: var(--clr-warm-white); }
+        
+        .youtube-link { color: var(--clr-coral); border-color: var(--clr-coral); }
+        .youtube-link:hover { background: var(--clr-coral); color: var(--clr-warm-white); }
+        
+        .tiktok-link { color: var(--clr-fuchsia); border-color: var(--clr-fuchsia); }
+        .tiktok-link:hover { background: var(--clr-fuchsia); color: var(--clr-warm-white); }
+        
+        .linkedin-link { color: var(--clr-mauve); border-color: var(--clr-mauve); }
+        .linkedin-link:hover { background: var(--clr-mauve); color: var(--clr-warm-white); }
+        
+        .facebook-link { color: var(--clr-coral); border-color: var(--clr-coral); }
+        .facebook-link:hover { background: var(--clr-coral); color: var(--clr-warm-white); }
+        
+        .discord-link { color: var(--clr-fuchsia); border-color: var(--clr-fuchsia); }
+        .discord-link:hover { background: var(--clr-fuchsia); color: var(--clr-warm-white); }
+        
+        .github-link { color: var(--clr-mauve); border-color: var(--clr-mauve); }
+        .github-link:hover { background: var(--clr-mauve); color: var(--clr-warm-white); }
+        
         .note-box {
-            background: transparent;
-            border-radius: 12px;
+            max-width: 800px;
+            margin: 40px auto;
             padding: 30px;
-            margin: 30px 0;
             border-left: 4px solid var(--clr-coral);
         }
         
@@ -87,14 +113,54 @@
             line-height: 1.6;
             margin: 0;
         }
+        
+        /* Optional side ad - hidden by default, show with media query if needed */
+        .adsense-side {
+            position: fixed;
+            right: 20px;
+            top: 180px;
+            width: 160px;
+            height: 600px;
+            z-index: 999;
+            display: none;
+        }
+        
+        @media (min-width: 1400px) {
+            .adsense-side {
+                display: block;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .social-list {
+                padding: 0 20px;
+            }
+            
+            .social-info {
+                gap: 10px;
+            }
+            
+            .social-link {
+                width: 80px;
+                padding: 6px 10px;
+                font-size: 0.85rem;
+            }
+        }
     </style>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+         crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- AdSense Top Banner -->
     <div class="adsense-top">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+             crossorigin="anonymous"></script>
+        <!-- this4dani-follow -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9422928756201532"
+             data-ad-slot="1904186528"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -102,26 +168,24 @@
         </script>
     </div>
     
-    <!-- Navigation Wrapper -->
-    <div class="nav-wrapper">
-        <nav id="nav">
-            <a href="index.html">
-                <img src="images/home-heart-door.png" alt="Home">
-            </a>
-            <a href="glossary.html">
-                <img src="images/file-folder-magazne-lable.png" alt="Glossary">
-            </a>
-            <a href="story.html">
-                <img src="images/slip-knot-first-chain.png" alt="Story">
-            </a>
-            <a href="follow.html" class="active">
-                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-            </a>
-        </nav>
-    </div>
+    <!-- Navigation -->
+    <nav id="nav">
+        <a href="index.html">
+            <img src="images/home-heart-door.png" alt="Home">
+        </a>
+        <a href="glossary.html">
+            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+        </a>
+        <a href="story.html">
+            <img src="images/slip-knot-first-chain.png" alt="Story">
+        </a>
+        <a href="follow.html" class="active">
+            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+        </a>
+    </nav>
     
     <!-- Main Content -->
-    <div class="container main-content">     
+    <div class="container content-wrapper">
         <!-- Header -->
         <header class="header">
             <h1>Follow</h1>
@@ -130,7 +194,6 @@
 
         <!-- Social Media List -->
         <ul class="social-list">
-            
             <li>
                 <div class="social-info">
                     <svg style="color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
@@ -138,12 +201,12 @@
                         <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
                         <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
                     </svg>
-                    <div>
+                    <div class="social-details">
                         <h3>Instagram</h3>
                         <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://instagram.com/this4dani" target="_blank" class="social-link" style="color: var(--clr-fuchsia); border-color: var(--clr-fuchsia);">Follow</a>
+                <a href="https://instagram.com/this4dani" target="_blank" class="social-link instagram-link">Follow</a>
             </li>
 
             <li>
@@ -154,12 +217,12 @@
                         <line x1="9" y1="9" x2="9.01" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         <line x1="15" y1="9" x2="15.01" y2="9" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
-                    <div>
+                    <div class="social-details">
                         <h3>Pinterest</h3>
                         <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://pinterest.com/this4dani" target="_blank" class="social-link" style="color: var(--clr-mauve); border-color: var(--clr-mauve);">Follow</a>
+                <a href="https://pinterest.com/this4dani" target="_blank" class="social-link pinterest-link">Follow</a>
             </li>
 
             <li>
@@ -168,12 +231,12 @@
                         <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" stroke="currentColor" stroke-width="2"/>
                         <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="currentColor"/>
                     </svg>
-                    <div>
+                    <div class="social-details">
                         <h3>YouTube</h3>
                         <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://youtube.com/@this4dani" target="_blank" class="social-link" style="color: var(--clr-coral); border-color: var(--clr-coral);">Subscribe</a>
+                <a href="https://youtube.com/@this4dani" target="_blank" class="social-link youtube-link">Subscribe</a>
             </li>
 
             <li>
@@ -181,12 +244,12 @@
                     <svg style="color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
                         <path d="M9 12a4 4 0 1 0 4 4V8a5 5 0 0 0 5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
-                    <div>
+                    <div class="social-details">
                         <h3>TikTok</h3>
                         <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://tiktok.com/@this4dani" target="_blank" class="social-link" style="color: var(--clr-fuchsia); border-color: var(--clr-fuchsia);">Follow</a>
+                <a href="https://tiktok.com/@this4dani" target="_blank" class="social-link tiktok-link">Follow</a>
             </li>
 
             <li>
@@ -196,12 +259,12 @@
                         <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2"/>
                         <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"/>
                     </svg>
-                    <div>
+                    <div class="social-details">
                         <h3>LinkedIn</h3>
                         <p>Ashley Danielle Caldwell</p>
                     </div>
                 </div>
-                <a href="https://linkedin.com/in/ashleydaniellecaldwell" target="_blank" class="social-link" style="color: var(--clr-mauve); border-color: var(--clr-mauve);">Connect</a>
+                <a href="https://linkedin.com/in/ashleydaniellecaldwell" target="_blank" class="social-link linkedin-link">Connect</a>
             </li>
 
             <li>
@@ -209,12 +272,12 @@
                     <svg style="color: var(--clr-coral);" viewBox="0 0 24 24" fill="none">
                         <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2"/>
                     </svg>
-                    <div>
+                    <div class="social-details">
                         <h3>Facebook</h3>
                         <p>Ashley Caldwell</p>
                     </div>
                 </div>
-                <a href="https://facebook.com/caldwelleppes" target="_blank" class="social-link" style="color: var(--clr-coral); border-color: var(--clr-coral);">Follow</a>
+                <a href="https://facebook.com/caldwelleppes" target="_blank" class="social-link facebook-link">Follow</a>
             </li>
 
             <li>
@@ -225,12 +288,12 @@
                         <path d="M7.5 7.5c3.5-2.5 9.5-2.5 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                         <path d="M7 16.5c3.5 2.5 9.5 2.5 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
                     </svg>
-                    <div>
+                    <div class="social-details">
                         <h3>Discord</h3>
                         <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="#" target="_blank" class="social-link" style="color: var(--clr-fuchsia); border-color: var(--clr-fuchsia);">Join</a>
+                <a href="#" target="_blank" class="social-link discord-link">Join</a>
             </li>
 
             <li>
@@ -238,14 +301,13 @@
                     <svg style="color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
                         <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="2"/>
                     </svg>
-                    <div>
+                    <div class="social-details">
                         <h3>GitHub</h3>
                         <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="https://github.com/this4dani" target="_blank" class="social-link" style="color: var(--clr-mauve); border-color: var(--clr-mauve);">View Code</a>
+                <a href="https://github.com/this4dani" target="_blank" class="social-link github-link">View Code</a>
             </li>
-
         </ul>
 
         <!-- Limitations Note -->
@@ -268,9 +330,29 @@
     
     <!-- AdSense Footer -->
     <div class="adsense-bottom">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+             crossorigin="anonymous"></script>
+        <!-- this4dani-follow -->
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9422928756201532"
+             data-ad-slot="1904186528"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <!-- Optional Side Ad (shows on wider screens) -->
+    <div class="adsense-side">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+             crossorigin="anonymous"></script>
+        <!-- this4dani-follow-side -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-slot="5077978925"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
         <script>
@@ -279,18 +361,13 @@
     </div>
 
     <script>
-        // Smooth scroll-then-stick navigation
+        // Simple sticky navigation
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
-            const navWrapper = document.querySelector('.nav-wrapper');
-            const wrapperTop = navWrapper.getBoundingClientRect().top;
-            
-            if (wrapperTop <= 0) {
-                nav.classList.add('stuck');
-                navWrapper.classList.add('stuck');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
             } else {
-                nav.classList.remove('stuck');
-                navWrapper.classList.remove('stuck');
+                nav.classList.remove('scrolled');
             }
         });
     </script>
