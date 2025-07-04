@@ -9,165 +9,268 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Glossary specific styles */
-        .glossary-container {
-            max-width: 1200px;
+        /* Glossary specific styles matching your design */
+        
+        /* Glossary content container - darkest mauve */
+        .glossary-content-container {
+            background: var(--clr-secondary-dark) !important;
+            border-radius: 25px;
+            margin: 30px 0;
+            box-shadow: 
+                0 15px 35px rgba(61, 26, 43, 0.5),
+                0 8px 20px rgba(0, 0, 0, 0.3),
+                inset 0 3px 6px rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(250, 248, 243, 0.15);
+            position: relative;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Sticky header section */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background: var(--clr-secondary-dark);
+            z-index: 50;
+            padding: 30px 40px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Search section - horizontal layout */
+        .search-section {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: var(--space-xl) var(--space-lg);
         }
         
-        /* Search bar */
-        .search-container {
-            text-align: center;
-            margin-bottom: var(--space-xl);
-        }
-        
-        .search-input {
-            width: 100%;
-            max-width: 600px;
-            padding: 15px 25px;
-            font-size: 1.1rem;
-            border-radius: 50px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--clr-warm-white);
-            outline: none;
-            transition: all 0.3s ease;
-        }
-        
-        .search-input:focus {
-            border-color: var(--clr-coral);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 20px rgba(255, 107, 122, 0.2);
-        }
-        
-        .search-input::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-        
-        /* Tips toggle */
+        /* Tips & Tricks button */
         .tips-toggle {
-            background: rgba(255, 107, 122, 0.1);
-            border: 2px solid var(--clr-coral);
-            color: var(--clr-coral);
+            background: var(--clr-cream) !important;
+            color: var(--clr-primary-dark) !important;
+            border: 1px solid rgba(0, 56, 64, 0.2) !important;
             padding: 12px 24px;
-            font-size: 1rem;
+            font-size: 0.95rem;
             font-weight: 600;
             border-radius: 50px;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: var(--space-lg);
+            position: relative;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         
         .tips-toggle:hover {
-            background: var(--clr-coral);
-            color: var(--clr-warm-white);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 107, 122, 0.3);
+            background: var(--clr-warm-white) !important;
+            border-color: var(--clr-coral) !important;
         }
         
         .tips-content {
-            background: rgba(61, 26, 43, 0.6);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: var(--space-xl);
-            margin-bottom: var(--space-xl);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--clr-cream);
+            color: var(--clr-primary-dark);
+            border: 2px solid var(--clr-coral);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 10px;
+            width: 280px;
             display: none;
+            z-index: 100;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
         }
         
         .tips-content.show {
             display: block;
-            animation: fadeIn 0.3s ease;
         }
         
-        .tips-content h3 {
+        .tips-content p {
+            color: var(--clr-primary-dark);
+            margin: 8px 0;
+            font-size: 0.9rem;
+        }
+        
+        .tips-content p strong {
             color: var(--clr-coral);
-            margin-bottom: var(--space-md);
-            font-family: var(--font-accent);
         }
         
-        .tips-content ul {
-            list-style: none;
-            padding-left: 0;
+        /* Search bar */
+        #search {
+            background: var(--clr-cream) !important;
+            color: var(--clr-primary-dark) !important;
+            border: 1px solid rgba(0, 56, 64, 0.2) !important;
+            width: 100%;
+            padding: 12px 25px;
+            font-size: 1.05rem;
+            border-radius: 50px;
+            outline: none;
+            transition: all 0.3s ease;
+            flex: 1;
         }
         
-        .tips-content li {
-            color: var(--clr-cream);
-            line-height: 1.8;
-            padding-left: 25px;
-            position: relative;
-            margin-bottom: var(--space-sm);
+        #search:focus {
+            border-color: var(--clr-coral) !important;
+            box-shadow: 0 0 20px rgba(255, 107, 122, 0.2);
         }
         
-        .tips-content li:before {
-            content: "✨";
-            position: absolute;
-            left: 0;
+        #search::placeholder {
+            color: var(--clr-mauve) !important;
+            opacity: 0.7 !important;
+        }
+        
+        /* Scrollable grid container */
+        .grid-container {
+            overflow-y: auto;
+            padding: 20px 40px 40px;
+            flex: 1;
+        }
+        
+        /* Custom scrollbar for grid container */
+        .grid-container::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        .grid-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+        }
+        
+        .grid-container::-webkit-scrollbar-thumb {
+            background: var(--clr-coral);
+            border-radius: 5px;
+            opacity: 0.5;
+        }
+        
+        .grid-container::-webkit-scrollbar-thumb:hover {
+            background: var(--clr-fuchsia);
         }
         
         /* Glossary grid */
         #glossary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-            gap: 15px;
-            margin-bottom: var(--space-xl);
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
         }
         
-        /* Stitch cards */
+        /* Enhanced 3D FLIP cards */
         .stitch-card {
-            background: rgba(61, 26, 43, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            text-align: center;
+            width: 100%;
+            height: 140px;
+            perspective: 1000px;
             cursor: pointer;
-            transition: all 0.3s ease;
+        }
+        
+        .card-inner {
             position: relative;
-            overflow: hidden;
-            min-height: 100px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+        }
+        
+        .stitch-card:hover .card-inner {
+            transform: rotateY(180deg);
+        }
+        
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 
+                0 8px 16px rgba(0, 0, 0, 0.2),
+                0 4px 8px rgba(0, 0, 0, 0.15),
+                inset 0 2px 4px rgba(255, 255, 255, 0.7),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.1);
         }
         
-        .stitch-card:hover {
-            transform: translateY(-5px) scale(1.05);
-            border-color: var(--clr-coral);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-            background: rgba(61, 26, 43, 0.9);
+        .card-front {
+            background: linear-gradient(145deg, var(--clr-cream) 0%, #f0e8d6 100%);
+            color: var(--clr-primary-dark);
         }
         
-        .stitch-card.search-highlight {
-            border-color: var(--clr-fuchsia);
-            background: rgba(255, 45, 130, 0.1);
+        .card-back {
+            background: linear-gradient(145deg, #f6eedc 0%, #e8d5c4 100%);
+            color: var(--clr-primary-dark);
+            transform: rotateY(180deg);
+            border: 2px solid var(--clr-coral);
         }
         
-        .stitch-card .abbr {
-            font-size: 1.8rem;
-            font-weight: 800;
-            color: var(--clr-coral);
-            margin-bottom: 5px;
-            text-transform: uppercase;
-            font-family: var(--font-primary);
-        }
-        
-        .stitch-card .name {
-            font-size: 0.75rem;
-            color: var(--clr-cream);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        /* Glossy overlay effect */
+        .card-front::before, .card-back::before {
+            content: '';
             position: absolute;
-            bottom: 10px;
+            top: 0;
             left: 0;
             right: 0;
-            padding: 0 5px;
+            bottom: 0;
+            background: linear-gradient(135deg, 
+                rgba(255,255,255,0.4) 0%, 
+                rgba(255,255,255,0.1) 30%, 
+                transparent 50%, 
+                rgba(0,0,0,0.05) 70%,
+                rgba(0,0,0,0.1) 100%);
+            border-radius: 12px;
+            pointer-events: none;
         }
         
-        .stitch-card:hover .name {
-            opacity: 0.9;
+        .card-front .abbr {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--clr-primary-dark);
+            text-transform: uppercase;
+            font-family: var(--font-primary);
+            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+            z-index: 2;
+            position: relative;
+        }
+        
+        .card-back .name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--clr-coral);
+            text-align: center;
+            z-index: 2;
+            position: relative;
+            line-height: 1.3;
+        }
+        
+        .card-back .uk-name {
+            font-size: 0.9rem;
+            color: var(--clr-mauve);
+            font-style: italic;
+            margin-top: 8px;
+            z-index: 2;
+            position: relative;
+        }
+        
+        /* Search highlight effect */
+        .stitch-card.search-highlight .card-front {
+            background: linear-gradient(145deg, #fff5f8 0%, #fde0e6 100%);
+            border-color: var(--clr-fuchsia);
+            box-shadow: 
+                0 8px 16px rgba(255, 45, 130, 0.3),
+                0 4px 8px rgba(0, 0, 0, 0.15),
+                inset 0 2px 4px rgba(255, 255, 255, 0.8),
+                0 0 20px rgba(255, 45, 130, 0.4);
+        }
+        
+        .stitch-card.search-highlight .card-back {
+            border-color: var(--clr-fuchsia);
+            box-shadow: 0 0 20px rgba(255, 45, 130, 0.4);
         }
         
         /* Popup modal */
@@ -269,25 +372,21 @@
         /* Mobile responsive */
         @media (max-width: 768px) {
             #glossary-grid {
-                grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-                gap: 10px;
+                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+                gap: 15px;
             }
             
             .stitch-card {
-                padding: 15px;
-                min-height: 80px;
+                padding: 20px 10px;
+                min-height: 100px;
             }
             
             .stitch-card .abbr {
-                font-size: 1.4rem;
-            }
-            
-            .popup-inner {
-                padding: var(--space-lg);
-            }
-            
-            #popup-title {
                 font-size: 1.5rem;
+            }
+            
+            .glossary-content-container {
+                padding: 25px 20px;
             }
         }
     </style>
@@ -333,52 +432,41 @@
         <!-- Header -->
         <header class="header">
             <h1>Interactive Crochet Glossary</h1>
-            <p>A comprehensive guide to crochet stitches in US & UK terminology</p>
+            <p>Your comprehensive guide to crochet stitches and techniques</p>
         </header>
         
-        <!-- Glossary Container -->
-        <div class="glossary-container">
-            <!-- Search Bar -->
-            <div class="search-container">
-                <input type="text" 
-                       id="search" 
-                       class="search-input"
-                       placeholder="Search stitches (e.g., 'double crochet' or 'dc')...">
+        <!-- Glossary Content Container -->
+        <div class="glossary-content-container">
+            <!-- Sticky header section -->
+            <div class="sticky-header">
+                <div class="search-section">
+                    <div class="tips-toggle" onclick="toggleTips()">
+                        Tips & Tricks ▼
+                        <div class="tips-content" id="tips-content">
+                            <p><strong>Browse:</strong> Scroll through all stitches</p>
+                            <p><strong>Search:</strong> Type abbreviation or full name</p>
+                            <p><strong>Hover:</strong> Card flips to show full name</p>
+                            <p><strong>Click:</strong> View detailed info with US/UK terms</p>
+                        </div>
+                    </div>
+                    <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
+                </div>
             </div>
-            
-            <!-- Tips Toggle -->
-            <div style="text-align: center;">
-                <button class="tips-toggle" onclick="toggleTips()">
-                    💡 Show Tips & Tricks
-                </button>
-            </div>
-            
-            <!-- Tips Content -->
-            <div id="tips-content" class="tips-content">
-                <h3>Pro Tips for Using This Glossary:</h3>
-                <ul>
-                    <li>US and UK terminology can be confusing - UK double crochet = US single crochet!</li>
-                    <li>Click any stitch card to see detailed information and the UK equivalent</li>
-                    <li>Use the search to find stitches by name or abbreviation</li>
-                    <li>Cards will highlight when they match your search</li>
-                    <li>Advanced stitches often combine basic stitches - master the basics first!</li>
-                </ul>
-            </div>
-            
-            <!-- Glossary Grid -->
-            <div id="glossary-grid">
-                <!-- Cards will be dynamically inserted here -->
+
+            <!-- Scrollable grid container -->
+            <div class="grid-container">
+                <div id="glossary-grid"></div>
             </div>
         </div>
         
         <!-- Footer -->
-        <div class="footer" style="border-top: none;">
-            <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <div style="margin-top: 20px;">
+        <div class="standard-footer">
+            <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <div class="footer-links">
                 <a href="privacy.html">Privacy Policy</a>
-                <span style="margin: 0 10px;">•</span>
+                <span class="footer-separator">•</span>
                 <a href="privacy.html#terms">Terms of Service</a>
-                <span style="margin: 0 10px;">•</span>
+                <span class="footer-separator">•</span>
                 <a href="privacy.html#contact">Contact</a>
             </div>
         </div>
@@ -411,7 +499,6 @@
         </div>
     </div>
 
-    <!-- Scripts -->
     <script type="module">
         import { stitchGlossary } from './glossarydata.js';
 
@@ -422,25 +509,42 @@
         const popupDesc = document.getElementById("popup-description");
         const popupUK = document.getElementById("popup-uk");
         const popupTags = document.getElementById("popup-tags");
+        const popupClose = document.querySelector(".popup-close");
 
         function buildCards() {
             grid.innerHTML = '';
             stitchGlossary.forEach((s) => {
                 const card = document.createElement("div");
                 card.className = "stitch-card";
-                card.setAttribute("data-name", s.name_us.toLowerCase());
-                card.setAttribute("data-tags", s.tags ? s.tags.join(' ').toLowerCase() : '');
-                card.setAttribute("data-abbr", s.id.toLowerCase());
+                card.setAttribute("data-name", s.name_us);
+                card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
 
+                const cardInner = document.createElement("div");
+                cardInner.className = "card-inner";
+
+                // Front of card
+                const cardFront = document.createElement("div");
+                cardFront.className = "card-front";
                 const abbr = document.createElement("div");
                 abbr.className = "abbr";
                 abbr.textContent = s.id.toUpperCase();
+                cardFront.appendChild(abbr);
 
-                const full = document.createElement("div");
-                full.className = "name";
-                full.textContent = s.name_us;
+                // Back of card
+                const cardBack = document.createElement("div");
+                cardBack.className = "card-back";
+                const name = document.createElement("div");
+                name.className = "name";
+                name.textContent = s.name_us;
+                const ukName = document.createElement("div");
+                ukName.className = "uk-name";
+                ukName.textContent = `UK: ${s.name_uk}`;
+                cardBack.appendChild(name);
+                cardBack.appendChild(ukName);
 
-                card.append(abbr, full);
+                cardInner.appendChild(cardFront);
+                cardInner.appendChild(cardBack);
+                card.appendChild(cardInner);
 
                 card.onclick = () => {
                     popupTitle.textContent = s.name_us;
@@ -468,41 +572,37 @@
         function initGlossary() {
             buildCards();
 
-            // Search functionality with highlighting
+            // Search with highlighting (not hiding)
             searchInput.addEventListener("input", () => {
-                const query = searchInput.value.toLowerCase().trim();
-                
-                Array.from(grid.children).forEach((card) => {
-                    const name = card.getAttribute("data-name");
-                    const tags = card.getAttribute("data-tags");
-                    const abbr = card.getAttribute("data-abbr");
+                const query = searchInput.value.toLowerCase();
+                Array.from(grid.children).forEach((c) => {
+                    const name = c.getAttribute("data-name").toLowerCase();
+                    const tags = c.getAttribute("data-tags").toLowerCase();
+                    const abbr = c.querySelector(".abbr").textContent.toLowerCase();
                     
                     const matches = name.includes(query) || 
                                    abbr.includes(query) || 
                                    tags.includes(query);
                     
-                    // Show/hide cards
-                    card.style.display = matches || query === "" ? "" : "none";
-                    
-                    // Highlight matching cards
+                    // Add highlight frame instead of hiding
                     if (query !== "" && matches) {
-                        card.classList.add("search-highlight");
+                        c.classList.add("search-highlight");
                     } else {
-                        card.classList.remove("search-highlight");
+                        c.classList.remove("search-highlight");
                     }
                 });
             });
 
-            // Popup close handlers
-            document.querySelector(".popup-close").onclick = () => closePopup();
+            // Popup close
+            popupClose.onclick = () => popup.classList.remove("active");
             popup.onclick = (e) => {
-                if (e.target === popup) closePopup();
+                if (e.target === popup) popup.classList.remove("active");
             };
 
             // ESC key to close popup
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    closePopup();
+                    popup.classList.remove('active');
                 }
             });
         }
@@ -510,25 +610,26 @@
         // Global functions
         window.toggleTips = function() {
             const tipsContent = document.getElementById('tips-content');
-            const toggle = document.querySelector('.tips-toggle');
-            
-            if (tipsContent.classList.contains('show')) {
-                tipsContent.classList.remove('show');
-                toggle.textContent = '💡 Show Tips & Tricks';
-            } else {
-                tipsContent.classList.add('show');
-                toggle.textContent = '💡 Hide Tips & Tricks';
-            }
+            tipsContent.classList.toggle('show');
         };
 
         window.closePopup = function() {
             popup.classList.remove("active");
         };
 
+        // Close tips when clicking outside
+        document.addEventListener('click', function(e) {
+            const tipsToggle = document.querySelector('.tips-toggle');
+            const tipsContent = document.getElementById('tips-content');
+            if (tipsToggle && !tipsToggle.contains(e.target)) {
+                tipsContent.classList.remove('show');
+            }
+        });
+
         // Initialize
         initGlossary();
 
-        // Sticky navigation
+        // Navigation scroll behavior
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
             if (window.scrollY > 50) {
