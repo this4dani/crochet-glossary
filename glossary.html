@@ -46,15 +46,15 @@
             margin: 0 auto;
         }
         
-        /* Tips & Tricks button */
+        /* Tips & Tricks button - less rounded */
         .tips-toggle {
             background: var(--clr-cream) !important;
             color: var(--clr-primary-dark) !important;
             border: 1px solid rgba(0, 56, 64, 0.2) !important;
-            padding: 12px 24px;
+            padding: 10px 20px;
             font-size: 0.95rem;
             font-weight: 600;
-            border-radius: 50px;
+            border-radius: 8px;  /* Much less rounded */
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
@@ -74,7 +74,7 @@
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
             border: 2px solid var(--clr-coral);
-            border-radius: 15px;
+            border-radius: 12px;
             padding: 20px;
             margin-top: 10px;
             width: 280px;
@@ -97,15 +97,15 @@
             color: var(--clr-coral);
         }
         
-        /* Search bar */
+        /* Search bar - less rounded */
         #search {
             background: var(--clr-cream) !important;
             color: var(--clr-primary-dark) !important;
             border: 1px solid rgba(0, 56, 64, 0.2) !important;
             width: 100%;
-            padding: 12px 25px;
+            padding: 10px 20px;
             font-size: 1.05rem;
-            border-radius: 50px;
+            border-radius: 8px;  /* Much less rounded */
             outline: none;
             transition: all 0.3s ease;
             flex: 1;
@@ -151,15 +151,16 @@
         /* Glossary grid */
         #glossary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: 15px;
             margin-bottom: 40px;
+            justify-items: center;
         }
         
-        /* Enhanced 3D FLIP cards */
+        /* Enhanced 3D FLIP cards - matching home page size */
         .stitch-card {
-            width: 100%;
-            height: 140px;
+            width: 80px;
+            height: 100px;
             perspective: 1000px;
             cursor: pointer;
         }
@@ -188,13 +189,10 @@
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            padding: 20px;
-            box-shadow: 
-                0 8px 16px rgba(0, 0, 0, 0.2),
-                0 4px 8px rgba(0, 0, 0, 0.15),
-                inset 0 2px 4px rgba(255, 255, 255, 0.7),
-                inset 0 -2px 4px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            gap: 8px;
+            padding: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border: 2px solid rgba(255, 255, 255, 0.3);
         }
         
         .card-front {
@@ -206,55 +204,31 @@
             background: linear-gradient(145deg, #f6eedc 0%, #e8d5c4 100%);
             color: var(--clr-primary-dark);
             transform: rotateY(180deg);
-            border: 2px solid var(--clr-coral);
-        }
-        
-        /* Glossy overlay effect */
-        .card-front::before, .card-back::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(255,255,255,0.4) 0%, 
-                rgba(255,255,255,0.1) 30%, 
-                transparent 50%, 
-                rgba(0,0,0,0.05) 70%,
-                rgba(0,0,0,0.1) 100%);
-            border-radius: 12px;
-            pointer-events: none;
+            border: 2px solid rgba(255, 45, 130, 0.4);
         }
         
         .card-front .abbr {
-            font-size: 2.5rem;
-            font-weight: 800;
+            font-size: 1.4rem;
+            font-weight: 900;
             color: var(--clr-primary-dark);
             text-transform: uppercase;
             font-family: var(--font-primary);
-            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
-            z-index: 2;
-            position: relative;
+            letter-spacing: 1px;
         }
         
         .card-back .name {
-            font-size: 1.1rem;
-            font-weight: 700;
+            font-size: 0.75rem;
+            font-weight: 800;
             color: var(--clr-coral);
             text-align: center;
-            z-index: 2;
-            position: relative;
-            line-height: 1.3;
+            line-height: 1.2;
+            padding: 0 4px;
         }
         
         .card-back .uk-name {
-            font-size: 0.9rem;
+            font-size: 0.65rem;
             color: var(--clr-mauve);
             font-style: italic;
-            margin-top: 8px;
-            z-index: 2;
-            position: relative;
         }
         
         /* Search highlight effect */
@@ -460,13 +434,13 @@
         </div>
         
         <!-- Footer -->
-        <div class="standard-footer">
-            <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <div class="footer-links">
+        <div class="footer" style="border-top: none;">
+            <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <div style="margin-top: 20px;">
                 <a href="privacy.html">Privacy Policy</a>
-                <span class="footer-separator">•</span>
+                <span style="margin: 0 10px;">•</span>
                 <a href="privacy.html#terms">Terms of Service</a>
-                <span class="footer-separator">•</span>
+                <span style="margin: 0 10px;">•</span>
                 <a href="privacy.html#contact">Contact</a>
             </div>
         </div>
