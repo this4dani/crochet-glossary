@@ -176,7 +176,6 @@
             perspective: 1000px;
             cursor: pointer;
             position: relative;
-            transform-style: preserve-3d;
         }
         
         .card-inner {
@@ -186,11 +185,10 @@
             text-align: center;
             transition: transform 0.6s;
             transform-style: preserve-3d;
-            transform-origin: center center;
         }
         
         .stitch-card:hover .card-inner {
-            transform: rotateY(180deg) translateY(0);
+            transform: rotateY(180deg);
         }
         
         .card-front, .card-back {
