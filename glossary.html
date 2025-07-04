@@ -9,59 +9,67 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Glossary specific styles matching your design */
+        /* Glossary specific styles */
         
-        /* Glossary content container - much less padding */
+        /* Container with tighter spacing */
         .glossary-content-container {
-            background: var(--clr-secondary-dark) !important;
-            border-radius: 20px;
-            margin: 20px 0;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(250, 248, 243, 0.1);
+            background: var(--clr-secondary-dark);
+            border-radius: 15px;
+            margin: 20px auto;
+            max-width: 1400px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(250, 248, 243, 0.08);
             position: relative;
             height: 75vh;
             display: flex;
             flex-direction: column;
         }
         
-        /* Sticky header section - less padding */
+        /* Sticky header with minimal padding */
         .sticky-header {
             position: sticky;
             top: 0;
             background: var(--clr-secondary-dark);
             z-index: 50;
             padding: 20px 30px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
         
-        /* Search section - horizontal layout */
+        /* Search section layout */
         .search-section {
             display: flex;
             align-items: center;
-            gap: 20px;
-            max-width: 800px;
+            gap: 15px;
+            max-width: 900px;
             margin: 0 auto;
         }
         
-        /* Tips & Tricks button - less rounded */
+        /* Tips & Tricks - inset 3D effect */
         .tips-toggle {
-            background: var(--clr-cream) !important;
-            color: var(--clr-primary-dark) !important;
-            border: 1px solid rgba(0, 56, 64, 0.2) !important;
+            background: var(--clr-cream);
+            color: var(--clr-primary-dark);
+            border: none;
             padding: 10px 20px;
             font-size: 0.95rem;
             font-weight: 600;
-            border-radius: 8px;  /* Much less rounded */
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.3s ease;
             position: relative;
             white-space: nowrap;
             flex-shrink: 0;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 -2px 4px rgba(255, 255, 255, 0.25),
+                0 1px 2px rgba(0, 0, 0, 0.2);
         }
         
         .tips-toggle:hover {
-            background: var(--clr-warm-white) !important;
-            border-color: var(--clr-coral) !important;
+            background: var(--clr-warm-white);
+            box-shadow: 
+                inset 0 3px 6px rgba(0, 0, 0, 0.15),
+                inset 0 -1px 3px rgba(255, 255, 255, 0.3),
+                0 1px 2px rgba(0, 0, 0, 0.2);
         }
         
         .tips-content {
@@ -70,14 +78,14 @@
             left: 0;
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
-            border: 2px solid var(--clr-coral);
-            border-radius: 12px;
-            padding: 20px;
-            margin-top: 10px;
-            width: 280px;
+            border: 1px solid var(--clr-coral);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 8px;
+            width: 250px;
             display: none;
             z-index: 100;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
         }
         
         .tips-content.show {
@@ -86,58 +94,65 @@
         
         .tips-content p {
             color: var(--clr-primary-dark);
-            margin: 8px 0;
-            font-size: 0.9rem;
+            margin: 6px 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
         }
         
         .tips-content p strong {
             color: var(--clr-coral);
         }
         
-        /* Search bar - less rounded */
+        /* Search bar - matching inset style */
         #search {
-            background: var(--clr-cream) !important;
-            color: var(--clr-primary-dark) !important;
-            border: 1px solid rgba(0, 56, 64, 0.2) !important;
+            background: var(--clr-cream);
+            color: var(--clr-primary-dark);
+            border: none;
             width: 100%;
             padding: 10px 20px;
-            font-size: 1.05rem;
-            border-radius: 8px;  /* Much less rounded */
+            font-size: 1rem;
+            border-radius: 6px;
             outline: none;
             transition: all 0.3s ease;
             flex: 1;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 -2px 4px rgba(255, 255, 255, 0.25),
+                0 1px 2px rgba(0, 0, 0, 0.2);
         }
         
         #search:focus {
-            border-color: var(--clr-coral) !important;
-            box-shadow: 0 0 20px rgba(255, 107, 122, 0.2);
+            box-shadow: 
+                inset 0 3px 6px rgba(0, 0, 0, 0.15),
+                inset 0 -1px 3px rgba(255, 255, 255, 0.3),
+                0 0 0 2px var(--clr-coral);
         }
         
         #search::placeholder {
-            color: var(--clr-mauve) !important;
-            opacity: 0.7 !important;
+            color: var(--clr-mauve);
+            opacity: 0.6;
         }
         
-        /* Scrollable grid container */
+        /* Grid container with minimal padding */
         .grid-container {
             overflow-y: auto;
-            padding: 20px 40px 40px;
+            padding: 20px 30px;
             flex: 1;
         }
         
-        /* Custom scrollbar for grid container */
+        /* Custom scrollbar */
         .grid-container::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
         
         .grid-container::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
         }
         
         .grid-container::-webkit-scrollbar-thumb {
             background: var(--clr-coral);
-            border-radius: 5px;
+            border-radius: 4px;
             opacity: 0.5;
         }
         
@@ -148,18 +163,19 @@
         /* Glossary grid */
         #glossary-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 15px;
-            margin-bottom: 40px;
-            justify-items: center;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 12px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
         
-        /* Enhanced 3D FLIP cards - better sizing and depth */
+        /* 3D Card styling */
         .stitch-card {
-            width: 100px;
-            height: 120px;
+            width: 100%;
+            height: 110px;
             perspective: 1000px;
             cursor: pointer;
+            position: relative;
         }
         
         .card-inner {
@@ -181,115 +197,85 @@
             height: 100%;
             -webkit-backface-visibility: hidden;
             backface-visibility: hidden;
-            border-radius: 8px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-direction: column;
-            gap: 4px;
-            padding: 10px;
-        }
-        
-        /* Better 3D depth for cards */
-        .card-front {
-            background: linear-gradient(145deg, #ffab7d 0%, #ff9a66 100%);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            padding: 8px;
+            /* 3D card effect */
+            background: var(--clr-cream);
+            border: 1px solid rgba(0, 0, 0, 0.15);
             box-shadow: 
-                0 4px 12px rgba(0, 0, 0, 0.15),
-                0 2px 4px rgba(0, 0, 0, 0.1),
-                inset 0 1px 2px rgba(255, 255, 255, 0.5);
+                0 3px 8px rgba(0, 0, 0, 0.15),
+                0 1px 3px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255, 255, 255, 0.5),
+                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
         }
         
         .card-back {
-            background: linear-gradient(145deg, #f6eedc 0%, #e8d5c4 100%);
             transform: rotateY(180deg);
-            border: 1px solid rgba(255, 45, 130, 0.3);
-            box-shadow: 
-                0 4px 12px rgba(0, 0, 0, 0.15),
-                0 2px 4px rgba(0, 0, 0, 0.1);
+            background: var(--clr-warm-white);
+            border: 1px solid var(--clr-coral);
         }
         
-        /* Add slight gloss effect */
-        .card-front::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(to bottom, 
-                rgba(255, 255, 255, 0.3) 0%, 
-                transparent 100%);
-            border-radius: 8px 8px 0 0;
-            pointer-events: none;
-        }
-        
+        /* Card text sizing */
         .card-front .abbr {
-            font-size: 1.8rem;
+            font-size: clamp(0.9rem, 1.2rem, 1.4rem);
             font-weight: 800;
-            color: var(--clr-deep-chocolate);
+            color: var(--clr-primary-dark);
             text-transform: uppercase;
             font-family: var(--font-primary);
             letter-spacing: 0.5px;
-            text-shadow: 0 1px 2px rgba(255, 255, 255, 0.3);
         }
         
         .card-back .name {
-            font-size: 0.85rem;
+            font-size: clamp(0.7rem, 0.8rem, 0.9rem);
             font-weight: 700;
             color: var(--clr-coral);
             text-align: center;
-            line-height: 1.3;
-            padding: 0 5px;
+            line-height: 1.2;
+            word-break: break-word;
+            padding: 0 4px;
         }
         
         .card-back .uk-name {
-            font-size: 0.7rem;
+            font-size: 0.65rem;
             color: var(--clr-mauve);
             font-style: italic;
+            margin-top: 4px;
         }
         
-        /* Different colors for different card types */
-        .stitch-card:nth-child(5n+1) .card-front { 
-            background: linear-gradient(145deg, #ffab7d 0%, #ff9a66 100%); 
-        }
-        .stitch-card:nth-child(5n+2) .card-front { 
-            background: linear-gradient(145deg, #ff6b7a 0%, #ff5a69 100%); 
-        }
-        .stitch-card:nth-child(5n+3) .card-front { 
-            background: linear-gradient(145deg, #f4d35e 0%, #f0c947 100%); 
-        }
-        .stitch-card:nth-child(5n+4) .card-front { 
-            background: linear-gradient(145deg, #8db596 0%, #7aa885 100%); 
-        }
-        .stitch-card:nth-child(5n+5) .card-front { 
-            background: linear-gradient(145deg, #d15694 0%, #c74583 100%); 
-        }
-        
-        /* Search highlight effect */
-        .stitch-card.search-highlight .card-front {
-            background: linear-gradient(145deg, #fff5f8 0%, #fde0e6 100%);
-            border-color: var(--clr-fuchsia);
+        /* Search highlight - frame effect */
+        .search-highlight-frame {
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 3px solid var(--clr-fuchsia);
+            border-radius: 8px;
+            pointer-events: none;
+            z-index: 10;
             box-shadow: 
-                0 8px 16px rgba(255, 45, 130, 0.3),
-                0 4px 8px rgba(0, 0, 0, 0.15),
-                inset 0 2px 4px rgba(255, 255, 255, 0.8),
-                0 0 20px rgba(255, 45, 130, 0.4);
+                0 0 20px rgba(255, 45, 130, 0.4),
+                inset 0 0 20px rgba(255, 45, 130, 0.1);
+            animation: pulse 1.5s ease-in-out infinite;
         }
         
-        .stitch-card.search-highlight .card-back {
-            border-color: var(--clr-fuchsia);
-            box-shadow: 0 0 20px rgba(255, 45, 130, 0.4);
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
         }
         
-        /* Popup modal - much more subtle */
+        /* Subtle popup */
         .popup {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(0, 0, 0, 0.5);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -307,29 +293,28 @@
         .popup-inner {
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
-            border-radius: 12px;
-            padding: 30px;
-            max-width: 500px;
+            border-radius: 10px;
+            padding: 25px;
+            max-width: 450px;
             width: 90%;
             max-height: 70vh;
             overflow-y: auto;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
         }
         
         .popup-close {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 15px;
+            right: 15px;
             background: transparent;
             border: none;
-            color: var(--clr-cream);
-            font-size: 2rem;
+            color: var(--clr-mauve);
+            font-size: 1.5rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -337,64 +322,68 @@
         }
         
         .popup-close:hover {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(0, 0, 0, 0.05);
             color: var(--clr-coral);
-            transform: rotate(90deg);
         }
         
         #popup-title {
             color: var(--clr-primary-dark);
-            font-size: 1.5rem;
-            margin-bottom: 10px;
+            font-size: 1.4rem;
+            margin-bottom: 8px;
             font-family: var(--font-accent);
         }
         
         #popup-uk {
             color: var(--clr-mauve);
-            font-size: 1rem;
-            margin-bottom: 20px;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
             font-style: italic;
         }
         
         #popup-description {
             color: var(--clr-primary-dark);
             line-height: 1.6;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
         }
         
         #popup-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
         }
         
         .tag {
-            background: rgba(255, 107, 122, 0.2);
+            background: rgba(255, 107, 122, 0.15);
             color: var(--clr-coral);
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.85rem;
+            padding: 3px 10px;
+            border-radius: 15px;
+            font-size: 0.8rem;
             font-weight: 500;
         }
         
         /* Mobile responsive */
         @media (max-width: 768px) {
             #glossary-grid {
-                grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
-                gap: 15px;
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 10px;
             }
             
             .stitch-card {
-                padding: 20px 10px;
-                min-height: 100px;
-            }
-            
-            .stitch-card .abbr {
-                font-size: 1.5rem;
+                height: 100px;
             }
             
             .glossary-content-container {
-                padding: 25px 20px;
+                margin: 10px;
+                height: 80vh;
+            }
+            
+            .sticky-header {
+                padding: 15px 20px 12px;
+            }
+            
+            .grid-container {
+                padding: 15px 20px;
             }
         }
     </style>
@@ -517,15 +506,15 @@
         const popupDesc = document.getElementById("popup-description");
         const popupUK = document.getElementById("popup-uk");
         const popupTags = document.getElementById("popup-tags");
-        const popupClose = document.querySelector(".popup-close");
 
         function buildCards() {
             grid.innerHTML = '';
             stitchGlossary.forEach((s) => {
                 const card = document.createElement("div");
                 card.className = "stitch-card";
-                card.setAttribute("data-name", s.name_us);
-                card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
+                card.setAttribute("data-name", s.name_us.toLowerCase());
+                card.setAttribute("data-tags", s.tags ? s.tags.join(' ').toLowerCase() : '');
+                card.setAttribute("data-abbr", s.id.toLowerCase());
 
                 const cardInner = document.createElement("div");
                 cardInner.className = "card-inner";
@@ -580,37 +569,45 @@
         function initGlossary() {
             buildCards();
 
-            // Search with highlighting (not hiding)
+            // Search with frame highlighting
             searchInput.addEventListener("input", () => {
-                const query = searchInput.value.toLowerCase();
-                Array.from(grid.children).forEach((c) => {
-                    const name = c.getAttribute("data-name").toLowerCase();
-                    const tags = c.getAttribute("data-tags").toLowerCase();
-                    const abbr = c.querySelector(".abbr").textContent.toLowerCase();
+                const query = searchInput.value.toLowerCase().trim();
+                
+                // Remove all existing highlight frames
+                document.querySelectorAll('.search-highlight-frame').forEach(frame => {
+                    frame.remove();
+                });
+                
+                if (query === "") return;
+                
+                Array.from(grid.children).forEach((card) => {
+                    const name = card.getAttribute("data-name");
+                    const tags = card.getAttribute("data-tags");
+                    const abbr = card.getAttribute("data-abbr");
                     
                     const matches = name.includes(query) || 
                                    abbr.includes(query) || 
                                    tags.includes(query);
                     
-                    // Add highlight frame instead of hiding
-                    if (query !== "" && matches) {
-                        c.classList.add("search-highlight");
-                    } else {
-                        c.classList.remove("search-highlight");
+                    if (matches) {
+                        // Create highlight frame
+                        const frame = document.createElement('div');
+                        frame.className = 'search-highlight-frame';
+                        card.appendChild(frame);
                     }
                 });
             });
 
-            // Popup close
-            popupClose.onclick = () => popup.classList.remove("active");
+            // Popup close handlers
+            document.querySelector(".popup-close").onclick = () => closePopup();
             popup.onclick = (e) => {
-                if (e.target === popup) popup.classList.remove("active");
+                if (e.target === popup) closePopup();
             };
 
             // ESC key to close popup
             document.addEventListener('keydown', function(e) {
                 if (e.key === 'Escape') {
-                    popup.classList.remove('active');
+                    closePopup();
                 }
             });
         }
@@ -618,7 +615,15 @@
         // Global functions
         window.toggleTips = function() {
             const tipsContent = document.getElementById('tips-content');
-            tipsContent.classList.toggle('show');
+            const toggle = document.querySelector('.tips-toggle');
+            
+            if (tipsContent.classList.contains('show')) {
+                tipsContent.classList.remove('show');
+                toggle.innerHTML = 'Tips & Tricks ▼';
+            } else {
+                tipsContent.classList.add('show');
+                toggle.innerHTML = 'Tips & Tricks ▲';
+            }
         };
 
         window.closePopup = function() {
@@ -631,13 +636,14 @@
             const tipsContent = document.getElementById('tips-content');
             if (tipsToggle && !tipsToggle.contains(e.target)) {
                 tipsContent.classList.remove('show');
+                tipsToggle.innerHTML = 'Tips & Tricks ▼';
             }
         });
 
         // Initialize
         initGlossary();
 
-        // Navigation scroll behavior
+        // Sticky navigation
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
             if (window.scrollY > 50) {
