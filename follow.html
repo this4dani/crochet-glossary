@@ -14,6 +14,7 @@
             padding: 0;
             margin: 40px auto;
             max-width: 700px;
+            background: transparent !important; /* Force no background */
         }
         
         .social-list li {
@@ -61,12 +62,13 @@
             text-decoration: none;
             font-weight: 600;
             font-size: 0.9rem;
-            width: 120px; /* Increased width for all buttons */
+            width: 140px; /* Increased to prevent text wrapping */
             text-align: center;
             transition: all 0.3s ease;
             border: 2px solid;
             display: inline-block;
             flex-shrink: 0;
+            white-space: nowrap; /* Prevent text wrapping */
         }
         
         .social-link:hover {
@@ -316,7 +318,7 @@
         </div>
 
         <!-- Footer -->
-        <div class="footer">
+        <div class="footer" style="border-top: none;">
             <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
             <div style="margin-top: 20px;">
                 <a href="privacy.html">Privacy Policy</a>
