@@ -11,14 +11,14 @@
     <style>
         /* Glossary specific styles */
         
-        /* Container with tighter spacing */
+        /* Container with darker background */
         .glossary-content-container {
-            background: var(--clr-secondary-dark);
+            background: var(--clr-rich-brown);
             border-radius: 15px;
             margin: 20px auto;
             max-width: 1400px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(250, 248, 243, 0.08);
+            border: 1px solid rgba(0, 0, 0, 0.2);
             position: relative;
             height: 75vh;
             display: flex;
@@ -29,10 +29,10 @@
         .sticky-header {
             position: sticky;
             top: 0;
-            background: var(--clr-secondary-dark);
+            background: var(--clr-rich-brown);
             z-index: 50;
             padding: 20px 30px 15px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
         }
         
         /* Search section layout */
@@ -203,26 +203,48 @@
             justify-content: center;
             flex-direction: column;
             padding: 8px;
-            /* 3D card effect */
+            /* 3D card effect with partial borders */
             background: var(--clr-cream);
-            border: 1px solid rgba(0, 0, 0, 0.15);
+            border-top: 2px solid rgba(255, 255, 255, 0.6);
+            border-right: 2px solid rgba(0, 0, 0, 0.15);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: 
-                0 3px 8px rgba(0, 0, 0, 0.15),
-                0 1px 3px rgba(0, 0, 0, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.5),
-                inset 0 -1px 0 rgba(0, 0, 0, 0.1);
+                2px 2px 6px rgba(0, 0, 0, 0.2),
+                inset -1px -1px 2px rgba(0, 0, 0, 0.1),
+                inset 1px 1px 2px rgba(255, 255, 255, 0.4);
         }
         
         .card-back {
             transform: rotateY(180deg);
             background: var(--clr-warm-white);
-            border: 1px solid var(--clr-coral);
+            border-top: 2px solid rgba(255, 255, 255, 0.7);
+            border-right: 2px solid var(--clr-coral);
+            border-bottom: 1px solid var(--clr-coral);
+            border-left: 1px solid rgba(255, 255, 255, 0.4);
         }
         
-        /* Card text sizing */
+        /* Add subtle color variations to cards */
+        .stitch-card:nth-child(4n+1) .card-front {
+            background: linear-gradient(135deg, var(--clr-cream) 0%, #f8f0de 100%);
+        }
+        
+        .stitch-card:nth-child(4n+2) .card-front {
+            background: linear-gradient(135deg, #faf5ed 0%, var(--clr-warm-white) 100%);
+        }
+        
+        .stitch-card:nth-child(4n+3) .card-front {
+            background: linear-gradient(135deg, var(--clr-warm-white) 0%, #f5ede0 100%);
+        }
+        
+        .stitch-card:nth-child(4n+4) .card-front {
+            background: linear-gradient(135deg, #f9f4ec 0%, var(--clr-cream) 100%);
+        }
+        
+        /* Card text sizing - less bold */
         .card-front .abbr {
             font-size: clamp(0.9rem, 1.2rem, 1.4rem);
-            font-weight: 800;
+            font-weight: 600;
             color: var(--clr-primary-dark);
             text-transform: uppercase;
             font-family: var(--font-primary);
@@ -231,7 +253,7 @@
         
         .card-back .name {
             font-size: clamp(0.7rem, 0.8rem, 0.9rem);
-            font-weight: 700;
+            font-weight: 600;
             color: var(--clr-coral);
             text-align: center;
             line-height: 1.2;
