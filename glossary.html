@@ -13,7 +13,7 @@
         
         /* Container with darker background */
         .glossary-content-container {
-            background: var(--clr-rich-brown);
+            background: var(--clr-secondary-dark);
             border-radius: 15px;
             margin: 20px auto;
             max-width: 1400px;
@@ -29,7 +29,7 @@
         .sticky-header {
             position: sticky;
             top: 0;
-            background: var(--clr-rich-brown);
+            background: var(--clr-secondary-dark);
             z-index: 50;
             padding: 20px 30px 15px;
             border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -176,6 +176,7 @@
             perspective: 1000px;
             cursor: pointer;
             position: relative;
+            transform-style: preserve-3d;
         }
         
         .card-inner {
@@ -185,10 +186,11 @@
             text-align: center;
             transition: transform 0.6s;
             transform-style: preserve-3d;
+            transform-origin: center center;
         }
         
         .stitch-card:hover .card-inner {
-            transform: rotateY(180deg);
+            transform: rotateY(180deg) translateY(0);
         }
         
         .card-front, .card-back {
