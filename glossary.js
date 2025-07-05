@@ -7,106 +7,160 @@ const popupTitle = document.getElementById("popup-title");
 const popupDesc = document.getElementById("popup-description");
 const popupUK = document.getElementById("popup-uk");
 const popupTags = document.getElementById("popup-tags");
-const popupClose = document.querySelector(".popup-close");
-
-const safeSymbol = (sym) => (/^[a-zA-Z_]/.test(sym) ? sym : `sym_${sym}`);
 
 function buildCards() {
-  grid.innerHTML = '';
-  stitchGlossary.forEach((s) => {
-    const card = document.createElement("div");
-    card.className = "stitch-card";
-    card.setAttribute("data-name", s.name_us);
-    card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
+    grid.innerHTML = '';
+    stitchGlossary.forEach((s) => {
+        const card = document.createElement("div");
+        card.className = "stitch-card";
+        card.setAttribute("data-name", s.name_us.toLowerCase());
+        card.setAttribute("data-tags", s.tags ? s.tags.join(' ').toLowerCase() : '');
+        card.setAttribute("data-abbr", s.id.toLowerCase());
 
-    const abbr = document.createElement("div");
-    abbr.className = "abbr";
-    abbr.textContent = s.id.toUpperCase();
+        const cardInner = document.createElement("div");
+        cardInner.className = "card-inner";
 
-    const full = document.createElement("div");
-    full.className = "name";
-    full.textContent = s.name_us;
+        // Front of card
+        const cardFront = document.createElement("div");
+        cardFront.className = "card-front";
+        const abbr = document.createElement("div");
+        abbr.className = "abbr";
+        abbr.textContent = s.id.toUpperCase();
+        cardFront.appendChild(abbr);
 
-    card.append(abbr, full);
+        // Back of card
+        const cardBack = document.createElement("div");
+        cardBack.className = "card-back";
+        const name = document.createElement("div");
+        name.className = "name";
+        name.textContent = s.name_us;
+        const ukName = document.createElement("div");
+        ukName.className = "uk-name";
+        ukName.textContent = `UK: ${s.name_uk}`;
+        cardBack.appendChild(name);
+        cardBack.appendChild(ukName);
 
-    card.onclick = () => {
-      popupTitle.textContent = s.name_us;
-      popupUK.textContent = `UK: ${s.name_uk}`;
-      popupDesc.textContent = s.notes || "No description available.";
-      
-      // Render tags
-      popupTags.innerHTML = '';
-      if (s.tags && s.tags.length > 0) {
-        s.tags.forEach(tag => {
-          const tagEl = document.createElement('span');
-          tagEl.className = 'tag';
-          tagEl.textContent = tag;
-          popupTags.appendChild(tagEl);
-        });
-      }
-      
-      popup.classList.add("active");
-    };
+        cardInner.appendChild(cardFront);
+        cardInner.appendChild(cardBack);
+        card.appendChild(cardInner);
 
-    grid.appendChild(card);
-  });
+        card.onclick = () => {
+            popupTitle.textContent = s.name_us;
+            popupUK.textContent = `UK: ${s.name_uk}`;
+            popupDesc.textContent = s.notes || "No description available.";
+            
+            // Render tags
+            popupTags.innerHTML = '';
+            if (s.tags && s.tags.length > 0) {
+                s.tags.forEach(tag => {
+                    const tagEl = document.createElement('span');
+                    tagEl.className = 'tag';
+                    tagEl.textContent = tag;
+                    popupTags.appendChild(tagEl);
+                });
+            }
+            
+            popup.classList.add("active");
+        };
+
+        grid.appendChild(card);
+    });
 }
 
 function initGlossary() {
-  buildCards();
+    buildCards();
 
-  // FIXED SEARCH WITH HIGHLIGHTING
-  searchInput.addEventListener("input", () => {
-    const query = searchInput.value.toLowerCase().trim();
-    
-    Array.from(grid.children).forEach((card) => {
-      const name = card.getAttribute("data-name").toLowerCase();
-      const tags = card.getAttribute("data-tags").toLowerCase();
-      const abbr = card.querySelector(".abbr").textContent.toLowerCase();
-      
-      const matches = name.includes(query) || 
-                     abbr.includes(query) || 
-                     tags.includes(query);
-      
-      // Remove existing highlight first
-      card.classList.remove("search-highlight");
-      
-      // Add highlight if query exists and matches
-      if (query !== "" && matches) {
-        card.classList.add("search-highlight");
-      }
+    // Search with enhanced highlighting
+    searchInput.addEventListener("input", () => {
+        const query = searchInput.value.toLowerCase().trim();
+        
+        // Remove all existing highlights and search-matched class
+        document.querySelectorAll('.stitch-card').forEach(card => {
+            card.classList.remove('search-matched');
+            const existingFrame = card.querySelector('.search-highlight-frame');
+            if (existingFrame) {
+                existingFrame.remove();
+            }
+        });
+        
+        if (query === "") return;
+        
+        Array.from(grid.children).forEach((card) => {
+            const name = card.getAttribute("data-name");
+            const tags = card.getAttribute("data-tags");
+            const abbr = card.getAttribute("data-abbr");
+            
+            const matches = name.includes(query) || 
+                           abbr.includes(query) || 
+                           tags.includes(query);
+            
+            if (matches) {
+                // Add search-matched class for enhanced hover
+                card.classList.add('search-matched');
+                
+                // Create bold highlight frame
+                const frame = document.createElement('div');
+                frame.className = 'search-highlight-frame';
+                card.appendChild(frame);
+            }
+        });
     });
-  });
 
-  // Popup close
-  popupClose.onclick = () => popup.classList.remove("active");
-  popup.onclick = (e) => {
-    if (e.target === popup) popup.classList.remove("active");
-  };
+    // Popup close handlers
+    document.querySelector(".popup-close").onclick = () => closePopup();
+    popup.onclick = (e) => {
+        if (e.target === popup) closePopup();
+    };
 
-  // Tips toggle - FIXED
-  window.toggleTips = function() {
+    // ESC key to close popup
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closePopup();
+        }
+    });
+}
+
+// Global functions
+window.toggleTips = function() {
     const tipsContent = document.getElementById('tips-content');
-    tipsContent.classList.toggle('show');
-  };
+    const toggle = document.querySelector('.tips-toggle');
+    
+    if (tipsContent.classList.contains('show')) {
+        tipsContent.classList.remove('show');
+        toggle.innerHTML = 'Tips & Tricks ▼';
+    } else {
+        tipsContent.classList.add('show');
+        toggle.innerHTML = 'Tips & Tricks ▲';
+    }
+};
 
-  // Close tips when clicking outside - FIXED
-  document.addEventListener('click', function(e) {
+window.closePopup = function() {
+    popup.classList.remove("active");
+};
+
+// Close tips when clicking outside
+document.addEventListener('click', function(e) {
     const tipsToggle = document.querySelector('.tips-toggle');
     const tipsContent = document.getElementById('tips-content');
     if (tipsToggle && !tipsToggle.contains(e.target)) {
-      tipsContent.classList.remove('show');
+        tipsContent.classList.remove('show');
+        tipsToggle.innerHTML = 'Tips & Tricks ▼';
     }
-  });
+});
 
-  // ESC key to close popup
-  document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-      popup.classList.remove('active');
-    }
-  });
+// Initialize when DOM is ready
+if (document.readyState !== "loading") {
+    initGlossary();
+} else {
+    document.addEventListener("DOMContentLoaded", initGlossary);
 }
 
-document.readyState !== "loading"
-  ? initGlossary()
-  : document.addEventListener("DOMContentLoaded", initGlossary);
+// Sticky navigation
+window.addEventListener('scroll', function() {
+    const nav = document.getElementById('nav');
+    if (window.scrollY > 50) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
