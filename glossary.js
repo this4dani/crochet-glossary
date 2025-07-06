@@ -9,44 +9,61 @@ const popupUK = document.getElementById("popup-uk");
 const popupTags = document.getElementById("popup-tags");
 
 function buildCards() {
-  grid.innerHTML = '';
+grid.innerHTML = '';
   stitchGlossary.forEach((s) => {
     const card = document.createElement("div");
     card.className = "stitch-card";
     card.setAttribute("data-name", s.name_us);
     card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
 
+    const cardInner = document.createElement("div");
+    cardInner.className = "card-inner";
+
+    // FRONT - Full name + "..."
+    const cardFront = document.createElement("div");
+    cardFront.className = "card-front";
+    
+    const name = document.createElement("div");
+    name.className = "name";
+    name.textContent = s.name_us;
+    
+    // Apply dynamic font sizing based on name length
+    const nameLength = s.name_us.length;
+    if (nameLength < 15) {
+      name.classList.add('name-short');
+    } else if (nameLength < 25) {
+      name.classList.add('name-medium');
+    } else if (nameLength < 35) {
+      name.classList.add('name-long');
+    } else {
+      name.classList.add('name-extra-long');
+    }
+    
+    const clickMore = document.createElement("div");
+    clickMore.className = "click-more";
+    clickMore.textContent = "...";
+    
+    cardFront.appendChild(name);
+    cardFront.appendChild(clickMore);
+
+    // BACK - Abbreviation + Description
+    const cardBack = document.createElement("div");
+    cardBack.className = "card-back";
+    
     const abbr = document.createElement("div");
     abbr.className = "abbr";
     abbr.textContent = s.id.toUpperCase();
     
-    const abbrLength = s.id.length;
-    if (abbrLength <= 3) {
-      abbr.classList.add('abbr-short');
-    } else if (abbrLength <= 6) {
-      abbr.classList.add('abbr-medium');
-    } else if (abbrLength <= 10) {
-      abbr.classList.add('abbr-long');
-    } else {
-      abbr.classList.add('abbr-extra-long');
-    }
-
-    const full = document.createElement("div");
-    full.className = "name";
-    full.textContent = s.name_us;
+    const description = document.createElement("div");
+    description.className = "description";
+    description.textContent = s.notes || `UK: ${s.name_uk}`;
     
-    const nameLength = s.name_us.length;
-    if (nameLength < 15) {
-      full.classList.add('name-short');
-    } else if (nameLength < 25) {
-      full.classList.add('name-medium');
-    } else if (nameLength < 35) {
-      full.classList.add('name-long');
-    } else {
-      full.classList.add('name-extra-long');
-    }
+    cardBack.appendChild(abbr);
+    cardBack.appendChild(description);
 
-    card.append(abbr, full);
+    cardInner.appendChild(cardFront);
+    cardInner.appendChild(cardBack);
+    card.appendChild(cardInner);
 
     card.onclick = () => {
       popupTitle.textContent = s.name_us;
