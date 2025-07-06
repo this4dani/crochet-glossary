@@ -170,17 +170,23 @@
         }
         
         /* Stitch card */
-    .stitch-card {
+  .stitch-card {
     position: relative;
-    width: 100%;
-    max-width: 200px;
-    height: 140px;
+    width: 80px;
+    height: 100px;
     perspective: 1000px;
-    transition: z-index 0.3s ease;
+    transition: transform 0.3s ease, z-index 0.3s ease, height 0.3s ease;
 }
 
 .stitch-card:hover {
+    transform: scale(1.15);
     z-index: 10;
+    height: auto;
+    min-height: 130px;
+}
+
+.stitch-card.search-highlight:hover {
+    transform: scale(1.2);
 }
 
 .card-inner {
@@ -195,6 +201,8 @@
 
 .stitch-card:hover .card-inner {
     transform: rotateY(180deg);
+    height: auto;
+    min-height: 130px;
 }
 
 .card-front, .card-back {
@@ -203,12 +211,12 @@
     height: 100%;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    border-radius: 15px;
+    border-radius: 12px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 20px 15px;
+    padding: 8px 6px;
     box-shadow: 
         0 1px 3px rgba(0, 0, 0, 0.12),
         0 1px 2px rgba(0, 0, 0, 0.24),
@@ -216,6 +224,12 @@
         2px 2px 8px rgba(0, 0, 0, 0.15),
         -1px -1px 4px rgba(255, 255, 255, 0.5) inset;
     border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.stitch-card:hover .card-back {
+    height: auto;
+    min-height: 100%;
+    padding: 10px 6px;
 }
 
 .card-front {
@@ -235,44 +249,49 @@
     font-weight: 600;
     color: var(--clr-primary-dark);
     margin: 0;
-    line-height: 1.2;
+    line-height: 1.1;
     word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
     text-align: center;
     width: 100%;
+    padding: 0 2px;
 }
 
-.name-short { font-size: 1.1rem; }
-.name-medium { font-size: 0.95rem; }
-.name-long { font-size: 0.8rem; }
-.name-extra-long { font-size: 0.7rem; }
+.name-short { font-size: 0.75rem; }
+.name-medium { font-size: 0.65rem; }
+.name-long { font-size: 0.55rem; }
+.name-extra-long { font-size: 0.5rem; }
 
 .card-back .abbr {
     font-family: var(--font-primary);
     font-weight: 700;
     color: var(--clr-fuchsia);
     text-transform: uppercase;
-    font-size: 1.8rem;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 4px;
 }
 
 .card-back .description {
-    font-size: 0.85rem;
+    font-size: 0.6rem;
     color: var(--clr-primary-dark);
     opacity: 0.9;
     text-align: center;
-    line-height: 1.3;
+    line-height: 1.2;
     overflow: hidden;
     display: -webkit-box;
-    -webkit-line-clamp: 3;
-    line-clamp: 3;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
+    padding: 0 4px;
 }
 
 .card-back .click-more {
-    font-size: 1.2rem;
+    font-size: 1rem;
     color: var(--clr-fuchsia);
-    opacity: 0.6;
-    margin-top: 5px;
+    opacity: 0.8;
+    margin-top: 4px;
+    font-weight: 700;
 }
 
 .stitch-card.search-highlight {
@@ -288,25 +307,24 @@
     }
 }
 
-/* Update the grid to prevent horizontal scroll */
 #glossary-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
+    grid-template-columns: repeat(auto-fill, 80px);
+    gap: 15px;
+    justify-content: center;
     margin-bottom: 40px;
     width: 100%;
-    overflow-x: hidden;
 }
 
 @media (max-width: 768px) {
     #glossary-grid {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-        gap: 15px;
+        grid-template-columns: repeat(auto-fill, 70px);
+        gap: 10px;
     }
     
     .stitch-card {
-        max-width: 100%;
-        height: 120px;
+        width: 70px;
+        height: 90px;
     }
 }
         
