@@ -9,62 +9,65 @@ const popupUK = document.getElementById("popup-uk");
 const popupTags = document.getElementById("popup-tags");
 
 function buildCards() {
-    grid.innerHTML = '';
-    stitchGlossary.forEach((s) => {
-        const card = document.createElement("div");
-        card.className = "stitch-card";
-        card.setAttribute("data-name", s.name_us.toLowerCase());
-        card.setAttribute("data-tags", s.tags ? s.tags.join(' ').toLowerCase() : '');
-        card.setAttribute("data-abbr", s.id.toLowerCase());
+  grid.innerHTML = '';
+  stitchGlossary.forEach((s) => {
+    const card = document.createElement("div");
+    card.className = "stitch-card";
+    card.setAttribute("data-name", s.name_us);
+    card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
 
-        const cardInner = document.createElement("div");
-        cardInner.className = "card-inner";
+    const abbr = document.createElement("div");
+    abbr.className = "abbr";
+    abbr.textContent = s.id.toUpperCase();
+    
+    const abbrLength = s.id.length;
+    if (abbrLength <= 3) {
+      abbr.classList.add('abbr-short');
+    } else if (abbrLength <= 6) {
+      abbr.classList.add('abbr-medium');
+    } else if (abbrLength <= 10) {
+      abbr.classList.add('abbr-long');
+    } else {
+      abbr.classList.add('abbr-extra-long');
+    }
 
-        // Front of card
-        const cardFront = document.createElement("div");
-        cardFront.className = "card-front";
-        const abbr = document.createElement("div");
-        abbr.className = "abbr";
-        abbr.textContent = s.id.toUpperCase();
-        cardFront.appendChild(abbr);
+    const full = document.createElement("div");
+    full.className = "name";
+    full.textContent = s.name_us;
+    
+    const nameLength = s.name_us.length;
+    if (nameLength < 15) {
+      full.classList.add('name-short');
+    } else if (nameLength < 25) {
+      full.classList.add('name-medium');
+    } else if (nameLength < 35) {
+      full.classList.add('name-long');
+    } else {
+      full.classList.add('name-extra-long');
+    }
 
-        // Back of card
-        const cardBack = document.createElement("div");
-        cardBack.className = "card-back";
-        const name = document.createElement("div");
-        name.className = "name";
-        name.textContent = s.name_us;
-        const ukName = document.createElement("div");
-        ukName.className = "uk-name";
-        ukName.textContent = `UK: ${s.name_uk}`;
-        cardBack.appendChild(name);
-        cardBack.appendChild(ukName);
+    card.append(abbr, full);
 
-        cardInner.appendChild(cardFront);
-        cardInner.appendChild(cardBack);
-        card.appendChild(cardInner);
+    card.onclick = () => {
+      popupTitle.textContent = s.name_us;
+      popupUK.textContent = `UK: ${s.name_uk}`;
+      popupDesc.textContent = s.notes || "No description available.";
+      
+      popupTags.innerHTML = '';
+      if (s.tags && s.tags.length > 0) {
+        s.tags.forEach(tag => {
+          const tagEl = document.createElement('span');
+          tagEl.className = 'tag';
+          tagEl.textContent = tag;
+          popupTags.appendChild(tagEl);
+        });
+      }
+      
+      popup.classList.add("active");
+    };
 
-        card.onclick = () => {
-            popupTitle.textContent = s.name_us;
-            popupUK.textContent = `UK: ${s.name_uk}`;
-            popupDesc.textContent = s.notes || "No description available.";
-            
-            // Render tags
-            popupTags.innerHTML = '';
-            if (s.tags && s.tags.length > 0) {
-                s.tags.forEach(tag => {
-                    const tagEl = document.createElement('span');
-                    tagEl.className = 'tag';
-                    tagEl.textContent = tag;
-                    popupTags.appendChild(tagEl);
-                });
-            }
-            
-            popup.classList.add("active");
-        };
-
-        grid.appendChild(card);
-    });
+    grid.appendChild(card);
+  });
 }
 
 function initGlossary() {
