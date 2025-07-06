@@ -9,7 +9,7 @@ const popupUK = document.getElementById("popup-uk");
 const popupTags = document.getElementById("popup-tags");
 
 function buildCards() {
-grid.innerHTML = '';
+  grid.innerHTML = '';
   stitchGlossary.forEach((s) => {
     const card = document.createElement("div");
     card.className = "stitch-card";
@@ -19,7 +19,7 @@ grid.innerHTML = '';
     const cardInner = document.createElement("div");
     cardInner.className = "card-inner";
 
-    // FRONT - Full name + "..."
+    // FRONT - Full name only
     const cardFront = document.createElement("div");
     cardFront.className = "card-front";
     
@@ -27,7 +27,6 @@ grid.innerHTML = '';
     name.className = "name";
     name.textContent = s.name_us;
     
-    // Apply dynamic font sizing based on name length
     const nameLength = s.name_us.length;
     if (nameLength < 15) {
       name.classList.add('name-short');
@@ -39,14 +38,9 @@ grid.innerHTML = '';
       name.classList.add('name-extra-long');
     }
     
-    const clickMore = document.createElement("div");
-    clickMore.className = "click-more";
-    clickMore.textContent = "...";
-    
     cardFront.appendChild(name);
-    cardFront.appendChild(clickMore);
 
-    // BACK - Abbreviation + Description
+    // BACK - Abbreviation + Description + "..."
     const cardBack = document.createElement("div");
     cardBack.className = "card-back";
     
@@ -58,8 +52,13 @@ grid.innerHTML = '';
     description.className = "description";
     description.textContent = s.notes || `UK: ${s.name_uk}`;
     
+    const clickMore = document.createElement("div");
+    clickMore.className = "click-more";
+    clickMore.textContent = "...";
+    
     cardBack.appendChild(abbr);
     cardBack.appendChild(description);
+    cardBack.appendChild(clickMore);
 
     cardInner.appendChild(cardFront);
     cardInner.appendChild(cardBack);
