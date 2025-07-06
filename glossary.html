@@ -11,11 +11,23 @@
     <style>
         /* Glossary specific styles */
         
+        /* Header styling - ADDED */
+        .header h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--clr-coral) 0%, var(--clr-fuchsia) 50%, var(--clr-mauve) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
         /* Container with darker background */
         .glossary-content-container {
             background: #003840;
             border-radius: 15px;
-            margin: 20px auto;
+            margin: 10px auto; /* CHANGED from 20px */
             max-width: 1400px;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(0, 0, 0, 0.2);
@@ -49,7 +61,7 @@
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
             border: none;
-            padding: 10px 20px;
+            padding: 14px 20px; /* CHANGED from 10px */
             font-size: 0.95rem;
             font-weight: 600;
             border-radius: 6px;
@@ -109,7 +121,7 @@
             color: var(--clr-primary-dark);
             border: none;
             width: 100%;
-            padding: 10px 20px;
+            padding: 14px 20px; /* CHANGED from 10px */
             font-size: 1rem;
             border-radius: 6px;
             outline: none;
@@ -136,7 +148,7 @@
         /* Grid container with minimal padding */
         .grid-container {
             overflow-y: auto;
-            padding: 20px 30px;
+            padding: 15px 20px; /* CHANGED from 20px 30px */
             flex: 1;
         }
         
