@@ -61,7 +61,8 @@
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
             border: none;
-            padding: 14px 20px; /* CHANGED from 10px */
+            padding: 12px 20px;
+            height: 44px;
             font-size: 0.95rem;
             font-weight: 600;
             border-radius: 6px;
@@ -74,6 +75,8 @@
                 inset 0 2px 4px rgba(0, 0, 0, 0.1),
                 inset 0 -2px 4px rgba(255, 255, 255, 0.25),
                 0 1px 2px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
         }
         
         .tips-toggle:hover {
@@ -121,7 +124,8 @@
             color: var(--clr-primary-dark);
             border: none;
             width: 100%;
-            padding: 14px 20px; /* CHANGED from 10px */
+            padding: 12px 20px;
+            height: 44px;
             font-size: 1rem;
             border-radius: 6px;
             outline: none;
@@ -458,6 +462,7 @@
                 padding: 15px 20px;
             }
         }
+        
     </style>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
@@ -509,14 +514,26 @@
             <!-- Sticky header section -->
             <div class="sticky-header">
                 <div class="search-section">
-                    <div class="tips-toggle" onclick="toggleTips()">
-                        Tips & Tricks ▼
-                        <div class="tips-content" id="tips-content">
-                            <p><strong>Browse:</strong> Scroll through all stitches</p>
-                            <p><strong>Search:</strong> Type abbreviation or full name</p>
-                            <p><strong>Hover:</strong> Card flips to show full name</p>
-                            <p><strong>Click:</strong> View detailed info with US/UK terms</p>
-                        </div>
+                    <div class="tips-content" id="tips-content">
+                        <h4 style="color: var(--clr-coral); margin: 0 0 10px 0; font-size: 1rem;">Welcome to your glossary! 🧶</h4>
+    
+                        <p><strong style="color: var(--clr-fuchsia);">✨ Hover over any card</strong><br>
+                        Watch them flip to reveal abbreviations and descriptions!</p>
+    
+                        <p><strong style="color: var(--clr-fuchsia);">🔍 Search made easy</strong><br>
+                        Type any part of a stitch name or its abbreviation - like "single" or "sc"</p>
+    
+                        <p><strong style="color: var(--clr-fuchsia);">📖 Click for details</strong><br>
+                        Each card opens a window with full information about that stitch</p>
+    
+                        <p><strong style="color: var(--clr-fuchsia);">🌍 US & UK friendly</strong><br>
+                        Every stitch shows both American and British terms - no more confusion!</p>
+    
+                        <p><strong style="color: var(--clr-fuchsia);">📚 253 stitches strong</strong><br>
+                        From basic chains to advanced techniques - it's all here for you!</p>
+    
+                        <p style="margin-top: 12px; font-style: italic; opacity: 0.9; font-size: 0.85rem;">
+                        Tip: Cards expand on hover to show longer descriptions 💕</p>
                     </div>
                     <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
                 </div>

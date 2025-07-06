@@ -183,3 +183,148 @@ window.addEventListener('scroll', function() {
         nav.classList.remove('scrolled');
     }
 });
+
+[{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 466,
+	"startColumn": 20,
+	"endLineNumber": 466,
+	"endColumn": 21
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 468,
+	"startColumn": 33,
+	"endLineNumber": 468,
+	"endColumn": 34
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-ruleorselectorexpected",
+	"severity": 8,
+	"message": "at-rule or selector expected",
+	"source": "css",
+	"startLineNumber": 470,
+	"startColumn": 5,
+	"endLineNumber": 470,
+	"endColumn": 6
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 471,
+	"startColumn": 18,
+	"endLineNumber": 471,
+	"endColumn": 19
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 472,
+	"startColumn": 8,
+	"endLineNumber": 472,
+	"endColumn": 9
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-ruleorselectorexpected",
+	"severity": 8,
+	"message": "at-rule or selector expected",
+	"source": "css",
+	"startLineNumber": 474,
+	"startColumn": 5,
+	"endLineNumber": 474,
+	"endColumn": 6
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-colonexpected",
+	"severity": 8,
+	"message": "colon expected",
+	"source": "css",
+	"startLineNumber": 475,
+	"startColumn": 15,
+	"endLineNumber": 475,
+	"endColumn": 16
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-ruleorselectorexpected",
+	"severity": 8,
+	"message": "at-rule or selector expected",
+	"source": "css",
+	"startLineNumber": 477,
+	"startColumn": 1,
+	"endLineNumber": 477,
+	"endColumn": 2
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 480,
+	"startColumn": 26,
+	"endLineNumber": 480,
+	"endColumn": 27
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 482,
+	"startColumn": 23,
+	"endLineNumber": 482,
+	"endColumn": 24
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 483,
+	"startColumn": 8,
+	"endLineNumber": 483,
+	"endColumn": 9
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-lcurlyexpected",
+	"severity": 8,
+	"message": "{ expected",
+	"source": "css",
+	"startLineNumber": 485,
+	"startColumn": 30,
+	"endLineNumber": 485,
+	"endColumn": 31
+},{
+	"resource": "/workspaces/crochet-glossary/glossary.html",
+	"owner": "_generated_diagnostic_collection_name_#1",
+	"code": "css-ruleorselectorexpected",
+	"severity": 8,
+	"message": "at-rule or selector expected",
+	"source": "css",
+	"startLineNumber": 486,
+	"startColumn": 5,
+	"endLineNumber": 486,
+	"endColumn": 6
+}]
