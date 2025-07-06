@@ -1,0 +1,29 @@
+total 200
+drwxrwxrwx+ 7 codespace root       4096 Jul  6 11:46 .
+drwxr-xrwx+ 6 codespace root       4096 Jul  5 14:53 ..
+drwxrwxrwx+ 9 codespace root       4096 Jul  6 11:19 .git
+drwxrwxrwx+ 3 codespace codespace  4096 Jul  6 11:10 .github
+-rw-rw-rw-  1 codespace codespace   180 Jul  6 11:08 .gitignore
+drwxrwxrwx+ 3 codespace codespace  4096 Jul  6 11:29 @this4dani ➜ 
+-rw-rw-rw-  1 codespace codespace    13 Jun 30 03:16 CNAME
+-rw-rw-rw-  1 codespace root       7048 Jun 26 01:36 LICENSE
+-rw-rw-rw-  1 codespace root         18 Jun 26 01:36 README.md
+-rw-rw-rw-  1 codespace codespace    63 Jul  6 11:43 config.py
+-rw-rw-rw-  1 codespace codespace  1385 Jul  6 11:27 create_glossary_sheet.py
+-rw-rw-rw-  1 codespace codespace  2374 Jul  6 11:13 credentials.json
+drwxrwxrwx+ 3 codespace codespace  4096 Jul  5 20:25 data
+-rw-rw-rw-  1 codespace codespace     0 Jul  6 11:46 file_tree.txt
+-rw-rw-rw-  1 codespace codespace 16213 Jul  4 02:11 follow.html
+-rw-rw-rw-  1 codespace codespace 18050 Jul  5 00:25 glossary.html
+-rw-rw-rw-  1 codespace codespace  5639 Jul  6 10:11 glossary.js
+-rw-rw-rw-  1 codespace codespace 11891 Jun 27 22:06 glossarydata.js
+-rw-rw-rw-  1 codespace codespace 10831 Jul  6 11:04 google_sheets_sync.py
+drwxrwxrwx+ 2 codespace codespace  4096 Jul  1 22:46 images
+-rw-rw-rw-  1 codespace codespace 11417 Jul  4 01:57 index.html
+-rw-rw-rw-  1 codespace codespace  3578 Jul  5 20:44 merge_glossary_data.py
+-rw-rw-rw-  1 codespace codespace 14841 Jun 30 10:40 privacy.html
+-rw-rw-rw-  1 codespace codespace   757 Jul  6 11:38 share_with_me.py
+-rw-rw-rw-  1 codespace codespace  2195 Jun 26 22:17 stitch_symbols.svg
+-rw-rw-rw-  1 codespace codespace 12371 Jul  4 02:29 story.html
+-rw-rw-rw-  1 codespace codespace 12106 Jul  4 19:52 styles.css
+-rw-rw-rw-  1 codespace codespace   347 Jul  6 11:24 test_sheets_connection.py
