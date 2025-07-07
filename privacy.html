@@ -4,6 +4,7 @@
     <title>Legal & Contact - DANI'S</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Privacy Policy, Terms of Service, and Contact Information for DANI'S - Your trusted crochet pattern and glossary resource.">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Dancing+Script:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
@@ -15,7 +16,7 @@
         .legal-container {
             max-width: 900px;
             margin: 0 auto;
-            padding: var(--space-2xl) var(--space-lg);
+            padding: var(--space-2xl) var(--space-xl);
             flex: 1;
         }
         
@@ -87,6 +88,25 @@
         
         .tab-content.active {
             display: block;
+        }
+        
+        /* SEO Enhancement - All content visible to crawlers */
+        .seo-content {
+            position: absolute;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+        }
+        
+        @media print {
+            .tab-content {
+                display: block !important;
+                page-break-before: always;
+            }
+            .tab-nav {
+                display: none;
+            }
         }
         
         .tab-content h2 {
@@ -310,16 +330,12 @@
                     <span>this4dani@gmail.com</span>
                 </div>
                 <div class="contact-item">
-                    <strong>Website:</strong>
-                    <a href="https://this4dani.com">this4dani.com</a>
+                    <strong>Instagram:</strong>
+                    <a href="https://instagram.com/this4dani">@this4dani</a>
                 </div>
                 <div class="contact-item">
-                    <strong>Social:</strong>
-                    <a href="#">@this4dani</a> (Instagram, Pinterest, TikTok)
-                </div>
-                <div class="contact-item">
-                    <strong>Business:</strong>
-                    <a href="#">LinkedIn</a>
+                    <strong>LinkedIn:</strong>
+                    <a href="https://linkedin.com/in/ashleydaniellecaldwell">Ashley Danielle Caldwell</a>
                 </div>
             </div>
             
@@ -339,7 +355,7 @@
             </div>
             
             <h3>Office Hours</h3>
-            <p>Monday - Friday: 9 AM - 5 PM EST<br>
+            <p>Friday: 9 AM - 3 PM EST<br>
             <em>Please note: Response times may be longer during mission trips or ministry events.</em></p>
         </div>
     </div>
@@ -348,6 +364,12 @@
         <p>Built with ❤️, prayers, coffee, and determination to solve real problems</p>
         <p>DANI'S: Designs • Accoutrements • Notions • Ideas • Something Special</p>
         <p>© 2024 DANI'S. All rights reserved.</p>
+    </div>
+    
+    <!-- SEO Enhancement: Hidden content for search engines -->
+    <div class="seo-content" aria-hidden="true">
+        <h1>DANI'S Privacy Policy, Terms of Service, and Contact Information</h1>
+        <p>Complete legal information and contact details for DANI'S crochet glossary and pattern adjustment platform.</p>
     </div>
     
     <script>
@@ -370,6 +392,27 @@
             document.getElementById(tabName).classList.add("active");
             evt.currentTarget.classList.add("active");
         }
+        
+        // Handle anchor links from other pages
+        function handleAnchorLink() {
+            const hash = window.location.hash;
+            if (hash === '#terms') {
+                // Find and click the terms button
+                const termsButton = document.querySelector('button[onclick*="terms"]');
+                if (termsButton) termsButton.click();
+            } else if (hash === '#contact') {
+                // Find and click the contact button
+                const contactButton = document.querySelector('button[onclick*="contact"]');
+                if (contactButton) contactButton.click();
+            }
+            // Default is privacy which is already active
+        }
+        
+        // Check for anchor on page load
+        window.addEventListener('DOMContentLoaded', handleAnchorLink);
+        
+        // Check for anchor on hash change (if user clicks back/forward)
+        window.addEventListener('hashchange', handleAnchorLink);
     </script>
 </body>
 </html>
