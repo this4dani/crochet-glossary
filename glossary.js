@@ -2,19 +2,15 @@ import { stitchGlossary } from './glossarydata.js';
 
 const searchInput = document.getElementById("search");
 const grid = document.getElementById("glossary-grid");
-const popup = document.getElementById("popup");
-const popupTitle = document.getElementById("popup-title");
-const popupDesc = document.getElementById("popup-description");
-const popupUK = document.getElementById("popup-uk");
-const popupTags = document.getElementById("popup-tags");
 
 function buildCards() {
   grid.innerHTML = '';
   stitchGlossary.forEach((s) => {
     const card = document.createElement("div");
     card.className = "stitch-card";
-    card.setAttribute("data-name", s.name_us);
-    card.setAttribute("data-tags", s.tags ? s.tags.join(' ') : '');
+    card.setAttribute("data-name", s.name_us.toLowerCase());
+    card.setAttribute("data-tags", s.tags ? s.tags.join(' ').toLowerCase() : '');
+    card.setAttribute("data-abbr", s.id.toLowerCase());
 
     const cardInner = document.createElement("div");
     cardInner.className = "card-inner";
@@ -64,22 +60,26 @@ function buildCards() {
     cardInner.appendChild(cardBack);
     card.appendChild(cardInner);
 
+    // UPDATED: Click handler for enhanced modal
     card.onclick = () => {
-      popupTitle.textContent = s.name_us;
-      popupUK.textContent = `UK: ${s.name_uk}`;
-      popupDesc.textContent = s.notes || "No description available.";
+      const stitchData = stitchGlossary.find(stitch => stitch.id === s.id);
       
-      popupTags.innerHTML = '';
-      if (s.tags && s.tags.length > 0) {
-        s.tags.forEach(tag => {
-          const tagEl = document.createElement('span');
-          tagEl.className = 'tag';
-          tagEl.textContent = tag;
-          popupTags.appendChild(tagEl);
-        });
+      // Add enhanced data if not already present
+      if (!stitchData.difficulty) {
+        // Add default data based on tags
+        stitchData.difficulty = stitchData.tags.includes('basic') ? 1 : 
+                               stitchData.tags.includes('intermediate') ? 3 : 
+                               stitchData.tags.includes('advanced') ? 4 : 2;
+        
+        stitchData.timeToLearn = stitchData.tags.includes('basic') ? '15-30 minutes' :
+                                stitchData.tags.includes('intermediate') ? '30-60 minutes' :
+                                stitchData.tags.includes('advanced') ? '1-2 hours' : '30 minutes';
       }
       
-      popup.classList.add("active");
+      // Open the enhanced modal
+      if (window.openEnhancedModal) {
+        window.openEnhancedModal(stitchData);
+      }
     };
 
     grid.appendChild(card);
@@ -89,83 +89,40 @@ function buildCards() {
 function initGlossary() {
     buildCards();
 
-    // Search with enhanced highlighting
+    // Search functionality
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase().trim();
-        
-        // Remove all existing highlights and search-matched class
-        document.querySelectorAll('.stitch-card').forEach(card => {
-            card.classList.remove('search-matched');
-            const existingFrame = card.querySelector('.search-highlight-frame');
-            if (existingFrame) {
-                existingFrame.remove();
-            }
-        });
-        
-        if (query === "") return;
         
         Array.from(grid.children).forEach((card) => {
             const name = card.getAttribute("data-name");
             const tags = card.getAttribute("data-tags");
             const abbr = card.getAttribute("data-abbr");
             
-            const matches = name.includes(query) || 
+            const matches = query === "" || 
+                           name.includes(query) || 
                            abbr.includes(query) || 
                            tags.includes(query);
             
-            if (matches) {
-                // Add search-matched class for enhanced hover
-                card.classList.add('search-matched');
-                
-                // Create bold highlight frame
-                const frame = document.createElement('div');
-                frame.className = 'search-highlight-frame';
-                card.appendChild(frame);
+            // Remove highlight first
+            card.classList.remove('search-highlight');
+            
+            // Show/hide cards
+            card.style.display = matches ? "" : "none";
+            
+            // Add highlight if there's a query and it matches
+            if (query !== "" && matches) {
+                card.classList.add('search-highlight');
             }
         });
     });
 
-    // Popup close handlers
-    document.querySelector(".popup-close").onclick = () => closePopup();
-    popup.onclick = (e) => {
-        if (e.target === popup) closePopup();
-    };
-
-    // ESC key to close popup
+    // ESC key to close modal
     document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-            closePopup();
+        if (e.key === 'Escape' && window.closeEnhancedModal) {
+            window.closeEnhancedModal();
         }
     });
 }
-
-// Global functions
-window.toggleTips = function() {
-    const tipsContent = document.getElementById('tips-content');
-    const toggle = document.querySelector('.tips-toggle');
-    
-    if (tipsContent.classList.contains('show')) {
-        tipsContent.classList.remove('show');
-        toggle.innerHTML = 'Tips & Tricks ▼';
-    } else {
-        tipsContent.classList.add('show');
-        toggle.innerHTML = 'Tips & Tricks ▲';
-    }
-};
-
-window.closePopup = function() {
-    popup.classList.remove("active");
-};
-
-// Close tips when clicking outside
-document.addEventListener('click', function(e) {
-    const tipsToggle = document.querySelector('.tips-toggle');
-    const tipsContent = document.getElementById('tips-content');
-    if (tipsToggle && !tipsToggle.contains(e.target)) {
-        tipsContent.classList.remove('show');
-        tipsToggle.innerHTML = 'Tips & Tricks ▼';
-    }
-});
 
 // Initialize when DOM is ready
 if (document.readyState !== "loading") {
@@ -183,148 +140,3 @@ window.addEventListener('scroll', function() {
         nav.classList.remove('scrolled');
     }
 });
-
-[{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-lcurlyexpected",
-	"severity": 8,
-	"message": "{ expected",
-	"source": "css",
-	"startLineNumber": 466,
-	"startColumn": 20,
-	"endLineNumber": 466,
-	"endColumn": 21
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-lcurlyexpected",
-	"severity": 8,
-	"message": "{ expected",
-	"source": "css",
-	"startLineNumber": 468,
-	"startColumn": 33,
-	"endLineNumber": 468,
-	"endColumn": 34
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-ruleorselectorexpected",
-	"severity": 8,
-	"message": "at-rule or selector expected",
-	"source": "css",
-	"startLineNumber": 470,
-	"startColumn": 5,
-	"endLineNumber": 470,
-	"endColumn": 6
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-lcurlyexpected",
-	"severity": 8,
-	"message": "{ expected",
-	"source": "css",
-	"startLineNumber": 471,
-	"startColumn": 18,
-	"endLineNumber": 471,
-	"endColumn": 19
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-lcurlyexpected",
-	"severity": 8,
-	"message": "{ expected",
-	"source": "css",
-	"startLineNumber": 472,
-	"startColumn": 8,
-	"endLineNumber": 472,
-	"endColumn": 9
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-ruleorselectorexpected",
-	"severity": 8,
-	"message": "at-rule or selector expected",
-	"source": "css",
-	"startLineNumber": 474,
-	"startColumn": 5,
-	"endLineNumber": 474,
-	"endColumn": 6
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-colonexpected",
-	"severity": 8,
-	"message": "colon expected",
-	"source": "css",
-	"startLineNumber": 475,
-	"startColumn": 15,
-	"endLineNumber": 475,
-	"endColumn": 16
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-ruleorselectorexpected",
-	"severity": 8,
-	"message": "at-rule or selector expected",
-	"source": "css",
-	"startLineNumber": 477,
-	"startColumn": 1,
-	"endLineNumber": 477,
-	"endColumn": 2
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-lcurlyexpected",
-	"severity": 8,
-	"message": "{ expected",
-	"source": "css",
-	"startLineNumber": 480,
-	"startColumn": 26,
-	"endLineNumber": 480,
-	"endColumn": 27
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-lcurlyexpected",
-	"severity": 8,
-	"message": "{ expected",
-	"source": "css",
-	"startLineNumber": 482,
-	"startColumn": 23,
-	"endLineNumber": 482,
-	"endColumn": 24
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-lcurlyexpected",
-	"severity": 8,
-	"message": "{ expected",
-	"source": "css",
-	"startLineNumber": 483,
-	"startColumn": 8,
-	"endLineNumber": 483,
-	"endColumn": 9
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-lcurlyexpected",
-	"severity": 8,
-	"message": "{ expected",
-	"source": "css",
-	"startLineNumber": 485,
-	"startColumn": 30,
-	"endLineNumber": 485,
-	"endColumn": 31
-},{
-	"resource": "/workspaces/crochet-glossary/glossary.html",
-	"owner": "_generated_diagnostic_collection_name_#1",
-	"code": "css-ruleorselectorexpected",
-	"severity": 8,
-	"message": "at-rule or selector expected",
-	"source": "css",
-	"startLineNumber": 486,
-	"startColumn": 5,
-	"endLineNumber": 486,
-	"endColumn": 6
-}]
