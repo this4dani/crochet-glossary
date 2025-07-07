@@ -34,45 +34,63 @@
     </script>
     
     <style>
-        /* Enhanced intro styles with hollow DANI'S effect */
+        /* Intro container - raised effect */
+        .intro {
+            background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
+            max-width: 850px;
+            margin: 0 auto;
+            padding: 70px;
+            border-radius: 25px;
+            text-align: left;
+            box-shadow: 
+                0 15px 35px rgba(79, 43, 58, 0.4),
+                0 8px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(250, 248, 243, 0.15);
+            position: relative;
+        }
+
         .intro h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 6rem;
-            color: #003840; /* Match the background color */
+            color: #003840;
             margin: 0 0 5px 0;
             font-weight: 800;
             letter-spacing: -5px;
-            /* Cutout effect with inset shadows */
+            /* Proper cutout effect */
             text-shadow: 
-                -2px -2px 3px rgba(0, 0, 0, 0.5),
-                2px 2px 3px rgba(255, 255, 255, 0.2),
-                inset -4px -4px 8px rgba(0, 0, 0, 0.4),
-                inset 4px 4px 8px rgba(255, 255, 255, 0.1);
-            position: relative;
-            transition: all 0.3s ease;
+                /* Inner bevel for depth */
+                inset 0 2px 3px rgba(0, 0, 0, 0.6),
+                inset 0 -2px 3px rgba(255, 255, 255, 0.1),
+                /* Outer shadow for carved look */
+                0 1px 0 rgba(255, 255, 255, 0.2),
+                0 -1px 2px rgba(0, 0, 0, 0.7);
+            /* Additional depth */
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
         }
-        
-        .intro h1:hover {
-            color: #002622; /* Slightly darker on hover */
-            text-shadow: 
-                -3px -3px 5px rgba(0, 0, 0, 0.6),
-                3px 3px 5px rgba(255, 255, 255, 0.3),
-                inset -6px -6px 12px rgba(0, 0, 0, 0.5),
-                inset 6px 6px 12px rgba(255, 255, 255, 0.15);
-            transform: scale(1.02);
-        }
-        
-        /* Fix the original acronym paragraph positioning */
+
         .intro p:first-of-type {
             color: #ff6b7a;
-            font-size: 1.3rem; /* Slightly bigger as requested */
+            font-size: 1.3rem;
             margin-top: -50px;
             margin-bottom: 15px;
             font-weight: 600;
             line-height: 1.4;
         }
+
+        .intro p:last-of-type {
+            font-family: 'Crimson Text', serif;
+            color: #c8b8a8;
+            font-size: 1.8rem;
+            margin: 35px 0 0 0;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-align: center;
+            line-height: 1.3;
+            font-style: italic;
+        }
         
-        /* Remove the acronym container - going back to original */
+        /* Remove the broken styles */
         .acronym-container {
             display: none;
         }
@@ -325,35 +343,7 @@
         <article class="intro">
             <header>
                 <h1 title="DANI'S - Interactive crochet glossary and pattern adjustment platform">DANI'S</h1>
-                
-                <!-- Enhanced acronym with individual hovers -->
-                <div class="acronym-container">
-                    <span class="acronym-word">
-                        <span class="acronym-letter">D</span>esigns
-                        <span class="acronym-tooltip">Pattern designs & adjustments</span>
-                    </span>
-                    <span style="color: #ff6b7a;">•</span>
-                    <span class="acronym-word">
-                        <span class="acronym-letter">A</span>ccoutrements
-                        <span class="acronym-tooltip">Essential crochet accessories</span>
-                    </span>
-                    <span style="color: #ff6b7a;">•</span>
-                    <span class="acronym-word">
-                        <span class="acronym-letter">N</span>otions
-                        <span class="acronym-tooltip">Tools, markers & supplies</span>
-                    </span>
-                    <span style="color: #ff6b7a;">•</span>
-                    <span class="acronym-word">
-                        <span class="acronym-letter">I</span>deas
-                        <span class="acronym-tooltip">Creative inspiration & tips</span>
-                    </span>
-                    <br>
-                    <span class="acronym-word" style="margin-top: 10px;">
-                        <span class="acronym-letter">S</span>omething Special
-                        <span class="acronym-tooltip">Made with love & expertise</span>
-                    </span>
-                </div>
-                
+                <p title="Crochet pattern tools, stitch guides, yarn weight converters, hook size charts, and innovative solutions for fiber artists">Designs • Accoutrements • Notions • Ideas<br>Something Special</p>
                 <p title="Bridging traditional yarn crafts with modern technology - pattern grading, gauge calculators, stitch counters, row trackers">Where Traditional Craft Meets Modern Technology</p>
             </header>
         </article>
