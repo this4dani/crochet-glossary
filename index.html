@@ -56,17 +56,16 @@
             margin: 0 0 5px 0;
             font-weight: 800;
             letter-spacing: -5px;
-            /* Proper cutout effect */
+            /* Proper cutout/carved effect - reversed shadows */
             text-shadow: 
-                /* Inner bevel for depth */
-                inset 0 2px 3px rgba(0, 0, 0, 0.6),
-                inset 0 -2px 3px rgba(255, 255, 255, 0.1),
-                /* Outer shadow for carved look */
-                0 1px 0 rgba(255, 255, 255, 0.2),
-                0 -1px 2px rgba(0, 0, 0, 0.7);
+                /* Outer shadows for carved look */
+                -1px -1px 0 rgba(255, 255, 255, 0.2),
+                1px 1px 3px rgba(0, 0, 0, 0.7),
+                /* Inner shadows for depth */
+                inset -2px -2px 3px rgba(255, 255, 255, 0.1),
+                inset 2px 2px 4px rgba(0, 0, 0, 0.6);
             /* Additional depth */
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
-            -webkit-text-stroke: 1px rgba(0, 0, 0, 0.3);
+            -webkit-text-stroke: 0.5px rgba(0, 0, 0, 0.4);
         }
 
         .intro p:first-of-type {
@@ -343,7 +342,7 @@
         <article class="intro">
             <header>
                 <h1 title="DANI'S - Interactive crochet glossary and pattern adjustment platform">DANI'S</h1>
-                <p title="Crochet pattern tools, stitch guides, yarn weight converters, hook size charts, and innovative solutions for fiber artists">Designs • Accoutrements • Notions • Ideas<br>Something Special</p>
+                <p title="Designs: Pattern creation and adjustment tools | Accoutrements: Essential crochet accessories | Notions: Tools and supplies | Ideas: Creative inspiration | Something Special: Made with 30 years of expertise">Designs • Accoutrements • Notions • Ideas<br>Something Special</p>
                 <p title="Bridging traditional yarn crafts with modern technology - pattern grading, gauge calculators, stitch counters, row trackers">Where Traditional Craft Meets Modern Technology</p>
             </header>
         </article>
