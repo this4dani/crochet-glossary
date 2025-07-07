@@ -102,11 +102,45 @@
         .github-link { color: var(--clr-mauve); border-color: var(--clr-mauve); }
         .github-link:hover { background: var(--clr-mauve); color: var(--clr-warm-white); }
         
+        .spotify-link { color: var(--clr-coral); border-color: var(--clr-coral); }
+        .spotify-link:hover { background: var(--clr-coral); color: var(--clr-warm-white); }
+        
+        /* Spotify embed section */
+        .spotify-section {
+            max-width: 700px;
+            margin: 40px auto;
+            padding: 30px;
+            background: rgba(61, 26, 43, 0.3);
+            border-radius: 15px;
+            border: 1px solid rgba(250, 248, 243, 0.1);
+        }
+        
+        .spotify-section h3 {
+            color: var(--clr-coral);
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            text-align: center;
+            font-family: var(--font-display);
+        }
+        
         .note-box {
             max-width: 700px;
             margin: 40px auto;
             padding: 30px;
-            border-left: 4px solid var(--clr-coral);
+            border-radius: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .note-box::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 10%;
+            bottom: 10%;
+            width: 4px;
+            background: var(--clr-coral);
+            border-radius: 2px;
         }
         
         .note-box p {
@@ -114,6 +148,7 @@
             font-size: 0.95rem;
             line-height: 1.6;
             margin: 0;
+            padding-left: 15px;
         }
         
         /* Optional side ad - hidden by default, show with media query if needed */
@@ -146,6 +181,11 @@
                 width: 100px; /* Adjusted for mobile */
                 padding: 6px 10px;
                 font-size: 0.85rem;
+            }
+            
+            .spotify-section {
+                margin: 30px 15px;
+                padding: 20px;
             }
         }
     </style>
@@ -199,6 +239,48 @@
             <li>
                 <div class="social-info">
                     <svg style="color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
+                        <circle cx="9" cy="12" r="1" fill="currentColor"/>
+                        <circle cx="15" cy="12" r="1" fill="currentColor"/>
+                        <path d="M7.5 7.5c3.5-2.5 9.5-2.5 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M7 16.5c3.5 2.5 9.5 2.5 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                    <div class="social-details">
+                        <h3>Discord</h3>
+                        <p>@this4dani</p>
+                    </div>
+                </div>
+                <a href="#" target="_blank" class="social-link discord-link">Join</a>
+            </li>
+
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-coral);" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <div class="social-details">
+                        <h3>Facebook</h3>
+                        <p>Ashley Caldwell</p>
+                    </div>
+                </div>
+                <a href="https://facebook.com/caldwelleppes" target="_blank" class="social-link facebook-link">Follow</a>
+            </li>
+
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
+                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <div class="social-details">
+                        <h3>GitHub</h3>
+                        <p>@this4dani</p>
+                    </div>
+                </div>
+                <a href="https://github.com/this4dani" target="_blank" class="social-link github-link">View Code</a>
+            </li>
+
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
                         <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke="currentColor" stroke-width="2"/>
                         <circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/>
                         <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2"/>
@@ -209,6 +291,21 @@
                     </div>
                 </div>
                 <a href="https://instagram.com/this4dani" target="_blank" class="social-link instagram-link">Follow</a>
+            </li>
+
+            <li>
+                <div class="social-info">
+                    <svg style="color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" stroke-width="2"/>
+                        <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2"/>
+                        <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                    <div class="social-details">
+                        <h3>LinkedIn</h3>
+                        <p>Ashley Danielle Caldwell</p>
+                    </div>
+                </div>
+                <a href="https://linkedin.com/in/ashleydaniellecaldwell" target="_blank" class="social-link linkedin-link">Connect</a>
             </li>
 
             <li>
@@ -230,15 +327,15 @@
             <li>
                 <div class="social-info">
                     <svg style="color: var(--clr-coral);" viewBox="0 0 24 24" fill="none">
-                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" stroke="currentColor" stroke-width="2"/>
-                        <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="currentColor"/>
+                        <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+                        <path d="M12 6.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11zm2.5 7.5l-3.5-2V8l3.5 2v4z" fill="currentColor"/>
                     </svg>
                     <div class="social-details">
-                        <h3>YouTube</h3>
-                        <p>@this4dani</p>
+                        <h3>Spotify</h3>
+                        <p>Follow my vibe</p>
                     </div>
                 </div>
-                <a href="https://youtube.com/@this4dani" target="_blank" class="social-link youtube-link">Subscribe</a>
+                <a href="https://open.spotify.com/playlist/3F79rDkRkTpYueMXbNmJbt" target="_blank" class="social-link spotify-link">Listen</a>
             </li>
 
             <li>
@@ -256,61 +353,24 @@
 
             <li>
                 <div class="social-info">
-                    <svg style="color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
-                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" stroke="currentColor" stroke-width="2"/>
-                        <rect x="2" y="9" width="4" height="12" stroke="currentColor" stroke-width="2"/>
-                        <circle cx="4" cy="4" r="2" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <div class="social-details">
-                        <h3>LinkedIn</h3>
-                        <p>Ashley Danielle Caldwell</p>
-                    </div>
-                </div>
-                <a href="https://linkedin.com/in/ashleydaniellecaldwell" target="_blank" class="social-link linkedin-link">Connect</a>
-            </li>
-
-            <li>
-                <div class="social-info">
                     <svg style="color: var(--clr-coral);" viewBox="0 0 24 24" fill="none">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z" stroke="currentColor" stroke-width="2"/>
+                        <polygon points="9.75,15.02 15.5,11.75 9.75,8.48" fill="currentColor"/>
                     </svg>
                     <div class="social-details">
-                        <h3>Facebook</h3>
-                        <p>Ashley Caldwell</p>
-                    </div>
-                </div>
-                <a href="https://facebook.com/caldwelleppes" target="_blank" class="social-link facebook-link">Follow</a>
-            </li>
-
-            <li>
-                <div class="social-info">
-                    <svg style="color: var(--clr-fuchsia);" viewBox="0 0 24 24" fill="none">
-                        <circle cx="9" cy="12" r="1" fill="currentColor"/>
-                        <circle cx="15" cy="12" r="1" fill="currentColor"/>
-                        <path d="M7.5 7.5c3.5-2.5 9.5-2.5 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                        <path d="M7 16.5c3.5 2.5 9.5 2.5 13 0" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                    </svg>
-                    <div class="social-details">
-                        <h3>Discord</h3>
+                        <h3>YouTube</h3>
                         <p>@this4dani</p>
                     </div>
                 </div>
-                <a href="#" target="_blank" class="social-link discord-link">Join</a>
-            </li>
-
-            <li>
-                <div class="social-info">
-                    <svg style="color: var(--clr-mauve);" viewBox="0 0 24 24" fill="none">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" stroke="currentColor" stroke-width="2"/>
-                    </svg>
-                    <div class="social-details">
-                        <h3>GitHub</h3>
-                        <p>@this4dani</p>
-                    </div>
-                </div>
-                <a href="https://github.com/this4dani" target="_blank" class="social-link github-link">View Code</a>
+                <a href="https://youtube.com/@this4dani" target="_blank" class="social-link youtube-link">Subscribe</a>
             </li>
         </ul>
+
+        <!-- Spotify Embed Section -->
+        <div class="spotify-section">
+            <h3>🎶 Follow My Vibe</h3>
+            <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/3F79rDkRkTpYueMXbNmJbt?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
 
         <!-- Limitations Note -->
         <div class="note-box">
