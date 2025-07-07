@@ -38,93 +38,43 @@
         .intro h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 6rem;
-            color: transparent;
+            color: #003840; /* Match the background color */
             margin: 0 0 5px 0;
             font-weight: 800;
             letter-spacing: -5px;
-            /* Hollow text effect with shadow */
-            -webkit-text-stroke: 3px #003840;
-            text-stroke: 3px #003840;
+            /* Cutout effect with inset shadows */
             text-shadow: 
-                6px 6px 10px rgba(0, 0, 0, 0.5),
-                -2px -2px 5px rgba(255, 255, 255, 0.1),
-                inset 0 0 20px rgba(0, 56, 64, 0.3);
+                -2px -2px 3px rgba(0, 0, 0, 0.5),
+                2px 2px 3px rgba(255, 255, 255, 0.2),
+                inset -4px -4px 8px rgba(0, 0, 0, 0.4),
+                inset 4px 4px 8px rgba(255, 255, 255, 0.1);
             position: relative;
             transition: all 0.3s ease;
         }
         
         .intro h1:hover {
-            -webkit-text-stroke: 3px #ff2d82;
-            text-stroke: 3px #ff2d82;
+            color: #002622; /* Slightly darker on hover */
             text-shadow: 
-                8px 8px 15px rgba(255, 45, 130, 0.4),
-                -2px -2px 5px rgba(255, 255, 255, 0.2),
-                0 0 30px rgba(255, 45, 130, 0.3);
-            transform: scale(1.05);
+                -3px -3px 5px rgba(0, 0, 0, 0.6),
+                3px 3px 5px rgba(255, 255, 255, 0.3),
+                inset -6px -6px 12px rgba(0, 0, 0, 0.5),
+                inset 6px 6px 12px rgba(255, 255, 255, 0.15);
+            transform: scale(1.02);
         }
         
-        /* Acronym with individual letter hovers */
-        .acronym-container {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
+        /* Fix the original acronym paragraph positioning */
+        .intro p:first-of-type {
+            color: #ff6b7a;
+            font-size: 1.3rem; /* Slightly bigger as requested */
             margin-top: -50px;
             margin-bottom: 15px;
-            flex-wrap: wrap;
-        }
-        
-        .acronym-word {
-            position: relative;
-            display: inline-block;
-            cursor: help;
-        }
-        
-        .acronym-letter {
-            color: #ff6b7a;
-            font-size: 1.2rem;
             font-weight: 600;
-            transition: all 0.3s ease;
+            line-height: 1.4;
         }
         
-        .acronym-word:hover .acronym-letter {
-            color: #ff2d82;
-            transform: translateY(-3px);
-            text-shadow: 0 5px 10px rgba(255, 45, 130, 0.3);
-        }
-        
-        .acronym-tooltip {
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--clr-secondary-dark);
-            color: var(--clr-cream);
-            padding: 8px 15px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            white-space: nowrap;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 107, 122, 0.3);
-        }
-        
-        .acronym-word:hover .acronym-tooltip {
-            opacity: 1;
-            visibility: visible;
-            bottom: 120%;
-        }
-        
-        .acronym-tooltip::after {
-            content: '';
-            position: absolute;
-            top: 100%;
-            left: 50%;
-            transform: translateX(-50%);
-            border: 8px solid transparent;
-            border-top-color: var(--clr-secondary-dark);
+        /* Remove the acronym container - going back to original */
+        .acronym-container {
+            display: none;
         }
         
         /* Enhanced floating cards with SEO data */
