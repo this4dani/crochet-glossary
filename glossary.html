@@ -801,7 +801,152 @@
                 padding: 20px 15px;
             }
         }
-        
+        /* ===== FIX TEXT OVERFLOW IN CARDS ===== */
+
+/* Card container needs overflow hidden */
+.stitch-card {
+    width: 85px;
+    height: 110px;
+    overflow: hidden; /* Prevent any overflow */
+}
+
+.card-inner {
+    width: 100%;
+    height: 100%;
+    overflow: hidden; /* Double protection */
+}
+
+.card-front, .card-back {
+    overflow: hidden; /* Triple protection! */
+    padding: 6px 4px; /* Tighter padding to give text more room */
+}
+
+/* Front card - name sizing with better control */
+.card-front .name {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ... if too long */
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Maximum 3 lines */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    word-break: break-word;
+    hyphens: auto;
+    font-size: 0.65rem; /* Base smaller */
+    line-height: 1.1;
+    text-align: center;
+}
+
+/* Dynamic font sizing based on text length */
+.name-short { 
+    font-size: 0.75rem; 
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+}
+
+.name-medium { 
+    font-size: 0.65rem; 
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+}
+
+.name-long { 
+    font-size: 0.55rem; 
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    letter-spacing: -0.02em; /* Tighter spacing */
+}
+
+.name-extra-long { 
+    font-size: 0.48rem; 
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    letter-spacing: -0.03em; /* Even tighter */
+    line-height: 1.05;
+}
+
+/* Back card - better containment */
+.card-back {
+    padding: 5px 4px; /* Very tight padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 2px;
+}
+
+.card-back .abbr {
+    font-size: 1.1rem; /* Smaller than before */
+    line-height: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 100%;
+}
+
+/* Abbreviations that are too long get smaller */
+.card-back .abbr {
+    font-size: clamp(0.7rem, 2vw, 1.1rem);
+}
+
+.card-back .description {
+    font-size: 0.55rem; /* Smaller base */
+    line-height: 1.15;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3; /* Max 3 lines */
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    word-break: break-word;
+    flex: 1; /* Take available space */
+    min-height: 0; /* Allow shrinking */
+}
+
+.card-back .click-more {
+    font-size: 0.9rem;
+    line-height: 1;
+    margin: 0;
+    flex-shrink: 0; /* Don't shrink */
+}
+
+/* Hover state - allow slight expansion but contained */
+.stitch-card:hover {
+    height: auto;
+    max-height: 140px; /* Maximum expansion */
+    min-height: 110px;
+}
+
+.stitch-card:hover .card-back {
+    height: 100%;
+    max-height: 140px;
+}
+
+/* Extra containment for really long content */
+.stitch-card:hover .description {
+    -webkit-line-clamp: 5; /* Allow more lines on hover */
+    line-clamp: 5;
+}
+
+/* Modern container query approach for truly responsive text */
+@supports (container-type: inline-size) {
+    .stitch-card {
+        container-type: inline-size;
+    }
+    
+    .card-front .name {
+        font-size: clamp(0.45rem, 4cqi, 0.75rem);
+    }
+    
+    .card-back .abbr {
+        font-size: clamp(0.7rem, 8cqi, 1.2rem);
+    }
+    
+    .card-back .description {
+        font-size: clamp(0.5rem, 3cqi, 0.65rem);
+    }
+}
     </style>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
