@@ -1,7 +1,7 @@
 /* ===== ROOT VARIABLES - THE DANI'S BRAND SYSTEM ===== */
 :root {
   /* Primary Colors - Bold & Distinctive */
-  --clr-primary-dark: #001820;
+  --clr-primary-dark: #002622;  /* DEEP TEAL - Intentionally updated */
   --clr-fuchsia: #ff2d82;
   --clr-coral: #ff6b7a;
   --clr-mauve: #d15694;
@@ -214,7 +214,7 @@ a:hover {
   background: var(--gradient-primary);
   color: var(--clr-warm-white);
   font-weight: 600;
-  border-radius: 10px;
+  border-radius: 50px;
   transition: all 0.3s ease;
   box-shadow: var(--shadow-md);
   border: none;
@@ -306,6 +306,12 @@ a:hover {
   margin: 0 0 5px 0;
   font-weight: 800;
   letter-spacing: -5px;
+  /* CARVED/HOLLOW EFFECT */
+  text-shadow: 
+    2px 2px 4px rgba(0, 0, 0, 0.8),
+    -1px -1px 2px rgba(255, 255, 255, 0.3),
+    inset -1px -1px 2px rgba(0, 0, 0, 0.5),
+    inset 1px 1px 2px rgba(255, 255, 255, 0.2);
 }
 
 .intro p:first-of-type {
@@ -476,11 +482,6 @@ a:hover {
   box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
   border-color: var(--clr-coral);
 }
-.stitch-card:hover .card-back .description {
-    -webkit-line-clamp: unset;
-    line-clamp: unset;
-    overflow: visible;
-}
 
 /* ===== MOBILE RESPONSIVE ===== */
 @media (max-width: 768px) {
@@ -599,4 +600,3 @@ a:hover {
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
-

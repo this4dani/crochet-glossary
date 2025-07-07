@@ -233,6 +233,44 @@
                 gap: 10px;
             }
         }
+
+        /* Acronym hover tooltip */
+.intro p:first-of-type {
+    position: relative;
+    cursor: help;
+    transition: all 0.3s ease;
+}
+
+.intro p:first-of-type:hover {
+    color: #ff2d82;
+}
+
+/* Tooltip that appears on hover */
+.intro p:first-of-type::after {
+    content: "D: Pattern designs | A: Accessories | N: Tools & supplies | I: Creative ideas | S: Special expertise";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(61, 26, 43, 0.95);
+    color: #faf8f3;
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    pointer-events: none;
+    margin-bottom: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.intro p:first-of-type:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
     </style>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
