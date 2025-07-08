@@ -259,6 +259,13 @@
             transform: rotateY(180deg);
             border: 2px solid rgba(255, 45, 130, 0.3);
         }
+        .card-front,
+.card-back {
+    -webkit-backface-visibility: hidden !important;
+    backface-visibility: hidden !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+}
 
         .card-front .name {
             font-family: var(--font-primary);
