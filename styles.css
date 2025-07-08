@@ -1,6 +1,6 @@
 /* ===== ROOT VARIABLES ===== */
 :root {
-  --clr-primary-dark: #001519;
+  --clr-primary-dark: #003840;
   --clr-fuchsia: #ff2d82;
   --clr-coral: #ff6b7a;
   --clr-mauve: #d15694;
@@ -318,7 +318,7 @@ a:hover {
 .intro h1 {
   font-family: 'Poppins', sans-serif;
   font-size: 6rem;
-  color: #001519;
+  color: #003840;
   margin: 0 0 5px 0;
   font-weight: 800;
   letter-spacing: -5px;
