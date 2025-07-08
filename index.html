@@ -23,48 +23,87 @@
         "name": "Ashley Danielle Caldwell",
         "alternateName": "DANI",
         "description": "Crocheter with 30+ years experience, pattern designer, ministry office manager"
-      },
-      "keywords": "crochet glossary, stitch dictionary, US UK crochet terms, pattern adjustment, gauge calculator, single crochet, double crochet, treble, Tunisian crochet, amigurumi, yarn weight converter",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": "https://this4dani.com/glossary.html?search={search_term}",
-        "query-input": "required name=search_term"
       }
     }
     </script>
     
     <style>
-        /* Intro container - raised effect */
+        /* Granny square background - BEHIND the container */
+        .content-wrapper {
+            position: relative;
+        }
+        
+        .content-wrapper::before {
+            content: '';
+            position: absolute;
+            left: 10%;
+            bottom: 20%;
+            width: 500px;
+            height: 500px;
+            background-image: url('images/crochet-grannysquare.png');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.05;
+            z-index: 0;
+        }
+        
+        /* Intro container - solid mauve with beveled edges and left accent */
         .intro {
-            background: radial-gradient(ellipse at center top, #7a3355, #67294b, #5a1f3f);
+            background: #7a3355;
             max-width: 850px;
             margin: 0 auto;
             padding: 70px;
+            padding-left: 85px;
             border-radius: 25px;
             text-align: left;
+            position: relative;
+            z-index: 1;
+            /* Beveled edge effect */
             box-shadow: 
+                /* Top light */
+                inset 0 2px 4px rgba(255, 255, 255, 0.25),
+                /* Bottom shadow */
+                inset 0 -2px 4px rgba(0, 0, 0, 0.25),
+                /* Outer shadow */
                 0 15px 35px rgba(79, 43, 58, 0.4),
                 0 8px 20px rgba(0, 0, 0, 0.3);
             border: 1px solid rgba(250, 248, 243, 0.15);
-            position: relative;
+        }
+        
+        /* Left accent bar like other pages */
+        .intro::before {
+            content: '';
+            position: absolute;
+            left: 30px;
+            top: 15%;
+            bottom: 15%;
+            width: 4px;
+            background: var(--clr-coral);
+            border-radius: 2px;
         }
 
-        /* ONLY fixing the DANI'S cutout effect */
+        /* TRUE carved/engraved effect for DANI'S */
         .intro h1 {
             font-family: 'Poppins', sans-serif;
             font-size: 6rem;
-            color: #003840;
             margin: 0 0 5px 0;
             font-weight: 800;
             letter-spacing: -5px;
-            /* Fixed carved/cutout effect */
+            /* Text color matches page background to show through */
+            color: #002622;
+            /* Create the carved effect with shadows */
             text-shadow: 
-                2px 2px 4px rgba(0, 0, 0, 0.8),
-                -1px -1px 2px rgba(255, 255, 255, 0.3),
-                inset -1px -1px 2px rgba(0, 0, 0, 0.5),
-                inset 1px 1px 2px rgba(255, 255, 255, 0.2);
+                /* Light mauve highlight below/right (as if light hits the edge) */
+                1px 1px 0 rgba(157, 81, 117, 0.6),  /* lighter mauve */
+                /* Pure black shadow above/left (inside the carving) */
+                -1px -1px 1px rgba(0, 0, 0, 1),
+                /* Additional mauve highlight for depth */
+                2px 2px 2px rgba(157, 81, 117, 0.3),
+                /* Deep black shadow */
+                -2px -2px 2px rgba(0, 0, 0, 1);
         }
-
+        
+        /* Acronym with enhanced hover - each letter different */
         .intro p:first-of-type {
             color: #ff6b7a;
             font-size: 1.3rem;
@@ -72,6 +111,130 @@
             margin-bottom: 15px;
             font-weight: 600;
             line-height: 1.4;
+            position: relative;
+        }
+        
+        /* Individual letter spans for the acronym */
+        .intro p:first-of-type .letter-d { cursor: help; transition: color 0.3s; }
+        .intro p:first-of-type .letter-a { cursor: help; transition: color 0.3s; }
+        .intro p:first-of-type .letter-n { cursor: help; transition: color 0.3s; }
+        .intro p:first-of-type .letter-i { cursor: help; transition: color 0.3s; }
+        .intro p:first-of-type .letter-s { cursor: help; transition: color 0.3s; }
+        
+        .intro p:first-of-type .letter-d:hover { color: #ff2d82; }
+        .intro p:first-of-type .letter-a:hover { color: #d15694; }
+        .intro p:first-of-type .letter-n:hover { color: #ff6b7a; }
+        .intro p:first-of-type .letter-i:hover { color: #ff2d82; }
+        .intro p:first-of-type .letter-s:hover { color: #d15694; }
+        
+        /* Individual tooltips for each letter */
+        .letter-d::after {
+            content: "Designs: Custom patterns for every skill level";
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: rgba(61, 26, 43, 0.95);
+            color: #faf8f3;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .letter-a::after {
+            content: "Accoutrements: Stitch markers, row counters, gauge tools";
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: rgba(61, 26, 43, 0.95);
+            color: #faf8f3;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .letter-n::after {
+            content: "Notions: Hooks, needles, scissors, measuring tapes";
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: rgba(61, 26, 43, 0.95);
+            color: #faf8f3;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .letter-i::after {
+            content: "Ideas: Creative inspiration for your next project";
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: rgba(61, 26, 43, 0.95);
+            color: #faf8f3;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .letter-s::after {
+            content: "Something Special: 30 years of expertise & love";
+            position: absolute;
+            bottom: 100%;
+            left: 0;
+            background: rgba(61, 26, 43, 0.95);
+            color: #faf8f3;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            margin-bottom: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+        }
+        
+        .letter-d:hover::after,
+        .letter-a:hover::after,
+        .letter-n:hover::after,
+        .letter-i:hover::after,
+        .letter-s:hover::after {
+            opacity: 1;
+            visibility: visible;
         }
 
         .intro p:last-of-type {
@@ -86,12 +249,7 @@
             font-style: italic;
         }
         
-        /* Remove the broken styles */
-        .acronym-container {
-            display: none;
-        }
-        
-        /* Enhanced floating cards with SEO data */
+        /* Enhanced floating cards */
         .floating-cards {
             position: fixed;
             top: 0;
@@ -225,52 +383,17 @@
         @media (max-width: 768px) {
             .intro h1 {
                 font-size: 4rem;
-                -webkit-text-stroke: 2px #003840;
-                text-stroke: 2px #003840;
             }
             
-            .acronym-container {
-                gap: 10px;
+            .intro {
+                padding: 40px 30px;
+                padding-left: 50px;
+            }
+            
+            .intro::before {
+                left: 15px;
             }
         }
-
-        /* Acronym hover tooltip */
-.intro p:first-of-type {
-    position: relative;
-    cursor: help;
-    transition: all 0.3s ease;
-}
-
-.intro p:first-of-type:hover {
-    color: #ff2d82;
-}
-
-/* Tooltip that appears on hover */
-.intro p:first-of-type::after {
-    content: "D: Pattern designs | A: Accessories | N: Tools & supplies | I: Creative ideas | S: Special expertise";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(61, 26, 43, 0.95);
-    color: #faf8f3;
-    padding: 12px 20px;
-    border-radius: 10px;
-    font-size: 0.85rem;
-    white-space: nowrap;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-    pointer-events: none;
-    margin-bottom: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
-}
-
-.intro p:first-of-type:hover::after {
-    opacity: 1;
-    visibility: visible;
-}
-
     </style>
     
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
@@ -296,22 +419,22 @@
     <!-- Enhanced Navigation with detailed tooltips -->
     <nav id="nav">
         <a href="index.html" class="active" title="DANI'S Home - Interactive crochet platform combining 30 years of yarn craft experience with modern pattern adjustment technology">
-            <img src="images/home-heart-door.png" alt="Home" title="Return to DANI'S homepage - Your crochet pattern adjustment and stitch reference hub">
+            <img src="images/home-heart-door.png" alt="Home">
         </a>
-        <a href="glossary.html" title="Interactive Crochet Glossary - 253 stitches including single crochet, double crochet, treble, Tunisian, amigurumi techniques, US UK terminology converter, beginner to advanced">
-            <img src="images/file-folder-magazne-lable.png" alt="Glossary" title="Comprehensive stitch dictionary with sc, dc, hdc, tr, fpdc, bpdc, cluster, shell, popcorn, puff, bobble, and 240+ more crochet stitches">
+        <a href="glossary.html" title="Interactive Crochet Glossary - 253 stitches including single crochet, double crochet, treble, Tunisian, amigurumi techniques">
+            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
         </a>
-        <a href="story.html" title="My Crochet Journey - From learning chain stitch at age 6 to developing AI-powered pattern adjustment tools for gauge calculations and yarn substitution">
-            <img src="images/slip-knot-first-chain.png" alt="Story" title="30-year crochet story: ministry teaching, raising 5 kids with handmade blankets, solving pattern math frustrations">
+        <a href="story.html" title="My Crochet Journey - From learning chain stitch at age 6 to developing AI-powered pattern adjustment tools">
+            <img src="images/slip-knot-first-chain.png" alt="Story">
         </a>
-        <a href="follow.html" title="Follow @this4dani - Instagram crochet tutorials, Pinterest pattern boards, LinkedIn tech updates, Spotify crochet podcast playlist">
-            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social" title="Connect on social media for WIP updates, frogging stories, yarn haul reveals, pattern release announcements">
+        <a href="follow.html" title="Follow @this4dani - Instagram crochet tutorials, Pinterest pattern boards, LinkedIn tech updates">
+            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
         </a>
     </nav>
     
-    <!-- Enhanced Floating Stitch Cards with SEO data -->
+    <!-- Enhanced Floating Stitch Cards -->
     <div class="floating-cards">
-        <div class="stitch-card fall-1" data-stitch="sc" title="Single Crochet (SC) - US term, UK: double crochet, basic stitch for amigurumi, dishcloths, tight fabric, beginner friendly">
+        <div class="stitch-card fall-1" data-stitch="sc" title="Single Crochet (SC) - Basic stitch for tight fabric">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-icon">×</div>
@@ -323,7 +446,7 @@
             </div>
         </div>
         
-        <div class="stitch-card fall-2" data-stitch="dc" title="Double Crochet (DC) - US term, UK: treble crochet, creates height and drape, perfect for blankets, shawls, garments">
+        <div class="stitch-card fall-2" data-stitch="dc" title="Double Crochet (DC) - Creates height and drape">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-icon">T</div>
@@ -335,7 +458,7 @@
             </div>
         </div>
         
-        <div class="stitch-card fall-3" data-stitch="hdc" title="Half Double Crochet (HDC) - US term, UK: half treble crochet, medium height stitch, less gaps than dc, good for sweaters">
+        <div class="stitch-card fall-3" data-stitch="hdc" title="Half Double Crochet (HDC) - Medium height stitch">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-icon">┬</div>
@@ -347,7 +470,7 @@
             </div>
         </div>
         
-        <div class="stitch-card fall-4" data-stitch="ch" title="Chain Stitch (CH) - Foundation of crochet, starting chains, turning chains, creates spaces, same in US and UK terms">
+        <div class="stitch-card fall-4" data-stitch="ch" title="Chain Stitch (CH) - Foundation of crochet">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-icon">○</div>
@@ -359,7 +482,7 @@
             </div>
         </div>
         
-        <div class="stitch-card fall-5" data-stitch="slst" title="Slip Stitch (SL ST) - Joining rounds, moving yarn without height, creating surface texture, same in US and UK">
+        <div class="stitch-card fall-5" data-stitch="slst" title="Slip Stitch (SL ST) - Joining rounds">
             <div class="card-inner">
                 <div class="card-front">
                     <div class="card-icon">—</div>
@@ -372,25 +495,25 @@
         </div>
     </div>
     
-    <!-- Main Content with enhanced intro -->
+    <!-- Main Content -->
     <div class="container content-wrapper">
         <article class="intro">
             <header>
-                <h1 title="DANI'S - Interactive crochet glossary and pattern adjustment platform">DANI'S</h1>
-                <p>Designs • Accoutrements • Notions • Ideas<br>Something Special</p>
+                <h1>DANI'S</h1>
+                <p><span class="letter-d">Designs</span> • <span class="letter-a">Accoutrements</span> • <span class="letter-n">Notions</span> • <span class="letter-i">Ideas</span><br><span class="letter-s">Something Special</span></p>
                 <p>Where Traditional Craft Meets Modern Technology</p>
             </header>
         </article>
         
-        <!-- Enhanced Footer with detailed tooltips -->
+        <!-- Footer -->
         <div class="footer">
-            <p title="DANI'S created by Ashley Danielle Caldwell - ministry office manager, mother of 5, 30+ years crocheting experience">Built with ❤️, prayers, coffee, and determination to solve real problems</p>
+            <p>Built with ❤️, prayers, coffee, and determination to solve real problems</p>
             <div style="margin-top: 20px;">
-                <a href="privacy.html" title="Privacy Policy - Cookie usage, Google AdSense disclosure, data protection for crocheters using DANI'S glossary and pattern adjustment API">Privacy Policy</a>
+                <a href="privacy.html">Privacy Policy</a>
                 <span style="margin: 0 10px;">•</span>
-                <a href="privacy.html#terms" title="Terms of Service - Usage guidelines for stitch glossary, pattern calculator, yarn weight converter, upcoming API features">Terms of Service</a>
+                <a href="privacy.html#terms">Terms of Service</a>
                 <span style="margin: 0 10px;">•</span>
-                <a href="privacy.html#contact" title="Contact Ashley (DANI) - Email this4dani@gmail.com, Instagram @this4dani, LinkedIn, Friday office hours 9-3 EST">Contact</a>
+                <a href="privacy.html#contact">Contact</a>
             </div>
         </div>
     </div>
@@ -411,27 +534,10 @@
         </script>
     </div>
     
-    <!-- Hidden SEO Content packed with crochet terms -->
+    <!-- Hidden SEO Content -->
     <div style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;" aria-hidden="true">
         <h1>DANI'S Complete Crochet Resource Platform</h1>
-        
-        <p>Welcome to DANI'S comprehensive crochet glossary and pattern adjustment platform. Our interactive stitch dictionary features over 253 crochet terms including single crochet (sc), double crochet (dc), half double crochet (hdc), treble crochet (tr), slip stitch (sl st), chain stitch (ch), and hundreds more stitches and techniques.</p>
-        
-        <p>Master crochet terminology with our US to UK converter: US single crochet equals UK double crochet, US double crochet equals UK treble crochet. Learn advanced stitches like front post double crochet (fpdc), back post double crochet (bpdc), popcorn stitch, bobble stitch, puff stitch, shell stitch, v-stitch, cluster stitch, crocodile stitch, alpine stitch, moss stitch, seed stitch, waffle stitch, basketweave, cables, and Tunisian crochet variations.</p>
-        
-        <p>Perfect for amigurumi makers needing invisible decrease, magic ring, and color change techniques. Ideal for blanket crocheters working with granny squares, c2c (corner to corner), ripple patterns, chevron, and temperature blankets. Essential for garment makers calculating gauge, ease, pattern grading, and yarn substitution.</p>
-        
-        <p>Crochet tools and features: stitch counters, row counters, gauge calculators, yarn weight converters (lace, fingering, sport, DK, worsted, aran, bulky, super bulky), hook size charts (metric and US sizes), pattern reading guides, abbreviation decoders, and tension square calculators.</p>
-        
-        <p>Learn techniques: blocking methods, seaming, joining as you go (JAYG), continuous rounds, working in rows, foundation single crochet (fsc), foundation double crochet (fdc), adjustable ring, magic loop, yarn over (yo), yarn under (yu), working in back loop only (blo), front loop only (flo), third loop, and post stitches.</p>
-        
-        <p>Common crochet problems solved: pattern adjustment for different sizes, calculating yarn requirements, substituting yarn weights, adjusting for gauge differences, converting between US and UK terms, understanding vintage patterns, reading charts and diagrams, fixing tension issues, preventing curling edges, and achieving straight edges.</p>
-        
-        <p>Created by Ashley Danielle Caldwell (DANI) after 30 years of crocheting, teaching in ministry, creating for 5 children, and recognizing the need for modern pattern adjustment tools. Combining traditional fiber arts with technology for gauge calculations, pattern grading, and automated stitch counting.</p>
-        
-        <p>Popular searches: how to crochet, crochet for beginners, crochet stitches, crochet patterns free, crochet abbreviations, crochet hook sizes, yarn weight chart, crochet terminology, crochet symbols, reading crochet patterns, crochet gauge, frogging, blocking acrylic, wet blocking, steam blocking, crochet increase decrease, yarn chicken, WIP (work in progress), SABLE (stash acquisition beyond life expectancy), CAL (crochet along), temperature blanket, virus shawl, mandala madness.</p>
-        
-        <p>Keywords: crochet glossary, crochet dictionary, crochet stitch guide, crochet terms, crochet abbreviations, US UK crochet conversion, crochet for beginners, learn to crochet, crochet tutorial, crochet help, pattern adjustment, gauge calculator, yarn calculator, crochet API, crochet technology, modern crochet tools, @this4dani, DANI'S crochet.</p>
+        <p>Welcome to DANI'S comprehensive crochet glossary and pattern adjustment platform. Over 253 crochet terms including single crochet, double crochet, half double crochet, treble crochet, and more.</p>
     </div>
 
     <script>
