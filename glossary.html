@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Header styling */
         .header h1 {
             font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 800;
@@ -21,7 +20,6 @@
             margin-bottom: 10px;
         }
         
-        /* Container with darker background */
         .glossary-content-container {
             background: #003840;
             border-radius: 15px;
@@ -35,7 +33,6 @@
             flex-direction: column;
         }
         
-        /* Sticky header with minimal padding */
         .sticky-header {
             position: sticky;
             top: 0;
@@ -45,7 +42,6 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.2);
         }
         
-        /* Search section layout */
         .search-section {
             display: flex;
             align-items: center;
@@ -54,7 +50,6 @@
             margin: 0 auto;
         }
         
-        /* FIXED Tips & Tricks Button - Matches Search Bar */
         .tips-toggle {
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
@@ -112,7 +107,6 @@
             color: var(--clr-coral);
         }
         
-        /* Search bar */
         #search {
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
@@ -136,14 +130,12 @@
             opacity: 0.6;
         }
         
-        /* Grid container */
         .grid-container {
             overflow-y: auto;
             padding: 15px 20px;
             flex: 1;
         }
         
-        /* DIAGNOSTIC: Working 3D Flip Cards - Fixed Positioning */
         #glossary-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, 80px);
@@ -198,16 +190,16 @@
                 2px 2px 8px rgba(0, 0, 0, 0.15),
                 -1px -1px 4px rgba(255, 255, 255, 0.5) inset;
             border: 1px solid rgba(0, 0, 0, 0.08);
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
         }
 
-        /* FRONT: Shows by default (0 degrees) */
         .card-front {
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
             transform: rotateY(0deg);
         }
 
-        /* BACK: Hidden by default (180 degrees) */
         .card-back {
             background: var(--clr-warm-white);
             color: var(--clr-primary-dark);
@@ -261,7 +253,6 @@
             }
         }
 
-        /* Enhanced Modal */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -330,17 +321,37 @@
             overflow-y: auto;
         }
 
-        .modal-content h3 {
+        .tab-nav {
+            background: var(--clr-warm-white);
+            display: flex;
+            padding: 0 25px;
+            border-bottom: 1px solid rgba(0, 56, 64, 0.1);
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--clr-primary-dark);
+            cursor: pointer;
+            position: relative;
+            font-family: var(--font-primary);
+        }
+
+        .tab-button.active {
             color: var(--clr-fuchsia);
-            margin-bottom: 10px;
         }
 
-        .modal-content p {
-            line-height: 1.6;
-            margin-bottom: 15px;
+        .tab-panel {
+            display: none;
         }
 
-        /* Mobile responsive */
+        .tab-panel.active {
+            display: block;
+        }
+
         @media (max-width: 768px) {
             #glossary-grid {
                 grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
@@ -367,7 +378,6 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- AdSense Top Banner -->
     <div class="adsense-top">
         <ins class="adsbygoogle"
              style="display:block"
@@ -380,7 +390,6 @@
         </script>
     </div>
     
-    <!-- Navigation -->
     <nav id="nav">
         <a href="index.html">
             <img src="images/home-heart-door.png" alt="Home">
@@ -396,17 +405,13 @@
         </a>
     </nav>
     
-    <!-- Main Content -->
     <div class="container content-wrapper">
-        <!-- Header -->
         <header class="header">
             <h1>Interactive Crochet Glossary</h1>
             <p>Your comprehensive guide to 250+ crochet stitches and techniques</p>
         </header>
         
-        <!-- Glossary Content Container -->
         <div class="glossary-content-container">
-            <!-- Sticky header section -->
             <div class="sticky-header">
                 <div class="search-section">
                     <div style="position: relative;">
@@ -436,13 +441,11 @@
                 </div>
             </div>
             
-            <!-- Scrollable grid container -->
             <div class="grid-container">
                 <div id="glossary-grid"></div>
             </div>
         </div>
         
-        <!-- Footer -->
         <div class="footer" style="border-top: none;">
             <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
             <div style="margin-top: 20px;">
@@ -455,7 +458,6 @@
         </div>
     </div>
     
-    <!-- AdSense Footer -->
     <div class="adsense-bottom">
         <ins class="adsbygoogle"
              style="display:block"
@@ -468,33 +470,84 @@
         </script>
     </div>
     
-    <!-- Simple Modal -->
-    <div class="modal-overlay" id="modal">
+    <div class="modal-overlay" id="enhanced-modal">
         <div class="modal-container">
             <div class="modal-header">
-                <h2 class="modal-title" id="modal-title">Stitch Name</h2>
+                <h2 class="modal-title">
+                    <span id="modal-stitch-name">Stitch Name</span>
+                    <span class="abbr-badge" id="modal-abbr" style="background: var(--clr-coral); color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; margin-left: 12px;">ABBR</span>
+                </h2>
                 <button class="close-button" onclick="closeModal()">×</button>
             </div>
+
+            <div class="tab-nav">
+                <button class="tab-button active" onclick="switchTab('overview')">Overview</button>
+                <button class="tab-button" onclick="switchTab('howto')">How-To</button>
+                <button class="tab-button" onclick="switchTab('tips')">Tips</button>
+                <button class="tab-button" onclick="switchTab('projects')">Projects</button>
+            </div>
+
             <div class="modal-content">
-                <h3>US Term</h3>
-                <p id="modal-us-name">-</p>
-                <h3>UK Term</h3>
-                <p id="modal-uk-name">-</p>
-                <h3>Description</h3>
-                <p id="modal-description">-</p>
+                <div id="overview-panel" class="tab-panel active">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                        <div style="background: var(--clr-warm-white); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 56, 64, 0.08);">
+                            <h4 style="color: var(--clr-mauve); font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">US Term</h4>
+                            <p id="modal-us-name" style="color: var(--clr-primary-dark); font-size: 1.1rem; font-weight: 600; margin: 0;">-</p>
+                        </div>
+                        <div style="background: var(--clr-warm-white); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 56, 64, 0.08);">
+                            <h4 style="color: var(--clr-mauve); font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">UK Term</h4>
+                            <p id="modal-uk-name" style="color: var(--clr-primary-dark); font-size: 1.1rem; font-weight: 600; margin: 0;">-</p>
+                        </div>
+                        <div style="background: var(--clr-warm-white); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 56, 64, 0.08);">
+                            <h4 style="color: var(--clr-mauve); font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Symbol</h4>
+                            <p id="modal-symbol" style="color: var(--clr-fuchsia); font-size: 2rem; font-weight: bold; margin: 0;">-</p>
+                        </div>
+                        <div style="background: var(--clr-warm-white); padding: 15px; border-radius: 12px; text-align: center; border: 1px solid rgba(0, 56, 64, 0.08);">
+                            <h4 style="color: var(--clr-mauve); font-size: 0.85rem; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px;">Difficulty</h4>
+                            <div id="modal-difficulty" style="display: flex; gap: 3px; justify-content: center;">
+                                <span class="star" style="color: var(--clr-coral); font-size: 1.1rem;">★</span>
+                                <span class="star empty" style="color: var(--clr-coral); font-size: 1.1rem; opacity: 0.25;">★</span>
+                                <span class="star empty" style="color: var(--clr-coral); font-size: 1.1rem; opacity: 0.25;">★</span>
+                                <span class="star empty" style="color: var(--clr-coral); font-size: 1.1rem; opacity: 0.25;">★</span>
+                                <span class="star empty" style="color: var(--clr-coral); font-size: 1.1rem; opacity: 0.25;">★</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="background: var(--clr-warm-white); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 56, 64, 0.08);">
+                        <h3 style="color: var(--clr-fuchsia); margin-bottom: 10px; font-size: 1.1rem;">Description</h3>
+                        <p id="modal-description" style="line-height: 1.6; color: var(--clr-primary-dark); margin-bottom: 10px;">-</p>
+                    </div>
+                </div>
+
+                <div id="howto-panel" class="tab-panel">
+                    <div style="background: var(--clr-warm-white); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 56, 64, 0.08);">
+                        <h3 style="color: var(--clr-fuchsia); margin-bottom: 10px; font-size: 1.1rem;">Step-by-Step Instructions</h3>
+                        <p>Coming soon! Detailed step-by-step instructions with photos and videos will be added to help you master this stitch.</p>
+                    </div>
+                </div>
+
+                <div id="tips-panel" class="tab-panel">
+                    <div style="background: var(--clr-warm-white); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 56, 64, 0.08);">
+                        <h3 style="color: var(--clr-fuchsia); margin-bottom: 10px; font-size: 1.1rem;">Pro Tips & Common Mistakes</h3>
+                        <p>Coming soon! Expert tips, common mistakes to avoid, and best practices for this stitch will be available here.</p>
+                    </div>
+                </div>
+
+                <div id="projects-panel" class="tab-panel">
+                    <div style="background: var(--clr-warm-white); padding: 20px; border-radius: 12px; border: 1px solid rgba(0, 56, 64, 0.08);">
+                        <h3 style="color: var(--clr-fuchsia); margin-bottom: 10px; font-size: 1.1rem;">Best Uses & Projects</h3>
+                        <p>Coming soon! Recommended projects, best yarn types, and hook sizes for this stitch will be featured here.</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Load external JavaScript -->
     <script type="module">
-        // Import the data
         import { stitchGlossary } from './glossarydata.js';
         
-        // Make it globally available
         window.stitchGlossary = stitchGlossary;
         
-        // Tips dropdown functionality
         function toggleTips() {
             const tipsContent = document.getElementById('tips-content');
             const button = document.getElementById('tips-toggle');
@@ -508,10 +561,8 @@
             }
         }
 
-        // Make toggleTips globally available
         window.toggleTips = toggleTips;
 
-        // Close tips when clicking outside
         document.addEventListener('click', function(e) {
             const tipsToggle = document.getElementById('tips-toggle');
             const tipsContent = document.getElementById('tips-content');
@@ -521,7 +572,6 @@
             }
         });
 
-        // Build the glossary cards
         function buildCards() {
             const grid = document.getElementById('glossary-grid');
             const searchInput = document.getElementById('search');
@@ -548,17 +598,18 @@
                 `;
                 
                 card.onclick = () => {
-                    document.getElementById('modal-title').textContent = stitch.name_us;
+                    document.getElementById('modal-stitch-name').textContent = stitch.name_us;
+                    document.getElementById('modal-abbr').textContent = stitch.id.toUpperCase();
                     document.getElementById('modal-us-name').textContent = stitch.name_us;
                     document.getElementById('modal-uk-name').textContent = stitch.name_uk;
+                    document.getElementById('modal-symbol').textContent = stitch.id.toUpperCase();
                     document.getElementById('modal-description').textContent = stitch.notes || 'No description available.';
-                    document.getElementById('modal').classList.add('active');
+                    document.getElementById('enhanced-modal').classList.add('active');
                 };
                 
                 grid.appendChild(card);
             });
             
-            // Search functionality
             searchInput.addEventListener('input', () => {
                 const query = searchInput.value.toLowerCase().trim();
                 
@@ -574,7 +625,6 @@
                     
                     card.style.display = matches ? '' : 'none';
                     
-                    // Add search highlight
                     if (query !== '' && matches) {
                         card.classList.add('search-highlight');
                     } else {
@@ -584,29 +634,41 @@
             });
         }
 
-        // Close modal
         function closeModal() {
-            document.getElementById('modal').classList.remove('active');
+            document.getElementById('enhanced-modal').classList.remove('active');
         }
 
-        // Make closeModal globally available
-        window.closeModal = closeModal;
+        function switchTab(tabName) {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.style.display = 'none';
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = 'var(--clr-primary-dark)';
+            });
+            
+            document.getElementById(tabName + '-panel').style.display = 'block';
+            
+            event.target.classList.add('active');
+            event.target.style.color = 'var(--clr-fuchsia)';
+        }
 
-        // Close modal when clicking outside
-        document.getElementById('modal').addEventListener('click', function(e) {
+        window.closeModal = closeModal;
+        window.switchTab = switchTab;
+
+        document.getElementById('enhanced-modal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
 
-        // ESC key to close modal
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeModal();
             }
         });
 
-        // Sticky navigation
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
             if (window.scrollY > 50) {
@@ -616,11 +678,9 @@
             }
         });
 
-        // Initialize when page loads
         document.addEventListener('DOMContentLoaded', function() {
             buildCards();
             
-            // Auto-show tips for 30 seconds
             const tipsContent = document.getElementById('tips-content');
             const tipsToggle = document.getElementById('tips-toggle');
             
