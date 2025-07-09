@@ -1,0 +1,19 @@
+.
+├── add_new_terms.py
+├── config.py
+├── create_glossary_sheet.py
+├── credentials.json
+├── enhance_glossary_sheets.py
+├── export_to_glossarydata.py
+├── glossarydata.js
+├── google_sheets_sync.py
+├── import_existing_terms.py
+├── merge_glossary_data.py
+├── remove_duplicates.py
+├── share_with_me.py
+├── test_my_sheet.py
+├── test_sheets_connection.py
+├── tree.txt
+└── validate_glossary_data.py
+
+1 directory, 16 files

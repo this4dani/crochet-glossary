@@ -248,24 +248,1310 @@
             padding: 10px 6px;
         }
 
+        .card-front,
+        .card-back {
+            -webkit-backface-visibility: hidden !important;
+            backface-visibility: hidden !important;
+            -webkit-transform: translateZ(0) !important;
+            transform: translateZ(0) !important;
+        }
+
+        /* CRITICAL: Fix the card orientation */
         .card-front {
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
+            transform: rotateY(0deg) !important;
         }
 
         .card-back {
             background: var(--clr-warm-white);
             color: var(--clr-primary-dark);
-            transform: rotateY(180deg);
+            transform: rotateY(180deg) !important;
             border: 2px solid rgba(255, 45, 130, 0.3);
         }
+
+        .card-front .name {
+            font-family: var(--font-primary);
+            font-weight: 600;
+            color: var(--clr-primary-dark);
+            margin: 0;
+            line-height: 1.1;
+            word-wrap: break-word;
+            word-break: break-word;
+            hyphens: auto;
+            text-align: center;
+            width: 100%;
+            padding: 0 2px;
+        }
+
+        .name-short { font-size: 0.75rem; }
+        .name-medium { font-size: 0.65rem; }
+        .name-long { font-size: 0.55rem; }
+        .name-extra-long { font-size: 0.5rem; }
+
+        .card-back .abbr {
+            font-family: var(--font-primary);
+            font-weight: 700;
+            color: var(--clr-fuchsia);
+            text-transform: uppercase;
+            font-size: 1.2rem;
+            margin-bottom: 4px;
+        }
+
+        .card-back .description {
+            font-size: 0.6rem;
+            color: var(--clr-primary-dark);
+            opacity: 0.9;
+            text-align: center;
+            line-height: 1.2;
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            line-clamp: 4;
+            -webkit-box-orient: vertical;
+            padding: 0 4px;
+        }
+
+        .card-back .click-more {
+            font-size: 1rem;
+            color: var(--clr-fuchsia);
+            opacity: 0.8;
+            margin-top: 4px;
+            font-weight: 700;
+        }
+
+        .stitch-card.search-highlight {
+            animation: glow 1s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 10px var(--clr-fuchsia);
+            }
+            to {
+                box-shadow: 0 0 20px var(--clr-fuchsia), 0 0 30px var(--clr-fuchsia);
+            }
+        }
+
+        #glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, 80px);
+            gap: 15px;
+            justify-content: center;
+            margin-bottom: 40px;
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            #glossary-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 10px;
+            }
+            
+            .stitch-card {
+                width: 70px;
+                height: 90px;
+            }
+        }
         
+        /* ===== ENHANCED POPUP STYLES ===== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 56, 64, 0.85);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-container {
+            background: var(--clr-cream);
+            color: var(--clr-primary-dark);
+            width: 90%;
+            max-width: 700px;
+            max-height: 85vh;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 25px 50px rgba(0, 0, 0, 0.4),
+                0 10px 20px rgba(0, 0, 0, 0.3);
+            transform: translateY(30px);
+            transition: transform 0.3s ease;
+        }
+
+        .modal-overlay.active .modal-container {
+            transform: translateY(0);
+        }
+
+        /* Modal Header */
+        .modal-header {
+            background: var(--clr-warm-white);
+            padding: 20px 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid rgba(0, 56, 64, 0.1);
+        }
+
+        .modal-title {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--clr-primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-family: var(--font-primary);
+        }
+
+        .abbr-badge {
+            background: var(--clr-coral);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .close-button {
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--clr-primary-dark);
+            cursor: pointer;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .close-button:hover {
+            background: rgba(0, 56, 64, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* Tab Navigation */
+        .tab-nav {
+            background: var(--clr-warm-white);
+            display: flex;
+            padding: 0 25px;
+            border-bottom: 1px solid rgba(0, 56, 64, 0.1);
+            overflow-x: auto;
+            scrollbar-width: thin;
+        }
+
+        .tab-button {
+            background: none;
+            border: none;
+            padding: 15px 20px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--clr-primary-dark);
+            cursor: pointer;
+            position: relative;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-family: var(--font-primary);
+        }
+
+        .tab-button:hover {
+            color: var(--clr-fuchsia);
+        }
+
+        .tab-button.active {
+            color: var(--clr-fuchsia);
+        }
+
+        .tab-button.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 10%;
+            right: 10%;
+            height: 3px;
+            background: var(--clr-fuchsia);
+            border-radius: 3px 3px 0 0;
+        }
+
+        /* Tab Content */
+        .tab-content {
+            padding: 25px;
+            max-height: calc(85vh - 140px);
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--clr-coral) var(--clr-warm-white);
+        }
+
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { 
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Overview Tab Styling */
+        .overview-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-card {
+            background: var(--clr-warm-white);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(0, 56, 64, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 56, 64, 0.1);
+        }
+
+        .info-card h4 {
+            color: var(--clr-mauve);
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-card p {
+            color: var(--clr-primary-dark);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        /* Symbol Display */
+        .symbol-display {
+            font-size: 2.5rem;
+            color: var(--clr-fuchsia);
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        /* Difficulty Stars */
+        .difficulty-stars {
+            display: flex;
+            gap: 3px;
+            justify-content: center;
+        }
+
+        .star {
+            color: var(--clr-coral);
+            font-size: 1.1rem;
+        }
+
+        .star.empty {
+            opacity: 0.25;
+        }
+
+        /* Description Box */
+        .description-box {
+            background: var(--clr-warm-white);
+            padding: 20px;
+            border-radius: 12px;
+            margin-top: 20px;
+            border: 1px solid rgba(0, 56, 64, 0.08);
+        }
+
+        .description-box h3 {
+            color: var(--clr-fuchsia);
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .description-box p {
+            line-height: 1.6;
+            color: var(--clr-primary-dark);
+            margin-bottom: 10px;
+        }
+
+        /* How-To Tab */
+        .step-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .step-item {
+            background: var(--clr-warm-white);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            display: flex;
+            gap: 15px;
+            align-items: start;
+            border: 1px solid rgba(0, 56, 64, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .step-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 12px rgba(0, 56, 64, 0.1);
+        }
+
+        .step-number {
+            background: var(--clr-fuchsia);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* Tips Section */
+        .tips-section {
+            margin-bottom: 25px;
+        }
+
+        .tips-section h3 {
+            color: var(--clr-fuchsia);
+            margin-bottom: 12px;
+            font-size: 1.1rem;
+        }
+
+        .tip-item {
+            background: var(--clr-warm-white);
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            border-left: 4px solid var(--clr-coral);
+        }
+
+        .tip-item.mistake {
+            border-left-color: #ff4444;
+        }
+
+        .tip-item strong {
+            color: var(--clr-primary-dark);
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        /* Projects Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .project-tag {
+            background: var(--clr-warm-white);
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            cursor: pointer;
+        }
+
+        .project-tag:hover {
+            border-color: var(--clr-coral);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 107, 122, 0.2);
+        }
+
+        /* Related Stitches */
+        .related-stitches {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .stitch-pill {
+            background: var(--clr-coral);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .stitch-pill:hover {
+            background: var(--clr-fuchsia);
+            transform: translateY(-1px);
+        }
+
+        /* Callout Boxes */
+        .callout-box {
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid;
+        }
+
+        .callout-box.warning {
+            background: #fff4e6;
+            border-left-color: #ff9800;
+        }
+
+        .callout-box.info {
+            background: #f0f9ff;
+            border-left-color: #2196F3;
+        }
+
+        /* Video Placeholder */
+        .video-placeholder {
+            background: #f5f5f5;
+            border-radius: 12px;
+            height: 250px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+            border: 2px dashed #ddd;
+        }
+
+        .video-placeholder span {
+            font-size: 3rem;
+            opacity: 0.3;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            #glossary-grid {
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                gap: 10px;
+            }
+            
+            .stitch-card {
+                height: 100px;
+            }
+            
+            .glossary-content-container {
+                margin: 10px;
+                height: 80vh;
+            }
+            
+            .sticky-header {
+                padding: 15px 20px 12px;
+            }
+            
+            .grid-container {
+                padding: 15px 20px;
+            }
+            
+            .modal-container {
+                width: 95%;
+                max-width: none;
+            }
+            
+            .overview-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            
+            .project-grid {
+                grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .modal-container {
+                width: 100%;
+                height: 100%;
+                max-height: 100%;
+                border-radius: 0;
+            }
+            
+            .modal-header {
+                padding: 15px 20px;
+            }
+            
+            .modal-title {
+                font-size: 1.2rem;
+            }
+            
+            .tab-button {
+                padding: 12px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .tab-content {
+                padding: 20px 15px;
+            }
+        }
+        
+    </style>
+    
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+         crossorigin="anonymous"></script>
+</head>
+<body>
+    <!-- AdSense Top Banner -->
+    <div class="adsense-top">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+             crossorigin="anonymous"></script>
+        <!-- this4dani-home-top -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-slot="5658247632"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <!-- Navigation -->
+    <nav id="nav">
+        <a href="index.html">
+            <img src="images/home-heart-door.png" alt="Home">
+        </a>
+        <a href="glossary.html" class="active">
+            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+        </a>
+        <a href="story.html">
+            <img src="images/slip-knot-first-chain.png" alt="Story">
+        </a>
+        <a href="follow.html">
+            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+        </a>
+    </nav>
+    
+    <!-- Main Content -->
+    <div class="container content-wrapper">
+        <!-- Header -->
+        <header class="header">
+            <h1>Interactive Crochet Glossary</h1>
+            <p>Your comprehensive guide to 250+ crochet stitches and techniques</p>
+        </header>
+        
+        <!-- Glossary Content Container -->
+        <div class="glossary-content-container">
+            <!-- Sticky header section -->
+            <div class="sticky-header">
+                <div class="search-section">
+                    <div style="position: relative;">
+                        <button class="tips-toggle" id="tips-toggle" onclick="toggleTips()">
+                            💡 Tips & Tricks ▼
+                        </button>
+                        <div class="tips-content" id="tips-content">
+                            <h4 style="color: var(--clr-coral); margin: 0 0 10px 0; font-size: 1rem;">Welcome to your glossary!</h4>
+                            
+                            <p><strong style="color: var(--clr-fuchsia);">✨ Hover over any card</strong><br>
+                            Watch them flip to reveal abbreviations and descriptions!</p>
+                            
+                            <p><strong style="color: var(--clr-fuchsia);">🔍 Search made easy</strong><br>
+                            Type any part of a stitch name or its abbreviation - like "single" or "sc"</p>
+                            
+                            <p><strong style="color: var(--clr-fuchsia);">📖 Click for details</strong><br>
+                            Each card opens a window with full information about that stitch</p>
+                            
+                            <p><strong style="color: var(--clr-fuchsia);">🌍 US & UK friendly</strong><br>
+                            Every stitch shows both American and British terms - no more confusion!</p>
+                            
+                            <p><strong style="color: var(--clr-fuchsia);">📚 250+ stitches strong</strong><br>
+                            From basic chains to advanced techniques - it's all here for you!</p>
+                            
+                            <p style="margin-top: 12px; font-style: italic; opacity: 0.9; font-size: 0.85rem;">
+                            Tip: Cards expand on hover to show longer descriptions 💕</p>
+                        </div>
+                    </div>
+                    <input type="text" id="search" placeholder="Try 'single', 'dc', or 'texture'...">
+                </div>
+            </div>
+            <!-- Scrollable grid container -->
+            <div class="grid-container">
+                <div id="glossary-grid"></div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer" style="border-top: none;">
+            <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <div style="margin-top: 20px;">
+                <a href="privacy.html">Privacy Policy</a>
+                <span style="margin: 0 10px;">•</span>
+                <a href="privacy.html#terms">Terms of Service</a>
+                <span style="margin: 0 10px;">•</span>
+                <a href="privacy.html#contact">Contact</a>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AdSense Footer -->
+    <div class="adsense-bottom">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
+             crossorigin="anonymous"></script>
+        <!-- this4dani-home-footer -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-slot="9304729040"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+    
+    <!-- Enhanced Modal Structure -->
+    <div class="modal-overlay" id="enhanced-modal">
+        <div class="modal-container">
+            <div class="modal-header">
+                <h2 class="modal-title">
+                    <span id="modal-stitch-name">Stitch Name</span>
+                    <span class="abbr-badge" id="modal-abbr">ABBR</span>
+                </h2>
+                <button class="close-button" onclick="closeEnhancedModal()" aria-label="Close modal">×</button>
+            </div>
+
+            <div class="tab-nav" role="tablist">
+                <button class="tab-button active" role="tab" aria-selected="true" onclick="switchTab('overview')">Overview</button>
+                <button class="tab-button" role="tab" aria-selected="false" onclick="switchTab('howto')">How-To</button>
+                <button class="tab-button" role="tab" aria-selected="false" onclick="switchTab('tips')">Tips</button>
+                <button class="tab-button" role="tab" aria-selected="false" onclick="switchTab('projects')">Projects</button>
+            </div>
+
+            <div class="tab-content">
+                <!-- Overview Tab -->
+                <div class="tab-panel active" id="overview-panel" role="tabpanel">
+                    <div class="overview-grid">
+                        <div class="info-card">
+                            <h4>US Term</h4>
+                            <p id="modal-us-name">-</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>UK Term</h4>
+                            <p id="modal-uk-name">-</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>Symbol</h4>
+                            <p class="symbol-display" id="modal-symbol">-</p>
+                        </div>
+                        <div class="info-card">
+                            <h4>Difficulty</h4>
+                            <div class="difficulty-stars" id="modal-difficulty">
+                                <span class="star empty">★</span>
+                                <span class="star empty">★</span>
+                                <span class="star empty">★</span>
+                                <span class="star empty">★</span>
+                                <span class="star empty">★</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="description-box">
+                        <h3>Description</h3>
+                        <p id="modal-description">-</p>
+                        <p><strong>Time to Learn:</strong> <span id="modal-time">-</span></p>
+                        <p><strong>Category:</strong> <span id="modal-category">-</span></p>
+                    </div>
+                </div>
+
+                <!-- How-To Tab -->
+                <div class="tab-panel" id="howto-panel" role="tabpanel">
+                    <ul class="step-list" id="modal-steps">
+                        <!-- Steps will be dynamically added -->
+                    </ul>
+
+                    <div class="callout-box warning">
+                        <strong>Left-Handed Note:</strong><br>
+                        <span id="modal-lefthanded">Work in mirror image</span>
+                    </div>
+
+                    <div class="video-placeholder">
+                        <span>▶️</span>
+                    </div>
+                    <p style="text-align: center; color: #666; margin-top: 10px;">Video tutorial coming soon!</p>
+                </div>
+
+                <!-- Tips Tab -->
+                <div class="tab-panel" id="tips-panel" role="tabpanel">
+                    <div class="tips-section">
+                        <h3>Pro Tips</h3>
+                        <div id="modal-protips">
+                            <!-- Pro tips will be dynamically added -->
+                        </div>
+                    </div>
+
+                    <div class="tips-section">
+                        <h3>Common Mistakes to Avoid</h3>
+                        <div id="modal-mistakes">
+                            <!-- Mistakes will be dynamically added -->
+                        </div>
+                    </div>
+
+                    <div class="tips-section">
+                        <h3>Hook & Yarn Recommendations</h3>
+                        <div class="tip-item" id="modal-hook-yarn">
+                            <!-- Hook and yarn info will be added -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Projects Tab -->
+                <div class="tab-panel" id="projects-panel" role="tabpanel">
+                    <h3 style="color: var(--clr-fuchsia); margin-bottom: 15px;">Perfect for These Projects</h3>
+                    <div class="project-grid" id="modal-projects">
+                        <!-- Projects will be dynamically added -->
+                    </div>
+
+                    <div class="description-box" style="margin-top: 20px;">
+                        <h3>Related Stitches</h3>
+                        <p>Master these stitches next:</p>
+                        <div class="related-stitches" id="modal-related">
+                            <!-- Related stitches will be dynamically added -->
+                        </div>
+                    </div>
+
+                    <div class="callout-box info">
+                        <strong>Pattern Suggestion:</strong><br>
+                        <span id="modal-pattern-suggestion">Check our patterns section for projects using this stitch!</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load external JavaScript file -->
+    <script type="module" src="glossary.js"></script>
+    <script src="glossarydata.js"></script>
+    
+    <!-- Enhanced modal functionality -->
+    <script>
+        // Tips dropdown functionality
+        function toggleTips() {
+            const tipsContent = document.getElementById('tips-content');
+            const button = document.getElementById('tips-toggle');
+            
+            tipsContent.classList.toggle('show');
+            
+            if (tipsContent.classList.contains('show')) {
+                button.innerHTML = '💡 Tips & Tricks ▲';
+            } else {
+                button.innerHTML = '💡 Tips & Tricks ▼';
+            }
+        }
+
+        // Close tips when clicking outside
+        document.addEventListener('click', function(e) {
+            const tipsToggle = document.getElementById('tips-toggle');
+            const tipsContent = document.getElementById('tips-content');
+            if (!tipsToggle.contains(e.target) && !tipsContent.contains(e.target)) {
+                tipsContent.classList.remove('show');
+                document.getElementById('tips-toggle').innerHTML = '💡 Tips & Tricks ▼';
+            }
+        });
+
+        // Enhanced modal functionality
+        function openEnhancedModal(stitchData) {
+            const modal = document.getElementById('enhanced-modal');
+            
+            // Populate Overview tab
+            document.getElementById('modal-stitch-name').textContent = stitchData.name_us;
+            document.getElementById('modal-abbr').textContent = stitchData.id.toUpperCase();
+            document.getElementById('modal-us-name').textContent = stitchData.name_us;
+            document.getElementById('modal-uk-name').textContent = stitchData.name_uk;
+            document.getElementById('modal-symbol').textContent = stitchData.symbol || stitchData.id;
+            document.getElementById('modal-description').textContent = stitchData.notes || 'Description coming soon!';
+            
+            // Set difficulty (default to 1 if not specified)
+            const difficulty = stitchData.difficulty || 1;
+            const stars = document.querySelectorAll('#modal-difficulty .star');
+            stars.forEach((star, index) => {
+                star.classList.toggle('empty', index >= difficulty);
+            });
+            
+            // Set category and time
+            document.getElementById('modal-category').textContent = stitchData.tags ? stitchData.tags.join(', ') : 'Basic';
+            document.getElementById('modal-time').textContent = stitchData.timeToLearn || '15-30 minutes';
+            
+            // Populate How-To tab (placeholder content for now)
+            const stepsList = document.getElementById('modal-steps');
+            stepsList.innerHTML = '';
+            const steps = stitchData.steps || [
+                'Insert hook into stitch',
+                'Yarn over and pull through',
+                'Complete the stitch as indicated'
+            ];
+            steps.forEach((step, index) => {
+                const li = document.createElement('li');
+                li.className = 'step-item';
+                li.innerHTML = `
+                    <span class="step-number">${index + 1}</span>
+                    <div>${step}</div>
+                `;
+                stepsList.appendChild(li);
+            });
+            
+            // Populate Tips tab
+            const proTipsDiv = document.getElementById('modal-protips');
+            proTipsDiv.innerHTML = '';
+            const proTips = stitchData.proTips || [
+                'Keep consistent tension',
+                'Count your stitches regularly',
+                'Use stitch markers to track your progress'
+            ];
+            proTips.forEach(tip => {
+                const div = document.createElement('div');
+                div.className = 'tip-item';
+                div.innerHTML = `<strong>${tip}</strong>`;
+                proTipsDiv.appendChild(div);
+            });
+            
+            const mistakesDiv = document.getElementById('modal-mistakes');
+            mistakesDiv.innerHTML = '';
+            const mistakes = stitchData.commonMistakes || [
+                'Working into the wrong loop',
+                'Missing stitches at row ends',
+                'Tension too tight or too loose'
+            ];
+            mistakes.forEach(mistake => {
+                const div = document.createElement('div');
+                div.className = 'tip-item mistake';
+                div.innerHTML = `<strong>${mistake}</strong>`;
+                mistakesDiv.appendChild(div);
+            });
+            
+            // Populate Projects tab
+            const projectsDiv = document.getElementById('modal-projects');
+            projectsDiv.innerHTML = '';
+            const projects = stitchData.bestFor || ['Blankets', 'Scarves', 'Dishcloths', 'Amigurumi'];
+            projects.forEach(project => {
+                const div = document.createElement('div');
+                div.className = 'project-tag';
+                div.textContent = project;
+                projectsDiv.appendChild(div);
+            });
+            
+            // Show modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            
+            // Reset to first tab
+            const firstTab = document.querySelector('.tab-button');
+            if (firstTab) {
+                firstTab.click();
+            }
+        }
+
+        function closeEnhancedModal() {
+            const modal = document.getElementById('enhanced-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        function switchTab(tabName) {
+            // Update active states
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Activate selected tab
+            event.target.classList.add('active');
+            event.target.setAttribute('aria-selected', 'true');
+            document.getElementById(tabName + '-panel').classList.add('active');
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('enhanced-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeEnhancedModal();
+            }
+        });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeEnhancedModal();
+            }
+        });
+
+        // Make enhanced modal available globally for glossary.js
+        window.openEnhancedModal = openEnhancedModal;
+        window.closeEnhancedModal = closeEnhancedModal;
+        window.switchTab = switchTab;
+        
+        // Auto-expand Tips & Tricks on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const tipsContent = document.getElementById('tips-content');
+            const tipsToggle = document.getElementById('tips-toggle');
+            let autoCloseTimeout;
+            let hasInteracted = false;
+            
+            if (tipsContent && tipsToggle) {
+                // Show the tips
+                tipsContent.classList.add('show');
+                tipsToggle.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▲</span>';
+                
+                // Function to close tips
+                function closeTips() {
+                    if (!hasInteracted) {
+                        tipsContent.classList.remove('show');
+                        tipsToggle.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▼</span>';
+                        clearTimeout(autoCloseTimeout);
+                    }
+                }
+                
+                // Auto-close after 30 seconds
+                autoCloseTimeout = setTimeout(closeTips, 30000);
+                
+                // Close on any interaction outside the tips
+                document.addEventListener('click', function(e) {
+                    if (!tipsToggle.contains(e.target) && !tipsContent.contains(e.target)) {
+                        closeTips();
+                    }
+                });
+                
+                // Close on scroll
+                let scrollTimeout;
+                window.addEventListener('scroll', function() {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(function() {
+                        if (window.scrollY > 100) {
+                            closeTips();
+                        }
+                    }, 150);
+                });
+                
+                // Close when user starts typing in search
+                const searchInput = document.getElementById('search');
+                if (searchInput) {
+                    searchInput.addEventListener('focus', closeTips);
+                }
+                
+                // Mark as interacted if user manually toggles
+                tipsToggle.addEventListener('click', function() {
+                    hasInteracted = true;
+                    clearTimeout(autoCloseTimeout);
+                });
+            }
+        });
+    </script>
+<style>
+    .tips-toggle {
+        transition: all 0.3s ease;
+    }
+    
+    #tips-content.show + .tips-toggle,
+    .tips-toggle:has(+ #tips-content.show) {
+        background: var(--clr-coral) !important;
+        color: white !important;
+        box-shadow: 0 4px 12px rgba(255, 107, 122, 0.3);
+    }
+</style>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Crochet Glossary - DANI'S</title>
+    <meta name="description" content="Comprehensive crochet glossary with US/UK terminology. 250+ stitches and terms with detailed explanations.">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Glossary specific styles */
+        
+        /* Header styling - ADDED */
+        .header h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--clr-coral) 0%, var(--clr-fuchsia) 50%, var(--clr-mauve) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        /* Container with darker background */
+        .glossary-content-container {
+            background: #003840;
+            border-radius: 15px;
+            margin: 10px auto; /* CHANGED from 20px */
+            max-width: 1400px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 0, 0, 0.2);
+            position: relative;
+            height: 75vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* Sticky header with minimal padding */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            background: #003840;
+            z-index: 50;
+            padding: 20px 30px 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        }
+        
+        /* Search section layout */
+        .search-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        /* Tips & Tricks - FIXED CORAL COLOR */
+        .tips-toggle {
+            background: var(--clr-coral) !important;
+            color: white !important;
+            border: none;
+            padding: 12px 20px;
+            height: 44px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            white-space: nowrap;
+            flex-shrink: 0;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 -2px 4px rgba(255, 255, 255, 0.25),
+                0 1px 2px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+        }
+        
+        .tips-toggle:hover {
+            background: var(--clr-fuchsia) !important;
+            box-shadow: 
+                inset 0 3px 6px rgba(0, 0, 0, 0.15),
+                inset 0 -1px 3px rgba(255, 255, 255, 0.3),
+                0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .tips-toggle.show {
+            background: var(--clr-fuchsia) !important;
+        }
+        
+        .tips-content {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--clr-cream);
+            color: var(--clr-primary-dark);
+            border: 1px solid var(--clr-coral);
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 8px;
+            width: 250px;
+            display: none;
+            z-index: 100;
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tips-content.show {
+            display: block;
+        }
+        
+        .tips-content p {
+            color: var(--clr-primary-dark);
+            margin: 6px 0;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+        
+        .tips-content p strong {
+            color: var(--clr-coral);
+        }
+        
+        /* Search bar - matching inset style */
+        #search {
+            background: var(--clr-cream);
+            color: var(--clr-primary-dark);
+            border: none;
+            width: 100%;
+            padding: 12px 20px;
+            height: 44px;
+            font-size: 1rem;
+            border-radius: 6px;
+            outline: none;
+            transition: all 0.3s ease;
+            flex: 1;
+            box-shadow: 
+                inset 0 2px 4px rgba(0, 0, 0, 0.1),
+                inset 0 -2px 4px rgba(255, 255, 255, 0.25),
+                0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        #search:focus {
+            box-shadow: 
+                inset 0 3px 6px rgba(0, 0, 0, 0.15),
+                inset 0 -1px 3px rgba(255, 255, 255, 0.3),
+                0 0 0 2px var(--clr-coral);
+        }
+        
+        #search::placeholder {
+            color: var(--clr-mauve);
+            opacity: 0.6;
+        }
+        
+        /* Grid container with minimal padding */
+        .grid-container {
+            overflow-y: auto;
+            padding: 15px 20px; /* CHANGED from 20px 30px */
+            flex: 1;
+        }
+        
+        /* Custom scrollbar */
+        .grid-container::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .grid-container::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+        }
+        
+        .grid-container::-webkit-scrollbar-thumb {
+            background: var(--clr-coral);
+            border-radius: 4px;
+            opacity: 0.5;
+        }
+        
+        .grid-container::-webkit-scrollbar-thumb:hover {
+            background: var(--clr-fuchsia);
+        }
+        
+        /* Glossary grid */
+        #glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+            gap: 12px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Stitch card */
+        .stitch-card {
+            position: relative;
+            width: 80px;
+            height: 100px;
+            perspective: 1000px;
+            transition: transform 0.3s ease, z-index 0.3s ease, height 0.3s ease;
+        }
+
+        .stitch-card:hover {
+            transform: scale(1.15);
+            z-index: 10;
+            height: auto;
+            min-height: 130px;
+        }
+
+        .stitch-card.search-highlight:hover {
+            transform: scale(1.2);
+        }
+
+        .card-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            transition: transform 0.6s;
+            transform-style: preserve-3d;
+            cursor: pointer;
+        }
+
+        .stitch-card:hover .card-inner {
+            transform: rotateY(180deg);
+            height: auto;
+            min-height: 130px;
+        }
+
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 8px 6px;
+            box-shadow: 
+                0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24),
+                0 2px 4px rgba(0, 0, 0, 0.1) inset,
+                2px 2px 8px rgba(0, 0, 0, 0.15),
+                -1px -1px 4px rgba(255, 255, 255, 0.5) inset;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .stitch-card:hover .card-back {
+            height: auto;
+            min-height: 100%;
+            padding: 10px 6px;
+        }
+
         .card-front,
         .card-back {
             -webkit-backface-visibility: hidden !important;
             backface-visibility: hidden !important;
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
+            -webkit-transform: translateZ(0) !important;
+            transform: translateZ(0) !important;
+        }
+
+        /* CRITICAL: Fix the card orientation */
+        .card-front {
+            background: var(--clr-cream);
+            color: var(--clr-primary-dark);
+            transform: rotateY(0deg) !important;
+        }
+
+        .card-back {
+            background: var(--clr-warm-white);
+            color: var(--clr-primary-dark);
+            transform: rotateY(180deg) !important;
+            border: 2px solid rgba(255, 45, 130, 0.3);
         }
 
         .card-front .name {

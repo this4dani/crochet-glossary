@@ -12,19 +12,17 @@ function buildCards() {
     card.setAttribute("data-tags", s.tags ? s.tags.join(' ').toLowerCase() : '');
     card.setAttribute("data-abbr", s.id.toLowerCase());
 
-    // Create the 3D card structure to match your advanced HTML
     const cardInner = document.createElement("div");
     cardInner.className = "card-inner";
 
-    // FRONT SIDE - Shows stitch NAMES (what user sees first)
+    // FRONT - Full name only
     const cardFront = document.createElement("div");
     cardFront.className = "card-front";
     
     const name = document.createElement("div");
     name.className = "name";
-    name.textContent = s.name_us;  // "Single Crochet"
+    name.textContent = s.name_us;
     
-    // Dynamic font sizing based on name length
     const nameLength = s.name_us.length;
     if (nameLength < 15) {
       name.classList.add('name-short');
@@ -38,13 +36,13 @@ function buildCards() {
     
     cardFront.appendChild(name);
 
-    // BACK SIDE - Shows abbreviations + description (on hover)
+    // BACK - Abbreviation + Description + "..."
     const cardBack = document.createElement("div");
     cardBack.className = "card-back";
     
     const abbr = document.createElement("div");
     abbr.className = "abbr";
-    abbr.textContent = s.id.toUpperCase();  // "SC"
+    abbr.textContent = s.id.toUpperCase();
     
     const description = document.createElement("div");
     description.className = "description";
@@ -58,7 +56,6 @@ function buildCards() {
     cardBack.appendChild(description);
     cardBack.appendChild(clickMore);
 
-    // Assemble the 3D card structure
     cardInner.appendChild(cardFront);
     cardInner.appendChild(cardBack);
     card.appendChild(cardInner);
@@ -91,19 +88,19 @@ function buildCards() {
 function initGlossary() {
     buildCards();
 
-    // Search functionality with highlighting
+    // Search functionality
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase().trim();
         
         Array.from(grid.children).forEach((card) => {
-            const name = card.getAttribute("data-name");
-            const tags = card.getAttribute("data-tags");
-            const abbr = card.getAttribute("data-abbr");
+            const cardName = card.getAttribute("data-name");
+            const cardTags = card.getAttribute("data-tags");
+            const cardAbbr = card.getAttribute("data-abbr");
             
             const matches = query === "" || 
-                           name.includes(query) || 
-                           abbr.includes(query) || 
-                           tags.includes(query);
+                           cardName.includes(query) || 
+                           cardAbbr.includes(query) || 
+                           cardTags.includes(query);
             
             // Remove highlight first
             card.classList.remove('search-highlight');

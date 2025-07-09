@@ -424,14 +424,6 @@ export const stitchGlossary = [
     notes: "Extremely tall stitch with 3 yarn overs"
   },
   {
-    id: "slipknot",
-    name_us: "Slip Knot",
-    name_uk: "Slip Knot",
-    symbol: "○",
-    tags: ["foundation", "starting", "basic"],
-    notes: "The very first loop to start any crochet project"
-  },
-  {
     id: "yo",
     name_us: "Yarn Over",
     name_uk: "Yarn Over Hook",
@@ -446,14 +438,6 @@ export const stitchGlossary = [
     symbol: "○",
     tags: ["basic", "fundamental"],
     notes: "A loop of yarn on the hook"
-  },
-  {
-    id: "fo",
-    name_us: "Fasten Off",
-    name_uk: "Cast Off",
-    symbol: "✂",
-    tags: ["technique", "finishing"],
-    notes: "Cut yarn and pull through last loop to secure"
   },
   {
     id: "beg",
@@ -1808,14 +1792,6 @@ export const stitchGlossary = [
     notes: "Light misting for delicate fibers"
   },
   {
-    id: "weave-ends",
-    name_us: "Weave in Ends",
-    name_uk: "Weave in Ends",
-    symbol: "weave",
-    tags: ["finishing", "ends", "neatening"],
-    notes: "Securing loose yarn ends"
-  },
-  {
     id: "felting",
     name_us: "Felting",
     name_uk: "Felting",
@@ -2000,14 +1976,6 @@ export const stitchGlossary = [
     notes: "Your crochet motivation and creative energy"
   },
   {
-    id: "bavarian",
-    name_us: "Bavarian Crochet",
-    name_uk: "Bavarian Crochet",
-    symbol: "bav",
-    tags: ["advanced", "colorwork", "squares"],
-    notes: "Creates colorful layered squares with unique diagonal construction"
-  },
-  {
     id: "entrelac",
     name_us: "Entrelac Crochet",
     name_uk: "Entrelac Crochet",
@@ -2024,44 +1992,12 @@ export const stitchGlossary = [
     notes: "Large color blocks without carrying yarn across back"
   },
   {
-    id: "filet",
-    name_us: "Filet Crochet",
-    name_uk: "Filet Crochet",
-    symbol: "filet",
-    tags: ["intermediate", "lace", "mesh"],
-    notes: "Creates pictures using filled and open mesh squares"
-  },
-  {
-    id: "overlay",
-    name_us: "Overlay Crochet",
-    name_uk: "Overlay Crochet",
-    symbol: "overlay",
-    tags: ["advanced", "layered", "3D"],
-    notes: "Working stitches on top of existing fabric for 3D effect"
-  },
-  {
-    id: "hyperbolic",
-    name_us: "Hyperbolic Crochet",
-    name_uk: "Hyperbolic Crochet",
-    symbol: "hyperbolic",
-    tags: ["mathematical", "ruffles", "coral"],
-    notes: "Mathematical increasing creates natural ruffled forms"
-  },
-  {
     id: "wire-crochet",
     name_us: "Wire Crochet",
     name_uk: "Wire Crochet",
     symbol: "wire",
     tags: ["specialty", "jewelry", "sculpture"],
     notes: "Using wire instead of yarn for sculptural pieces"
-  },
-  {
-    id: "bead-crochet",
-    name_us: "Bead Crochet",
-    name_uk: "Bead Crochet",
-    symbol: "bead",
-    tags: ["decorative", "jewelry", "embellishment"],
-    notes: "Incorporating beads into crochet stitches"
   },
   {
     id: "linked-dc",
@@ -2080,28 +2016,12 @@ export const stitchGlossary = [
     notes: "Creates foundation chain and first row of DC simultaneously"
   },
   {
-    id: "spike-st",
-    name_us: "Spike Stitch",
-    name_uk: "Spike Stitch",
-    symbol: "spike",
-    tags: ["intermediate", "decorative", "colorwork"],
-    notes: "Working into rows below current row for vertical lines"
-  },
-  {
     id: "loop-st",
     name_us: "Loop Stitch",
     name_uk: "Loop Stitch",
     symbol: "loop",
     tags: ["intermediate", "texture", "fur"],
     notes: "Creates loops on surface for fur or fringe effect"
-  },
-  {
-    id: "crab-st",
-    name_us: "Crab Stitch",
-    name_uk: "Crab Stitch",
-    symbol: "crab",
-    tags: ["basic", "edging", "decorative"],
-    notes: "Reverse single crochet worked backwards for rope-like edge"
   },
   {
     id: "surface-crochet",
