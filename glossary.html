@@ -540,6 +540,52 @@
         </div>
     </div>
 
+    <script>
+        // Put critical functions in global scope BEFORE module loading
+        window.toggleTips = function() {
+            console.log('toggleTips called!');
+            const tipsContent = document.getElementById('tips-content');
+            const button = document.getElementById('tips-toggle');
+            
+            console.log('Tips content element:', tipsContent);
+            console.log('Button element:', button);
+            
+            if (tipsContent && button) {
+                tipsContent.classList.toggle('show');
+                
+                if (tipsContent.classList.contains('show')) {
+                    button.innerHTML = '💡 Tips & Tricks ▲';
+                    console.log('Tips opened');
+                } else {
+                    button.innerHTML = '💡 Tips & Tricks ▼';
+                    console.log('Tips closed');
+                }
+            } else {
+                console.error('Elements not found!');
+            }
+        };
+
+        window.closeModal = function() {
+            document.getElementById('enhanced-modal').classList.remove('active');
+        };
+
+        window.switchTab = function(tabName) {
+            document.querySelectorAll('.tab-panel').forEach(panel => {
+                panel.style.display = 'none';
+            });
+            
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active');
+                btn.style.color = 'var(--clr-primary-dark)';
+            });
+            
+            document.getElementById(tabName + '-panel').style.display = 'block';
+            
+            event.target.classList.add('active');
+            event.target.style.color = 'var(--clr-fuchsia)';
+        };
+    </script>
+
     <script type="module">
         import { stitchGlossary } from './glossarydata.js';
         
