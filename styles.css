@@ -249,26 +249,6 @@ a:hover {
   color: var(--clr-warm-white);
 }
 
-.card {
-  background: var(--clr-cream);
-  color: var(--clr-primary-dark);
-  padding: var(--space-lg);
-  border-radius: 15px;
-  box-shadow: 
-    0 8px 16px rgba(0, 0, 0, 0.15),
-    0 4px 8px rgba(0, 0, 0, 0.12);
-  transition: all 0.3s ease;
-  position: relative;
-  overflow: hidden;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 
-    0 12px 24px rgba(0, 0, 0, 0.2),
-    0 6px 12px rgba(0, 0, 0, 0.15);
-}
-
 /* ===== FOOTER ===== */
 .footer,
 .standard-footer {
@@ -535,25 +515,6 @@ a:hover {
   margin-bottom: 20px;
   text-align: center;
   font-family: var(--font-display);
-}
-
-/* ===== GLOSSARY PAGE ===== */
-.glossary-content-container {
-  background: rgba(61, 26, 43, 0.8);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(250,248,243,0.15);
-  border-radius: 20px;
-  padding: 40px;
-  margin: 30px 0;
-  font-family: var(--font-primary);
-  box-shadow: none;
-  color: var(--clr-warm-white);
-}
-
-.stitch-card:hover {
-  transform: translateY(-6px) scale(1.02);
-  box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
-  border-color: var(--clr-coral);
 }
 
 /* ===== PRIVACY PAGE ===== */
