@@ -190,14 +190,11 @@
                 2px 2px 8px rgba(0, 0, 0, 0.15),
                 -1px -1px 4px rgba(255, 255, 255, 0.5) inset;
             border: 1px solid rgba(0, 0, 0, 0.08);
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
         }
 
         .card-front {
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
-            transform: rotateY(0deg);
         }
 
         .card-back {
@@ -548,20 +545,25 @@
         
         window.stitchGlossary = stitchGlossary;
         
-        function toggleTips() {
+        // Make sure toggleTips is available globally with debug
+        window.toggleTips = function() {
+            console.log('toggleTips called!');
             const tipsContent = document.getElementById('tips-content');
             const button = document.getElementById('tips-toggle');
+            
+            console.log('Tips content element:', tipsContent);
+            console.log('Button element:', button);
             
             tipsContent.classList.toggle('show');
             
             if (tipsContent.classList.contains('show')) {
                 button.innerHTML = '💡 Tips & Tricks ▲';
+                console.log('Tips opened');
             } else {
                 button.innerHTML = '💡 Tips & Tricks ▼';
+                console.log('Tips closed');
             }
-        }
-
-        window.toggleTips = toggleTips;
+        };
 
         document.addEventListener('click', function(e) {
             const tipsToggle = document.getElementById('tips-toggle');
@@ -634,11 +636,11 @@
             });
         }
 
-        function closeModal() {
+        window.closeModal = function() {
             document.getElementById('enhanced-modal').classList.remove('active');
-        }
+        };
 
-        function switchTab(tabName) {
+        window.switchTab = function(tabName) {
             document.querySelectorAll('.tab-panel').forEach(panel => {
                 panel.style.display = 'none';
             });
@@ -652,20 +654,17 @@
             
             event.target.classList.add('active');
             event.target.style.color = 'var(--clr-fuchsia)';
-        }
-
-        window.closeModal = closeModal;
-        window.switchTab = switchTab;
+        };
 
         document.getElementById('enhanced-modal').addEventListener('click', function(e) {
             if (e.target === this) {
-                closeModal();
+                window.closeModal();
             }
         });
 
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
-                closeModal();
+                window.closeModal();
             }
         });
 
