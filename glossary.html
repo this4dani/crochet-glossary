@@ -58,8 +58,8 @@
         
         /* Tips & Tricks - inset 3D effect */
         .tips-toggle {
-            background: var(--clr-cream);
-            color: var(--clr-primary-dark);
+            background: var(--clr-coral) !important;
+            color: white !important;
             border: none;
             padding: 12px 20px;
             height: 44px;
@@ -80,7 +80,7 @@
         }
         
         .tips-toggle:hover {
-            background: var(--clr-warm-white);
+            background: var(--clr-fuchsia) !important;
             box-shadow: 
                 inset 0 3px 6px rgba(0, 0, 0, 0.15),
                 inset 0 -1px 3px rgba(255, 255, 255, 0.3),
@@ -248,24 +248,28 @@
             padding: 10px 6px;
         }
 
+        /* CRITICAL FIX: Card front shows NAMES by default */
         .card-front {
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
+            transform: rotateY(0deg) !important;
         }
 
+        /* CRITICAL FIX: Card back shows ABBREVIATIONS on hover */
         .card-back {
             background: var(--clr-warm-white);
             color: var(--clr-primary-dark);
-            transform: rotateY(180deg);
+            transform: rotateY(180deg) !important;
             border: 2px solid rgba(255, 45, 130, 0.3);
         }
+        
         .card-front,
-.card-back {
-    -webkit-backface-visibility: hidden !important;
-    backface-visibility: hidden !important;
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
-}
+        .card-back {
+            -webkit-backface-visibility: hidden !important;
+            backface-visibility: hidden !important;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+        }
 
         .card-front .name {
             font-family: var(--font-primary);
@@ -341,7 +345,7 @@
 
         @media (max-width: 768px) {
             #glossary-grid {
-                grid-template-columns: repeat(auto-fill, 70px);
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
                 gap: 10px;
             }
             
@@ -1273,6 +1277,16 @@
             button.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▼</span>';
         }
     }
+
+    // Sticky navigation script
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
 </script>
 <style>
     .tips-toggle {
