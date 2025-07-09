@@ -248,18 +248,15 @@
             padding: 10px 6px;
         }
 
-        /* CRITICAL FIX: Card front shows NAMES by default */
         .card-front {
             background: var(--clr-cream);
             color: var(--clr-primary-dark);
-            transform: rotateY(0deg) !important;
         }
 
-        /* CRITICAL FIX: Card back shows ABBREVIATIONS on hover */
         .card-back {
             background: var(--clr-warm-white);
             color: var(--clr-primary-dark);
-            transform: rotateY(180deg) !important;
+            transform: rotateY(180deg);
             border: 2px solid rgba(255, 45, 130, 0.3);
         }
         
@@ -1049,6 +1046,7 @@
 
     <!-- Load external JavaScript file -->
     <script type="module" src="glossary.js"></script>
+    <script src="glossarydata.js"></script>
     
     <!-- Enhanced modal functionality -->
     <script>
@@ -1206,88 +1204,65 @@
 
         // Make enhanced modal available globally for glossary.js
         window.openEnhancedModal = openEnhancedModal;
-    </script>
-    <script>
-    // Auto-expand Tips & Tricks on page load
-    window.addEventListener('DOMContentLoaded', function() {
-        const tipsContent = document.getElementById('tips-content');
-        const tipsToggle = document.getElementById('tips-toggle');
-        let autoCloseTimeout;
-        let hasInteracted = false;
+        window.closeEnhancedModal = closeEnhancedModal;
+        window.switchTab = switchTab;
         
-        if (tipsContent && tipsToggle) {
-            // Show the tips
-            tipsContent.classList.add('show');
-            tipsToggle.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▲</span>';
+        // Auto-expand Tips & Tricks on page load
+        window.addEventListener('DOMContentLoaded', function() {
+            const tipsContent = document.getElementById('tips-content');
+            const tipsToggle = document.getElementById('tips-toggle');
+            let autoCloseTimeout;
+            let hasInteracted = false;
             
-            // Function to close tips
-            function closeTips() {
-                if (!hasInteracted) {
-                    tipsContent.classList.remove('show');
-                    tipsToggle.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▼</span>';
-                    clearTimeout(autoCloseTimeout);
+            if (tipsContent && tipsToggle) {
+                // Show the tips
+                tipsContent.classList.add('show');
+                tipsToggle.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▲</span>';
+                
+                // Function to close tips
+                function closeTips() {
+                    if (!hasInteracted) {
+                        tipsContent.classList.remove('show');
+                        tipsToggle.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▼</span>';
+                        clearTimeout(autoCloseTimeout);
+                    }
                 }
-            }
-            
-            // Auto-close after 30 seconds
-            autoCloseTimeout = setTimeout(closeTips, 30000);
-            
-            // Close on any interaction outside the tips
-            document.addEventListener('click', function(e) {
-                if (!tipsToggle.contains(e.target) && !tipsContent.contains(e.target)) {
-                    closeTips();
-                }
-            });
-            
-            // Close on scroll
-            let scrollTimeout;
-            window.addEventListener('scroll', function() {
-                clearTimeout(scrollTimeout);
-                scrollTimeout = setTimeout(function() {
-                    if (window.scrollY > 100) {
+                
+                // Auto-close after 30 seconds
+                autoCloseTimeout = setTimeout(closeTips, 30000);
+                
+                // Close on any interaction outside the tips
+                document.addEventListener('click', function(e) {
+                    if (!tipsToggle.contains(e.target) && !tipsContent.contains(e.target)) {
                         closeTips();
                     }
-                }, 150);
-            });
-            
-            // Close when user starts typing in search
-            const searchInput = document.getElementById('search');
-            if (searchInput) {
-                searchInput.addEventListener('focus', closeTips);
+                });
+                
+                // Close on scroll
+                let scrollTimeout;
+                window.addEventListener('scroll', function() {
+                    clearTimeout(scrollTimeout);
+                    scrollTimeout = setTimeout(function() {
+                        if (window.scrollY > 100) {
+                            closeTips();
+                        }
+                    }, 150);
+                });
+                
+                // Close when user starts typing in search
+                const searchInput = document.getElementById('search');
+                if (searchInput) {
+                    searchInput.addEventListener('focus', closeTips);
+                }
+                
+                // Mark as interacted if user manually toggles
+                tipsToggle.addEventListener('click', function() {
+                    hasInteracted = true;
+                    clearTimeout(autoCloseTimeout);
+                });
             }
-            
-            // Mark as interacted if user manually toggles
-            tipsToggle.addEventListener('click', function() {
-                hasInteracted = true;
-                clearTimeout(autoCloseTimeout);
-            });
-        }
-    });
-
-    // Toggle function with larger arrows
-    function toggleTips() {
-        const tipsContent = document.getElementById('tips-content');
-        const button = document.getElementById('tips-toggle');
-        
-        tipsContent.classList.toggle('show');
-        
-        if (tipsContent.classList.contains('show')) {
-            button.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▲</span>';
-        } else {
-            button.innerHTML = '💡 Tips & Tricks <span style="font-size: 1.2rem; font-weight: 700;">▼</span>';
-        }
-    }
-
-    // Sticky navigation script
-    window.addEventListener('scroll', function() {
-        const nav = document.getElementById('nav');
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    });
-</script>
+        });
+    </script>
 <style>
     .tips-toggle {
         transition: all 0.3s ease;
