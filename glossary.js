@@ -12,17 +12,19 @@ function buildCards() {
     card.setAttribute("data-tags", s.tags ? s.tags.join(' ').toLowerCase() : '');
     card.setAttribute("data-abbr", s.id.toLowerCase());
 
+    // Create the 3D card structure to match your advanced HTML
     const cardInner = document.createElement("div");
     cardInner.className = "card-inner";
 
-    // FRONT - Full name only
+    // FRONT SIDE - Shows stitch NAMES (what user sees first)
     const cardFront = document.createElement("div");
     cardFront.className = "card-front";
     
     const name = document.createElement("div");
     name.className = "name";
-    name.textContent = s.name_us;
+    name.textContent = s.name_us;  // "Single Crochet"
     
+    // Dynamic font sizing based on name length
     const nameLength = s.name_us.length;
     if (nameLength < 15) {
       name.classList.add('name-short');
@@ -36,13 +38,13 @@ function buildCards() {
     
     cardFront.appendChild(name);
 
-    // BACK - Abbreviation + Description + "..."
+    // BACK SIDE - Shows abbreviations + description (on hover)
     const cardBack = document.createElement("div");
     cardBack.className = "card-back";
     
     const abbr = document.createElement("div");
     abbr.className = "abbr";
-    abbr.textContent = s.id.toUpperCase();
+    abbr.textContent = s.id.toUpperCase();  // "SC"
     
     const description = document.createElement("div");
     description.className = "description";
@@ -56,17 +58,17 @@ function buildCards() {
     cardBack.appendChild(description);
     cardBack.appendChild(clickMore);
 
+    // Assemble the 3D card structure
     cardInner.appendChild(cardFront);
     cardInner.appendChild(cardBack);
     card.appendChild(cardInner);
 
-    // UPDATED: Click handler for enhanced modal
+    // Click handler for enhanced modal
     card.onclick = () => {
       const stitchData = stitchGlossary.find(stitch => stitch.id === s.id);
       
       // Add enhanced data if not already present
       if (!stitchData.difficulty) {
-        // Add default data based on tags
         stitchData.difficulty = stitchData.tags.includes('basic') ? 1 : 
                                stitchData.tags.includes('intermediate') ? 3 : 
                                stitchData.tags.includes('advanced') ? 4 : 2;
@@ -89,7 +91,7 @@ function buildCards() {
 function initGlossary() {
     buildCards();
 
-    // Search functionality
+    // Search functionality with highlighting
     searchInput.addEventListener("input", () => {
         const query = searchInput.value.toLowerCase().trim();
         
