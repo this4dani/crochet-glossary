@@ -1,4 +1,4 @@
-// DANI'S Interactive Crochet Glossary - Safe API Version
+// DANI'S Interactive Crochet Glossary - HTML-Matched Version
 let stitchGlossary = [];
 
 async function loadGlossaryData() {
@@ -30,6 +30,7 @@ function buildCards() {
         card.setAttribute("data-abbr", stitch.id.toLowerCase());
         card.setAttribute("data-tags", stitch.tags ? stitch.tags.join(' ') : '');
 
+        // Match your HTML structure exactly
         card.innerHTML = `
             <div class="card-inner">
                 <div class="card-front">
@@ -42,42 +43,34 @@ function buildCards() {
             </div>
         `;
 
-        card.onclick = () => openPopup(stitch);
+        card.onclick = () => openModal(stitch);
         grid.appendChild(card);
     });
 }
 
-function openPopup(stitch) {
-    const popup = document.getElementById("popup");
-    const popupTitle = document.getElementById("popup-title");
-    const popupUK = document.getElementById("popup-uk");
-    const popupDesc = document.getElementById("popup-desc");
-    const popupTags = document.getElementById("popup-tags");
+function openModal(stitch) {
+    // Use your actual modal ID: enhanced-modal
+    const modal = document.getElementById("enhanced-modal");
+    const modalName = document.getElementById("modal-stitch-name");
+    const modalAbbr = document.getElementById("modal-abbr");
+    const modalUsName = document.getElementById("modal-us-name");
+    const modalUkName = document.getElementById("modal-uk-name");
+    const modalDesc = document.getElementById("modal-description");
     
-    if (!popup) return;
+    if (!modal) return;
     
-    if (popupTitle) popupTitle.textContent = stitch.name_us;
-    if (popupUK) popupUK.textContent = `UK: ${stitch.name_uk}`;
-    if (popupDesc) popupDesc.textContent = stitch.notes || "No description available.";
+    if (modalName) modalName.textContent = stitch.name_us;
+    if (modalAbbr) modalAbbr.textContent = stitch.id.toUpperCase();
+    if (modalUsName) modalUsName.textContent = stitch.name_us;
+    if (modalUkName) modalUkName.textContent = stitch.name_uk;
+    if (modalDesc) modalDesc.textContent = stitch.notes || "No description available.";
     
-    if (popupTags) {
-        popupTags.innerHTML = '';
-        if (stitch.tags && stitch.tags.length > 0) {
-            stitch.tags.forEach(tag => {
-                const tagEl = document.createElement('span');
-                tagEl.className = 'tag';
-                tagEl.textContent = tag;
-                popupTags.appendChild(tagEl);
-            });
-        }
-    }
-    
-    popup.classList.add("active");
+    modal.classList.add("active");
 }
 
-function closePopup() {
-    const popup = document.getElementById("popup");
-    if (popup) popup.classList.remove("active");
+function closeModal() {
+    const modal = document.getElementById("enhanced-modal");
+    if (modal) modal.classList.remove("active");
 }
 
 function initGlossary() {
@@ -108,7 +101,7 @@ function initGlossary() {
         });
     }
     
-    // Tips toggle
+    // Tips toggle - using your actual HTML
     const tipsToggle = document.getElementById("tips-toggle");
     if (tipsToggle) {
         tipsToggle.onclick = () => {
@@ -119,28 +112,14 @@ function initGlossary() {
         };
     }
     
-    // Popup close handlers
-    const popupClose = document.querySelector(".popup-close");
-    const popup = document.getElementById("popup");
-    
-    if (popupClose) {
-        popupClose.onclick = closePopup;
-    }
-    
-    if (popup) {
-        popup.onclick = (e) => {
-            if (e.target === popup) closePopup();
-        };
-    }
-    
-    // ESC key handler
+    // Modal close handlers - using your actual close function in HTML
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closePopup();
+        if (e.key === 'Escape') closeModal();
     });
 }
 
 // Make functions globally available
-window.closePopup = closePopup;
+window.closeModal = closeModal;
 
 // Load data when page loads
 document.addEventListener('DOMContentLoaded', loadGlossaryData);
