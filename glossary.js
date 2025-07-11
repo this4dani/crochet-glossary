@@ -1,4 +1,5 @@
 // DANI'S Interactive Crochet Glossary - Professional glossary interface
+console.log("🔧 Glossary script loading...");
 
 let stitchGlossary = [];
 
