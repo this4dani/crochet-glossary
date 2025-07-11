@@ -1,4 +1,3 @@
-cat > glossary.js << 'EOF'
 // DANI'S Interactive Crochet Glossary - Fixed Version
 let stitchGlossary = [];
 
@@ -87,7 +86,6 @@ function initGlossary() {
     console.log("🔧 Starting initGlossary...");
     buildCards();
     
-    // Search functionality
     const searchInput = document.getElementById("search");
     if (searchInput) {
         searchInput.addEventListener("input", function() {
@@ -113,7 +111,6 @@ function initGlossary() {
         console.log("✅ Search initialized");
     }
     
-    // Tips toggle - using working syntax
     const tipsToggle = document.getElementById("tips-toggle");
     if (tipsToggle) {
         tipsToggle.onclick = function() {
@@ -127,7 +124,6 @@ function initGlossary() {
         console.log("✅ Tips toggle initialized");
     }
     
-    // ESC key handler
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape') {
             closeModal();
@@ -137,9 +133,5 @@ function initGlossary() {
     console.log("✅ initGlossary completed!");
 }
 
-// Make functions globally available
 window.closeModal = closeModal;
-
-// Load data when page loads
 document.addEventListener('DOMContentLoaded', loadGlossaryData);
-EOF
