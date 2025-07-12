@@ -18,11 +18,11 @@
     
     /* Flashcard Container */
     .flashcard-container {
-        min-height: calc(100vh - 200px);
+        min-height: calc(100vh - 300px);
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px;
+        padding: 10px;
         position: relative;
     }
     
@@ -181,9 +181,9 @@
     
     /* Control Buttons */
     .control-btn {
-        background: var(--clr-coral);
-        color: white;
-        border: none;
+        background: transparent;
+        color: var(--clr-coral);
+        border: 2px solid var(--clr-coral);
         padding: 12px 20px;
         border-radius: 8px;
         cursor: pointer;
@@ -194,7 +194,8 @@
     }
     
     .control-btn:hover {
-        background: var(--clr-fuchsia);
+        background: var(--clr-coral);
+        color: white;
         transform: translateY(-2px);
     }
     
@@ -304,7 +305,7 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container content-wrapper">
+    <div class="container">
         <div class="header">
             <h1>Interactive Crochet Flashcards</h1>
             <p>Master crochet terminology with spaced repetition learning</p>
@@ -342,8 +343,8 @@
             <div class="flashcard-layout">
                 <!-- Desktop Left Controls -->
                 <div class="left-controls">
-                    <button onclick="previousCard()" class="control-btn">⬅️ Previous</button>
-                    <button onclick="shuffleCards()" class="control-btn">🔀 Shuffle</button>
+                    <button onclick="previousCard()" class="control-btn">Previous</button>
+                    <button onclick="shuffleCards()" class="control-btn">Shuffle</button>
                 </div>
 
                 <!-- Flashcard -->
@@ -371,24 +372,24 @@
 
                 <!-- Desktop Right Controls -->
                 <div class="right-controls">
-                    <button onclick="nextCard()" class="control-btn">Next ➡️</button>
-                    <button onclick="resetProgress()" class="control-btn">🔄 Reset</button>
+                    <button onclick="nextCard()" class="control-btn">Next</button>
+                    <button onclick="resetProgress()" class="control-btn">Reset</button>
                 </div>
 
                 <!-- Desktop Bottom Controls -->
                 <div class="bottom-controls">
-                    <button onclick="markDifficulty('again')" class="control-btn">❌ Again</button>
-                    <button onclick="markDifficulty('hard')" class="control-btn">🔶 Hard</button>
-                    <button onclick="markDifficulty('good')" class="control-btn">✅ Good</button>
-                    <button onclick="markDifficulty('easy')" class="control-btn">🚀 Easy</button>
+                    <button onclick="markDifficulty('again')" class="control-btn">Again</button>
+                    <button onclick="markDifficulty('hard')" class="control-btn">Hard</button>
+                    <button onclick="markDifficulty('good')" class="control-btn">Good</button>
+                    <button onclick="markDifficulty('easy')" class="control-btn">Easy</button>
                 </div>
             </div>
 
             <!-- Mobile Controls -->
             <div class="mobile-controls">
-                <button onclick="previousCard()" class="control-btn">⬅️ Previous</button>
-                <button onclick="flipCard()" class="control-btn">🔄 Flip</button>
-                <button onclick="nextCard()" class="control-btn">Next ➡️</button>
+                <button onclick="previousCard()" class="control-btn">Previous</button>
+                <button onclick="flipCard()" class="control-btn">Flip</button>
+                <button onclick="nextCard()" class="control-btn">Next</button>
             </div>
         </div>
     </div>
@@ -434,11 +435,16 @@
         // Load data from API
         async function loadGlossaryData() {
             try {
+                console.log('Attempting to load glossary data...');
                 const response = await fetch('https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json');
+                console.log('Response status:', response.status);
+                
                 if (!response.ok) {
-                    throw new Error('Failed to load data');
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
+                
                 const data = await response.json();
+                console.log('Data loaded:', data.length, 'terms');
                 glossaryTerms = data;
                 
                 // Hide loading, show interface
@@ -453,6 +459,37 @@
                 console.error('Error loading glossary data:', error);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
+                
+                // Try alternative endpoints
+                tryAlternativeEndpoints();
+            }
+        }
+        
+        // Try alternative API endpoints
+        async function tryAlternativeEndpoints() {
+            const alternatives = [
+                'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/glossary.json',
+                'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/categories.json'
+            ];
+            
+            for (let url of alternatives) {
+                try {
+                    console.log('Trying alternative:', url);
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        const data = await response.json();
+                        console.log('Alternative data loaded:', data.length, 'terms');
+                        glossaryTerms = data;
+                        
+                        document.getElementById('error').style.display = 'none';
+                        document.getElementById('flashcard-interface').style.display = 'block';
+                        displayCard();
+                        updateProgress();
+                        return;
+                    }
+                } catch (e) {
+                    console.log('Alternative failed:', e);
+                }
             }
         }
         
