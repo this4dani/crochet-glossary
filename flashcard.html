@@ -1,344 +1,281 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <title>Crochet Flashcards - DANI'S Interactive Learning</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <meta name="description" content="Interactive crochet flashcards with US/UK terminology. Learn and practice crochet stitches with spaced repetition.">
-    <link rel="stylesheet" href="styles.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Crochet Flashcards - DANI'S Crochet Technology</title>
+    <meta name="description" content="Learn crochet terminology with interactive flashcards. Master US and UK crochet terms with spaced repetition learning.">
     
+    <!-- Global Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532" crossorigin="anonymous"></script>
+    
+    <!-- Page-Specific Styles -->
     <style>
-        .flashcard-app {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-            min-height: 100vh;
-        }
-
-        .app-header {
-            text-align: center;
-            margin-bottom: 2rem;
-        }
-
-        .app-title {
-            color: var(--clr-cream);
-            font-family: var(--font-accent);
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .app-subtitle {
-            color: var(--clr-warm-white);
-            opacity: 0.9;
-            margin-bottom: 1rem;
-        }
-
-        .study-modes {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .mode-btn {
-            padding: 12px 24px;
-            background: var(--clr-coral);
-            color: var(--clr-warm-white);
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .mode-btn:hover,
-        .mode-btn.active {
-            background: var(--clr-fuchsia);
-            transform: translateY(-2px);
-        }
-
-        .progress-bar {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            height: 8px;
-            margin-bottom: 2rem;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            background: linear-gradient(90deg, var(--clr-coral), var(--clr-fuchsia));
-            height: 100%;
-            width: 0%;
-            transition: width 0.5s ease;
-        }
-
-        .stats-row {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .stat-item {
-            text-align: center;
-            color: var(--clr-warm-white);
-        }
-
-        .stat-number {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--clr-coral);
-        }
-
-        .flashcard-container {
-            perspective: 1000px;
-            margin-bottom: 2rem;
-        }
-
-        .flashcard {
+    /* Flashcard Page Styles */
+    
+    /* Flashcard Container */
+    .flashcard-container {
+        min-height: calc(100vh - 200px);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        position: relative;
+    }
+    
+    /* Desktop Layout (768px+) */
+    @media (min-width: 769px) {
+        .flashcard-layout {
+            display: grid;
+            grid-template-columns: 200px 1fr 200px;
+            grid-template-areas: 
+                "left-nav card right-nav"
+                "bottom-controls bottom-controls bottom-controls";
+            gap: 30px;
+            align-items: center;
+            max-width: 800px;
             width: 100%;
-            max-width: 600px;
-            height: 450px;
-            margin: 0 auto;
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s ease;
-            cursor: pointer;
         }
-
-        .flashcard.flipped {
-            transform: rotateY(180deg);
-        }
-
-        .card-face {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            backface-visibility: hidden;
-            border-radius: 15px;
+        
+        .left-controls {
+            grid-area: left-nav;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
-            text-align: center;
+            gap: 15px;
         }
-
-        .card-front {
-            background: linear-gradient(135deg, var(--clr-cream), #f8f4ef);
-            color: var(--clr-primary-dark);
-            border: 3px solid rgba(0, 56, 64, 0.1);
-        }
-
-        .card-back {
-            background: linear-gradient(135deg, var(--clr-coral), var(--clr-fuchsia));
-            color: var(--clr-warm-white);
-            transform: rotateY(180deg);
-        }
-
-        .card-back * {
-            transform: scaleX(-1);
-        }
-
-        .card-term {
-            font-size: 2.2rem;
-            font-weight: bold;
-            margin-bottom: 1rem;
-            font-family: var(--font-accent);
-            line-height: 1.2;
-        }
-
-        .card-abbreviation {
-            background: var(--clr-primary-dark);
-            color: var(--clr-warm-white);
-            padding: 10px 20px;
-            border-radius: 12px;
-            font-size: 1.4rem;
-            margin-bottom: 1.5rem;
-            display: inline-block;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-
-        .card-description {
-            font-size: 1.2rem;
-            line-height: 1.7;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-weight: 500;
-        }
-
-        .card-hint {
-            font-size: 1rem;
-            opacity: 0.7;
-            font-style: italic;
-            margin-top: 1rem;
-        }
-
-        .card-translations {
-            margin-top: auto;
-            padding-top: 1.5rem;
-            border-top: 2px solid rgba(255, 255, 255, 0.3);
-            width: 100%;
-        }
-
-        .translation-item {
+        
+        .right-controls {
+            grid-area: right-nav;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 8px 12px;
-            border-radius: 8px;
-            backdrop-filter: blur(5px);
+            flex-direction: column;
+            gap: 15px;
         }
-
-        .translation-item strong {
-            font-weight: bold;
-            font-size: 0.9rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+        
+        .flashcard-wrapper {
+            grid-area: card;
         }
-
-        .answer-buttons {
+        
+        .bottom-controls {
+            grid-area: bottom-controls;
             display: flex;
-            gap: 1rem;
             justify-content: center;
-            margin-top: 2rem;
-        }
-
-        .answer-btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
-
-        .btn-again {
-            background: #ff4757;
-            color: white;
-        }
-
-        .btn-hard {
-            background: #ffa502;
-            color: white;
-        }
-
-        .btn-good {
-            background: #2ed573;
-            color: white;
-        }
-
-        .btn-easy {
-            background: #3742fa;
-            color: white;
-        }
-
-        .answer-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .controls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
+            gap: 20px;
             flex-wrap: wrap;
         }
-
-        .control-btn {
-            padding: 10px 20px;
-            background: transparent;
-            border: 2px solid var(--clr-coral);
-            color: var(--clr-coral);
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            font-size: 0.9rem;
+        
+        .mobile-controls {
+            display: none;
         }
-
-        .control-btn:hover {
-            background: var(--clr-coral);
-            color: var(--clr-warm-white);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(255, 107, 122, 0.3);
+    }
+    
+    /* Mobile Layout (768px and below) */
+    @media (max-width: 768px) {
+        .flashcard-layout {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            max-width: 400px;
+            width: 100%;
         }
-
-        .keyboard-hint {
-            text-align: center;
-            color: var(--clr-warm-white);
-            opacity: 0.7;
-            font-size: 0.9rem;
-            margin-top: 1rem;
+        
+        .left-controls,
+        .right-controls,
+        .bottom-controls {
+            display: none;
         }
-
-        .study-complete {
-            text-align: center;
-            padding: 3rem;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
+        
+        .mobile-controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-
-        .study-complete h2 {
-            color: var(--clr-cream);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .loading-state {
-            text-align: center;
-            padding: 3rem;
-            color: var(--clr-warm-white);
-        }
-
-        @media (max-width: 768px) {
-            .flashcard-app {
-                padding: 1rem;
-            }
-
-            .flashcard {
-                height: 350px;
-            }
-
-            .card-face {
-                padding: 1.5rem;
-            }
-
-            .card-term {
-                font-size: 1.5rem;
-            }
-
-            .stats-row {
-                gap: 1rem;
-            }
-
-            .answer-buttons {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-            }
-
-            .answer-btn {
-                min-width: 100px;
-                padding: 10px 16px;
-            }
-        }
+    }
+    
+    /* Flashcard Component */
+    .flashcard {
+        width: 400px;
+        height: 280px;
+        margin: 0 auto;
+        perspective: 1000px;
+        position: relative;
+    }
+    
+    .card-inner {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+        cursor: pointer;
+    }
+    
+    .card-inner.flipped {
+        transform: rotateY(180deg);
+    }
+    
+    .card-front,
+    .card-back {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        border-radius: 15px;
+        padding: 30px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background: var(--clr-warm-white);
+        color: var(--clr-primary-dark);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        border: 3px solid var(--clr-coral);
+    }
+    
+    .card-back {
+        transform: rotateY(180deg);
+        background: var(--clr-cream);
+    }
+    
+    /* Card Content */
+    .term-name {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 15px;
+        color: var(--clr-primary-dark);
+        text-align: center;
+    }
+    
+    .term-abbreviation {
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: var(--clr-fuchsia);
+        margin-bottom: 15px;
+    }
+    
+    .term-description {
+        font-size: 1.1rem;
+        line-height: 1.4;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+    
+    .term-translations {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .translation-box {
+        background: rgba(255, 107, 122, 0.1);
+        padding: 8px 15px;
+        border-radius: 8px;
+        border: 1px solid var(--clr-coral);
+        font-size: 0.9rem;
+    }
+    
+    /* Control Buttons */
+    .control-btn {
+        background: var(--clr-coral);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+    }
+    
+    .control-btn:hover {
+        background: var(--clr-fuchsia);
+        transform: translateY(-2px);
+    }
+    
+    .control-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: none;
+    }
+    
+    /* Progress Display */
+    .progress-info {
+        text-align: center;
+        margin-bottom: 20px;
+        color: var(--clr-warm-white);
+    }
+    
+    .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 4px;
+        overflow: hidden;
+        margin: 10px 0;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background: var(--clr-coral);
+        border-radius: 4px;
+        transition: width 0.3s ease;
+    }
+    
+    /* Study Mode Controls */
+    .study-modes {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .mode-btn {
+        background: transparent;
+        color: var(--clr-warm-white);
+        border: 2px solid var(--clr-coral);
+        padding: 8px 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        transition: all 0.3s ease;
+    }
+    
+    .mode-btn.active {
+        background: var(--clr-coral);
+        color: white;
+    }
+    
+    .mode-btn:hover {
+        background: var(--clr-coral);
+        color: white;
+    }
+    
+    /* Loading State */
+    .loading {
+        text-align: center;
+        color: var(--clr-warm-white);
+        font-size: 1.2rem;
+        padding: 40px;
+    }
+    
+    .error {
+        text-align: center;
+        color: var(--clr-coral);
+        font-size: 1.1rem;
+        padding: 40px;
+    }
     </style>
 </head>
 <body>
     <!-- AdSense Top -->
     <div class="adsense-top">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532" crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9422928756201532"
@@ -350,7 +287,7 @@
         </script>
     </div>
 
-    <!-- Navigation -->
+    <!-- Navigation (Uses Global Styles) -->
     <nav id="nav">
         <a href="index.html">
             <img src="images/home-heart-door.png" alt="Home">
@@ -366,393 +303,98 @@
         </a>
     </nav>
 
-    <!-- Main App -->
+    <!-- Main Content -->
     <div class="container content-wrapper">
-        <main class="flashcard-app">
-            <header class="app-header">
-                <h1 class="app-title">Crochet Flashcards</h1>
-                <p class="app-subtitle">Master crochet terminology with interactive learning</p>
-            </header>
+        <div class="header">
+            <h1>Interactive Crochet Flashcards</h1>
+            <p>Master crochet terminology with spaced repetition learning</p>
+        </div>
 
+        <!-- Loading State -->
+        <div id="loading" class="loading">
+            Loading your crochet terms...
+        </div>
+
+        <!-- Error State -->
+        <div id="error" class="error" style="display: none;">
+            Unable to load flashcards. Please try again later.
+        </div>
+
+        <!-- Flashcard Interface -->
+        <div id="flashcard-interface" class="flashcard-container" style="display: none;">
+            <!-- Progress Information -->
+            <div class="progress-info">
+                <div id="progress-text">Card 1 of 0</div>
+                <div class="progress-bar">
+                    <div id="progress-fill" class="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Study Mode Selection -->
             <div class="study-modes">
-                <button class="mode-btn active" data-mode="flashcards">📚 Flashcards</button>
-                <button class="mode-btn" data-mode="learn">🎯 Learn</button>
-                <button class="mode-btn" data-mode="test">📝 Test</button>
-                <button class="mode-btn" data-mode="match">🎮 Match</button>
+                <button class="mode-btn active" onclick="setStudyMode('flashcards')">Flashcards</button>
+                <button class="mode-btn" onclick="setStudyMode('learn')">Learn</button>
+                <button class="mode-btn" onclick="setStudyMode('test')">Test</button>
+                <button class="mode-btn" onclick="setStudyMode('match')">Match</button>
             </div>
 
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
-            </div>
+            <!-- Responsive Flashcard Layout -->
+            <div class="flashcard-layout">
+                <!-- Desktop Left Controls -->
+                <div class="left-controls">
+                    <button onclick="previousCard()" class="control-btn">⬅️ Previous</button>
+                    <button onclick="shuffleCards()" class="control-btn">🔀 Shuffle</button>
+                </div>
 
-            <div class="stats-row">
-                <div class="stat-item">
-                    <div class="stat-number" id="current-card">1</div>
-                    <div>of <span id="total-cards">Loading...</span></div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="known-count">0</div>
-                    <div>Known</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="learning-count">0</div>
-                    <div>Learning</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-number" id="mastered-count">0</div>
-                    <div>Mastered</div>
-                </div>
-            </div>
-
-            <div id="loading-state" class="loading-state">
-                <h2>🧶 Loading flashcards...</h2>
-                <p>Preparing your crochet learning experience</p>
-            </div>
-
-            <div id="flashcard-container" class="flashcard-container" style="display: none;">
-                <div class="flashcard" id="flashcard">
-                    <div class="card-face card-front">
-                        <div class="card-term" id="card-term">Loading...</div>
-                        <div class="card-abbreviation" id="card-abbreviation">...</div>
-                        <div class="card-hint">Click to see definition</div>
-                    </div>
-                    <div class="card-face card-back">
-                        <div class="card-description" id="card-description">Loading...</div>
-                        <div class="card-translations">
-                            <div class="translation-item">
-                                <strong>US Term:</strong> <span id="us-term">...</span>
+                <!-- Flashcard -->
+                <div class="flashcard-wrapper">
+                    <div class="flashcard">
+                        <div id="card-inner" class="card-inner" onclick="flipCard()">
+                            <!-- Front of Card -->
+                            <div class="card-front">
+                                <div id="front-content">
+                                    <div id="term-name" class="term-name">Loading...</div>
+                                    <div id="term-description" class="term-description"></div>
+                                    <div id="term-translations" class="term-translations"></div>
+                                </div>
                             </div>
-                            <div class="translation-item">
-                                <strong>UK Term:</strong> <span id="uk-term">...</span>
+                            <!-- Back of Card -->
+                            <div class="card-back">
+                                <div id="back-content">
+                                    <div id="term-abbreviation" class="term-abbreviation">...</div>
+                                    <div class="term-description">Click or tap to flip back</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="answer-buttons" id="answer-buttons" style="display: none;">
-                    <button class="answer-btn btn-again" data-difficulty="again">
-                        Again<br><small>(1)</small>
-                    </button>
-                    <button class="answer-btn btn-hard" data-difficulty="hard">
-                        Hard<br><small>(2)</small>
-                    </button>
-                    <button class="answer-btn btn-good" data-difficulty="good">
-                        Good<br><small>(3)</small>
-                    </button>
-                    <button class="answer-btn btn-easy" data-difficulty="easy">
-                        Easy<br><small>(4)</small>
-                    </button>
+                <!-- Desktop Right Controls -->
+                <div class="right-controls">
+                    <button onclick="nextCard()" class="control-btn">Next ➡️</button>
+                    <button onclick="resetProgress()" class="control-btn">🔄 Reset</button>
                 </div>
 
-                <div class="controls">
-                    <button class="control-btn" id="shuffle-btn">🔀 Shuffle</button>
-                    <button class="control-btn" id="reset-btn">🔄 Reset Progress</button>
-                    <button class="control-btn" id="settings-btn">⚙️ Settings</button>
-                </div>
-
-                <div class="keyboard-hint">
-                    💡 Tip: Use Space to flip cards, 1-4 keys for difficulty, or ←→ arrows to navigate
+                <!-- Desktop Bottom Controls -->
+                <div class="bottom-controls">
+                    <button onclick="markDifficulty('again')" class="control-btn">❌ Again</button>
+                    <button onclick="markDifficulty('hard')" class="control-btn">🔶 Hard</button>
+                    <button onclick="markDifficulty('good')" class="control-btn">✅ Good</button>
+                    <button onclick="markDifficulty('easy')" class="control-btn">🚀 Easy</button>
                 </div>
             </div>
 
-            <div id="study-complete" class="study-complete" style="display: none;">
-                <h2>🎉 Study Session Complete!</h2>
-                <p>Great job! You've reviewed all available cards.</p>
-                <button class="mode-btn" onclick="restartStudy()">Study Again</button>
+            <!-- Mobile Controls -->
+            <div class="mobile-controls">
+                <button onclick="previousCard()" class="control-btn">⬅️ Previous</button>
+                <button onclick="flipCard()" class="control-btn">🔄 Flip</button>
+                <button onclick="nextCard()" class="control-btn">Next ➡️</button>
             </div>
-        </main>
+        </div>
     </div>
-
-    <!-- Navigation Script -->
-    <script>
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('nav');
-            if (window.scrollY > 100) {
-                nav.style.position = 'fixed';
-                nav.style.top = '0';
-                nav.style.left = '50%';
-                nav.style.transform = 'translateX(-50%) scale(0.8)';
-                nav.style.zIndex = '100';
-                nav.style.transition = 'all 0.3s ease';
-            } else {
-                nav.style.position = 'absolute';
-                nav.style.top = '20px';
-                nav.style.left = '50%';
-                nav.style.transform = 'translateX(-50%) scale(1)';
-                nav.style.transition = 'all 0.3s ease';
-            }
-        });
-    </script>
-
-    <!-- Flashcard App Script -->
-    <script>
-        class CrochetFlashcards {
-            constructor() {
-                this.terms = [];
-                this.currentCardIndex = 0;
-                this.isFlipped = false;
-                this.studyMode = 'flashcards';
-                this.cardStates = {}; // Track difficulty for each card
-                this.apiEndpoint = 'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json';
-                
-                this.init();
-            }
-
-            async init() {
-                await this.loadTerms();
-                this.setupEventListeners();
-                this.setupKeyboardShortcuts();
-                this.showCurrentCard();
-            }
-
-            async loadTerms() {
-                try {
-                    const response = await fetch(this.apiEndpoint);
-                    const data = await response.json();
-                    this.terms = data.data || data.terms || data || [];
-                    
-                    // Initialize card states
-                    this.terms.forEach((term, index) => {
-                        this.cardStates[index] = {
-                            difficulty: 0, // 0=new, 1=learning, 2=known, 3=mastered
-                            lastReviewed: null,
-                            reviewCount: 0
-                        };
-                    });
-
-                    this.hideElement('loading-state');
-                    this.showElement('flashcard-container');
-                    this.updateStats();
-                    
-                    console.log(`Loaded ${this.terms.length} flashcards`);
-                } catch (error) {
-                    console.error('Error loading terms:', error);
-                    document.getElementById('loading-state').innerHTML = 
-                        '<h2>❌ Error loading flashcards</h2><p>Please try refreshing the page</p>';
-                }
-            }
-
-            setupEventListeners() {
-                // Card flip
-                document.getElementById('flashcard').addEventListener('click', () => {
-                    this.flipCard();
-                });
-
-                // Answer buttons
-                document.querySelectorAll('.answer-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        const difficulty = e.target.dataset.difficulty;
-                        this.answerCard(difficulty);
-                    });
-                });
-
-                // Control buttons
-                document.getElementById('shuffle-btn').addEventListener('click', () => {
-                    this.shuffleCards();
-                });
-
-                document.getElementById('reset-btn').addEventListener('click', () => {
-                    this.resetProgress();
-                });
-
-                // Study mode buttons
-                document.querySelectorAll('.mode-btn').forEach(btn => {
-                    btn.addEventListener('click', (e) => {
-                        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
-                        e.target.classList.add('active');
-                        this.studyMode = e.target.dataset.mode;
-                        this.updateStudyMode();
-                    });
-                });
-            }
-
-            setupKeyboardShortcuts() {
-                document.addEventListener('keydown', (e) => {
-                    switch(e.key) {
-                        case ' ':
-                            e.preventDefault();
-                            this.flipCard();
-                            break;
-                        case '1':
-                            if (this.isFlipped) this.answerCard('again');
-                            break;
-                        case '2':
-                            if (this.isFlipped) this.answerCard('hard');
-                            break;
-                        case '3':
-                            if (this.isFlipped) this.answerCard('good');
-                            break;
-                        case '4':
-                            if (this.isFlipped) this.answerCard('easy');
-                            break;
-                        case 'ArrowLeft':
-                            this.previousCard();
-                            break;
-                        case 'ArrowRight':
-                            this.nextCard();
-                            break;
-                    }
-                });
-            }
-
-            flipCard() {
-                const card = document.getElementById('flashcard');
-                card.classList.toggle('flipped');
-                this.isFlipped = !this.isFlipped;
-                
-                // Show answer buttons when flipped
-                const answerButtons = document.getElementById('answer-buttons');
-                if (this.isFlipped && this.studyMode === 'learn') {
-                    answerButtons.style.display = 'flex';
-                } else {
-                    answerButtons.style.display = 'none';
-                }
-            }
-
-            showCurrentCard() {
-                if (this.terms.length === 0) return;
-
-                const term = this.terms[this.currentCardIndex];
-                
-                // Update card content
-                document.getElementById('card-term').textContent = term.name_us || term.name || 'Unknown Term';
-                document.getElementById('card-abbreviation').textContent = term.abbreviation || term.symbol || '';
-                document.getElementById('card-description').textContent = term.description || term.notes || 'No description available';
-                document.getElementById('us-term').textContent = term.name_us || term.name || 'Unknown';
-                document.getElementById('uk-term').textContent = term.name_uk || term.name_us || 'Unknown';
-
-                // Reset card state
-                const card = document.getElementById('flashcard');
-                card.classList.remove('flipped');
-                this.isFlipped = false;
-                document.getElementById('answer-buttons').style.display = 'none';
-
-                this.updateProgress();
-            }
-
-            answerCard(difficulty) {
-                const cardState = this.cardStates[this.currentCardIndex];
-                
-                // Update card difficulty based on answer
-                switch(difficulty) {
-                    case 'again':
-                        cardState.difficulty = Math.max(0, cardState.difficulty - 1);
-                        break;
-                    case 'hard':
-                        cardState.difficulty = Math.max(1, cardState.difficulty);
-                        break;
-                    case 'good':
-                        cardState.difficulty = Math.min(3, cardState.difficulty + 1);
-                        break;
-                    case 'easy':
-                        cardState.difficulty = 3;
-                        break;
-                }
-                
-                cardState.lastReviewed = new Date();
-                cardState.reviewCount++;
-
-                this.nextCard();
-                this.updateStats();
-            }
-
-            nextCard() {
-                if (this.currentCardIndex < this.terms.length - 1) {
-                    this.currentCardIndex++;
-                } else {
-                    this.currentCardIndex = 0;
-                }
-                this.showCurrentCard();
-            }
-
-            previousCard() {
-                if (this.currentCardIndex > 0) {
-                    this.currentCardIndex--;
-                } else {
-                    this.currentCardIndex = this.terms.length - 1;
-                }
-                this.showCurrentCard();
-            }
-
-            shuffleCards() {
-                for (let i = this.terms.length - 1; i > 0; i--) {
-                    const j = Math.floor(Math.random() * (i + 1));
-                    [this.terms[i], this.terms[j]] = [this.terms[j], this.terms[i]];
-                }
-                this.currentCardIndex = 0;
-                this.showCurrentCard();
-            }
-
-            resetProgress() {
-                Object.keys(this.cardStates).forEach(key => {
-                    this.cardStates[key] = {
-                        difficulty: 0,
-                        lastReviewed: null,
-                        reviewCount: 0
-                    };
-                });
-                this.updateStats();
-            }
-
-            updateStudyMode() {
-                const answerButtons = document.getElementById('answer-buttons');
-                
-                if (this.studyMode === 'learn') {
-                    // Show answer buttons in learn mode
-                    if (this.isFlipped) {
-                        answerButtons.style.display = 'flex';
-                    }
-                } else {
-                    // Hide answer buttons in other modes
-                    answerButtons.style.display = 'none';
-                }
-            }
-
-            updateStats() {
-                const stats = Object.values(this.cardStates).reduce((acc, state) => {
-                    switch(state.difficulty) {
-                        case 0: acc.new++; break;
-                        case 1: acc.learning++; break;
-                        case 2: acc.known++; break;
-                        case 3: acc.mastered++; break;
-                    }
-                    return acc;
-                }, { new: 0, learning: 0, known: 0, mastered: 0 });
-
-                document.getElementById('total-cards').textContent = this.terms.length;
-                document.getElementById('learning-count').textContent = stats.learning;
-                document.getElementById('known-count').textContent = stats.known;
-                document.getElementById('mastered-count').textContent = stats.mastered;
-            }
-
-            updateProgress() {
-                const progress = ((this.currentCardIndex + 1) / this.terms.length) * 100;
-                document.getElementById('progress-fill').style.width = `${progress}%`;
-                document.getElementById('current-card').textContent = this.currentCardIndex + 1;
-            }
-
-            hideElement(id) {
-                const element = document.getElementById(id);
-                if (element) element.style.display = 'none';
-            }
-
-            showElement(id) {
-                const element = document.getElementById(id);
-                if (element) element.style.display = 'block';
-            }
-        }
-
-        // Initialize the app
-        new CrochetFlashcards();
-
-        function restartStudy() {
-            location.reload();
-        }
-    </script>
 
     <!-- AdSense Bottom -->
     <div class="adsense-bottom">
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532" crossorigin="anonymous"></script>
         <ins class="adsbygoogle"
              style="display:block"
              data-ad-client="ca-pub-9422928756201532"
@@ -763,5 +405,196 @@
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
+
+    <!-- Navigation Behavior Script -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+
+    <!-- Flashcard Functionality -->
+    <script>
+        // Global variables
+        let glossaryTerms = [];
+        let currentCardIndex = 0;
+        let isFlipped = false;
+        let studyMode = 'flashcards';
+        
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', function() {
+            loadGlossaryData();
+        });
+        
+        // Load data from API
+        async function loadGlossaryData() {
+            try {
+                const response = await fetch('https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load data');
+                }
+                const data = await response.json();
+                glossaryTerms = data;
+                
+                // Hide loading, show interface
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('flashcard-interface').style.display = 'block';
+                
+                // Display first card
+                displayCard();
+                updateProgress();
+                
+            } catch (error) {
+                console.error('Error loading glossary data:', error);
+                document.getElementById('loading').style.display = 'none';
+                document.getElementById('error').style.display = 'block';
+            }
+        }
+        
+        // Display current card
+        function displayCard() {
+            if (glossaryTerms.length === 0) return;
+            
+            const term = glossaryTerms[currentCardIndex];
+            
+            // Update front of card
+            document.getElementById('term-name').textContent = term.name || term.term || 'Unknown Term';
+            document.getElementById('term-description').textContent = term.description || term.definition || '';
+            
+            // Update translations if available
+            const translationsEl = document.getElementById('term-translations');
+            translationsEl.innerHTML = '';
+            
+            if (term.us_term && term.uk_term) {
+                translationsEl.innerHTML = `
+                    <div class="translation-box">US: ${term.us_term}</div>
+                    <div class="translation-box">UK: ${term.uk_term}</div>
+                `;
+            }
+            
+            // Update back of card
+            document.getElementById('term-abbreviation').textContent = term.abbreviation || term.abbrev || term.short || '...';
+            
+            // Reset flip state
+            const cardInner = document.getElementById('card-inner');
+            cardInner.classList.remove('flipped');
+            isFlipped = false;
+        }
+        
+        // Flip the card
+        function flipCard() {
+            const cardInner = document.getElementById('card-inner');
+            cardInner.classList.toggle('flipped');
+            isFlipped = !isFlipped;
+        }
+        
+        // Navigate to next card
+        function nextCard() {
+            if (currentCardIndex < glossaryTerms.length - 1) {
+                currentCardIndex++;
+            } else {
+                currentCardIndex = 0; // Loop back to first card
+            }
+            displayCard();
+            updateProgress();
+        }
+        
+        // Navigate to previous card
+        function previousCard() {
+            if (currentCardIndex > 0) {
+                currentCardIndex--;
+            } else {
+                currentCardIndex = glossaryTerms.length - 1; // Loop to last card
+            }
+            displayCard();
+            updateProgress();
+        }
+        
+        // Update progress display
+        function updateProgress() {
+            const progressText = document.getElementById('progress-text');
+            const progressFill = document.getElementById('progress-fill');
+            
+            if (glossaryTerms.length > 0) {
+                const current = currentCardIndex + 1;
+                const total = glossaryTerms.length;
+                const percentage = (current / total) * 100;
+                
+                progressText.textContent = `Card ${current} of ${total}`;
+                progressFill.style.width = `${percentage}%`;
+            }
+        }
+        
+        // Set study mode
+        function setStudyMode(mode) {
+            studyMode = mode;
+            
+            // Update button states
+            document.querySelectorAll('.mode-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            console.log(`Study mode changed to: ${mode}`);
+        }
+        
+        // Mark card difficulty (for spaced repetition)
+        function markDifficulty(level) {
+            console.log(`Card marked as: ${level}`);
+            // Future: Implement spaced repetition algorithm
+            nextCard();
+        }
+        
+        // Shuffle cards
+        function shuffleCards() {
+            for (let i = glossaryTerms.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [glossaryTerms[i], glossaryTerms[j]] = [glossaryTerms[j], glossaryTerms[i]];
+            }
+            currentCardIndex = 0;
+            displayCard();
+            updateProgress();
+        }
+        
+        // Reset progress
+        function resetProgress() {
+            currentCardIndex = 0;
+            displayCard();
+            updateProgress();
+        }
+        
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(event) {
+            switch(event.code) {
+                case 'Space':
+                    event.preventDefault();
+                    flipCard();
+                    break;
+                case 'ArrowLeft':
+                    previousCard();
+                    break;
+                case 'ArrowRight':
+                    nextCard();
+                    break;
+                case 'Digit1':
+                    markDifficulty('again');
+                    break;
+                case 'Digit2':
+                    markDifficulty('hard');
+                    break;
+                case 'Digit3':
+                    markDifficulty('good');
+                    break;
+                case 'Digit4':
+                    markDifficulty('easy');
+                    break;
+            }
+        });
+    </script>
 </body>
 </html>
