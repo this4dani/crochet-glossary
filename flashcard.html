@@ -442,9 +442,10 @@
             document.getElementById('term-name').textContent = abbrev;
             document.getElementById('term-description').textContent = 'What does this mean?';
             
-            // Update translations if available
+            // Update translations if available - FIXED: define usName before using it
             const translationsEl = document.getElementById('term-translations');
             if (translationsEl) {
+                const usName = term.name_us || term.name || 'Unknown Term';
                 const ukName = term.name_uk || usName;
                 let translations = '';
                 if (usName !== ukName) {
