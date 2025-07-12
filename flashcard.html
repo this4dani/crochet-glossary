@@ -3,79 +3,98 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Crochet Flashcards - DANI'S Crochet Technology</title>
-    <meta name="description" content="Learn crochet terminology with interactive flashcards. Master US and UK crochet terms with spaced repetition learning.">
-    
+    <title>Interactive Crochet Flashcards - DANI'S</title>
     <link rel="stylesheet" href="styles.css">
     
+    <!-- AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532" crossorigin="anonymous"></script>
     
+    <!-- Page-specific flashcard styles -->
     <style>
-    /* Page-specific flashcard styles */
-    .flashcard-container {
-        min-height: calc(100vh - 250px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 10px;
-        position: relative;
+    .content-wrapper {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background: transparent;
+    }
+    
+    .header {
+        text-align: center;
+        margin-bottom: 30px;
+        color: var(--clr-warm-white);
+    }
+    
+    .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        color: var(--clr-warm-white);
+    }
+    
+    .header p {
+        font-size: 1.1rem;
+        opacity: 0.9;
     }
     
     /* Desktop layout - controls on sides */
-    @media (min-width: 769px) {
-        .flashcard-layout {
-            display: grid;
-            grid-template-columns: 180px 1fr 180px;
-            grid-template-areas: 
-                "left-nav card right-nav"
-                "bottom-controls bottom-controls bottom-controls";
-            gap: 20px;
-            align-items: center;
-            max-width: 800px;
-            width: 100%;
-        }
-        
-        .left-controls { grid-area: left-nav; display: flex; flex-direction: column; gap: 15px; }
-        .right-controls { grid-area: right-nav; display: flex; flex-direction: column; gap: 15px; }
-        .flashcard-wrapper { grid-area: card; }
-        .bottom-controls { grid-area: bottom-controls; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-        .mobile-controls { display: none; }
+    .flashcard-layout {
+        display: grid;
+        grid-template-columns: 200px 1fr 200px;
+        gap: 20px;
+        align-items: center;
+        margin: 40px 0;
+    }
+    
+    .left-controls, .right-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .right-controls {
+        order: 3;
     }
     
     /* Mobile layout - stacked */
     @media (max-width: 768px) {
         .flashcard-layout {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            max-width: 400px;
-            width: 100%;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            text-align: center;
         }
         
-        .left-controls, .right-controls, .bottom-controls { display: none; }
-        .mobile-controls { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; }
+        .left-controls, .right-controls {
+            order: 2;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .flashcard-wrapper {
+            order: 1;
+        }
     }
     
     /* Flashcard component */
-    .flashcard {
-        width: 400px;
-        height: 280px;
-        margin: 0 auto;
+    .flashcard-wrapper {
         perspective: 1000px;
-        position: relative;
+        display: flex;
+        justify-content: center;
+        margin: 20px 0;
     }
     
-    .card-inner {
+    .flashcard {
+        width: 400px;
+        height: 300px;
         position: relative;
-        width: 100%;
-        height: 100%;
-        text-align: center;
-        transition: transform 0.6s;
         transform-style: preserve-3d;
+        transition: transform 0.6s;
         cursor: pointer;
     }
     
-    .card-inner.flipped { transform: rotateY(180deg); }
+    .flashcard.flipped {
+        transform: rotateY(180deg);
+    }
     
     .card-front, .card-back {
         position: absolute;
@@ -88,62 +107,56 @@
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        background: var(--clr-warm-white);
+        text-align: center;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+    }
+    
+    .card-front {
+        background: linear-gradient(135deg, var(--clr-warm-white), #f0f0f0);
         color: var(--clr-primary-dark);
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        border: 3px solid var(--clr-coral);
     }
     
     .card-back {
+        background: linear-gradient(135deg, var(--clr-coral), var(--clr-fuchsia));
+        color: white;
         transform: rotateY(180deg);
-        background: var(--clr-cream);
     }
     
     /* Card content styling */
     .term-name {
         font-size: 2rem;
-        font-weight: bold;
+        font-weight: 700;
         margin-bottom: 15px;
-        color: var(--clr-primary-dark);
-        text-align: center;
-    }
-    
-    .term-abbreviation {
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: var(--clr-fuchsia);
-        margin-bottom: 15px;
+        line-height: 1.2;
     }
     
     .term-description {
         font-size: 1.1rem;
         line-height: 1.4;
-        text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
+    }
+    
+    .term-abbreviation {
+        font-size: 3rem;
+        font-weight: 800;
+        text-transform: uppercase;
+        letter-spacing: 2px;
     }
     
     .term-translations {
-        display: flex;
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-    
-    .translation-box {
-        background: rgba(255, 107, 122, 0.1);
-        padding: 8px 15px;
-        border-radius: 8px;
-        border: 1px solid var(--clr-coral);
         font-size: 0.9rem;
+        font-style: italic;
+        opacity: 0.8;
+        margin-top: 10px;
     }
     
-    /* Button styling - transparent with coral border, hover to fuchsia */
-    .control-btn {
+    /* Button styling */
+    .control-btn, .mode-btn {
         background: transparent;
-        color: var(--clr-coral);
         border: 2px solid var(--clr-coral);
+        color: var(--clr-coral);
         padding: 12px 20px;
-        border-radius: 8px;
+        border-radius: 25px;
         cursor: pointer;
         font-size: 1rem;
         font-weight: 600;
@@ -151,84 +164,78 @@
         white-space: nowrap;
     }
     
-    .control-btn:hover {
+    .control-btn:hover, .mode-btn:hover {
         background: var(--clr-fuchsia);
-        color: white;
         border-color: var(--clr-fuchsia);
-        transform: translateY(-2px);
+        color: white;
     }
     
-    .control-btn:disabled {
-        background: #ccc;
-        color: #666;
-        border-color: #ccc;
-        cursor: not-allowed;
-        transform: none;
+    .mode-btn.active {
+        background: var(--clr-coral);
+        color: white;
     }
     
     /* Progress display */
     .progress-info {
         text-align: center;
-        margin-bottom: 15px;
+        margin-bottom: 20px;
         color: var(--clr-warm-white);
     }
     
     .progress-bar {
         width: 100%;
-        height: 8px;
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
+        height: 6px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 3px;
         overflow: hidden;
         margin: 10px 0;
     }
     
     .progress-fill {
         height: 100%;
-        background: var(--clr-coral);
-        border-radius: 4px;
+        background: linear-gradient(90deg, var(--clr-coral), var(--clr-fuchsia));
+        border-radius: 3px;
         transition: width 0.3s ease;
     }
     
     /* Study mode buttons */
     .study-modes {
         display: flex;
-        gap: 10px;
-        margin-bottom: 15px;
-        flex-wrap: wrap;
         justify-content: center;
-    }
-    
-    .mode-btn {
-        background: transparent;
-        color: var(--clr-warm-white);
-        border: 2px solid var(--clr-coral);
-        padding: 8px 16px;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        transition: all 0.3s ease;
-    }
-    
-    .mode-btn.active, .mode-btn:hover {
-        background: var(--clr-coral);
-        color: white;
+        gap: 10px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
     }
     
     /* Loading and error states */
     .loading, .error {
         text-align: center;
         font-size: 1.2rem;
-        padding: 20px;
+        padding: 40px;
+        color: var(--clr-warm-white);
     }
     
-    .loading { color: var(--clr-warm-white); }
-    .error { color: var(--clr-coral); }
+    .error {
+        color: var(--clr-coral);
+    }
     
-    /* Header spacing fix */
-    .header {
-        text-align: center;
-        margin-bottom: 20px;
-        padding: 0 20px;
+    @media (max-width: 480px) {
+        .flashcard {
+            width: 300px;
+            height: 250px;
+        }
+        
+        .term-name {
+            font-size: 1.5rem;
+        }
+        
+        .term-abbreviation {
+            font-size: 2.5rem;
+        }
+        
+        .header h1 {
+            font-size: 2rem;
+        }
     }
     </style>
 </head>
@@ -241,7 +248,9 @@
              data-ad-slot="5658247632"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
     <!-- Navigation uses global styles -->
@@ -261,7 +270,7 @@
     </nav>
 
     <!-- Main content -->
-    <div class="container">
+    <div class="container content-wrapper">
         <div class="header">
             <h1>Interactive Crochet Flashcards</h1>
             <p>Master crochet terminology with spaced repetition learning</p>
@@ -274,7 +283,7 @@
 
         <!-- Error state -->
         <div id="error" class="error" style="display: none;">
-            Unable to load flashcards. Please try again later.
+            Unable to load flashcards. Please check your internet connection.
         </div>
 
         <!-- Flashcard interface -->
@@ -305,19 +314,17 @@
 
                 <!-- Flashcard -->
                 <div class="flashcard-wrapper">
-                    <div class="flashcard">
-                        <div id="card-inner" class="card-inner" onclick="flipCard()">
-                            <!-- Front of card -->
-                            <div class="card-front">
-                                <div id="term-name" class="term-name">Loading...</div>
-                                <div id="term-description" class="term-description"></div>
-                                <div id="term-translations" class="term-translations"></div>
-                            </div>
-                            <!-- Back of card -->
-                            <div class="card-back">
-                                <div id="term-abbreviation" class="term-abbreviation">...</div>
-                                <div class="term-description">Click or tap to flip back</div>
-                            </div>
+                    <div class="flashcard" id="card-element" onclick="flipCard()">
+                        <!-- Front of card -->
+                        <div class="card-front">
+                            <div id="term-name" class="term-name">Loading...</div>
+                            <div id="term-description" class="term-description"></div>
+                            <div id="term-translations" class="term-translations"></div>
+                        </div>
+                        <!-- Back of card -->
+                        <div class="card-back">
+                            <div id="term-abbreviation" class="term-abbreviation">...</div>
+                            <div id="back-notes" class="term-description"></div>
                         </div>
                     </div>
                 </div>
@@ -325,23 +332,8 @@
                 <!-- Desktop right controls -->
                 <div class="right-controls">
                     <button onclick="nextCard()" class="control-btn">Next</button>
-                    <button onclick="resetProgress()" class="control-btn">Reset</button>
+                    <button onclick="markKnown()" class="control-btn">Know It</button>
                 </div>
-
-                <!-- Desktop bottom controls -->
-                <div class="bottom-controls">
-                    <button onclick="markDifficulty('again')" class="control-btn">Again</button>
-                    <button onclick="markDifficulty('hard')" class="control-btn">Hard</button>
-                    <button onclick="markDifficulty('good')" class="control-btn">Good</button>
-                    <button onclick="markDifficulty('easy')" class="control-btn">Easy</button>
-                </div>
-            </div>
-
-            <!-- Mobile controls -->
-            <div class="mobile-controls">
-                <button onclick="previousCard()" class="control-btn">Previous</button>
-                <button onclick="flipCard()" class="control-btn">Flip</button>
-                <button onclick="nextCard()" class="control-btn">Next</button>
             </div>
         </div>
     </div>
@@ -354,10 +346,12 @@
              data-ad-slot="9304729040"
              data-ad-format="auto"
              data-full-width-responsive="true"></ins>
-        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
-    <!-- Navigation behavior script -->
+    <!-- Navigation scroll behavior -->
     <script>
         window.addEventListener('scroll', function() {
             const nav = document.getElementById('nav');
@@ -377,20 +371,40 @@
         let isFlipped = false;
         let studyMode = 'flashcards';
         
+        // API endpoint - same as working glossary.js
+        const apiEndpoint = 'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json';
+        
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
             loadGlossaryData();
         });
         
-        // Load data from API
+        // Load data from API - same approach as working glossary.js
         async function loadGlossaryData() {
             try {
-                const response = await fetch('https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json');
+                console.log('Loading glossary data from API...');
+                
+                const response = await fetch(apiEndpoint);
+                
                 if (!response.ok) {
-                    throw new Error('Failed to load data');
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
                 }
+                
                 const data = await response.json();
-                glossaryTerms = data;
+                
+                // Handle different data structures - same as glossary.js
+                glossaryTerms = data.data || data.terms || data || [];
+                
+                console.log(`Loaded ${glossaryTerms.length} terms from API`);
+                
+                if (!Array.isArray(glossaryTerms) || glossaryTerms.length === 0) {
+                    throw new Error('No valid terms found in API response');
+                }
+                
+                // Filter out invalid terms
+                glossaryTerms = glossaryTerms.filter(term => term && (term.name_us || term.name_uk || term.name));
+                
+                console.log(`Filtered to ${glossaryTerms.length} valid terms`);
                 
                 // Hide loading, show interface
                 document.getElementById('loading').style.display = 'none';
@@ -404,6 +418,11 @@
                 console.error('Error loading glossary data:', error);
                 document.getElementById('loading').style.display = 'none';
                 document.getElementById('error').style.display = 'block';
+                document.getElementById('error').innerHTML = `
+                    Unable to load flashcards.<br>
+                    Error: ${error.message}<br>
+                    Please check your internet connection.
+                `;
             }
         }
         
@@ -413,98 +432,60 @@
             
             const term = glossaryTerms[currentCardIndex];
             
-            // Update front of card
-            document.getElementById('term-name').textContent = term.name || term.term || 'Unknown Term';
-            document.getElementById('term-description').textContent = term.description || term.definition || '';
+            // Reset flip state
+            isFlipped = false;
+            document.getElementById('card-element').classList.remove('flipped');
+            
+            // Update front of card - same field handling as glossary.js
+            const usName = term.name_us || term.name || 'Unknown Term';
+            const description = term.description || term.notes || '';
+            
+            document.getElementById('term-name').textContent = usName;
+            document.getElementById('term-description').textContent = description;
             
             // Update translations if available
             const translationsEl = document.getElementById('term-translations');
             if (translationsEl) {
-                translationsEl.innerHTML = '';
-                
-                if (term.us_term && term.uk_term) {
-                    translationsEl.innerHTML = `
-                        <div class="translation-box">US: ${term.us_term}</div>
-                        <div class="translation-box">UK: ${term.uk_term}</div>
-                    `;
+                const ukName = term.name_uk || usName;
+                let translations = '';
+                if (usName !== ukName) {
+                    translations = `US: ${usName} | UK: ${ukName}`;
                 }
+                translationsEl.textContent = translations;
             }
             
             // Update back of card
-            document.getElementById('term-abbreviation').textContent = term.abbreviation || term.abbrev || term.short || '...';
+            const abbrev = term.abbreviation || term.symbol || term.id || '?';
+            document.getElementById('term-abbreviation').textContent = abbrev.toUpperCase();
             
-            // Reset flip state
-            const cardInner = document.getElementById('card-inner');
-            cardInner.classList.remove('flipped');
-            isFlipped = false;
+            const backNotesEl = document.getElementById('back-notes');
+            if (backNotesEl) {
+                backNotesEl.textContent = description;
+            }
         }
         
-        // Flip the card
-        function flipCard() {
-            const cardInner = document.getElementById('card-inner');
-            cardInner.classList.toggle('flipped');
+        // Flip card
+        window.flipCard = function() {
+            const card = document.getElementById('card-element');
             isFlipped = !isFlipped;
+            card.classList.toggle('flipped', isFlipped);
         }
         
-        // Navigate to next card
-        function nextCard() {
-            if (currentCardIndex < glossaryTerms.length - 1) {
-                currentCardIndex++;
-            } else {
-                currentCardIndex = 0; // Loop back to first card
-            }
+        // Navigation functions
+        window.nextCard = function() {
+            currentCardIndex = (currentCardIndex + 1) % glossaryTerms.length;
             displayCard();
             updateProgress();
         }
         
-        // Navigate to previous card
-        function previousCard() {
-            if (currentCardIndex > 0) {
-                currentCardIndex--;
-            } else {
-                currentCardIndex = glossaryTerms.length - 1; // Loop to last card
-            }
+        window.previousCard = function() {
+            currentCardIndex = currentCardIndex === 0 ? glossaryTerms.length - 1 : currentCardIndex - 1;
             displayCard();
             updateProgress();
         }
         
-        // Update progress display
-        function updateProgress() {
-            const progressText = document.getElementById('progress-text');
-            const progressFill = document.getElementById('progress-fill');
-            
-            if (glossaryTerms.length > 0) {
-                const current = currentCardIndex + 1;
-                const total = glossaryTerms.length;
-                const percentage = (current / total) * 100;
-                
-                progressText.textContent = `Card ${current} of ${total}`;
-                progressFill.style.width = `${percentage}%`;
-            }
-        }
-        
-        // Set study mode
-        function setStudyMode(mode) {
-            studyMode = mode;
-            
-            // Update button states
-            document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            console.log(`Study mode changed to: ${mode}`);
-        }
-        
-        // Mark card difficulty (for spaced repetition)
-        function markDifficulty(level) {
-            console.log(`Card marked as: ${level}`);
-            // Future: Implement spaced repetition algorithm
-            nextCard();
-        }
-        
-        // Shuffle cards
-        function shuffleCards() {
+        window.shuffleCards = function() {
+            // Fisher-Yates shuffle
             for (let i = glossaryTerms.length - 1; i > 0; i--) {
                 const j = Math.floor(Math.random() * (i + 1));
                 [glossaryTerms[i], glossaryTerms[j]] = [glossaryTerms[j], glossaryTerms[i]];
@@ -514,37 +495,52 @@
             updateProgress();
         }
         
-        // Reset progress
-        function resetProgress() {
-            currentCardIndex = 0;
-            displayCard();
-            updateProgress();
+        window.markKnown = function() {
+            // For now, just move to next card
+            // In future, could track known terms
+            nextCard();
         }
         
-        // Keyboard shortcuts
-        document.addEventListener('keydown', function(event) {
-            switch(event.code) {
-                case 'Space':
-                    event.preventDefault();
-                    flipCard();
-                    break;
+        // Study mode functions
+        window.setStudyMode = function(mode) {
+            studyMode = mode;
+            
+            // Update active button
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Different study modes could have different behaviors
+            console.log(`Study mode set to: ${mode}`);
+        }
+        
+        // Update progress display
+        function updateProgress() {
+            const progressText = document.getElementById('progress-text');
+            const progressFill = document.getElementById('progress-fill');
+            
+            if (progressText) {
+                progressText.textContent = `Card ${currentCardIndex + 1} of ${glossaryTerms.length}`;
+            }
+            
+            if (progressFill) {
+                const percentage = ((currentCardIndex + 1) / glossaryTerms.length) * 100;
+                progressFill.style.width = `${percentage}%`;
+            }
+        }
+        
+        // Keyboard navigation
+        document.addEventListener('keydown', function(e) {
+            switch(e.key) {
                 case 'ArrowLeft':
                     previousCard();
                     break;
                 case 'ArrowRight':
+                case ' ':
                     nextCard();
                     break;
-                case 'Digit1':
-                    markDifficulty('again');
-                    break;
-                case 'Digit2':
-                    markDifficulty('hard');
-                    break;
-                case 'Digit3':
-                    markDifficulty('good');
-                    break;
-                case 'Digit4':
-                    markDifficulty('easy');
+                case 'ArrowUp':
+                case 'ArrowDown':
+                    flipCard();
                     break;
             }
         });
