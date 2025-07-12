@@ -438,13 +438,9 @@
             
             // Update front of card - show abbreviation/symbol (what they see in patterns)
             const abbrev = term.abbreviation || term.symbol || term.id || 'NO ABBREV';
-            const usName = term.name_us || term.name || 'Unknown Term';
             
             document.getElementById('term-name').textContent = abbrev;
             document.getElementById('term-description').textContent = 'What does this mean?';
-            
-            document.getElementById('term-name').textContent = usName;
-            document.getElementById('term-description').textContent = description;
             
             // Update translations if available
             const translationsEl = document.getElementById('term-translations');
@@ -457,12 +453,12 @@
                 translationsEl.textContent = translations;
             }
             
-           /// Update back of card - show full name and description
+           // Update back of card - show full name and description  
             const fullName = term.name_us || term.name || 'Unknown Term';
-            const description = term.description || term.notes || 'Practice this technique';
+            const backDescription = term.description || term.notes || 'Practice this technique';
             
             document.getElementById('term-abbreviation').textContent = fullName;
-            document.getElementById('back-notes').textContent = description;
+            document.getElementById('back-notes').textContent = backDescription;
         }    
         
         // Flip card
