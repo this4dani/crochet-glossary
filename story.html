@@ -39,30 +39,25 @@
         
         /* Story section container */
         .story-section {
-            padding: var(--space-2xl) var(--space-2xl);
-            background: rgba(61, 26, 43, 0.8);
-            backdrop-filter: blur(20px);
+            padding: var(--space-2xl) var(--space-xl);
             margin: var(--space-2xl) 0;
-            border-radius: var(--space-lg);
         }
         
         .story-container {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 40px;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-2xl);
             align-items: start;
         }
         
         /* Mission card styling */
         .mission-card {
-            background: rgba(61, 26, 43, 0.8);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(250,248,243,0.15);
-            border-radius: 20px;
+            background: rgba(250, 248, 243, 0.05);
+            border-radius: 15px;
             padding: var(--space-xl);
-            transition: all 0.3s ease;
+            border: 1px solid rgba(250, 248, 243, 0.1);
         }
         
         .mission-title {
@@ -118,74 +113,84 @@
         .content-menu {
             display: flex;
             flex-direction: column;
-            gap: var(--space-lg);
+            gap: var(--space-md);
         }
 
         .content-link-item {
             background: rgba(250, 248, 243, 0.05);
-            border-radius: 15px;
+            border-radius: 10px;
             padding: var(--space-lg);
-            border-left: 4px solid var(--clr-coral);
+            border-left: 3px solid var(--clr-coral);
             transition: all 0.3s ease;
         }
 
         .content-link-item:hover {
-            background: rgba(250, 248, 243, 0.1);
-            transform: translateX(5px);
+            background: rgba(250, 248, 243, 0.08);
         }
 
         .content-link-item h3 {
             color: var(--clr-coral);
             font-family: var(--font-display);
-            font-size: 1.2rem;
-            margin-bottom: var(--space-sm);
+            font-size: 1.1rem;
+            margin-bottom: var(--space-xs);
         }
 
         .content-link-item p {
             color: var(--clr-cream);
-            margin-bottom: var(--space-md);
-            opacity: 0.9;
-            font-size: 0.95rem;
+            margin-bottom: var(--space-sm);
+            opacity: 0.8;
+            font-size: 0.9rem;
         }
 
         .content-btn {
-            background: var(--clr-coral);
-            color: var(--clr-rich-brown);
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: 20px;
+            background: transparent;
+            color: var(--clr-coral);
+            padding: var(--space-xs) var(--space-md);
+            border: 1px solid var(--clr-coral);
+            border-radius: 15px;
             text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 600;
+            font-size: 0.85rem;
+            font-weight: 500;
             transition: all 0.3s ease;
             display: inline-block;
         }
 
         .content-btn:hover {
-            background: var(--clr-fuchsia);
-            transform: translateY(-2px);
+            background: var(--clr-coral);
+            color: var(--clr-rich-brown);
         }
 
         /* Social Feed Styles */
         .social-feed-container {
-            max-height: 400px;
+            max-height: 500px;
             overflow-y: auto;
-            margin-bottom: var(--space-xl);
-            background: rgba(250, 248, 243, 0.05);
-            border-radius: 15px;
+            margin-bottom: var(--space-lg);
+            background: rgba(250, 248, 243, 0.03);
+            border-radius: 10px;
+            padding: var(--space-md);
+            border: 1px solid rgba(250, 248, 243, 0.1);
+        }
+
+        .loading-message {
+            text-align: center;
+            color: var(--clr-cream);
+            font-style: italic;
             padding: var(--space-lg);
+            opacity: 0.7;
         }
 
         /* Custom styles for social-feed.js posts */
         .social-feed-element {
-            background: rgba(250, 248, 243, 0.1);
-            border-radius: 10px;
+            background: rgba(250, 248, 243, 0.03);
+            border-radius: 8px;
             padding: var(--space-md);
             margin-bottom: var(--space-md);
-            border-left: 3px solid var(--clr-coral);
+            border-bottom: 1px solid rgba(250, 248, 243, 0.1);
         }
 
         .social-feed-element:last-child {
             margin-bottom: 0;
+            border-bottom: none;
         }
 
         .social-feed-element .author-title {
@@ -197,20 +202,20 @@
 
         .social-feed-element .text {
             color: var(--clr-cream);
-            font-size: 0.85rem;
-            line-height: 1.5;
+            font-size: 0.9rem;
+            line-height: 1.4;
             margin-bottom: var(--space-sm);
         }
 
         .social-feed-element .date {
             color: var(--clr-warm-white);
-            font-size: 0.7rem;
-            opacity: 0.7;
+            font-size: 0.75rem;
+            opacity: 0.6;
         }
 
         .social-feed-element .social-feed-image {
             width: 100%;
-            border-radius: 8px;
+            border-radius: 6px;
             margin: var(--space-sm) 0;
         }
 
@@ -310,6 +315,7 @@
                     <h3 class="mission-title">Latest Updates</h3>
                     
                     <!-- Social Feed Container -->
+                    <div class="loading-message">Loading latest posts...</div>
                     <div class="social-feed-container"></div>
                     
                     <!-- Keep Your Mission Statement -->
@@ -345,64 +351,69 @@
     <script>
     $(document).ready(function(){
         
-        // Initialize social feed
-        $('.social-feed-container').socialfeed({
-            
-            // RSS (for your Blogger)
-            rss: {
-                urls: ['https://this4dani.blogspot.com/feeds/posts/default'],
-                limit: 3
-            },
-            
-            // If you want Instagram later (requires access token)
-            // instagram: {
-            //     accounts: ['@this4dani'],
-            //     limit: 2,
-            //     access_token: 'YOUR_INSTAGRAM_ACCESS_TOKEN'
-            // },
-            
-            // General settings
-            length: 150,  // Text truncation length
-            show_media: true,  // Show images
-            media_min_width: 100,  // Minimum image width
-            
-            // Custom template (matches your brand)
-            template_html: 
-                '<div class="social-feed-element">' +
-                    '<div class="author-title">' +
-                        '<a href="{{link}}" target="_blank">{{author_name}}</a>' +
-                    '</div>' +
-                    '<div class="text">{{text}}</div>' +
-                    '{{image}}' +
-                    '<div class="date">{{date}}</div>' +
-                '</div>',
-                
-            // Date format
-            date_format: "MMM DD",
-            date_locale: "en"
-        });
+        // Show loading message
+        $('.loading-message').show();
         
-        // Fallback content if feed fails
-        setTimeout(function() {
-            if ($('.social-feed-container').children().length === 0) {
+        // Try to load Blogger RSS feed
+        fetch('https://this4dani.blogspot.com/feeds/posts/default?alt=json&max-results=5')
+            .then(response => response.json())
+            .then(data => {
+                $('.loading-message').hide();
+                
+                if (data.feed && data.feed.entry) {
+                    const posts = data.feed.entry;
+                    let feedHTML = '';
+                    
+                    posts.forEach(post => {
+                        const title = post.title.$t;
+                        const content = post.content ? post.content.$t : (post.summary ? post.summary.$t : '');
+                        const link = post.link.find(l => l.rel === 'alternate').href;
+                        const date = new Date(post.published.$t).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        
+                        // Extract text from HTML content
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = content;
+                        const textContent = tempDiv.textContent || tempDiv.innerText || '';
+                        const preview = textContent.length > 200 ? textContent.substring(0, 200) + '...' : textContent;
+                        
+                        feedHTML += `
+                            <div class="social-feed-element">
+                                <div class="author-title">
+                                    <a href="${link}" target="_blank">${title}</a>
+                                </div>
+                                <div class="text">${preview}</div>
+                                <div class="date">${date}</div>
+                            </div>
+                        `;
+                    });
+                    
+                    $('.social-feed-container').html(feedHTML);
+                } else {
+                    throw new Error('No posts found');
+                }
+            })
+            .catch(error => {
+                $('.loading-message').hide();
+                console.log('RSS fetch failed, showing fallback content:', error);
+                
+                // Fallback content
                 $('.social-feed-container').html(`
                     <div class="social-feed-element">
                         <div class="author-title">
-                            <a href="https://this4dani.blogspot.com/2025/07/the-slip-knot.html" target="_blank">Latest Blog Post</a>
+                            <a href="https://this4dani.blogspot.com/2025/07/the-slip-knot.html" target="_blank">The Slip Knot Story</a>
                         </div>
-                        <div class="text">The Slip Knot: Where Every Crochet Journey Begins. Hi, I'm Dani. My great aunt started teaching me crochet when I was 8 years old...</div>
+                        <div class="text">Hi, I'm Dani. My great aunt started teaching me crochet when I was 8 years old. Along the years there have been other women that taught me new techniques and encouraged me to keep going with the craft...</div>
                         <div class="date">Jul 11</div>
                     </div>
                     <div class="social-feed-element">
                         <div class="author-title">
-                            <a href="https://github.com/this4dani" target="_blank">GitHub Activity</a>
+                            <a href="https://github.com/this4dani" target="_blank">Site Development</a>
                         </div>
-                        <div class="text">Updated site functionality and AdSense integration</div>
-                        <div class="date">Jul 10</div>
+                        <div class="text">Updated story page with social feed integration and improved content navigation.</div>
+                        <div class="date">Jul 12</div>
                     </div>
                 `);
-            }
-        }, 3000);
+            });
     });
 
     // Simple sticky navigation
