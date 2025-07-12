@@ -8,244 +8,270 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* Story-specific styling */
-        .story-title {
+        /* Modern Content Hub Layout */
+        .content-hub {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-2xl) var(--space-xl);
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: var(--space-2xl);
+            min-height: 80vh;
+        }
+        
+        /* Left Sidebar - Skinnier */
+        .sidebar {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+        
+        .sidebar-title {
             font-family: var(--font-display);
-            font-size: 2.5rem;
-            margin-bottom: var(--space-xl);
-            color: var(--clr-warm-white);
-            line-height: 1.2;
-        }
-        
-        .story-description {
-            font-size: 1.2rem; 
-            margin: var(--space-2xl) 0;
+            font-size: 1.8rem;
             color: var(--clr-cream);
-            line-height: 1.6;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid rgba(250, 248, 243, 0.2);
         }
         
-        .story-highlight {
-            font-style: italic; 
-            color: var(--clr-cream); 
-            margin: var(--space-2xl) 0;
+        .nav-item {
+            display: block;
+            padding: var(--space-md) 0;
+            color: var(--clr-cream);
+            text-decoration: none;
+            border-bottom: 1px solid rgba(250, 248, 243, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-item:hover {
+            color: var(--clr-coral);
+            padding-left: var(--space-md);
+        }
+        
+        .nav-item:hover::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 3px;
+            height: 20px;
+            background: var(--clr-coral);
+        }
+        
+        .nav-emoji {
+            margin-right: var(--space-sm);
             font-size: 1.1rem;
         }
         
-        .story-launch-date {
-            font-size: 0.9rem; 
-            opacity: 0.8;
-            color: var(--clr-cream);
+        .nav-title {
+            font-weight: 600;
+            font-size: 0.95rem;
         }
         
-        /* Story section container */
-        .story-section {
-            padding: var(--space-2xl) var(--space-xl);
-            margin: var(--space-2xl) 0;
-        }
-        
-        .story-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--space-2xl);
-            align-items: start;
-        }
-        
-        /* Mission card styling */
-        .mission-card {
-            background: rgba(250, 248, 243, 0.05);
-            border-radius: 15px;
-            padding: var(--space-xl);
-            border: 1px solid rgba(250, 248, 243, 0.1);
-        }
-        
-        .mission-title {
-            color: var(--clr-coral);
-            font-size: 1.5rem;
-            margin-bottom: var(--space-lg);
-            font-family: var(--font-display);
-        }
-        
-        .sanctification-box {
-            background: var(--clr-rich-brown);
-            border-radius: 20px;
-            padding: 30px;
-            margin: 40px 0;
-            border: 2px dashed var(--clr-coral);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .sanctification-box::before {
-            content: '🔨';
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
+        .nav-desc {
+            font-size: 0.8rem;
             opacity: 0.7;
+            margin-top: 2px;
         }
         
-        .sanctification-title {
-            color: var(--clr-coral);
-            font-size: 1.3rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            font-family: var(--font-display);
-        }
-        
-        .sanctification-verse {
-            color: var(--clr-cream);
-            font-size: 0.9rem;
-            font-style: italic;
-            margin-bottom: 15px;
-            opacity: 0.9;
-        }
-        
-        .sanctification-text {
-            color: var(--clr-warm-white);
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-        
-        /* Content Menu Styles */
-        .content-menu {
+        /* Main Content Area */
+        .main-content {
             display: flex;
             flex-direction: column;
-            gap: var(--space-md);
+            gap: var(--space-xl);
         }
-
-        .content-link-item {
-            background: rgba(250, 248, 243, 0.05);
-            border-radius: 10px;
-            padding: var(--space-lg);
-            border-left: 3px solid var(--clr-coral);
-            transition: all 0.3s ease;
+        
+        /* Header */
+        .content-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
         }
-
-        .content-link-item:hover {
-            background: rgba(250, 248, 243, 0.08);
-        }
-
-        .content-link-item h3 {
-            color: var(--clr-coral);
+        
+        .content-header h1 {
             font-family: var(--font-display);
-            font-size: 1.1rem;
-            margin-bottom: var(--space-xs);
-        }
-
-        .content-link-item p {
+            font-size: 3rem;
             color: var(--clr-cream);
             margin-bottom: var(--space-sm);
-            opacity: 0.8;
-            font-size: 0.9rem;
         }
-
-        .content-btn {
-            background: transparent;
+        
+        .content-header .subtitle {
             color: var(--clr-coral);
-            padding: var(--space-xs) var(--space-md);
-            border: 1px solid var(--clr-coral);
-            border-radius: 15px;
-            text-decoration: none;
-            font-size: 0.85rem;
+            font-size: 1.2rem;
             font-weight: 500;
-            transition: all 0.3s ease;
-            display: inline-block;
         }
-
-        .content-btn:hover {
-            background: var(--clr-coral);
-            color: var(--clr-rich-brown);
-        }
-
-        /* Social Feed Styles */
-        .social-feed-container {
-            max-height: 500px;
-            overflow-y: auto;
-            margin-bottom: var(--space-lg);
-            background: rgba(250, 248, 243, 0.03);
-            border-radius: 10px;
-            padding: var(--space-md);
+        
+        /* Feed Section */
+        .feed-section {
+            background: rgba(250, 248, 243, 0.02);
+            border-radius: 12px;
             border: 1px solid rgba(250, 248, 243, 0.1);
         }
-
+        
+        .feed-header {
+            padding: var(--space-lg) var(--space-xl);
+            border-bottom: 1px solid rgba(250, 248, 243, 0.1);
+        }
+        
+        .feed-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--clr-coral);
+            margin: 0;
+        }
+        
+        .feed-content {
+            padding: var(--space-xl);
+        }
+        
         .loading-message {
             text-align: center;
             color: var(--clr-cream);
-            font-style: italic;
-            padding: var(--space-lg);
             opacity: 0.7;
+            padding: var(--space-2xl);
+            font-style: italic;
         }
-
-        /* Custom styles for social-feed.js posts */
-        .social-feed-element {
+        
+        /* Post Cards */
+        .post-card {
             background: rgba(250, 248, 243, 0.03);
             border-radius: 8px;
-            padding: var(--space-md);
-            margin-bottom: var(--space-md);
-            border-bottom: 1px solid rgba(250, 248, 243, 0.1);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            border-left: 3px solid var(--clr-coral);
+            transition: all 0.3s ease;
         }
-
-        .social-feed-element:last-child {
+        
+        .post-card:hover {
+            background: rgba(250, 248, 243, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .post-card:last-child {
             margin-bottom: 0;
-            border-bottom: none;
         }
-
-        .social-feed-element .author-title {
-            color: var(--clr-coral);
+        
+        .post-title {
+            font-size: 1.1rem;
             font-weight: 600;
-            font-size: 0.9rem;
-            margin-bottom: var(--space-xs);
-        }
-
-        .social-feed-element .text {
-            color: var(--clr-cream);
-            font-size: 0.9rem;
-            line-height: 1.4;
-            margin-bottom: var(--space-sm);
-        }
-
-        .social-feed-element .date {
-            color: var(--clr-warm-white);
-            font-size: 0.75rem;
-            opacity: 0.6;
-        }
-
-        .social-feed-element .social-feed-image {
-            width: 100%;
-            border-radius: 6px;
-            margin: var(--space-sm) 0;
-        }
-
-        .social-feed-element a {
             color: var(--clr-coral);
+            margin-bottom: var(--space-sm);
+            line-height: 1.3;
+        }
+        
+        .post-title a {
+            color: inherit;
             text-decoration: none;
         }
-
-        .social-feed-element a:hover {
+        
+        .post-title a:hover {
             color: var(--clr-fuchsia);
         }
         
-        /* Mobile responsive */
-        @media (max-width: 768px) {
-            .story-container {
+        .post-excerpt {
+            color: var(--clr-cream);
+            font-size: 0.9rem;
+            line-height: 1.5;
+            margin-bottom: var(--space-md);
+        }
+        
+        .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--clr-warm-white);
+            opacity: 0.6;
+        }
+        
+        .post-date {
+            font-weight: 500;
+        }
+        
+        .post-source {
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        /* Mission Statement */
+        .mission-section {
+            background: rgba(250, 248, 243, 0.02);
+            border-radius: 12px;
+            border: 1px solid rgba(250, 248, 243, 0.1);
+            padding: var(--space-xl);
+            text-align: center;
+        }
+        
+        .mission-title {
+            font-family: var(--font-display);
+            font-size: 1.4rem;
+            color: var(--clr-coral);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .mission-verse {
+            font-style: italic;
+            color: var(--clr-cream);
+            margin-bottom: var(--space-md);
+            font-size: 0.95rem;
+        }
+        
+        .mission-text {
+            color: var(--clr-warm-white);
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 1024px) {
+            .content-hub {
                 grid-template-columns: 1fr;
                 gap: var(--space-xl);
-                text-align: center;
-            }
-            
-            .story-title {
-                font-size: 2rem;
-            }
-            
-            .story-section {
                 padding: var(--space-xl) var(--space-lg);
             }
             
-            .social-feed-container {
-                max-height: 300px;
+            .sidebar {
+                position: static;
+                order: 2;
+            }
+            
+            .sidebar-title {
+                font-size: 1.4rem;
+            }
+            
+            .nav-item {
+                display: inline-block;
+                margin-right: var(--space-lg);
+                border-bottom: none;
+                padding: var(--space-sm);
+                background: rgba(250, 248, 243, 0.05);
+                border-radius: 6px;
+                margin-bottom: var(--space-sm);
+            }
+            
+            .nav-desc {
+                display: none;
+            }
+            
+            .content-header h1 {
+                font-size: 2.5rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .content-hub {
+                padding: var(--space-lg) var(--space-md);
+            }
+            
+            .content-header h1 {
+                font-size: 2rem;
+            }
+            
+            .feed-content,
+            .mission-section {
+                padding: var(--space-lg);
             }
         }
     </style>
@@ -267,94 +293,91 @@
         </a>
     </nav>
 
-    <!-- Main Content -->
-    <div class="container content-wrapper">
-        <!-- Header -->
-        <header class="header">
-            <h1>My Story</h1>
-            <p style="color: var(--clr-coral); font-size: 1.4rem; font-weight: 600;">CONTENT HUB</p>
-        </header>
-
-        <!-- Content Hub -->
-        <div class="story-section">
-            <div class="story-container">
-                
-                <!-- LEFT COLUMN - Content Menu -->
-                <div class="story-text">
-                    <h2 class="story-title">Find My Content</h2>
-                    
-                    <div class="content-menu">
-                        <div class="content-link-item">
-                            <h3>🪡 Crochet Stories</h3>
-                            <p>Personal stories about stitches and techniques</p>
-                            <a href="https://this4dani.blogspot.com" target="_blank" class="content-btn">Read Stories →</a>
-                        </div>
-                        
-                        <div class="content-link-item">
-                            <h3>💻 Development Journey</h3>
-                            <p>Building this platform, coding adventures</p>
-                            <a href="https://github.com/this4dani" target="_blank" class="content-btn">View Code →</a>
-                        </div>
-                        
-                        <div class="content-link-item">
-                            <h3>🔧 Crochet Resources</h3>
-                            <p>Interactive glossary and tools</p>
-                            <a href="glossary.html" class="content-btn">Use Glossary →</a>
-                        </div>
-                        
-                        <div class="content-link-item">
-                            <h3>📸 Social & Life</h3>
-                            <p>Real life, family, ministry updates</p>
-                            <a href="https://instagram.com/this4dani" target="_blank" class="content-btn">Follow Along →</a>
-                        </div>
-                    </div>
+    <!-- Content Hub -->
+    <div class="content-hub">
+        
+        <!-- Left Sidebar - Skinny Navigation -->
+        <aside class="sidebar">
+            <h2 class="sidebar-title">Explore</h2>
+            
+            <a href="https://this4dani.blogspot.com" target="_blank" class="nav-item">
+                <span class="nav-emoji">🪡</span>
+                <div>
+                    <div class="nav-title">Crochet Stories</div>
+                    <div class="nav-desc">Stitch tales & techniques</div>
                 </div>
-                
-                <!-- RIGHT COLUMN - Auto-Updating Social Feed -->
-                <div class="mission-card">
-                    <h3 class="mission-title">Latest Updates</h3>
-                    
-                    <!-- Social Feed Container -->
+            </a>
+            
+            <a href="https://github.com/this4dani" target="_blank" class="nav-item">
+                <span class="nav-emoji">💻</span>
+                <div>
+                    <div class="nav-title">Development</div>
+                    <div class="nav-desc">Building this platform</div>
+                </div>
+            </a>
+            
+            <a href="glossary.html" class="nav-item">
+                <span class="nav-emoji">🔧</span>
+                <div>
+                    <div class="nav-title">Glossary</div>
+                    <div class="nav-desc">Interactive crochet terms</div>
+                </div>
+            </a>
+            
+            <a href="https://instagram.com/this4dani" target="_blank" class="nav-item">
+                <span class="nav-emoji">📸</span>
+                <div>
+                    <div class="nav-title">Social & Life</div>
+                    <div class="nav-desc">Real updates & moments</div>
+                </div>
+            </a>
+            
+            <a href="follow.html" class="nav-item">
+                <span class="nav-emoji">🌐</span>
+                <div>
+                    <div class="nav-title">All Platforms</div>
+                    <div class="nav-desc">Complete social links</div>
+                </div>
+            </a>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            
+            <!-- Header -->
+            <header class="content-header">
+                <h1>Content Hub</h1>
+                <p class="subtitle">Stories, updates, and everything in between</p>
+            </header>
+            
+            <!-- Latest Posts Feed -->
+            <section class="feed-section">
+                <div class="feed-header">
+                    <h2 class="feed-title">Latest Posts</h2>
+                </div>
+                <div class="feed-content">
                     <div class="loading-message">Loading latest posts...</div>
-                    <div class="social-feed-container"></div>
-                    
-                    <!-- Keep Your Mission Statement -->
-                    <div class="sanctification-box">
-                        <div class="sanctification-title">Being Built & Sanctified</div>
-                        <p class="sanctification-verse">"My goal is that they may be encouraged in heart and united in love, so that they may have the full riches of complete understanding"<br>— Colossians 2:2</p>
-                        <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith. ✨</p>
-                    </div>
+                    <div id="posts-container"></div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Standard Footer -->
-        <div class="standard-footer">
-            <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <div class="footer-links">
-                <a href="privacy.html">Privacy Policy</a>
-                <span class="footer-separator">•</span>
-                <a href="privacy.html#terms">Terms of Service</a>
-                <span class="footer-separator">•</span>
-                <a href="privacy.html#contact">Contact</a>
-            </div>
-        </div>
+            </section>
+            
+            <!-- Mission Statement -->
+            <section class="mission-section">
+                <h3 class="mission-title">Being Built & Sanctified</h3>
+                <p class="mission-verse">"My goal is that they may be encouraged in heart and united in love, so that they may have the full riches of complete understanding" — Colossians 2:2</p>
+                <p class="mission-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith. ✨</p>
+            </section>
+            
+        </main>
     </div>
 
-    <!-- jQuery (required for social-feed.js) -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    <!-- Social Feed JS -->
-    <script src="https://cdn.jsdelivr.net/npm/social-feed@1.2.0/js/jquery.socialfeed.min.js"></script>
-
-    <!-- Initialize Social Feed -->
     <script>
     $(document).ready(function(){
         
-        // Show loading message
-        $('.loading-message').show();
-        
-        // Try to load Blogger RSS feed
+        // Load Blogger RSS feed
         fetch('https://this4dani.blogspot.com/feeds/posts/default?alt=json&max-results=5')
             .then(response => response.json())
             .then(data => {
@@ -362,61 +385,72 @@
                 
                 if (data.feed && data.feed.entry) {
                     const posts = data.feed.entry;
-                    let feedHTML = '';
+                    let postsHTML = '';
                     
                     posts.forEach(post => {
                         const title = post.title.$t;
                         const content = post.content ? post.content.$t : (post.summary ? post.summary.$t : '');
                         const link = post.link.find(l => l.rel === 'alternate').href;
-                        const date = new Date(post.published.$t).toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                        const date = new Date(post.published.$t).toLocaleDateString('en-US', { 
+                            month: 'short', 
+                            day: 'numeric' 
+                        });
                         
-                        // Extract text from HTML content
+                        // Extract text from HTML
                         const tempDiv = document.createElement('div');
                         tempDiv.innerHTML = content;
                         const textContent = tempDiv.textContent || tempDiv.innerText || '';
-                        const preview = textContent.length > 200 ? textContent.substring(0, 200) + '...' : textContent;
+                        const excerpt = textContent.length > 180 ? textContent.substring(0, 180) + '...' : textContent;
                         
-                        feedHTML += `
-                            <div class="social-feed-element">
-                                <div class="author-title">
+                        postsHTML += `
+                            <article class="post-card">
+                                <h3 class="post-title">
                                     <a href="${link}" target="_blank">${title}</a>
+                                </h3>
+                                <p class="post-excerpt">${excerpt}</p>
+                                <div class="post-meta">
+                                    <span class="post-date">${date}</span>
+                                    <span class="post-source">Blog</span>
                                 </div>
-                                <div class="text">${preview}</div>
-                                <div class="date">${date}</div>
-                            </div>
+                            </article>
                         `;
                     });
                     
-                    $('.social-feed-container').html(feedHTML);
+                    $('#posts-container').html(postsHTML);
                 } else {
                     throw new Error('No posts found');
                 }
             })
             .catch(error => {
                 $('.loading-message').hide();
-                console.log('RSS fetch failed, showing fallback content:', error);
+                console.log('RSS fetch failed, showing fallback:', error);
                 
-                // Fallback content
-                $('.social-feed-container').html(`
-                    <div class="social-feed-element">
-                        <div class="author-title">
+                $('#posts-container').html(`
+                    <article class="post-card">
+                        <h3 class="post-title">
                             <a href="https://this4dani.blogspot.com/2025/07/the-slip-knot.html" target="_blank">The Slip Knot Story</a>
+                        </h3>
+                        <p class="post-excerpt">Hi, I'm Dani. My great aunt started teaching me crochet when I was 8 years old. Along the years there have been other women that taught me new techniques and encouraged me to keep going with the craft...</p>
+                        <div class="post-meta">
+                            <span class="post-date">Jul 11</span>
+                            <span class="post-source">Blog</span>
                         </div>
-                        <div class="text">Hi, I'm Dani. My great aunt started teaching me crochet when I was 8 years old. Along the years there have been other women that taught me new techniques and encouraged me to keep going with the craft...</div>
-                        <div class="date">Jul 11</div>
-                    </div>
-                    <div class="social-feed-element">
-                        <div class="author-title">
-                            <a href="https://github.com/this4dani" target="_blank">Site Development</a>
+                    </article>
+                    <article class="post-card">
+                        <h3 class="post-title">
+                            <a href="https://github.com/this4dani" target="_blank">Site Development Update</a>
+                        </h3>
+                        <p class="post-excerpt">Updated story page with modern content hub design, improved navigation, and better social feed integration for a cleaner user experience.</p>
+                        <div class="post-meta">
+                            <span class="post-date">Jul 12</span>
+                            <span class="post-source">Development</span>
                         </div>
-                        <div class="text">Updated story page with social feed integration and improved content navigation.</div>
-                        <div class="date">Jul 12</div>
-                    </div>
+                    </article>
                 `);
             });
     });
 
-    // Simple sticky navigation
+    // Sticky navigation
     window.addEventListener('scroll', function() {
         const nav = document.getElementById('nav');
         if (window.scrollY > 50) {
