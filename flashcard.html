@@ -436,9 +436,12 @@
             isFlipped = false;
             document.getElementById('card-element').classList.remove('flipped');
             
-            // Update front of card - same field handling as glossary.js
+            // Update front of card - show abbreviation/symbol (what they see in patterns)
+            const abbrev = term.abbreviation || term.symbol || term.id || 'NO ABBREV';
             const usName = term.name_us || term.name || 'Unknown Term';
-            const description = term.description || term.notes || '';
+            
+            document.getElementById('term-name').textContent = abbrev;
+            document.getElementById('term-description').textContent = 'What does this mean?';
             
             document.getElementById('term-name').textContent = usName;
             document.getElementById('term-description').textContent = description;
@@ -454,15 +457,13 @@
                 translationsEl.textContent = translations;
             }
             
-            // Update back of card
-            const abbrev = term.abbreviation || term.symbol || term.id || '?';
-            document.getElementById('term-abbreviation').textContent = abbrev.toUpperCase();
+           /// Update back of card - show full name and description
+            const fullName = term.name_us || term.name || 'Unknown Term';
+            const description = term.description || term.notes || 'Practice this technique';
             
-            const backNotesEl = document.getElementById('back-notes');
-            if (backNotesEl) {
-                backNotesEl.textContent = description;
-            }
-        }
+            document.getElementById('term-abbreviation').textContent = fullName;
+            document.getElementById('back-notes').textContent = description;
+        }    
         
         // Flip card
         window.flipCard = function() {
@@ -545,5 +546,17 @@
             }
         });
     </script>
+    <!-- Footer uses global styles -->
+    <footer>
+        <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+        <p style="margin-top: 10px; font-size: 0.9rem;">&copy; 2025 DANI'S. All rights reserved.</p>
+        <div style="margin-top: 20px;">
+            <a href="privacy.html">Privacy Policy</a>
+            <span style="margin: 0 10px;">•</span>
+            <a href="privacy.html#terms">Terms of Service</a>
+            <span style="margin: 0 10px;">•</span>
+            <a href="privacy.html#contact">Contact</a>
+        </div>
+    </footer>
 </body>
 </html>
