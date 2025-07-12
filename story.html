@@ -10,7 +10,7 @@
     <style>
         /* Story-specific styling */
         .story-title {
-            font-family: var(--font-accent);
+            font-family: var(--font-display);
             font-size: 2.5rem;
             margin-bottom: var(--space-xl);
             color: var(--clr-warm-white);
@@ -19,7 +19,7 @@
         
         .story-description {
             font-size: 1.2rem; 
-            margin: var(--space-lg) 0;
+            margin: var(--space-2xl) 0;
             color: var(--clr-cream);
             line-height: 1.6;
         }
@@ -27,7 +27,7 @@
         .story-highlight {
             font-style: italic; 
             color: var(--clr-cream); 
-            margin: var(--space-lg) 0;
+            margin: var(--space-2xl) 0;
             font-size: 1.1rem;
         }
         
@@ -39,11 +39,11 @@
         
         /* Story section container */
         .story-section {
-            padding: var(--space-xl) var(--space-lg);
+            padding: var(--space-2xl) var(--space-2xl);
             background: rgba(61, 26, 43, 0.8);
             backdrop-filter: blur(20px);
-            margin: var(--space-xl) 0;
-            border-radius: 20px;
+            margin: var(--space-2xl) 0;
+            border-radius: var(--space-lg);
         }
         
         .story-container {
@@ -62,68 +62,16 @@
             border: 1px solid rgba(250,248,243,0.15);
             border-radius: 20px;
             padding: var(--space-xl);
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
+            transition: all 0.3s ease;
         }
-
-        .mission-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,107,122,0.1), transparent);
-            transition: left 0.6s ease;
-        }
-
-        .mission-card:hover::before {
-            left: 100%;
-        }
-
-        .mission-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--clr-coral);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            background: rgba(61, 26, 43, 0.9);
-        }
-
-        .mission-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: var(--space-lg);
+        
+        .mission-title {
             color: var(--clr-coral);
-            font-family: var(--font-accent);
-        }
-
-        .mission-card p {
-            color: var(--clr-cream);
-            opacity: 0.95;
-            line-height: 1.7;
-            font-family: var(--font-primary);
+            font-size: 1.5rem;
+            margin-bottom: var(--space-lg);
+            font-family: var(--font-display);
         }
         
-        /* Feature list styling */
-        .mission-card div {
-            display: flex;
-            align-items: center;
-            margin: var(--space-md) 0;
-        }
-        
-        .mission-card img {
-            width: 24px;
-            height: 24px;
-            margin-right: var(--space-sm);
-            filter: brightness(0) saturate(100%) invert(85%) sepia(15%) saturate(200%) hue-rotate(20deg) brightness(95%) contrast(90%);
-        }
-        
-        .mission-card span {
-            color: var(--clr-cream);
-            font-family: var(--font-primary);
-        }
-        
-        /* Sanctification under construction element */
         .sanctification-box {
             background: var(--clr-rich-brown);
             border-radius: 20px;
@@ -149,7 +97,7 @@
             font-size: 1.3rem;
             font-weight: 700;
             margin-bottom: 10px;
-            font-family: var(--font-accent);
+            font-family: var(--font-display);
         }
         
         .sanctification-verse {
@@ -164,6 +112,136 @@
             color: var(--clr-warm-white);
             font-size: 1rem;
             line-height: 1.5;
+        }
+        
+        /* Content Menu Styles */
+        .content-menu {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+
+        .content-link-item {
+            background: rgba(250, 248, 243, 0.05);
+            border-radius: 15px;
+            padding: var(--space-lg);
+            border-left: 4px solid var(--clr-coral);
+            transition: all 0.3s ease;
+        }
+
+        .content-link-item:hover {
+            background: rgba(250, 248, 243, 0.1);
+            transform: translateX(5px);
+        }
+
+        .content-link-item h3 {
+            color: var(--clr-coral);
+            font-family: var(--font-display);
+            font-size: 1.2rem;
+            margin-bottom: var(--space-sm);
+        }
+
+        .content-link-item p {
+            color: var(--clr-cream);
+            margin-bottom: var(--space-md);
+            opacity: 0.9;
+            font-size: 0.95rem;
+        }
+
+        .content-btn {
+            background: var(--clr-coral);
+            color: var(--clr-rich-brown);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .content-btn:hover {
+            background: var(--clr-fuchsia);
+            transform: translateY(-2px);
+        }
+
+        /* Social Feed Styles */
+        .social-feed-container {
+            max-height: 400px;
+            overflow-y: auto;
+            margin-bottom: var(--space-xl);
+            background: rgba(250, 248, 243, 0.05);
+            border-radius: 15px;
+            padding: var(--space-lg);
+        }
+
+        /* Custom styles for social-feed.js posts */
+        .social-feed-element {
+            background: rgba(250, 248, 243, 0.1);
+            border-radius: 10px;
+            padding: var(--space-md);
+            margin-bottom: var(--space-md);
+            border-left: 3px solid var(--clr-coral);
+        }
+
+        .social-feed-element:last-child {
+            margin-bottom: 0;
+        }
+
+        .social-feed-element .author-title {
+            color: var(--clr-coral);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: var(--space-xs);
+        }
+
+        .social-feed-element .text {
+            color: var(--clr-cream);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            margin-bottom: var(--space-sm);
+        }
+
+        .social-feed-element .date {
+            color: var(--clr-warm-white);
+            font-size: 0.7rem;
+            opacity: 0.7;
+        }
+
+        .social-feed-element .social-feed-image {
+            width: 100%;
+            border-radius: 8px;
+            margin: var(--space-sm) 0;
+        }
+
+        .social-feed-element a {
+            color: var(--clr-coral);
+            text-decoration: none;
+        }
+
+        .social-feed-element a:hover {
+            color: var(--clr-fuchsia);
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .story-container {
+                grid-template-columns: 1fr;
+                gap: var(--space-xl);
+                text-align: center;
+            }
+            
+            .story-title {
+                font-size: 2rem;
+            }
+            
+            .story-section {
+                padding: var(--space-xl) var(--space-lg);
+            }
+            
+            .social-feed-container {
+                max-height: 300px;
+            }
         }
     </style>
 </head>
@@ -189,93 +267,153 @@
         <!-- Header -->
         <header class="header">
             <h1>My Story</h1>
-            <p style="color: var(--clr-coral); font-size: 1.4rem; font-weight: 600;">COMING SOON</p>
+            <p style="color: var(--clr-coral); font-size: 1.4rem; font-weight: 600;">CONTENT HUB</p>
         </header>
 
-        <!-- Coming Soon Content -->
+        <!-- Content Hub -->
         <div class="story-section">
             <div class="story-container">
                 
-                <!-- Left Column - Your existing content with AdSense -->
+                <!-- LEFT COLUMN - Content Menu -->
                 <div class="story-text">
-                    <h2 class="story-title">Stories, Social Feeds & More</h2>
+                    <h2 class="story-title">Find My Content</h2>
                     
-                    <p class="story-description">I'm building something special here - a place where my 30-year crochet journey meets modern storytelling.</p>
-                    
-                    <div class="mission-card">
-                        <h3>What's Coming:</h3>
-                        <div>
-                            <img src="images/slip-knot-first-chain.png" alt="Story">
-                            <span>Deep-dive blog stories about my crochet and tech journey</span>
+                    <div class="content-menu">
+                        <div class="content-link-item">
+                            <h3>🪡 Crochet Stories</h3>
+                            <p>Personal stories about stitches and techniques</p>
+                            <a href="https://this4dani.blogspot.com" target="_blank" class="content-btn">Read Stories →</a>
                         </div>
-                        <div>
-                            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-                            <span>Live social media feeds from all my @this4dani accounts</span>
+                        
+                        <div class="content-link-item">
+                            <h3>💻 Development Journey</h3>
+                            <p>Building this platform, coding adventures</p>
+                            <a href="https://github.com/this4dani" target="_blank" class="content-btn">View Code →</a>
                         </div>
-                        <div>
-                            <img src="images/file-folder-magazne-lable.png" alt="API">
-                            <span>Behind-the-scenes content from building the pattern adjustment API</span>
+                        
+                        <div class="content-link-item">
+                            <h3>🔧 Crochet Resources</h3>
+                            <p>Interactive glossary and tools</p>
+                            <a href="glossary.html" class="content-btn">Use Glossary →</a>
                         </div>
-                        <div>
-                            <img src="images/home-heart-door.png" alt="Faith">
-                            <span>Faith and ministry moments that shape everything I create</span>
+                        
+                        <div class="content-link-item">
+                            <h3>📸 Social & Life</h3>
+                            <p>Real life, family, ministry updates</p>
+                            <a href="https://instagram.com/this4dani" target="_blank" class="content-btn">Follow Along →</a>
                         </div>
                     </div>
-                    
-                    <p class="story-highlight">Where traditional craft meets modern innovation, and every story has a purpose.</p>
-                    
-                    <p class="story-launch-date">Expected launch: July 2025</p>
                 </div>
                 
-                <!-- Right Column - Single Sanctification Box -->
-                <div class="sanctification-section">
-                    <div class="sanctification-box">
-                        <h3 class="sanctification-title">Being Sanctified...</h3>
-                        <p class="sanctification-verse">"...knit together in love, to reach all the riches of full assurance of understanding and the knowledge of God's mystery."<br>— Colossians 2:2</p>
-                        <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith. ✨</p>
-                    </div>
+                <!-- RIGHT COLUMN - Auto-Updating Social Feed -->
+                <div class="mission-card">
+                    <h3 class="mission-title">Latest Updates</h3>
                     
-                    <!-- AdSense in-article ad for right column -->
-                    <div class="story-ad">
-                        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532"
-                             crossorigin="anonymous"></script>
-                        <ins class="adsbygoogle"
-                             style="display:block; text-align:center;"
-                             data-ad-layout="in-article"
-                             data-ad-format="fluid"
-                             data-ad-client="ca-pub-9422928756201532"
-                             data-ad-slot="5237761028"></ins>
-                        <script>
-                             (adsbygoogle = window.adsbygoogle || []).push({});
-                        </script>
+                    <!-- Social Feed Container -->
+                    <div class="social-feed-container"></div>
+                    
+                    <!-- Keep Your Mission Statement -->
+                    <div class="sanctification-box">
+                        <div class="sanctification-title">Being Built & Sanctified</div>
+                        <p class="sanctification-verse">"My goal is that they may be encouraged in heart and united in love, so that they may have the full riches of complete understanding"<br>— Colossians 2:2</p>
+                        <p class="sanctification-text">Like a beautiful crochet pattern taking shape stitch by stitch, this space is being lovingly crafted with intention. There's something sacred about being knit together - whether in yarn or in faith. ✨</p>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Footer -->
-        <div class="footer">
-            <p>Built with ❤️, prayer, coffee, and determination to solve real problems</p>
-            <div style="margin-top: 20px;">
+        <!-- Standard Footer -->
+        <div class="standard-footer">
+            <p class="footer-built">Built with ❤️, prayer, coffee, and determination to solve real problems</p>
+            <div class="footer-links">
                 <a href="privacy.html">Privacy Policy</a>
-                <span style="margin: 0 10px;">•</span>
+                <span class="footer-separator">•</span>
                 <a href="privacy.html#terms">Terms of Service</a>
-                <span style="margin: 0 10px;">•</span>
+                <span class="footer-separator">•</span>
                 <a href="privacy.html#contact">Contact</a>
             </div>
         </div>
     </div>
-    
+
+    <!-- jQuery (required for social-feed.js) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- Social Feed JS -->
+    <script src="https://cdn.jsdelivr.net/npm/social-feed@1.2.0/js/jquery.socialfeed.min.js"></script>
+
+    <!-- Initialize Social Feed -->
     <script>
-        // Simple sticky navigation
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+    $(document).ready(function(){
+        
+        // Initialize social feed
+        $('.social-feed-container').socialfeed({
+            
+            // RSS (for your Blogger)
+            rss: {
+                urls: ['https://this4dani.blogspot.com/feeds/posts/default'],
+                limit: 3
+            },
+            
+            // If you want Instagram later (requires access token)
+            // instagram: {
+            //     accounts: ['@this4dani'],
+            //     limit: 2,
+            //     access_token: 'YOUR_INSTAGRAM_ACCESS_TOKEN'
+            // },
+            
+            // General settings
+            length: 150,  // Text truncation length
+            show_media: true,  // Show images
+            media_min_width: 100,  // Minimum image width
+            
+            // Custom template (matches your brand)
+            template_html: 
+                '<div class="social-feed-element">' +
+                    '<div class="author-title">' +
+                        '<a href="{{link}}" target="_blank">{{author_name}}</a>' +
+                    '</div>' +
+                    '<div class="text">{{text}}</div>' +
+                    '{{image}}' +
+                    '<div class="date">{{date}}</div>' +
+                '</div>',
+                
+            // Date format
+            date_format: "MMM DD",
+            date_locale: "en"
         });
+        
+        // Fallback content if feed fails
+        setTimeout(function() {
+            if ($('.social-feed-container').children().length === 0) {
+                $('.social-feed-container').html(`
+                    <div class="social-feed-element">
+                        <div class="author-title">
+                            <a href="https://this4dani.blogspot.com/2025/07/the-slip-knot.html" target="_blank">Latest Blog Post</a>
+                        </div>
+                        <div class="text">The Slip Knot: Where Every Crochet Journey Begins. Hi, I'm Dani. My great aunt started teaching me crochet when I was 8 years old...</div>
+                        <div class="date">Jul 11</div>
+                    </div>
+                    <div class="social-feed-element">
+                        <div class="author-title">
+                            <a href="https://github.com/this4dani" target="_blank">GitHub Activity</a>
+                        </div>
+                        <div class="text">Updated site functionality and AdSense integration</div>
+                        <div class="date">Jul 10</div>
+                    </div>
+                `);
+            }
+        }, 3000);
+    });
+
+    // Simple sticky navigation
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    });
     </script>
 </body>
 </html>
