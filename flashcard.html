@@ -75,52 +75,51 @@
         }
     }
     
-    /* Flashcard component */
-    .flashcard-wrapper {
-        perspective: 1000px;
-        display: flex;
-        justify-content: center;
-        margin: 20px 0;
-    }
-    
-    .flashcard {
-        width: 400px;
-        height: 300px;
-        position: relative;
-        transform-style: preserve-3d;
-        transition: transform 0.6s;
-        cursor: pointer;
-    }
-    
-    .flashcard.flipped {
-        transform: rotateY(180deg);
-    }
-    
-    .card-front, .card-back {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        backface-visibility: hidden;
-        border-radius: 15px;
-        padding: 30px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        box-shadow: 0 8px 16px rgba(0,0,0,0.3);
-    }
-    
-    .card-front {
-        background: linear-gradient(135deg, var(--clr-warm-white), #f0f0f0);
-        color: var(--clr-primary-dark);
-    }
-    
-    .card-back {
-        background: linear-gradient(135deg, var(--clr-coral), var(--clr-fuchsia));
-        color: white;
-        transform: rotateY(180deg);
-    }
+    /* Flashcard Component */
+.flashcard {
+    width: 400px;
+    height: 280px;
+    margin: 0 auto;
+    perspective: 1000px;
+    position: relative;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card-inner.flipped {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: var(--clr-warm-white);
+    color: var(--clr-primary-dark);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 3px solid var(--clr-coral);
+}
+
+.card-back {
+    transform: rotateY(180deg);
+    background: var(--clr-cream);
+}
     
     /* Card content styling */
     .term-name {
@@ -427,40 +426,30 @@
         }
         
         // Display current card
-        function displayCard() {
-            if (glossaryTerms.length === 0) return;
-            
-            const term = glossaryTerms[currentCardIndex];
-            
-            // Reset flip state
-            isFlipped = false;
-            document.getElementById('card-element').classList.remove('flipped');
-            
-            // Update front of card - show abbreviation/symbol (what they see in patterns)
-            const abbrev = term.abbreviation || term.symbol || term.id || 'NO ABBREV';
-            
-            document.getElementById('term-name').textContent = abbrev;
-            document.getElementById('term-description').textContent = 'What does this mean?';
-            
-            // Update translations if available - FIXED: define usName before using it
-            const translationsEl = document.getElementById('term-translations');
-            if (translationsEl) {
-                const usName = term.name_us || term.name || 'Unknown Term';
-                const ukName = term.name_uk || usName;
-                let translations = '';
-                if (usName !== ukName) {
-                    translations = `US: ${usName} | UK: ${ukName}`;
-                }
-                translationsEl.textContent = translations;
-            }
-            
-           // Update back of card - show full name and description  
-            const fullName = term.name_us || term.name || 'Unknown Term';
-            const backDescription = term.description || term.notes || 'Practice this technique';
-            
-            document.getElementById('term-abbreviation').textContent = fullName;
-            document.getElementById('back-notes').textContent = backDescription;
-        }    
+       function displayCard() {
+    if (glossaryTerms.length === 0) return;
+    
+    const term = glossaryTerms[currentCardIndex];
+    
+    // FRONT of card: Line 1 = ID (abbreviation), Line 2 = Symbol
+    document.getElementById('term-name').textContent = term.id ? term.id.toUpperCase() : 'Unknown';
+    document.getElementById('term-description').textContent = term.symbol || '';
+    
+    // BACK of card: Line 1 = Name, Line 2 = Instructions
+    document.getElementById('term-abbreviation').textContent = term.name_us || term.name || 'Unknown Term';
+    document.getElementById('term-symbol').textContent = term.notes || term.description || term.instruction || 'Practice this technique';
+    
+    // Clear translations section (not needed for flashcards)
+    const translationsEl = document.getElementById('term-translations');
+    if (translationsEl) {
+        translationsEl.innerHTML = '';
+    }
+    
+    // Reset flip state
+    const cardInner = document.getElementById('card-inner');
+    cardInner.classList.remove('flipped');
+    isFlipped = false;
+}
         
         // Flip card
         window.flipCard = function() {
