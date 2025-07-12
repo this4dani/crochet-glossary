@@ -1,0 +1,732 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Crochet Flashcards - DANI'S Interactive Learning</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <meta name="description" content="Interactive crochet flashcards with US/UK terminology. Learn and practice crochet stitches with spaced repetition.">
+    <link rel="stylesheet" href="styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Playfair+Display:wght@400;500;600;700;800&family=Crimson+Text:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        .flashcard-app {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            min-height: 100vh;
+        }
+
+        .app-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .app-title {
+            color: var(--clr-cream);
+            font-family: var(--font-accent);
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .app-subtitle {
+            color: var(--clr-warm-white);
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+
+        .study-modes {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .mode-btn {
+            padding: 12px 24px;
+            background: var(--clr-coral);
+            color: var(--clr-warm-white);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-btn:hover,
+        .mode-btn.active {
+            background: var(--clr-fuchsia);
+            transform: translateY(-2px);
+        }
+
+        .progress-bar {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            height: 8px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            background: linear-gradient(90deg, var(--clr-coral), var(--clr-fuchsia));
+            height: 100%;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: var(--clr-warm-white);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--clr-coral);
+        }
+
+        .flashcard-container {
+            perspective: 1000px;
+            margin-bottom: 2rem;
+        }
+
+        .flashcard {
+            width: 100%;
+            max-width: 600px;
+            height: 400px;
+            margin: 0 auto;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease;
+            cursor: pointer;
+        }
+
+        .flashcard.flipped {
+            transform: rotateY(180deg);
+        }
+
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .card-front {
+            background: linear-gradient(135deg, var(--clr-cream), #f8f4ef);
+            color: var(--clr-primary-dark);
+        }
+
+        .card-back {
+            background: linear-gradient(135deg, var(--clr-coral), var(--clr-fuchsia));
+            color: var(--clr-warm-white);
+            transform: rotateY(180deg);
+        }
+
+        .card-term {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            font-family: var(--font-accent);
+        }
+
+        .card-abbreviation {
+            background: var(--clr-primary-dark);
+            color: var(--clr-warm-white);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .card-description {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .card-translations {
+            margin-top: auto;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(0, 56, 64, 0.2);
+            width: 100%;
+        }
+
+        .translation-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .answer-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .answer-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+        }
+
+        .btn-again {
+            background: #ff4757;
+            color: white;
+        }
+
+        .btn-hard {
+            background: #ffa502;
+            color: white;
+        }
+
+        .btn-good {
+            background: #2ed573;
+            color: white;
+        }
+
+        .btn-easy {
+            background: #3742fa;
+            color: white;
+        }
+
+        .answer-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .controls {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .control-btn {
+            padding: 8px 16px;
+            background: transparent;
+            border: 2px solid var(--clr-coral);
+            color: var(--clr-coral);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .control-btn:hover {
+            background: var(--clr-coral);
+            color: var(--clr-warm-white);
+        }
+
+        .keyboard-hint {
+            text-align: center;
+            color: var(--clr-warm-white);
+            opacity: 0.7;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+
+        .study-complete {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .study-complete h2 {
+            color: var(--clr-cream);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 3rem;
+            color: var(--clr-warm-white);
+        }
+
+        @media (max-width: 768px) {
+            .flashcard-app {
+                padding: 1rem;
+            }
+
+            .flashcard {
+                height: 350px;
+            }
+
+            .card-face {
+                padding: 1.5rem;
+            }
+
+            .card-term {
+                font-size: 1.5rem;
+            }
+
+            .stats-row {
+                gap: 1rem;
+            }
+
+            .answer-buttons {
+                flex-wrap: wrap;
+                gap: 0.5rem;
+            }
+
+            .answer-btn {
+                min-width: 100px;
+                padding: 10px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- AdSense Top -->
+    <div class="adsense-top">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-slot="5658247632"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="nav">
+        <a href="index.html">
+            <img src="images/home-heart-door.png" alt="Home">
+        </a>
+        <a href="glossary.html">
+            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+        </a>
+        <a href="story.html">
+            <img src="images/slip-knot-first-chain.png" alt="Story">
+        </a>
+        <a href="follow.html">
+            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+        </a>
+    </nav>
+
+    <!-- Main App -->
+    <div class="container content-wrapper">
+        <main class="flashcard-app">
+            <header class="app-header">
+                <h1 class="app-title">Crochet Flashcards</h1>
+                <p class="app-subtitle">Master crochet terminology with interactive learning</p>
+            </header>
+
+            <div class="study-modes">
+                <button class="mode-btn active" data-mode="flashcards">📚 Flashcards</button>
+                <button class="mode-btn" data-mode="learn">🎯 Learn</button>
+                <button class="mode-btn" data-mode="test">📝 Test</button>
+                <button class="mode-btn" data-mode="match">🎮 Match</button>
+            </div>
+
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-number" id="current-card">1</div>
+                    <div>of <span id="total-cards">Loading...</span></div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="known-count">0</div>
+                    <div>Known</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="learning-count">0</div>
+                    <div>Learning</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number" id="mastered-count">0</div>
+                    <div>Mastered</div>
+                </div>
+            </div>
+
+            <div id="loading-state" class="loading-state">
+                <h2>🧶 Loading flashcards...</h2>
+                <p>Preparing your crochet learning experience</p>
+            </div>
+
+            <div id="flashcard-container" class="flashcard-container" style="display: none;">
+                <div class="flashcard" id="flashcard">
+                    <div class="card-face card-front">
+                        <div class="card-term" id="card-term">Loading...</div>
+                        <div class="card-abbreviation" id="card-abbreviation">...</div>
+                        <div class="card-hint">Click to see definition</div>
+                    </div>
+                    <div class="card-face card-back">
+                        <div class="card-description" id="card-description">Loading...</div>
+                        <div class="card-translations">
+                            <div class="translation-item">
+                                <strong>US Term:</strong> <span id="us-term">...</span>
+                            </div>
+                            <div class="translation-item">
+                                <strong>UK Term:</strong> <span id="uk-term">...</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="answer-buttons" id="answer-buttons" style="display: none;">
+                    <button class="answer-btn btn-again" data-difficulty="again">
+                        Again<br><small>(1)</small>
+                    </button>
+                    <button class="answer-btn btn-hard" data-difficulty="hard">
+                        Hard<br><small>(2)</small>
+                    </button>
+                    <button class="answer-btn btn-good" data-difficulty="good">
+                        Good<br><small>(3)</small>
+                    </button>
+                    <button class="answer-btn btn-easy" data-difficulty="easy">
+                        Easy<br><small>(4)</small>
+                    </button>
+                </div>
+
+                <div class="controls">
+                    <button class="control-btn" id="shuffle-btn">🔀 Shuffle</button>
+                    <button class="control-btn" id="reset-btn">🔄 Reset Progress</button>
+                    <button class="control-btn" id="settings-btn">⚙️ Settings</button>
+                </div>
+
+                <div class="keyboard-hint">
+                    💡 Tip: Use Space to flip cards, 1-4 keys for difficulty, or ←→ arrows to navigate
+                </div>
+            </div>
+
+            <div id="study-complete" class="study-complete" style="display: none;">
+                <h2>🎉 Study Session Complete!</h2>
+                <p>Great job! You've reviewed all available cards.</p>
+                <button class="mode-btn" onclick="restartStudy()">Study Again</button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Navigation Script -->
+    <script>
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 100) {
+                nav.style.position = 'fixed';
+                nav.style.top = '0';
+                nav.style.left = '50%';
+                nav.style.transform = 'translateX(-50%)';
+                nav.style.zIndex = '100';
+            } else {
+                nav.style.position = 'absolute';
+                nav.style.top = '20px';
+                nav.style.left = '50%';
+                nav.style.transform = 'translateX(-50%)';
+            }
+        });
+    </script>
+
+    <!-- Flashcard App Script -->
+    <script>
+        class CrochetFlashcards {
+            constructor() {
+                this.terms = [];
+                this.currentCardIndex = 0;
+                this.isFlipped = false;
+                this.studyMode = 'flashcards';
+                this.cardStates = {}; // Track difficulty for each card
+                this.apiEndpoint = 'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json';
+                
+                this.init();
+            }
+
+            async init() {
+                await this.loadTerms();
+                this.setupEventListeners();
+                this.setupKeyboardShortcuts();
+                this.showCurrentCard();
+            }
+
+            async loadTerms() {
+                try {
+                    const response = await fetch(this.apiEndpoint);
+                    const data = await response.json();
+                    this.terms = data.data || data.terms || data || [];
+                    
+                    // Initialize card states
+                    this.terms.forEach((term, index) => {
+                        this.cardStates[index] = {
+                            difficulty: 0, // 0=new, 1=learning, 2=known, 3=mastered
+                            lastReviewed: null,
+                            reviewCount: 0
+                        };
+                    });
+
+                    this.hideElement('loading-state');
+                    this.showElement('flashcard-container');
+                    this.updateStats();
+                    
+                    console.log(`Loaded ${this.terms.length} flashcards`);
+                } catch (error) {
+                    console.error('Error loading terms:', error);
+                    document.getElementById('loading-state').innerHTML = 
+                        '<h2>❌ Error loading flashcards</h2><p>Please try refreshing the page</p>';
+                }
+            }
+
+            setupEventListeners() {
+                // Card flip
+                document.getElementById('flashcard').addEventListener('click', () => {
+                    this.flipCard();
+                });
+
+                // Answer buttons
+                document.querySelectorAll('.answer-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const difficulty = e.target.dataset.difficulty;
+                        this.answerCard(difficulty);
+                    });
+                });
+
+                // Control buttons
+                document.getElementById('shuffle-btn').addEventListener('click', () => {
+                    this.shuffleCards();
+                });
+
+                document.getElementById('reset-btn').addEventListener('click', () => {
+                    this.resetProgress();
+                });
+
+                // Study mode buttons
+                document.querySelectorAll('.mode-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        document.querySelectorAll('.mode-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.studyMode = e.target.dataset.mode;
+                        this.updateStudyMode();
+                    });
+                });
+            }
+
+            setupKeyboardShortcuts() {
+                document.addEventListener('keydown', (e) => {
+                    switch(e.key) {
+                        case ' ':
+                            e.preventDefault();
+                            this.flipCard();
+                            break;
+                        case '1':
+                            if (this.isFlipped) this.answerCard('again');
+                            break;
+                        case '2':
+                            if (this.isFlipped) this.answerCard('hard');
+                            break;
+                        case '3':
+                            if (this.isFlipped) this.answerCard('good');
+                            break;
+                        case '4':
+                            if (this.isFlipped) this.answerCard('easy');
+                            break;
+                        case 'ArrowLeft':
+                            this.previousCard();
+                            break;
+                        case 'ArrowRight':
+                            this.nextCard();
+                            break;
+                    }
+                });
+            }
+
+            flipCard() {
+                const card = document.getElementById('flashcard');
+                card.classList.toggle('flipped');
+                this.isFlipped = !this.isFlipped;
+                
+                // Show answer buttons when flipped
+                const answerButtons = document.getElementById('answer-buttons');
+                if (this.isFlipped && this.studyMode === 'learn') {
+                    answerButtons.style.display = 'flex';
+                } else {
+                    answerButtons.style.display = 'none';
+                }
+            }
+
+            showCurrentCard() {
+                if (this.terms.length === 0) return;
+
+                const term = this.terms[this.currentCardIndex];
+                
+                // Update card content
+                document.getElementById('card-term').textContent = term.name_us || term.name || 'Unknown Term';
+                document.getElementById('card-abbreviation').textContent = term.abbreviation || term.symbol || '';
+                document.getElementById('card-description').textContent = term.description || term.notes || 'No description available';
+                document.getElementById('us-term').textContent = term.name_us || term.name || 'Unknown';
+                document.getElementById('uk-term').textContent = term.name_uk || term.name_us || 'Unknown';
+
+                // Reset card state
+                const card = document.getElementById('flashcard');
+                card.classList.remove('flipped');
+                this.isFlipped = false;
+                document.getElementById('answer-buttons').style.display = 'none';
+
+                this.updateProgress();
+            }
+
+            answerCard(difficulty) {
+                const cardState = this.cardStates[this.currentCardIndex];
+                
+                // Update card difficulty based on answer
+                switch(difficulty) {
+                    case 'again':
+                        cardState.difficulty = Math.max(0, cardState.difficulty - 1);
+                        break;
+                    case 'hard':
+                        cardState.difficulty = Math.max(1, cardState.difficulty);
+                        break;
+                    case 'good':
+                        cardState.difficulty = Math.min(3, cardState.difficulty + 1);
+                        break;
+                    case 'easy':
+                        cardState.difficulty = 3;
+                        break;
+                }
+                
+                cardState.lastReviewed = new Date();
+                cardState.reviewCount++;
+
+                this.nextCard();
+                this.updateStats();
+            }
+
+            nextCard() {
+                if (this.currentCardIndex < this.terms.length - 1) {
+                    this.currentCardIndex++;
+                } else {
+                    this.currentCardIndex = 0;
+                }
+                this.showCurrentCard();
+            }
+
+            previousCard() {
+                if (this.currentCardIndex > 0) {
+                    this.currentCardIndex--;
+                } else {
+                    this.currentCardIndex = this.terms.length - 1;
+                }
+                this.showCurrentCard();
+            }
+
+            shuffleCards() {
+                for (let i = this.terms.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [this.terms[i], this.terms[j]] = [this.terms[j], this.terms[i]];
+                }
+                this.currentCardIndex = 0;
+                this.showCurrentCard();
+            }
+
+            resetProgress() {
+                Object.keys(this.cardStates).forEach(key => {
+                    this.cardStates[key] = {
+                        difficulty: 0,
+                        lastReviewed: null,
+                        reviewCount: 0
+                    };
+                });
+                this.updateStats();
+            }
+
+            updateStudyMode() {
+                const answerButtons = document.getElementById('answer-buttons');
+                
+                if (this.studyMode === 'learn') {
+                    // Show answer buttons in learn mode
+                    if (this.isFlipped) {
+                        answerButtons.style.display = 'flex';
+                    }
+                } else {
+                    // Hide answer buttons in other modes
+                    answerButtons.style.display = 'none';
+                }
+            }
+
+            updateStats() {
+                const stats = Object.values(this.cardStates).reduce((acc, state) => {
+                    switch(state.difficulty) {
+                        case 0: acc.new++; break;
+                        case 1: acc.learning++; break;
+                        case 2: acc.known++; break;
+                        case 3: acc.mastered++; break;
+                    }
+                    return acc;
+                }, { new: 0, learning: 0, known: 0, mastered: 0 });
+
+                document.getElementById('total-cards').textContent = this.terms.length;
+                document.getElementById('learning-count').textContent = stats.learning;
+                document.getElementById('known-count').textContent = stats.known;
+                document.getElementById('mastered-count').textContent = stats.mastered;
+            }
+
+            updateProgress() {
+                const progress = ((this.currentCardIndex + 1) / this.terms.length) * 100;
+                document.getElementById('progress-fill').style.width = `${progress}%`;
+                document.getElementById('current-card').textContent = this.currentCardIndex + 1;
+            }
+
+            hideElement(id) {
+                const element = document.getElementById(id);
+                if (element) element.style.display = 'none';
+            }
+
+            showElement(id) {
+                const element = document.getElementById(id);
+                if (element) element.style.display = 'block';
+            }
+        }
+
+        // Initialize the app
+        new CrochetFlashcards();
+
+        function restartStudy() {
+            location.reload();
+        }
+    </script>
+
+    <!-- AdSense Bottom -->
+    <div class="adsense-bottom">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9422928756201532"
+             data-ad-slot="9304729040"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+</body>
+</html>
