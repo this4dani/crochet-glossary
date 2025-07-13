@@ -171,48 +171,67 @@ body {
 /* Dropdown Menu Styles */
 .nav-dropdown {
     position: relative;
-    display: inline-block; /* Add this */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100px;
+    width: 100px;
+}
+
+/* Match the existing nav hover behavior */
+.nav-dropdown:hover {
+    transform: translateY(-3px);
 }
 
 .dropdown-menu {
     position: absolute;
-    top: 100%;
+    top: 90px; /* Position below the icon */
     left: 50%;
     transform: translateX(-50%);
-    margin-top: 10px;
-    background: rgba(0, 21, 25, 0.95);
+    background: rgba(0, 21, 25, 0.9); /* Your dark teal, transparent */
     border-radius: 8px;
     padding: 8px 0;
-    min-width: 140px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    min-width: 120px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
     
     /* Hide by default */
-    display: none; /* Changed from opacity/visibility */
-    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    
+    z-index: 2000; /* High z-index to ensure it's on top */
 }
 
-/* Show on hover - simplified */
+/* Show on hover */
 .nav-dropdown:hover .dropdown-menu {
-    display: block; /* Changed to display */
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
 }
 
+/* Style the links to match nav icon color */
 .dropdown-menu a {
     display: block;
-    padding: 10px 16px;
-    color: #faf8f3;
+    padding: 8px 16px;
+    color: #faf8f3; /* Same cream color as your nav icons */
     text-decoration: none;
-    font-size: 0.95rem;
-    white-space: nowrap;
-    width: 100%;
+    font-size: 0.9rem;
+    font-family: var(--font-primary);
+    text-align: center;
+    transition: color 0.2s ease;
+    
+    /* Override the default height/width from nav links */
     height: auto;
+    width: auto;
 }
 
 .dropdown-menu a:hover {
-    background: rgba(255, 107, 122, 0.15);
-    color: #ff6b7a;
+    color: #ff6b7a; /* Coral on hover */
 }
 
-.dropdown-menu a img {
+/* Hide any images that might be in dropdown links */
+.dropdown-menu img {
     display: none;
 }
 
