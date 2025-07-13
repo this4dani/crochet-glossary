@@ -171,6 +171,7 @@ body {
 /* Dropdown Menu Styles */
 .nav-dropdown {
     position: relative;
+    display: inline-block; /* Add this */
 }
 
 .dropdown-menu {
@@ -184,19 +185,15 @@ body {
     padding: 8px 0;
     min-width: 140px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: all 0.2s ease-out;
+    
+    /* Hide by default */
+    display: none; /* Changed from opacity/visibility */
     z-index: 1000;
 }
 
-.nav-dropdown:hover .dropdown-menu,
-.nav-dropdown:focus-within .dropdown-menu,
-.dropdown-menu:hover {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
+/* Show on hover - simplified */
+.nav-dropdown:hover .dropdown-menu {
+    display: block; /* Changed to display */
 }
 
 .dropdown-menu a {
@@ -206,30 +203,17 @@ body {
     text-decoration: none;
     font-size: 0.95rem;
     white-space: nowrap;
-    transition: all 0.2s ease;
     width: 100%;
     height: auto;
 }
 
-.dropdown-menu a:hover,
-.dropdown-menu a:focus {
+.dropdown-menu a:hover {
     background: rgba(255, 107, 122, 0.15);
     color: #ff6b7a;
 }
 
 .dropdown-menu a img {
     display: none;
-}
-
-.dropdown-menu a:focus {
-    outline: 2px solid #ff6b7a;
-    outline-offset: -2px;
-}
-
-@media (hover: hover) {
-    .nav-dropdown:hover .dropdown-menu {
-        transition-delay: 0.1s;
-    }
 }
 
 /* ===== TYPOGRAPHY ===== */
