@@ -332,119 +332,114 @@
         </div>
     </footer>
     
-    <!-- Scripts -->
-    <script>
-        // Sticky Navigation
-        window.addEventListener('scroll', function() {
-            const nav = document.getElementById('nav');
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
-        
-        // Toggle Tips & Tricks
-        function toggleTips() {
-            const content = document.getElementById('tips-content');
-            const arrow = document.getElementById('tips-arrow');
-            content.classList.toggle('show');
-            arrow.textContent = content.classList.contains('show') ? '▲' : '▼';
+   <!-- Scripts -->
+<script>
+    // Sticky Navigation
+    window.addEventListener('scroll', function() {
+        const nav = document.getElementById('nav');
+        if (window.scrollY > 50) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
         }
-        
-        // Placeholder functions for search and filter
-        function searchGlossary() {
-            // This will be connected to glossary.js
-            console.log('Search functionality to be implemented');
-        }
-        
-        function filterCategory(category) {
-            // Update active button
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-            
-            // Filter logic to be implemented
-            console.log('Filtering by:', category);
-        }
-        
-        // Load glossary data from API
-        async function loadGlossary() {
-            try {
-                const response = await fetch('https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json');
-                const data = await response.json();
-                
-                const grid = document.getElementById('glossary-grid');
-                const terms = data.terms || data.data || [];
-                
-                // Display first 9 terms as example
-                terms.slice(0, 9).forEach(term => {
-                    const card = createGlossaryCard(term);
-                    grid.appendChild(card);
-                });
-                
-                // Update count
-                document.getElementById('term-count').textContent = `${terms.length} terms`;
-                
-            } catch (error) {
-                console.error('Error loading glossary:', error);
-            }
-        }
-        
-        function createGlossaryCard(term) {
-            const card = document.createElement('div');
-            card.className = 'glossary-card';
-            
-            // Default values if fields are missing
-            const name = term.name_us || term.Name_US || 'Unknown Stitch';
-            const abbr = term.id || term.ID || '';
-            const symbol = term.symbol || term.Symbol || '•';
-            const difficulty = term.difficulty || 1;
-            const nameUK = term.name_uk || term.Name_UK || name;
-            
-            card.innerHTML = `
-                <div class="card-header">
-                    <div>
-                        <div class="stitch-name">${name}</div>
-                        <div class="stitch-abbr">${abbr.toUpperCase()}</div>
-                    </div>
-                    <div class="stitch-symbol">${symbol}</div>
-                </div>
-                <div class="card-details">
-                    <div class="us-uk-terms">
-                        <span><strong>US:</strong> ${name}</span>
-                        ${name !== nameUK ? `<span><strong>UK:</strong> ${nameUK}</span>` : ''}
-                    </div>
-                    <div class="difficulty-stars">
-                        ${generateStars(difficulty)}
-                    </div>
-                </div>
-                <div class="card-menu" onclick="openModal('${term.id || ''}')">⋮</div>
-            `;
-            
-            return card;
-        }
-        
-        function generateStars(difficulty) {
-            let stars = '';
-            for (let i = 1; i <= 5; i++) {
-                stars += `<span class="star ${i <= difficulty ? '' : 'empty'}">★</span>`;
-            }
-            return stars;
-        }
-        
-        function openModal(termId) {
-            // This will open the tabbed popup
-            console.log('Opening modal for:', termId);
-        }
-        
-        // Load glossary on page load
-        document.addEventListener('DOMContentLoaded', loadGlossary);
-    </script>
+    });
     
-    <!-- Connect to existing glossary.js -->
-    <script src="glossary.js"></script>
+    // Toggle Tips & Tricks
+    function toggleTips() {
+        const content = document.getElementById('tips-content');
+        const arrow = document.getElementById('tips-arrow');
+        content.classList.toggle('show');
+        arrow.textContent = content.classList.contains('show') ? '▲' : '▼';
+    }
+    
+    // Load glossary data from API
+    async function loadGlossary() {
+        try {
+            const response = await fetch('https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/glossary.json');
+            const data = await response.json();
+            
+            const grid = document.getElementById('glossary-grid');
+            const terms = data.terms || data.data || data;
+            
+            // Clear loading message
+            grid.innerHTML = '';
+            
+            // Display all terms
+            terms.forEach(term => {
+                const card = createGlossaryCard(term);
+                grid.appendChild(card);
+            });
+            
+            // Update count
+            document.getElementById('term-count').textContent = `${terms.length} terms`;
+            
+        } catch (error) {
+            console.error('Error loading glossary:', error);
+            document.getElementById('glossary-grid').innerHTML = '<p style="color: var(--clr-coral);">Unable to load glossary. Please refresh the page.</p>';
+        }
+    }
+    
+    function createGlossaryCard(term) {
+        const card = document.createElement('div');
+        card.className = 'glossary-card';
+        
+        // Extract and clean data
+        const name = term.name_us || term.Name_US || 'Unknown Stitch';
+        const abbr = term.id || term.ID || '';
+        const symbol = term.symbol || term.Symbol || '•';
+        const difficulty = parseInt(term.difficulty || term.Difficulty || 1);
+        const nameUK = term.name_uk || term.Name_UK || name;
+        
+        card.innerHTML = `
+            <div class="card-header">
+                <div>
+                    <div class="stitch-name">${name}</div>
+                    <div class="stitch-abbr">${abbr.toUpperCase()}</div>
+                </div>
+                <div class="stitch-symbol">${symbol}</div>
+            </div>
+            <div class="card-details">
+                <div class="us-uk-terms">
+                    <span><strong>US:</strong> ${name}</span>
+                    ${name !== nameUK ? `<span><strong>UK:</strong> ${nameUK}</span>` : ''}
+                </div>
+                <div class="difficulty-stars">
+                    ${generateStars(difficulty)}
+                </div>
+            </div>
+            <div class="card-menu" onclick="openModal('${abbr}')">⋮</div>
+        `;
+        
+        return card;
+    }
+    
+    function generateStars(difficulty) {
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += `<span class="star ${i <= difficulty ? '' : 'empty'}">★</span>`;
+        }
+        return stars;
+    }
+    
+    function openModal(termId) {
+        console.log('Opening modal for:', termId);
+    }
+    
+    function searchGlossary() {
+        console.log('Search functionality to be implemented');
+    }
+    
+    function filterCategory(category) {
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('active');
+        });
+        event.target.classList.add('active');
+        console.log('Filtering by:', category);
+    }
+    
+    // Load glossary when page loads
+    document.addEventListener('DOMContentLoaded', loadGlossary);
+</script>
     
     <!-- Modal Styles -->
     <style>
