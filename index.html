@@ -556,18 +556,8 @@
                 nav.classList.remove('scrolled');
             }
         });
-
-        // Floating cards click functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const stitchCards = document.querySelectorAll('.stitch-card');
-            
-            stitchCards.forEach(card => {
-                card.addEventListener('click', function() {
-                    const stitchId = this.getAttribute('data-stitch');
-                    window.location.href = `glossary.html#${stitchId}`;
-                });
-            });
-        });
     </script>
+    <!-- Main JS: Sticky nav, glossary dropdown menu -->
+    <script src="main.js"></script>
 </body>
 </html>

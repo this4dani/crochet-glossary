@@ -292,16 +292,6 @@
     
    <!-- Scripts -->
 <script>
-    // Sticky Navigation
-    window.addEventListener('scroll', function() {
-        const nav = document.getElementById('nav');
-        if (window.scrollY > 50) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
-        }
-    });
-    
     // Toggle Tips & Tricks
     function toggleTips() {
         const content = document.getElementById('tips-content');
@@ -579,5 +569,7 @@
             color: var(--clr-mauve);
         }
     </style>
+    <!-- Main JS: Sticky nav, glossary dropdown menu -->
+    <script src="main.js"></script>
 </body>
 </html>
