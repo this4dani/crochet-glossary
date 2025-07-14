@@ -171,68 +171,68 @@ body {
 /* Dropdown Menu Styles */
 .nav-dropdown {
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: inline-block;
+}
+
+#nav .nav-dropdown {
     height: 100px;
     width: 100px;
 }
 
-/* Match the existing nav hover behavior */
-.nav-dropdown:hover {
-    transform: translateY(-3px);
+#nav .nav-dropdown > a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    height: 100px;
+    width: 100px;
+    position: relative;
 }
 
-.dropdown-menu {
+#nav .dropdown-menu {
     position: absolute;
-    top: 90px; /* Position below the icon */
+    top: 90px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 21, 25, 0.9); /* Your dark teal, transparent */
+    background: rgba(0, 31, 38, 0.95);
     border-radius: 8px;
     padding: 8px 0;
     min-width: 120px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    
-    /* Hide by default */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.2s ease, visibility 0.2s ease;
-    
-    z-index: 2000; /* High z-index to ensure it's on top */
-}
-
-/* Show on hover */
-.nav-dropdown:hover .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-}
-
-/* Style the links to match nav icon color */
-.dropdown-menu a {
-    display: block;
-    padding: 8px 16px;
-    color: #faf8f3; /* Same cream color as your nav icons */
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-family: var(--font-primary);
-    text-align: center;
-    transition: color 0.2s ease;
-    
-    /* Override the default height/width from nav links */
-    height: auto;
-    width: auto;
-}
-
-.dropdown-menu a:hover {
-    color: #ff6b7a; /* Coral on hover */
-}
-
-/* Hide any images that might be in dropdown links */
-.dropdown-menu img {
     display: none;
+    z-index: 2000;
+}
+
+#nav .nav-dropdown:hover .dropdown-menu {
+    display: block;
+}
+
+#nav .dropdown-menu a {
+    display: block !important;
+    padding: 8px 16px !important;
+    color: #faf8f3 !important;
+    text-decoration: none !important;
+    font-size: 0.9rem !important;
+    font-family: var(--font-primary) !important;
+    text-align: center !important;
+    transition: all 0.2s ease !important;
+    height: auto !important;
+    width: auto !important;
+    position: static !important;
+    filter: none !important;
+    opacity: 1 !important;
+    background: transparent !important;
+}
+
+#nav .dropdown-menu a:hover {
+    color: #ff6b7a !important;
+    background: rgba(255, 107, 122, 0.1) !important;
+    transform: none !important;
+}
+
+#nav .dropdown-menu a img {
+    display: none !important;
 }
 
 /* ===== TYPOGRAPHY ===== */
