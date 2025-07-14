@@ -174,11 +174,7 @@ body {
     display: inline-block;
 }
 
-#nav .nav-dropdown {
-    height: 100px;
-    width: 100px;
-}
-
+/* Ensure the glossary link inside nav-dropdown behaves like other nav links */
 #nav .nav-dropdown > a {
     display: flex;
     align-items: center;
@@ -190,6 +186,12 @@ body {
     position: relative;
 }
 
+/* Keep the hover effect for the icon */
+#nav .nav-dropdown > a:hover {
+    transform: translateY(-3px);
+}
+
+/* Dropdown menu positioning and hiding */
 #nav .dropdown-menu {
     position: absolute;
     top: 90px;
@@ -204,10 +206,12 @@ body {
     z-index: 2000;
 }
 
+/* Show dropdown on nav-dropdown hover */
 #nav .nav-dropdown:hover .dropdown-menu {
     display: block;
 }
 
+/* Style the dropdown links */
 #nav .dropdown-menu a {
     display: block !important;
     padding: 8px 16px !important;
@@ -216,7 +220,7 @@ body {
     font-size: 0.9rem !important;
     font-family: var(--font-primary) !important;
     text-align: center !important;
-    transition: all 0.2s ease !important;
+    transition: color 0.2s ease !important;
     height: auto !important;
     width: auto !important;
     position: static !important;
@@ -225,12 +229,14 @@ body {
     background: transparent !important;
 }
 
+/* Dropdown link hover */
 #nav .dropdown-menu a:hover {
     color: #ff6b7a !important;
     background: rgba(255, 107, 122, 0.1) !important;
     transform: none !important;
 }
 
+/* Hide any images in dropdown links */
 #nav .dropdown-menu a img {
     display: none !important;
 }
