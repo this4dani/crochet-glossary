@@ -414,23 +414,32 @@
         <script>
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
-    </div>
-    
-    <!-- Enhanced Navigation with detailed tooltips -->
-    <nav id="nav">
-        <a href="index.html" class="active" title="DANI'S Home - Interactive crochet platform combining 30 years of yarn craft experience with modern pattern adjustment technology">
-            <img src="images/home-heart-door.png" alt="Home">
-        </a>
-        <a href="glossary.html" title="Interactive Crochet Glossary - 253 stitches including single crochet, double crochet, treble, Tunisian, amigurumi techniques">
-            <img src="images/file-folder-magazne-lable.png" alt="Glossary">
-        </a>
-        <a href="story.html" title="My Crochet Journey - From learning chain stitch at age 6 to developing AI-powered pattern adjustment tools">
-            <img src="images/slip-knot-first-chain.png" alt="Story">
-        </a>
-        <a href="follow.html" title="Follow @this4dani - Instagram crochet tutorials, Pinterest pattern boards, LinkedIn tech updates">
-            <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
-        </a>
-    </nav>
+    </div>    
+        <!-- Navigation with Hidden Text for Better Functionality -->
+        <nav id="nav">
+            <a href="index.html">
+                <img src="images/home-heart-door.png" alt="Home">
+                <span class="sr-only">Home</span>
+            </a>
+            <div class="nav-dropdown">
+                <a href="glossary.html" class="active">
+                    <img src="images/file-folder-magazne-lable.png" alt="Glossary">
+                    <span class="sr-only">Glossary</span>
+                </a>
+                <div class="dropdown-menu">
+                    <a href="glossary.html">Glossary</a>
+                    <a href="flashcard.html">Flashcards</a>
+                </div>
+            </div>
+            <a href="story.html">
+                <img src="images/slip-knot-first-chain.png" alt="Story">
+                <span class="sr-only">Story</span>
+            </a>
+            <a href="follow.html">
+                <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
+                <span class="sr-only">Follow</span>
+            </a>
+        </nav>
     
     <!-- Enhanced Floating Stitch Cards -->
     <div class="floating-cards">
