@@ -1,4 +1,4 @@
-// DANI'S Crochet Glossary - Simple Clean Implementation
+// DANI'S Crochet Glossary - Enhanced with Rich Cards
 console.log('Loading DANI\'s Crochet Glossary...');
 
 class SimpleGlossary {
@@ -8,9 +8,14 @@ class SimpleGlossary {
         this.currentFilter = 'all';
         this.searchQuery = '';
         
-        // Your API endpoint
-        this.apiEndpoint = 'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json';
+        // Try multiple API endpoints in case one fails
+        this.apiEndpoints = [
+            'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/glossary.json',
+            'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json',
+            'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/data/glossary.json'
+        ];
         
+        this.currentEndpointIndex = 0;
         this.init();
     }
 
@@ -64,14 +69,24 @@ class SimpleGlossary {
         try {
             console.log('Loading from API...');
             
-            const response = await fetch(this.apiEndpoint);
+            const response = await fetch(this.apiEndpoints[this.currentEndpointIndex]);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`);
             }
             
             const data = await response.json();
-            this.terms = data.data || data.terms || data || [];
+            
+            // Handle different data structures
+            if (data.data && Array.isArray(data.data)) {
+                this.terms = data.data;
+            } else if (data.terms && Array.isArray(data.terms)) {
+                this.terms = data.terms;
+            } else if (Array.isArray(data)) {
+                this.terms = data;
+            } else {
+                throw new Error('Invalid data structure');
+            }
             
             console.log(`Loaded ${this.terms.length} terms`);
             
@@ -80,7 +95,15 @@ class SimpleGlossary {
             
         } catch (error) {
             console.error('Error loading data:', error);
-            this.showError();
+            
+            // Try next endpoint if available
+            if (this.currentEndpointIndex < this.apiEndpoints.length - 1) {
+                this.currentEndpointIndex++;
+                console.log(`Trying alternate endpoint: ${this.apiEndpoints[this.currentEndpointIndex]}`);
+                await this.loadData();
+            } else {
+                this.showError();
+            }
         }
     }
 
@@ -103,28 +126,32 @@ class SimpleGlossary {
     }
 
     matchesCategory(term) {
-        const tags = term.tags || [];
-        const name = (term.name_us || '').toLowerCase();
+        const difficulty = parseInt(term.difficulty || term.Difficulty || 1);
+        const name = (term.name_us || term.Name_US || '').toLowerCase();
+        const tags = term.tags || term.Tags || [];
         
-        const categoryMap = {
-            'basic': ['basic', 'single', 'double', 'chain', 'slip'],
-            'advanced': ['advanced', 'cable', 'bobble', 'cluster'],
-            'techniques': ['technique', 'method', 'join', 'seam']
-        };
+        if (this.currentFilter === 'basic') {
+            return difficulty <= 2 || name.includes('basic') || name.includes('single') || 
+                   name.includes('chain') || name.includes('slip');
+        } else if (this.currentFilter === 'advanced') {
+            return difficulty >= 4 || name.includes('advanced') || name.includes('cable') || 
+                   name.includes('cluster');
+        } else if (this.currentFilter === 'techniques') {
+            return tags.includes('technique') || name.includes('join') || name.includes('seam') ||
+                   name.includes('technique') || name.includes('method');
+        }
         
-        const keywords = categoryMap[this.currentFilter] || [];
-        
-        return tags.some(tag => keywords.includes(tag.toLowerCase())) ||
-               keywords.some(keyword => name.includes(keyword));
+        return true;
     }
 
     matchesSearch(term) {
         const searchFields = [
-            term.name_us || '',
-            term.name_uk || '',
-            term.abbreviation || '',
-            term.description || '',
-            term.notes || ''
+            term.name_us || term.Name_US || '',
+            term.name_uk || term.Name_UK || '',
+            term.abbreviation || term.Abbreviation || '',
+            term.id || term.ID || '',
+            term.description || term.Description || '',
+            term.notes || term.Notes || ''
         ];
         
         return searchFields.some(field => 
@@ -147,26 +174,41 @@ class SimpleGlossary {
         this.hideElement('no-results');
         grid.style.display = 'grid';
         
-        grid.innerHTML = termsToShow.map(term => this.createTermHTML(term)).join('');
+        grid.innerHTML = termsToShow.map(term => this.createCardHTML(term)).join('');
     }
 
-    createTermHTML(term) {
-        const usName = term.name_us || term.name || 'Unknown';
-        const ukName = term.name_uk || usName;
-        const abbrev = term.abbreviation || term.symbol || '';
-        const description = term.description || term.notes || 'No description available';
+    createCardHTML(term) {
+        // Extract data with multiple fallbacks
+        const usName = term.name_us || term.Name_US || term.name || 'Unknown Stitch';
+        const ukName = term.name_uk || term.Name_UK || usName;
+        const abbrev = term.id || term.ID || term.abbreviation || term.Abbreviation || '';
+        const symbol = term.symbol || term.Symbol || '•';
+        const description = term.description || term.Description || term.notes || 'No description available';
+        const difficulty = parseInt(term.difficulty || term.Difficulty || 1);
+        
+        // Generate stars
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += `<span class="star ${i <= difficulty ? '' : 'empty'}">★</span>`;
+        }
         
         return `
-            <div class="term-item">
-                <div class="term-title">${this.escapeHTML(usName)}</div>
-                ${abbrev ? `<div class="term-abbrev">${this.escapeHTML(abbrev)}</div>` : ''}
-                <div class="term-desc">${this.escapeHTML(description)}</div>
-                <div class="term-translations">
-                    <div class="translation-row">
-                        <strong>US:</strong> <span>${this.escapeHTML(usName)}</span>
+            <div class="glossary-card">
+                <div class="card-header">
+                    <div>
+                        <div class="stitch-name">${this.escapeHTML(usName)}</div>
+                        ${abbrev ? `<div class="stitch-abbr">${this.escapeHTML(abbrev.toUpperCase())}</div>` : ''}
                     </div>
-                    <div class="translation-row">
-                        <strong>UK:</strong> <span>${this.escapeHTML(ukName)}</span>
+                    <div class="stitch-symbol">${this.escapeHTML(symbol)}</div>
+                </div>
+                <div class="card-details">
+                    <div class="card-description">${this.escapeHTML(description)}</div>
+                    <div class="us-uk-terms">
+                        <span><strong>US:</strong> ${this.escapeHTML(usName)}</span>
+                        ${usName !== ukName ? `<span><strong>UK:</strong> ${this.escapeHTML(ukName)}</span>` : ''}
+                    </div>
+                    <div class="difficulty-stars">
+                        ${stars}
                     </div>
                 </div>
             </div>
@@ -194,7 +236,7 @@ class SimpleGlossary {
         
         const countElement = document.getElementById('term-count');
         if (countElement) {
-            countElement.textContent = 'Error';
+            countElement.textContent = '0';
         }
     }
 

@@ -54,12 +54,31 @@
             margin: 20px auto;
             max-width: 1200px;
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            overflow-x: auto;
+            overflow-y: hidden
         }
         
         #terms-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(3, minmax(280px, 1fr));
+            grid-template-rows: repeat(3, auto);
             gap: 20px;
+            min-width: 900px;
+        }
+        
+        /* HORIZONTAL SCROLLBAR */
+        .terms-container::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        .terms-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+        }
+
+        .terms-container::-webkit-scrollbar-thumb {
+            background: var(--clr-coral);
+            border-radius: 6px;
         }
         
         /* Term Cards */
