@@ -34,18 +34,19 @@
         }
         
         .content-wrapper::before {
-            content: '';
-            position: absolute;
-            left: 10%;
-            bottom: 20%;
-            width: 500px;
-            height: 500px;
-            background-image: url('images/crochet-grannysquare.png');
-            background-size: contain;
-            background-repeat: no-repeat;
-            opacity: 0.05;
-            z-index: 0;
-        }
+    content: '';
+    position: absolute;
+    left: -10%;
+    top: 10%;
+    width: 600px;
+    height: 600px;
+    background-image: url('images/crochet-grannysquare.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.15;
+    z-index: 0;
+    filter: brightness(0) saturate(100%) invert(98%) sepia(5%) saturate(50%) hue-rotate(20deg) brightness(105%) contrast(98%);
+}
         
         /* Intro container - solid mauve with beveled edges and left accent */
         .intro {
@@ -421,7 +422,7 @@
                 <img src="images/home-heart-door.png" alt="Home">
             </a>
             <div class="nav-dropdown">
-                <a href="glossary.html" class="active">
+                <a href="glossary.html">
                     <img src="images/file-folder-magazne-lable.png" alt="Glossary">
                 </a>
                 <div class="dropdown-menu">
@@ -429,10 +430,10 @@
                     <a href="flashcard.html">Flashcards</a>
                 </div>
             </div>
-            <a href="story.html" class="active">
+            <a href="story.html">
                 <img src="images/slip-knot-first-chain.png" alt="Story">
             </a>
-            <a href="follow.html" class="active">
+            <a href="follow.html">
                 <img src="images/yarn-ball-insert-crochet-hook.png" alt="Social">
             </a>
         </nav>
