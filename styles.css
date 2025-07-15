@@ -773,37 +773,7 @@ a:hover {
 .animate-pulse {
   animation: pulse 2s ease-in-out infinite;
 }
-
-/* ===== FIXES ===== */
-.note-box::before,
-.legal-container::before,
-.privacy-container::before,
-.content-wrapper::before,
-.container::before {
-  display: none !important;
-}
-
-section,
-article,
-div {
-  position: relative;
-  overflow: hidden;
-}
-
-section::before,
-article::before,
-div::before {
-  content: none !important;
-  border: none !important;
-  background: none !important;
-}
-
-.instagram-media {
-  margin: 20px auto !important;
-  max-width: 540px !important;
-  min-width: 326px !important;
-}
-
+/* ===== ACCENT BACKGROUND IMAGES ===== */
 .pattern-bg,
 .granny-bg {
   padding: 40px;
