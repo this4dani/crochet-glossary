@@ -352,6 +352,9 @@ a:hover {
   text-align: center;
   padding: var(--space-xl) var(--space-lg);
   margin-top: var(--space-xxl);
+  position: relative;
+  z-index: 1;
+  background: var(--clr-primary-dark);
 }
 
 .footer p,
@@ -377,6 +380,7 @@ a:hover {
   opacity: 0.4;
   margin: 0 10px;
 }
+
 
 /* ===== HOME PAGE ===== */
 .intro {
