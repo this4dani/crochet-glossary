@@ -46,26 +46,46 @@
             display: none;
         }
         
-        /* Terms Grid Container */
+        /* Scrolling Container for Cards */
+        .cards-scroll-container,
         .terms-container {
             background: var(--clr-primary-dark);
             border-radius: 16px;
             padding: 20px;
             margin: 20px auto;
             max-width: 1200px;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
             overflow-x: auto;
-            overflow-y: hidden
+            overflow-y: hidden;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
         }
-        
+
+        .cards-grid,
         #terms-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(280px, 1fr));
-            grid-template-rows: repeat(3, auto);
+            grid-template-columns: repeat(3, 1fr);
             gap: 20px;
+            width: max-content;
             min-width: 900px;
         }
-        
+
+        /* Add scrollbar styling */
+        .cards-scroll-container::-webkit-scrollbar,
+        .terms-container::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        .cards-scroll-container::-webkit-scrollbar-track,
+        .terms-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+        }
+
+        .cards-scroll-container::-webkit-scrollbar-thumb,
+        .terms-container::-webkit-scrollbar-thumb {
+            background: var(--clr-coral);
+            border-radius: 6px;
+        }
+
         /* HORIZONTAL SCROLLBAR */
         .terms-container::-webkit-scrollbar {
             height: 12px;
