@@ -46,8 +46,7 @@
             display: none;
         }
         
-        /* Scrolling Container for Cards */
-        .cards-scroll-container,
+        /* Terms Container with Horizontal Scroll */
         .terms-container {
             background: var(--clr-primary-dark);
             border-radius: 16px;
@@ -59,34 +58,17 @@
             box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
         }
 
-        .cards-grid,
+        /* FORCE 3x3 GRID LAYOUT */
         #terms-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            width: max-content;
-            min-width: 900px;
+            display: grid !important;
+            grid-template-columns: repeat(3, 320px) !important;
+            grid-auto-flow: row !important;
+            gap: 20px !important;
+            width: max-content !important;
+            min-width: 1020px !important;
         }
 
-        /* Add scrollbar styling */
-        .cards-scroll-container::-webkit-scrollbar,
-        .terms-container::-webkit-scrollbar {
-            height: 12px;
-        }
-
-        .cards-scroll-container::-webkit-scrollbar-track,
-        .terms-container::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-        }
-
-        .cards-scroll-container::-webkit-scrollbar-thumb,
-        .terms-container::-webkit-scrollbar-thumb {
-            background: var(--clr-coral);
-            border-radius: 6px;
-        }
-
-        /* HORIZONTAL SCROLLBAR */
+        /* Custom Scrollbar */
         .terms-container::-webkit-scrollbar {
             height: 12px;
         }
@@ -99,70 +81,111 @@
         .terms-container::-webkit-scrollbar-thumb {
             background: var(--clr-coral);
             border-radius: 6px;
+        }
+
+        .terms-container::-webkit-scrollbar-thumb:hover {
+            background: var(--clr-fuchsia);
         }
         
-        /* Term Cards */
-        .term-item {
+        /* Glossary Cards */
+        .glossary-card {
             background: var(--clr-cream);
             border-radius: 12px;
             padding: 20px;
-            position: relative;
+            width: 320px !important;
+            height: 250px !important;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: all 0.3s ease;
             cursor: pointer;
-            min-height: 200px;
             display: flex;
             flex-direction: column;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
         
-        .term-item:hover {
+        .glossary-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
         }
         
-        .term-title {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: var(--clr-primary-dark);
+        /* Card Header */
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 10px;
         }
         
-        .term-abbrev {
-            font-size: 2rem;
+        .stitch-name {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--clr-primary-dark);
+            line-height: 1.2;
+        }
+        
+        .stitch-abbr {
+            font-size: 1.8rem;
             font-weight: 700;
             color: var(--clr-coral);
-            margin-bottom: 15px;
+            line-height: 1;
+            margin-top: 5px;
         }
         
-        .term-desc {
-            font-size: 0.95rem;
-            color: var(--clr-rich-brown);
-            margin-bottom: 15px;
+        .stitch-symbol {
+            font-size: 1.5rem;
+            color: var(--clr-mauve);
+        }
+        
+        /* Card Details */
+        .card-details {
             flex-grow: 1;
-        }
-        
-        .term-translations {
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            font-size: 0.9rem;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-            padding-top: 10px;
-            margin-top: auto;
+            overflow: hidden;
         }
         
-        .translation-row {
-            display: flex;
-            gap: 10px;
-        }
-        
-        .translation-row strong {
-            color: var(--clr-primary-dark);
-            width: 30px;
-        }
-        
-        .translation-row span {
+        .card-description {
+            font-size: 0.85rem;
             color: var(--clr-rich-brown);
+            margin-bottom: 10px;
+            flex-grow: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+        
+        .us-uk-terms {
+            font-size: 0.8rem;
+            display: flex;
+            gap: 15px;
+            margin-top: auto;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
+        
+        .us-uk-terms strong {
+            color: var(--clr-primary-dark);
+        }
+        
+        .us-uk-terms span {
+            color: var(--clr-rich-brown);
+        }
+        
+        .difficulty-stars {
+            margin-top: 5px;
+            display: flex;
+            gap: 2px;
+        }
+        
+        .star {
+            color: var(--clr-coral);
+            font-size: 1rem;
+        }
+        
+        .star.empty {
+            opacity: 0.3;
         }
         
         /* Search Section */
@@ -230,6 +253,24 @@
         #error-message,
         #no-results {
             display: none;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            #terms-grid {
+                grid-template-columns: 1fr !important;
+                min-width: 100% !important;
+            }
+            
+            .glossary-card {
+                width: 100% !important;
+                height: auto !important;
+                min-height: 200px;
+            }
+            
+            .terms-container {
+                overflow-x: visible;
+            }
         }
     </style>
 </head>
