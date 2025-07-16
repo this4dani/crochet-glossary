@@ -123,6 +123,11 @@ class SimpleGlossary {
         this.filteredTerms = filtered;
         this.render();
         this.updateStats();
+        
+        // RE-SETUP PAGINATION AFTER FILTERING - THIS IS THE FIX!
+        setTimeout(() => {
+            setupPagination();
+        }, 200);
     }
 
     matchesCategory(term) {
@@ -264,8 +269,7 @@ if (document.readyState === 'loading') {
     new SimpleGlossary();
 }
 
-// REPLACE the previous pagination code with this FIXED version
-
+// PAGINATION CODE
 function setupPagination() {
     console.log('Setting up pagination...');
     
