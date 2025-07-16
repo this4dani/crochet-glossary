@@ -264,120 +264,154 @@ if (document.readyState === 'loading') {
     new SimpleGlossary();
 }
 
-// ADD THIS TO THE BOTTOM OF YOUR EXISTING glossary.js FILE
-// This works with your existing API - no changes needed!
+// REPLACE the previous pagination code with this FIXED version
 
-// Simple pagination for glossary cards
 function setupPagination() {
+    console.log('Setting up pagination...');
+    
     const cardsPerPage = 9; // 3x3 grid
     let currentPage = 0;
     
-    // Get all cards
-    const allCards = document.querySelectorAll('.glossary-card');
-    const totalPages = Math.ceil(allCards.length / cardsPerPage);
-    
-    // Create navigation controls
-    const termsContainer = document.querySelector('.terms-container');
-    
-    // Add navigation buttons
-    const navDiv = document.createElement('div');
-    navDiv.style.cssText = 'text-align: center; margin-top: 20px;';
-    navDiv.innerHTML = `
-        <button id="prevPage" style="
-            background: var(--clr-coral);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-        ">← Previous</button>
+    // Wait a bit to ensure cards are rendered
+    setTimeout(() => {
+        // Get all cards
+        const allCards = document.querySelectorAll('.glossary-card');
+        console.log(`Found ${allCards.length} cards`);
         
-        <span id="pageInfo" style="
-            color: var(--clr-coral);
-            margin: 0 20px;
-            font-weight: 600;
-        ">Page 1 of ${totalPages}</span>
+        if (allCards.length === 0) {
+            console.error('No cards found!');
+            return;
+        }
         
-        <button id="nextPage" style="
-            background: var(--clr-coral);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            margin: 0 10px;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-        ">Next →</button>
-    `;
-    
-    // Insert after the terms container
-    termsContainer.parentNode.insertBefore(navDiv, termsContainer.nextSibling);
-    
-    // Function to show specific page
-    function showPage(page) {
-        allCards.forEach((card, index) => {
-            const startIndex = page * cardsPerPage;
-            const endIndex = startIndex + cardsPerPage;
+        const totalPages = Math.ceil(allCards.length / cardsPerPage);
+        
+        // Create navigation controls
+        const termsContainer = document.querySelector('.terms-container');
+        
+        // Remove any existing navigation
+        const existingNav = document.getElementById('pagination-nav');
+        if (existingNav) {
+            existingNav.remove();
+        }
+        
+        // Add navigation buttons
+        const navDiv = document.createElement('div');
+        navDiv.id = 'pagination-nav';
+        navDiv.style.cssText = 'text-align: center; margin-top: 20px;';
+        navDiv.innerHTML = `
+            <button id="prevPage" style="
+                background: var(--clr-coral);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                margin: 0 10px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            ">← Previous</button>
             
-            if (index >= startIndex && index < endIndex) {
-                card.style.display = 'flex';
-            } else {
+            <span id="pageInfo" style="
+                color: var(--clr-coral);
+                margin: 0 20px;
+                font-weight: 600;
+            ">Page 1 of ${totalPages}</span>
+            
+            <button id="nextPage" style="
+                background: var(--clr-coral);
+                color: white;
+                border: none;
+                padding: 10px 20px;
+                margin: 0 10px;
+                border-radius: 25px;
+                cursor: pointer;
+                font-weight: 600;
+                transition: all 0.3s ease;
+            ">Next →</button>
+        `;
+        
+        // Insert after the terms container
+        termsContainer.parentNode.insertBefore(navDiv, termsContainer.nextSibling);
+        
+        // Function to show specific page
+        function showPage(page) {
+            console.log(`Showing page ${page + 1}`);
+            
+            // First hide ALL cards
+            allCards.forEach((card) => {
                 card.style.display = 'none';
+                card.style.visibility = 'hidden';
+                card.style.position = 'absolute';
+                card.style.left = '-9999px';
+            });
+            
+            // Then show only the cards for this page
+            const startIndex = page * cardsPerPage;
+            const endIndex = Math.min(startIndex + cardsPerPage, allCards.length);
+            
+            console.log(`Showing cards ${startIndex} to ${endIndex - 1}`);
+            
+            for (let i = startIndex; i < endIndex; i++) {
+                if (allCards[i]) {
+                    allCards[i].style.display = 'flex';
+                    allCards[i].style.visibility = 'visible';
+                    allCards[i].style.position = 'relative';
+                    allCards[i].style.left = '0';
+                }
             }
-        });
-        
-        // Update page info
-        document.getElementById('pageInfo').textContent = `Page ${page + 1} of ${totalPages}`;
-        
-        // Update button states
-        document.getElementById('prevPage').disabled = page === 0;
-        document.getElementById('nextPage').disabled = page === totalPages - 1;
-        
-        // Style disabled buttons
-        if (page === 0) {
-            document.getElementById('prevPage').style.opacity = '0.5';
-            document.getElementById('prevPage').style.cursor = 'default';
-        } else {
-            document.getElementById('prevPage').style.opacity = '1';
-            document.getElementById('prevPage').style.cursor = 'pointer';
+            
+            // Update page info
+            document.getElementById('pageInfo').textContent = `Page ${page + 1} of ${totalPages}`;
+            
+            // Update button states
+            const prevBtn = document.getElementById('prevPage');
+            const nextBtn = document.getElementById('nextPage');
+            
+            prevBtn.disabled = page === 0;
+            nextBtn.disabled = page === totalPages - 1;
+            
+            // Style disabled buttons
+            if (page === 0) {
+                prevBtn.style.opacity = '0.5';
+                prevBtn.style.cursor = 'default';
+            } else {
+                prevBtn.style.opacity = '1';
+                prevBtn.style.cursor = 'pointer';
+            }
+            
+            if (page === totalPages - 1) {
+                nextBtn.style.opacity = '0.5';
+                nextBtn.style.cursor = 'default';
+            } else {
+                nextBtn.style.opacity = '1';
+                nextBtn.style.cursor = 'pointer';
+            }
+            
+            // Update current page
+            currentPage = page;
         }
         
-        if (page === totalPages - 1) {
-            document.getElementById('nextPage').style.opacity = '0.5';
-            document.getElementById('nextPage').style.cursor = 'default';
-        } else {
-            document.getElementById('nextPage').style.opacity = '1';
-            document.getElementById('nextPage').style.cursor = 'pointer';
-        }
-    }
-    
-    // Add click handlers
-    document.getElementById('prevPage').onclick = () => {
-        if (currentPage > 0) {
-            currentPage--;
-            showPage(currentPage);
-        }
-    };
-    
-    document.getElementById('nextPage').onclick = () => {
-        if (currentPage < totalPages - 1) {
-            currentPage++;
-            showPage(currentPage);
-        }
-    };
-    
-    // Show first page
-    showPage(0);
+        // Add click handlers
+        document.getElementById('prevPage').onclick = () => {
+            if (currentPage > 0) {
+                showPage(currentPage - 1);
+            }
+        };
+        
+        document.getElementById('nextPage').onclick = () => {
+            if (currentPage < totalPages - 1) {
+                showPage(currentPage + 1);
+            }
+        };
+        
+        // Show first page
+        showPage(0);
+        
+    }, 500); // Small delay to ensure cards are loaded
 }
 
 // Call this after glossary loads
-// Add to the end of your existing SimpleGlossary render() method
-// Or call it separately after a delay
-setTimeout(() => {
-    const cards = document.querySelectorAll('.glossary-card');
-    if (cards.length > 0) {
-        setupPagination();
-    }
-}, 1500);
+// Try multiple times to ensure it works
+setTimeout(() => setupPagination(), 1000);
+setTimeout(() => setupPagination(), 2000);
+setTimeout(() => setupPagination(), 3000);
