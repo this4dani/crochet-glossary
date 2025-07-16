@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <style>
+        /* Main container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -15,282 +16,140 @@
             background: #003840;
         }
 
-        /* Tips & Tricks Collapsible */
-        .tips-container {
-            background: var(--clr-secondary-dark);
-            border-radius: 12px;
+        /* Content wrapper with transparent background */
+        .content-wrapper {
+            background: transparent;
+            width: 100%;
+            max-width: 900px;
             margin: 20px auto;
-            max-width: 800px;
-            overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            position: relative;
         }
-        
+
+        /* Search section with inline tips button */
+        .search-section {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px auto;
+            max-width: 800px;
+        }
+
+        /* Tips toggle button styling */
         #tips-toggle {
             background: var(--clr-coral);
             color: var(--clr-warm-white);
-            padding: 15px 25px;
+            padding: 12px 25px;
             cursor: pointer;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-weight: 600;
             transition: all 0.3s ease;
-            width: 100%;
             border: none;
-            text-align: left;
+            border-radius: 25px;
+            min-width: 140px;
+            height: 45px;
+            white-space: nowrap;
         }
         
         #tips-toggle:hover {
             background: var(--clr-fuchsia);
         }
         
+        /* Tips dropdown content */
         #tips-content {
-            position: relative;
-            width: 100%;
+            position: absolute;
+            top: 60px;
+            left: 0;
+            right: 0;
+            z-index: 1000;
             padding: 20px;
-            background: rgba(248, 241, 227, 0.1);
-            border: 1px solid rgba(248, 241, 227, 0.2);
+            background: rgba(248, 241, 227, 0.95);
+            border: 2px solid var(--clr-coral);
             border-radius: 10px;
-            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
         #tips-content.hidden {
             display: none;
         }
         
-        /* Terms Container with Horizontal Scroll */
-        .grid-container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            min-height: 600px;
-            position: relative;
-        }
-
-        /* GRID LAYOUT */
-        #terms-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
-            gap: 20px !important;
-            width: 100% !important;
-            height: auto !important;
-            justify-content: center;
-            padding: 10px;
-        }
-
-        /* Custom Scrollbar */
-        .terms-container::-webkit-scrollbar {
-            height: 12px;
-        }
-
-        .terms-container::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-            border-radius: 6px;
-        }
-
-        .terms-container::-webkit-scrollbar-thumb {
-            background: var(--clr-coral);
-            border-radius: 6px;
-        }
-
-        .terms-container::-webkit-scrollbar-thumb:hover {
-            background: var(--clr-fuchsia);
-        }
-        .content-wrapper {
-            background: #003840;
-            width: 100%;
-            max-width: 900px;
-            margin: 20px auto;
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            position: relative;
-        }
-        
-        /* Glossary Cards */
-        .glossary-card {
-            width: 180px;
-            height: 250px;
-            margin: 0 auto; /* Center individual cards */
-            position: relative;
-            transform-style: preserve-3d;
-            transition: transform 0.6s;
-            cursor: pointer;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-        
-        .glossary-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-        }
-        
-        /* Card Header */
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            margin-bottom: 10px;
-        }
-        
-        .stitch-name {
-            font-size: 1.1rem;
-            font-weight: 700;
-            color: var(--clr-primary-dark);
-            line-height: 1.2;
-        }
-        
-        .stitch-abbr {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--clr-coral);
-            line-height: 1;
-            margin-top: 5px;
-        }
-        
-        .stitch-symbol {
-            font-size: 1.5rem;
-            color: var(--clr-mauve);
-        }
-        
-        /* Card Details */
-        .card-details {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-        }
-        
-        .card-description {
-            font-size: 0.85rem;
-            color: var(--clr-rich-brown);
-            margin-bottom: 10px;
-            flex-grow: 1;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-        
-        .us-uk-terms {
-            font-size: 0.8rem;
-            display: flex;
-            gap: 15px;
-            margin-top: auto;
-            padding-top: 10px;
-            border-top: 1px solid rgba(0, 0, 0, 0.1);
-        }
-        
-        .us-uk-terms strong {
-            color: var(--clr-primary-dark);
-        }
-        
-        .us-uk-terms span {
-            color: var(--clr-rich-brown);
-        }
-        
-        .difficulty-stars {
-            margin-top: 5px;
-            display: flex;
-            gap: 2px;
-        }
-        
-        .star {
-            color: var(--clr-coral);
-            font-size: 1rem;
-        }
-        
-        .star.empty {
-            opacity: 0.3;
-        }
-        
-        /* Search Section */
-        .search-section {
-            text-align: center;
-            margin: 30px auto;
-            max-width: 600px;
-        }
-        
-        .search-container {
-            display: flex;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-        
+        /* Search input field */
         #search-input {
             flex: 1;
+            max-width: 400px;
             padding: 12px 20px;
             border: 2px solid var(--clr-coral);
-            border-radius: 8px;
+            border-radius: 25px;
             background: rgba(255, 255, 255, 0.1);
             color: var(--clr-warm-white);
             font-size: 1rem;
+            height: 45px;
         }
         
         #search-input::placeholder {
             color: rgba(255, 255, 255, 0.6);
         }
         
-        /* Category Filters */
+        /* Category filter buttons */
         .filter-buttons {
             display: flex;
             gap: 10px;
             justify-content: center;
             flex-wrap: wrap;
+            margin-bottom: 20px;
         }
         
         .filter-btn {
-            padding: 8px 20px;
-            border: 2px solid var(--clr-coral);
+            padding: 10px 25px;
             background: transparent;
             color: var(--clr-coral);
+            border: 2px solid var(--clr-coral);
             border-radius: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
             font-weight: 600;
+            min-width: 120px;
+            white-space: nowrap;
         }
         
-        .filter-btn.active,
-        .filter-btn:hover {
+        .filter-btn.active {
             background: var(--clr-coral);
             color: var(--clr-warm-white);
         }
         
-        /* Messages */
-        #loading-message,
-        #error-message,
-        #no-results {
-            text-align: center;
-            padding: 40px;
-            color: var(--clr-coral);
-            font-size: 1.1rem;
+        .filter-btn:hover {
+            background: var(--clr-fuchsia);
+            color: var(--clr-warm-white);
+            border-color: var(--clr-fuchsia);
         }
         
-        #error-message,
-        #no-results {
-            display: none;
+        /* Grid container with background */
+        .grid-container {
+            background: rgba(0, 56, 64, 0.5);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+            min-height: 600px;
+            position: relative;
         }
-        
-        /* Mobile Responsive */
-        @media (max-width: 768px) {
-            #terms-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
-            }
-            
-            .glossary-card {
-                width: 150px;
-                height: 220px;
-            }
-            
-             .content-wrapper {
-                width: 95%;
-                padding: 20px;
-            }
+
+        /* Terms grid layout */
+        #terms-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 180px);
+            gap: 15px;
+            justify-content: center;
+            margin: 0 auto;
+            padding: 0;
         }
-       
-        /* Make cards flippable */
+
+        /* Glossary card base styling */
         .glossary-card {
             width: 180px !important;
             height: 250px !important;
@@ -299,13 +158,19 @@
             transition: transform 0.6s;
             cursor: pointer;
             background: transparent !important;
+            margin: 0 auto;
         }
 
         .glossary-card.flipped {
             transform: rotateY(180deg);
         }
 
-        /* Card faces */
+        .glossary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Card face styling */
         .card-front, .card-back {
             position: absolute;
             width: 100%;
@@ -323,6 +188,7 @@
             align-items: center;
             justify-content: center;
             text-align: center;
+            transform: rotateY(0deg);
         }
 
         .card-back {
@@ -330,14 +196,21 @@
             transform: rotateY(180deg);
             display: flex;
             flex-direction: column;
+            color: var(--clr-primary-dark) !important;
         }
 
-        /* Front side - just basics */
+        /* Card front content */
         .front-name {
             font-size: 1rem;
             font-weight: 300;
             color: var(--clr-primary-dark);
             margin-bottom: 8px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
         }
 
         .front-abbr {
@@ -352,10 +225,10 @@
             color: var(--clr-mauve);
         }
 
-        /* Back side - all details */
+        /* Card back content */
         .back-description {
             font-size: 0.9rem;
-            color: var(--clr-rich-brown);
+            color: var(--clr-primary-dark);
             margin-bottom: 15px;
             flex-grow: 1;
         }
@@ -368,21 +241,70 @@
             border-top: 1px solid rgba(0, 0, 0, 0.1);
         }
 
+        .back-terms strong {
+            color: var(--clr-primary-dark);
+        }
+
         .back-stars {
             display: flex;
             gap: 2px;
             justify-content: center;
         }
 
-        /* Adjust grid for smaller cards */
-        #terms-grid {
-            grid-template-columns: repeat(4, 180px) !important;
-            grid-template-rows: repeat(2, 250px) !important;
-            gap: 12px !important;
-            width: 765px !important;
-            height: 515px !important;
+        .star {
+            color: var(--clr-coral);
+            font-size: 1rem;
         }
-    </style>
+
+        .star.empty {
+            opacity: 0.3;
+        }
+        
+        /* Loading and error messages */
+        #loading-message,
+        #error-message,
+        #no-results {
+            text-align: center;
+            padding: 40px;
+            color: var(--clr-coral);
+            font-size: 1.1rem;
+        }
+        
+        #error-message,
+        #no-results {
+            display: none;
+        }
+        
+        /* Mobile responsive design */
+        @media (max-width: 768px) {
+            #terms-grid {
+                grid-template-columns: repeat(2, 150px);
+            }
+            
+            .glossary-card {
+                width: 150px !important;
+                height: 220px !important;
+            }
+            
+            .content-wrapper {
+                width: 95%;
+                padding: 15px;
+            }
+
+            .search-section {
+                flex-direction: column;
+            }
+
+            .filter-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .filter-btn {
+                width: 200px;
+            }
+        }
+</style>
 </head>
 <body>
     <!-- AdSense Top -->
