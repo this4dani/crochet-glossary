@@ -8,6 +8,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     
     <style>
+        .container {
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
         /* Tips & Tricks Collapsible */
         .tips-container {
             background: var(--clr-secondary-dark);
@@ -38,8 +45,13 @@
         }
         
         #tips-content {
-            padding: 20px 25px;
-            background: rgba(250, 248, 243, 0.05);
+            position: relative;
+            width: 100%;
+            padding: 20px;
+            background: rgba(248, 241, 227, 0.1);
+            border: 1px solid rgba(248, 241, 227, 0.2);
+            border-radius: 10px;
+            margin-top: 10px;
         }
         
         #tips-content.hidden {
@@ -47,25 +59,24 @@
         }
         
         /* Terms Container with Horizontal Scroll */
-        .terms-container {
-            background: var(--clr-primary-dark);
-            border-radius: 16px;
-            padding: 20px;
-            margin: 20px auto;
+        .grid-container {
+            width: 100%;
             max-width: 1200px;
-            overflow-x: auto;
-            overflow-y: hidden;
-            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+            margin: 20px auto;
+            padding: 20px;
+            min-height: 600px;
+            position: relative;
         }
 
-        /* FORCE 3x3 GRID LAYOUT */
+        /* GRID LAYOUT */
         #terms-grid {
-            display: grid !important;
-            grid-template-columns: repeat(3, 320px) !important;
-            grid-auto-flow: row !important;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)) !important;
             gap: 20px !important;
-            width: max-content !important;
-            min-width: 1020px !important;
+            width: 100% !important;
+            height: auto !important;
+            justify-content: center;
+            padding: 10px;
         }
 
         /* Custom Scrollbar */
@@ -86,20 +97,28 @@
         .terms-container::-webkit-scrollbar-thumb:hover {
             background: var(--clr-fuchsia);
         }
+        .content-wrapper {
+            background: #003840;
+            width: 90%;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: visible;
+        }
         
         /* Glossary Cards */
         .glossary-card {
-            background: var(--clr-cream);
-            border-radius: 12px;
-            padding: 20px;
-            width: 320px !important;
-            height: 250px !important;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
+            width: 180px;
+            height: 250px;
+            margin: 0 auto; /* Center individual cards */
             position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
         
         .glossary-card:hover {
@@ -258,112 +277,111 @@
         /* Mobile Responsive */
         @media (max-width: 768px) {
             #terms-grid {
-                grid-template-columns: 1fr !important;
-                min-width: 100% !important;
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important;
             }
             
             .glossary-card {
-                width: 100% !important;
-                height: auto !important;
-                min-height: 200px;
+                width: 150px;
+                height: 220px;
             }
             
-            .terms-container {
-                overflow-x: visible;
+             .content-wrapper {
+                width: 95%;
+                padding: 20px;
             }
         }
        
-/* Make cards flippable */
-.glossary-card {
-    width: 180px !important;
-    height: 250px !important;
-    position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.6s;
-    cursor: pointer;
-    background: transparent !important;
-}
+        /* Make cards flippable */
+        .glossary-card {
+            width: 180px !important;
+            height: 250px !important;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+            background: transparent !important;
+        }
 
-.glossary-card.flipped {
-    transform: rotateY(180deg);
-}
+        .glossary-card.flipped {
+            transform: rotateY(180deg);
+        }
 
-/* Card faces */
-.card-front, .card-back {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+        /* Card faces */
+        .card-front, .card-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
 
-.card-front {
-    background: var(--clr-cream);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
+        .card-front {
+            background: var(--clr-cream);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
 
-.card-back {
-    background: var(--clr-cream);
-    transform: rotateY(180deg);
-    display: flex;
-    flex-direction: column;
-}
+        .card-back {
+            background: var(--clr-cream);
+            transform: rotateY(180deg);
+            display: flex;
+            flex-direction: column;
+        }
 
-/* Front side - just basics */
-.front-name {
-    font-size: 1rem;
-    font-weight: 300;
-    color: var(--clr-primary-dark);
-    margin-bottom: 8px;
-}
+        /* Front side - just basics */
+        .front-name {
+            font-size: 1rem;
+            font-weight: 300;
+            color: var(--clr-primary-dark);
+            margin-bottom: 8px;
+        }
 
-.front-abbr {
-    font-size: 1.8rem;
-    font-weight: 400;
-    color: var(--clr-coral);
-    margin-bottom: 8px;
-}
+        .front-abbr {
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: var(--clr-coral);
+            margin-bottom: 8px;
+        }
 
-.front-symbol {
-    font-size: 1.3rem;
-    color: var(--clr-mauve);
-}
+        .front-symbol {
+            font-size: 1.3rem;
+            color: var(--clr-mauve);
+        }
 
-/* Back side - all details */
-.back-description {
-    font-size: 0.9rem;
-    color: var(--clr-rich-brown);
-    margin-bottom: 15px;
-    flex-grow: 1;
-}
+        /* Back side - all details */
+        .back-description {
+            font-size: 0.9rem;
+            color: var(--clr-rich-brown);
+            margin-bottom: 15px;
+            flex-grow: 1;
+        }
 
-.back-terms {
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-}
+        .back-terms {
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            padding-top: 10px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+        }
 
-.back-stars {
-    display: flex;
-    gap: 2px;
-    justify-content: center;
-}
+        .back-stars {
+            display: flex;
+            gap: 2px;
+            justify-content: center;
+        }
 
-/* Adjust grid for smaller cards */
-#terms-grid {
-    grid-template-columns: repeat(4, 180px) !important;
-    grid-template-rows: repeat(2, 250px) !important;
-    gap: 12px !important;
-    width: 765px !important;
-    height: 515px !important;
-}
+        /* Adjust grid for smaller cards */
+        #terms-grid {
+            grid-template-columns: repeat(4, 180px) !important;
+            grid-template-rows: repeat(2, 250px) !important;
+            gap: 12px !important;
+            width: 765px !important;
+            height: 515px !important;
+        }
     </style>
 </head>
 <body>
