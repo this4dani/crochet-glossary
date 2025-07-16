@@ -274,7 +274,7 @@ if (document.readyState === 'loading') {
 function setupPagination() {
     console.log('Setting up pagination...');
     
-    const cardsPerPage = 9; // 3x3 grid
+    const cardsPerPage = 8; // 4x2 grid
     let currentPage = 0;
     
     // Wait a bit to ensure cards are rendered
