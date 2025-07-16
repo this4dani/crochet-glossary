@@ -183,42 +183,43 @@ class SimpleGlossary {
     }
 
     createCardHTML(term) {
-        // Extract data with multiple fallbacks
-        const usName = term.name_us || term.Name_US || term.name || 'Unknown Stitch';
-        const ukName = term.name_uk || term.Name_UK || usName;
-        const abbrev = term.id || term.ID || term.abbreviation || term.Abbreviation || '';
-        const symbol = term.symbol || term.Symbol || '•';
-        const description = term.description || term.Description || term.notes || 'No description available';
-        const difficulty = parseInt(term.difficulty || term.Difficulty || 1);
-        
-        // Generate stars
-        let stars = '';
-        for (let i = 1; i <= 5; i++) {
-            stars += `<span class="star ${i <= difficulty ? '' : 'empty'}">★</span>`;
-        }
-        
-        return `
-            <div class="glossary-card">
-                <div class="card-header">
-                    <div>
-                        <div class="stitch-name">${this.escapeHTML(usName)}</div>
-                        ${abbrev ? `<div class="stitch-abbr">${this.escapeHTML(abbrev.toUpperCase())}</div>` : ''}
-                    </div>
-                    <div class="stitch-symbol">${this.escapeHTML(symbol)}</div>
+    // Extract data with multiple fallbacks
+    const usName = term.name_us || term.Name_US || term.name || 'Unknown Stitch';
+    const ukName = term.name_uk || term.Name_UK || usName;
+    const abbrev = term.id || term.ID || term.abbreviation || term.Abbreviation || '';
+    const symbol = term.symbol || term.Symbol || '•';
+    const description = term.description || term.Description || term.notes || 'No description available';
+    const difficulty = parseInt(term.difficulty || term.Difficulty || 1);
+    
+    // Generate stars
+    let stars = '';
+    for (let i = 1; i <= 5; i++) {
+        stars += `<span class="star ${i <= difficulty ? '' : 'empty'}">★</span>`;
+    }
+    
+    return `
+        <div class="glossary-card" onclick="this.classList.toggle('flipped')">
+            <!-- Front of card -->
+            <div class="card-front">
+                <div class="front-name">${this.escapeHTML(usName)}</div>
+                ${abbrev ? `<div class="front-abbr">${this.escapeHTML(abbrev.toUpperCase())}</div>` : ''}
+                <div class="front-symbol">${this.escapeHTML(symbol)}</div>
+            </div>
+            
+            <!-- Back of card -->
+            <div class="card-back">
+                <div class="back-description">${this.escapeHTML(description)}</div>
+                <div class="back-terms">
+                    <span><strong>US:</strong> ${this.escapeHTML(usName)}</span>
+                    ${usName !== ukName ? `<span><strong>UK:</strong> ${this.escapeHTML(ukName)}</span>` : ''}
                 </div>
-                <div class="card-details">
-                    <div class="card-description">${this.escapeHTML(description)}</div>
-                    <div class="us-uk-terms">
-                        <span><strong>US:</strong> ${this.escapeHTML(usName)}</span>
-                        ${usName !== ukName ? `<span><strong>UK:</strong> ${this.escapeHTML(ukName)}</span>` : ''}
-                    </div>
-                    <div class="difficulty-stars">
-                        ${stars}
-                    </div>
+                <div class="back-stars">
+                    ${stars}
                 </div>
             </div>
-        `;
-    }
+        </div>
+    `;
+}
 
     updateStats() {
         const countElement = document.getElementById('term-count');
