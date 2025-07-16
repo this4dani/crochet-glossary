@@ -272,6 +272,78 @@
                 overflow-x: visible;
             }
         }
+        /* FORCE 3x3 GRID - OVERRIDE EVERYTHING */
+#terms-grid {
+    display: grid !important;
+    grid-template-columns: 320px 320px 320px !important;
+    grid-auto-rows: 250px !important;
+    gap: 20px !important;
+    width: 1020px !important;
+    overflow: visible !important;
+}
+
+.terms-container {
+    overflow-x: scroll !important;
+    overflow-y: hidden !important;
+    max-height: 830px !important;
+}
+
+/* Fix card sizing */
+.glossary-card {
+    width: 320px !important;
+    height: 250px !important;
+    overflow: hidden !important;
+}
+
+/* Style Tips button to match your design */
+#tips-toggle {
+    background: transparent !important;
+    border: 2px solid var(--clr-coral) !important;
+    color: var(--clr-coral) !important;
+    border-radius: 25px !important;
+    padding: 10px 25px !important;
+    font-size: 1rem !important;
+}
+
+#tips-toggle:hover {
+    background: var(--clr-coral) !important;
+    color: var(--clr-warm-white) !important;
+}
+
+/* Fix Tips container */
+.tips-container {
+    background: transparent !important;
+    border: 2px solid var(--clr-coral) !important;
+    max-width: 600px !important;
+}
+
+#tips-content {
+    background: rgba(61, 26, 43, 0.3) !important;
+    backdrop-filter: blur(10px) !important;
+}
+
+/* Style search input */
+#search-input {
+    background: transparent !important;
+    border: 2px solid var(--clr-coral) !important;
+    border-radius: 25px !important;
+    padding: 10px 20px !important;
+}
+
+#search-input:focus {
+    outline: none !important;
+    border-color: var(--clr-fuchsia) !important;
+}
+
+/* Better filter button styling */
+.filter-buttons {
+    margin-top: 15px !important;
+}
+
+.filter-btn {
+    font-size: 0.9rem !important;
+    padding: 6px 18px !important;
+}
     </style>
 </head>
 <body>
