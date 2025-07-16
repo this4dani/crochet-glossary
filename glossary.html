@@ -9,10 +9,10 @@
     
     <style>
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
             padding: 20px;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            background: #003840;
         }
 
         /* Tips & Tricks Collapsible */
@@ -99,14 +99,13 @@
         }
         .content-wrapper {
             background: #003840;
-            width: 90%;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 30px;
+            width: 100%;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             position: relative;
-            overflow: visible;
         }
         
         /* Glossary Cards */
@@ -363,6 +362,7 @@
 
         .back-terms {
             font-size: 0.85rem;
+            color: var(--clr-primary-dark);
             margin-bottom: 10px;
             padding-top: 10px;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
