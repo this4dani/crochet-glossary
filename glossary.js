@@ -263,3 +263,121 @@ if (document.readyState === 'loading') {
 } else {
     new SimpleGlossary();
 }
+
+// ADD THIS TO THE BOTTOM OF YOUR EXISTING glossary.js FILE
+// This works with your existing API - no changes needed!
+
+// Simple pagination for glossary cards
+function setupPagination() {
+    const cardsPerPage = 9; // 3x3 grid
+    let currentPage = 0;
+    
+    // Get all cards
+    const allCards = document.querySelectorAll('.glossary-card');
+    const totalPages = Math.ceil(allCards.length / cardsPerPage);
+    
+    // Create navigation controls
+    const termsContainer = document.querySelector('.terms-container');
+    
+    // Add navigation buttons
+    const navDiv = document.createElement('div');
+    navDiv.style.cssText = 'text-align: center; margin-top: 20px;';
+    navDiv.innerHTML = `
+        <button id="prevPage" style="
+            background: var(--clr-coral);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+        ">← Previous</button>
+        
+        <span id="pageInfo" style="
+            color: var(--clr-coral);
+            margin: 0 20px;
+            font-weight: 600;
+        ">Page 1 of ${totalPages}</span>
+        
+        <button id="nextPage" style="
+            background: var(--clr-coral);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+        ">Next →</button>
+    `;
+    
+    // Insert after the terms container
+    termsContainer.parentNode.insertBefore(navDiv, termsContainer.nextSibling);
+    
+    // Function to show specific page
+    function showPage(page) {
+        allCards.forEach((card, index) => {
+            const startIndex = page * cardsPerPage;
+            const endIndex = startIndex + cardsPerPage;
+            
+            if (index >= startIndex && index < endIndex) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+        
+        // Update page info
+        document.getElementById('pageInfo').textContent = `Page ${page + 1} of ${totalPages}`;
+        
+        // Update button states
+        document.getElementById('prevPage').disabled = page === 0;
+        document.getElementById('nextPage').disabled = page === totalPages - 1;
+        
+        // Style disabled buttons
+        if (page === 0) {
+            document.getElementById('prevPage').style.opacity = '0.5';
+            document.getElementById('prevPage').style.cursor = 'default';
+        } else {
+            document.getElementById('prevPage').style.opacity = '1';
+            document.getElementById('prevPage').style.cursor = 'pointer';
+        }
+        
+        if (page === totalPages - 1) {
+            document.getElementById('nextPage').style.opacity = '0.5';
+            document.getElementById('nextPage').style.cursor = 'default';
+        } else {
+            document.getElementById('nextPage').style.opacity = '1';
+            document.getElementById('nextPage').style.cursor = 'pointer';
+        }
+    }
+    
+    // Add click handlers
+    document.getElementById('prevPage').onclick = () => {
+        if (currentPage > 0) {
+            currentPage--;
+            showPage(currentPage);
+        }
+    };
+    
+    document.getElementById('nextPage').onclick = () => {
+        if (currentPage < totalPages - 1) {
+            currentPage++;
+            showPage(currentPage);
+        }
+    };
+    
+    // Show first page
+    showPage(0);
+}
+
+// Call this after glossary loads
+// Add to the end of your existing SimpleGlossary render() method
+// Or call it separately after a delay
+setTimeout(() => {
+    const cards = document.querySelectorAll('.glossary-card');
+    if (cards.length > 0) {
+        setupPagination();
+    }
+}, 1500);
