@@ -172,14 +172,39 @@
             position: relative;
         }
 
-        /* Terms grid layout */
+        /* CAROUSEL: Horizontal scrolling container */
+        .terms-container {
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 20px 0;
+            margin: 20px 0;
+        }
+
+        /* Custom scrollbar styling */
+        .terms-container::-webkit-scrollbar {
+            height: 12px;
+        }
+
+        .terms-container::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 6px;
+        }
+
+        .terms-container::-webkit-scrollbar-thumb {
+            background: var(--clr-coral);
+            border-radius: 6px;
+        }
+
+        .terms-container::-webkit-scrollbar-thumb:hover {
+            background: var(--clr-fuchsia);
+        }
+
+        /* CAROUSEL: Terms grid layout */
         #terms-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 180px);
+            display: flex;
             gap: 15px;
-            justify-content: center;
-            margin: 0 auto;
-            padding: 0;
+            padding: 10px;
+            min-width: max-content;
         }
 
         /* Glossary card base styling */
@@ -191,7 +216,7 @@
             transition: transform 0.6s;
             cursor: pointer;
             background: transparent !important;
-            margin: 0 auto;
+            flex-shrink: 0; /* Prevent cards from shrinking in flex container */
         }
 
         .glossary-card.flipped {
@@ -328,12 +353,17 @@
                 min-width: 140px;
             }
             
+            /* Mobile: Keep horizontal scroll */
+            .terms-container {
+                padding: 10px 0;
+            }
+            
             #terms-grid {
                 gap: 10px;
+                padding: 5px;
             }
             
             .glossary-card {
-                flex: 0 0 150px;
                 width: 150px !important;
                 height: 220px !important;
             }
@@ -341,6 +371,26 @@
             .grid-container {
                 width: 95%;
                 padding: 15px;
+            }
+        }
+
+        /* Extra small screens - even smaller cards but still horizontal scroll */
+        @media (max-width: 480px) {
+            .glossary-card {
+                width: 130px !important;
+                height: 200px !important;
+            }
+            
+            .front-name {
+                font-size: 0.9rem;
+            }
+            
+            .front-abbr {
+                font-size: 1.5rem;
+            }
+            
+            .front-symbol {
+                font-size: 1.1rem;
             }
         }
     </style>
@@ -397,6 +447,7 @@
             <p><strong>Take the Quiz:</strong> Test your knowledge with our quizzes (coming soon!).</p>
             <p><strong>Difficulty Levels:</strong> 1 star = beginner, 5 stars = advanced.</p>
             <p><strong>Quick Search:</strong> Use the search bar to find specific stitches instantly.</p>
+            <p><strong>Scroll Through All:</strong> Scroll horizontally to browse all crochet terms!</p>
         </div>
     </div>
     
@@ -426,9 +477,11 @@
             <!-- No Results Message -->
             <div id="no-results">No terms found matching your search.</div>
             
-            <!-- Terms Grid -->
-            <div id="terms-grid">
-                <!-- Terms will be loaded here by glossary.js -->
+            <!-- CAROUSEL: Horizontal scrolling container -->
+            <div class="terms-container">
+                <div id="terms-grid">
+                    <!-- Terms will be loaded here by glossary.js -->
+                </div>
             </div>
         </div>
     </div>
