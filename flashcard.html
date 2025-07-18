@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Crochet Flashcards - DANI'S</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="glossary.css">
     
     <!-- AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9422928756201532" crossorigin="anonymous"></script>
@@ -155,7 +156,7 @@
         border: 2px solid var(--clr-coral);
         color: var(--clr-coral);
         padding: 12px 20px;
-        border-radius: 25px;
+        border-radius: 6px;
         cursor: pointer;
         font-size: 1rem;
         font-weight: 600;
@@ -323,16 +324,18 @@
                 <!-- Flashcard -->
                 <div class="flashcard-wrapper">
                     <div class="flashcard" id="card-element" onclick="flipCard()">
-                        <!-- Front of card -->
-                        <div class="card-front">
-                            <div id="term-name" class="term-name">Loading...</div>
-                            <div id="term-description" class="term-description"></div>
-                            <div id="term-translations" class="term-translations"></div>
-                        </div>
-                        <!-- Back of card -->
-                        <div class="card-back">
-                            <div id="term-abbreviation" class="term-abbreviation">...</div>
-                            <div id="back-notes" class="term-description"></div>
+                        <div class="card-inner" id="card-inner">
+                            <!-- Front of card -->
+                            <div class="card-front">
+                                <div id="term-name" class="term-name">Loading...</div>
+                                <div id="term-description" class="term-description"></div>
+                                <div id="term-translations" class="term-translations"></div>
+                            </div>
+                            <!-- Back of card -->
+                            <div class="card-back">
+                                <div id="term-abbreviation" class="term-abbreviation">...</div>
+                                <div id="back-notes" class="term-description"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -380,7 +383,7 @@
         let studyMode = 'flashcards';
         
         // API endpoint - same as working glossary.js
-        const apiEndpoint = 'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json';
+        const apiEndpoint = 'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/glossary.json';
         
         // Initialize the app
         document.addEventListener('DOMContentLoaded', function() {
@@ -446,7 +449,7 @@
     
     // BACK of card: Line 1 = Name, Line 2 = Instructions
     document.getElementById('term-abbreviation').textContent = term.name_us || term.name || 'Unknown Term';
-    document.getElementById('term-symbol').textContent = term.notes || term.description || term.instruction || 'Practice this technique';
+    document.getElementById('back-notes').textContent = term.notes || term.description || term.instruction || 'Practice this technique';
     
     // Clear translations section (not needed for flashcards)
     const translationsEl = document.getElementById('term-translations');
