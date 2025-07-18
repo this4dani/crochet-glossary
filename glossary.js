@@ -8,14 +8,8 @@ class SimpleGlossary {
         this.currentFilter = 'all';
         this.searchQuery = '';
         
-        // Try multiple API endpoints in case one fails
-        this.apiEndpoints = [
-            'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/glossary.json',
-            'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/terms.json',
-            'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/data/glossary.json'
-        ];
-        
-        this.currentEndpointIndex = 0;
+        // API endpoint for full glossary data
+        this.apiEndpoint = 'https://raw.githubusercontent.com/this4dani/crochet-glossary-api/main/glossary.json';
         this.init();
     }
 
@@ -69,7 +63,7 @@ class SimpleGlossary {
         try {
             console.log('Loading from API...');
             
-            const response = await fetch(this.apiEndpoints[this.currentEndpointIndex]);
+            const response = await fetch(this.apiEndpoint);
             
             if (!response.ok) {
                 throw new Error(`HTTP ${response.status}`);
@@ -77,33 +71,21 @@ class SimpleGlossary {
             
             const data = await response.json();
             
-            // Handle different data structures
-            if (data.data && Array.isArray(data.data)) {
-                this.terms = data.data;
-            } else if (data.terms && Array.isArray(data.terms)) {
+            // Handle the glossary.json structure
+            if (data.terms && Array.isArray(data.terms)) {
                 this.terms = data.terms;
-            } else if (Array.isArray(data)) {
-                this.terms = data;
             } else {
                 throw new Error('Invalid data structure');
             }
             
-            console.log(`Loaded ${this.terms.length} terms`);
+            console.log(`Loaded ${this.terms.length} terms from glossary API`);
             
             this.hideElement('loading-message');
             this.updateStats();
             
         } catch (error) {
             console.error('Error loading data:', error);
-            
-            // Try next endpoint if available
-            if (this.currentEndpointIndex < this.apiEndpoints.length - 1) {
-                this.currentEndpointIndex++;
-                console.log(`Trying alternate endpoint: ${this.apiEndpoints[this.currentEndpointIndex]}`);
-                await this.loadData();
-            } else {
-                this.showError();
-            }
+            this.showError();
         }
     }
 
@@ -183,13 +165,13 @@ class SimpleGlossary {
     }
 
     createCardHTML(term) {
-        // Extract data with multiple fallbacks
-        const usName = term.name_us || term.Name_US || term.name || 'Unknown Stitch';
-        const ukName = term.name_uk || term.Name_UK || usName;
-        const abbrev = term.id || term.ID || term.abbreviation || term.Abbreviation || '';
-        const symbol = term.symbol || term.Symbol || '•';
-        const description = term.description || term.Description || term.notes || 'No description available';
-        const difficulty = parseInt(term.difficulty || term.Difficulty || 1);
+        // Extract data - field names match glossary.json structure
+        const usName = term.name_us || 'Unknown Stitch';
+        const ukName = term.name_uk || usName;
+        const abbrev = term.id || '';
+        const symbol = term.symbol || '•';
+        const description = term.description || 'No description available';
+        const difficulty = parseInt(term.difficulty) || 1;
         
         // Generate stars
         let stars = '';
