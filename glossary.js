@@ -293,7 +293,7 @@ function setupPagination() {
                 border: none;
                 padding: 10px 20px;
                 margin: 0 10px;
-                border-radius: 25px;
+                border-radius: 6px;
                 cursor: pointer;
                 font-weight: 600;
                 transition: all 0.3s ease;
@@ -311,7 +311,7 @@ function setupPagination() {
                 border: none;
                 padding: 10px 20px;
                 margin: 0 10px;
-                border-radius: 25px;
+                border-radius: 6px;
                 cursor: pointer;
                 font-weight: 600;
                 transition: all 0.3s ease;

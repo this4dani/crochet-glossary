@@ -31,7 +31,7 @@
     font-weight: 600;
     transition: all 0.3s ease;
     border: none;
-    border-radius: 25px;
+    border-radius: 6px;
     min-width: 140px;
     height: 45px;
     white-space: nowrap;
@@ -78,7 +78,7 @@
     max-width: 400px;
     padding: 12px 20px;
     border: 2px solid var(--clr-coral);
-    border-radius: 25px;
+    border-radius: 6px;
     background: rgba(255, 255, 255, 0.1);
     color: var(--clr-cream);
     font-size: 1rem;
@@ -113,7 +113,7 @@
     background: transparent;
     color: var(--clr-coral);
     border: 2px solid var(--clr-coral);
-    border-radius: 25px;
+    border-radius: 6px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-weight: 600;
@@ -356,7 +356,7 @@
     color: var(--clr-warm-white);
     border: none;
     padding: 10px 25px;
-    border-radius: 25px;
+    border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
     transition: all 0.3s ease;
