@@ -618,13 +618,17 @@
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
+            if (mode === 'match' || mode === 'test') {
+            // Hide regular flashcard layout
+            document.querySelector('.flashcard-layout').style.display = 'none';
+            document.querySelector('.progress-info').style.display = 'none';
+            
+            // Create appropriate game mode
             if (mode === 'match') {
-                // Hide regular flashcard layout
-                document.querySelector('.flashcard-layout').style.display = 'none';
-                document.querySelector('.progress-info').style.display = 'none';
-                
-                // Create memory match game
                 createMemoryMatch();
+            } else if (mode === 'test') {
+                createMultipleChoice();
+            }
             } else {
                 // Show regular flashcard layout
                 document.querySelector('.flashcard-layout').style.display = 'grid';
@@ -697,6 +701,165 @@ function handleMemoryCardClick(e) {
             }, 1500);
         }
     }
+}
+
+        // Create multiple choice test
+function createMultipleChoice() {
+    // Create test container
+    const testContainer = document.createElement('div');
+    testContainer.id = 'test-game-container';
+    testContainer.innerHTML = `
+        <div style="text-align: center; margin-bottom: 30px; color: var(--clr-warm-white);">
+            <h3>Test Your Knowledge!</h3>
+            <p>Score: <span id="test-score">0</span> / <span id="test-total">10</span></p>
+        </div>
+        <div id="test-card" style="
+            max-width: 600px;
+            margin: 0 auto;
+            background: var(--clr-cream);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        ">
+            <div id="test-question" style="
+                font-size: 1.3rem;
+                color: var(--clr-primary-dark);
+                margin-bottom: 30px;
+                text-align: center;
+                font-weight: 600;
+            "></div>
+            <div id="test-options" style="
+                display: grid;
+                gap: 15px;
+            "></div>
+        </div>
+    `;
+
+            // Test mode variables
+            let currentTestQuestion = 0;
+            let testScore = 0;
+            let currentCorrectAnswer = '';
+
+            // Generate test question
+function generateTestQuestion() {
+    if (currentTestQuestion >= 10) {
+        // Test complete
+        document.getElementById('test-card').innerHTML = `
+            <h2 style="text-align: center; color: var(--clr-coral);">Test Complete!</h2>
+            <p style="text-align: center; font-size: 1.5rem;">Your score: ${testScore} / 10</p>
+            <button onclick="setStudyMode('flashcards')" style="
+                display: block;
+                margin: 20px auto;
+                padding: 12px 30px;
+                background: var(--clr-coral);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 1rem;
+            ">Back to Flashcards</button>
+        `;
+        return;
+    }
+    
+    // Pick random term for question
+    const correctTerm = glossaryTerms[Math.floor(Math.random() * glossaryTerms.length)];
+    currentCorrectAnswer = correctTerm.name_us || correctTerm.name || 'Unknown';
+    
+    // Generate question
+    const questionText = correctTerm.description || correctTerm.notes || correctTerm.instruction || 'No description';
+    document.getElementById('test-question').innerHTML = `
+        <strong>Question ${currentTestQuestion + 1}:</strong><br>
+        Which stitch is described as:<br>
+        "${questionText}"
+    `;
+    
+    // Generate 3 wrong answers
+    const wrongAnswers = glossaryTerms
+        .filter(term => term !== correctTerm)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3)
+        .map(term => term.name_us || term.name || 'Unknown');
+    
+    // Mix correct answer with wrong ones
+    const allAnswers = [...wrongAnswers, currentCorrectAnswer].sort(() => 0.5 - Math.random());
+    
+    // Create option buttons
+    const optionsContainer = document.getElementById('test-options');
+    optionsContainer.innerHTML = '';
+    
+    allAnswers.forEach((answer, index) => {
+        const button = document.createElement('button');
+        button.textContent = answer;
+        button.style.cssText = `
+            padding: 15px 20px;
+            background: transparent;
+            border: 2px solid var(--clr-coral);
+            color: var(--clr-primary-dark);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        `;
+        button.onmouseover = () => {
+            button.style.background = 'var(--clr-coral)';
+            button.style.color = 'white';
+        };
+        button.onmouseout = () => {
+            button.style.background = 'transparent';
+            button.style.color = 'var(--clr-primary-dark)';
+        };
+        button.onclick = () => checkAnswer(answer, button);
+        optionsContainer.appendChild(button);
+    });
+}
+
+// Check test answer
+function checkAnswer(answer, button) {
+    // Disable all buttons
+    const allButtons = document.querySelectorAll('#test-options button');
+    allButtons.forEach(btn => {
+        btn.disabled = true;
+        btn.style.cursor = 'default';
+    });
+    
+    if (answer === currentCorrectAnswer) {
+        // Correct
+        button.style.background = '#4CAF50';
+        button.style.borderColor = '#4CAF50';
+        button.style.color = 'white';
+        testScore++;
+        document.getElementById('test-score').textContent = testScore;
+    } else {
+        // Wrong
+        button.style.background = '#f44336';
+        button.style.borderColor = '#f44336';
+        button.style.color = 'white';
+        
+        // Show correct answer
+        allButtons.forEach(btn => {
+            if (btn.textContent === currentCorrectAnswer) {
+                btn.style.background = '#4CAF50';
+                btn.style.borderColor = '#4CAF50';
+                btn.style.color = 'white';
+            }
+        });
+    }
+    
+    // Next question after delay
+    currentTestQuestion++;
+    setTimeout(() => {
+        generateTestQuestion();
+    }, 2000);
+}
+    
+    // Insert after study modes
+    document.querySelector('.study-modes').insertAdjacentElement('afterend', testContainer);
+    
+    // Start test
+    currentTestQuestion = 0;
+    testScore = 0;
+    generateTestQuestion();
 }
         
         // Update progress display
