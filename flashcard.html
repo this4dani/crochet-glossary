@@ -308,7 +308,7 @@
             <!-- Study mode selection -->
             <div class="study-modes">
                 <button class="mode-btn active" onclick="setStudyMode('flashcards')">Flashcards</button>
-                <button class="mode-btn" onclick="setStudyMode('learn')">Learn</button>
+                <button class="mode-btn" onclick="setStudyMode('quickid')">Quick ID</button>
                 <button class="mode-btn" onclick="setStudyMode('test')">Test</button>
                 <button class="mode-btn" onclick="setStudyMode('match')">Match</button>
             </div>
@@ -613,22 +613,21 @@
         // Handle study mode changes
         window.setStudyMode = function(mode) {
             studyMode = mode;
-            
             // Update active button
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
-            
-            if (mode === 'match' || mode === 'test') {
+            if (mode === 'match' || mode === 'test' || mode === 'quickid') {
             // Hide regular flashcard layout
             document.querySelector('.flashcard-layout').style.display = 'none';
             document.querySelector('.progress-info').style.display = 'none';
-            
             // Create appropriate game mode
             if (mode === 'match') {
                 createMemoryMatch();
             } else if (mode === 'test') {
                 createMultipleChoice();
             }
+            } else if (mode === 'quickid') {
+                createSpeedRecognition();
             } else {
                 // Show regular flashcard layout
                 document.querySelector('.flashcard-layout').style.display = 'grid';
@@ -641,6 +640,7 @@
                 }
             }
         }
+
         // Memory game state variables
         let flippedCards = [];
         let matchedPairs = 0;
@@ -868,6 +868,198 @@ function checkAnswer(answer, button) {
     setTimeout(() => {
         generateTestQuestion();
     }, 2000);
+}
+// Create speed recognition game
+function createSpeedRecognition() {
+    // Create game container
+    const speedContainer = document.createElement('div');
+    speedContainer.id = 'speed-game-container';
+    speedContainer.innerHTML = `
+        <div style="text-align: center; margin-bottom: 30px; color: var(--clr-warm-white);">
+            <h3>Quick ID Challenge!</h3>
+            <p>Identify stitches as fast as you can!</p>
+            <p>Score: <span id="speed-score">0</span> | Lives: <span id="speed-lives">❤️❤️❤️</span></p>
+            <p>Time: <span id="speed-timer">3.0</span> seconds</p>
+        </div>
+        <div id="speed-flash-card" style="
+            max-width: 400px;
+            margin: 0 auto 30px;
+            background: var(--clr-cream);
+            border-radius: 15px;
+            padding: 60px 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        ">
+            <div id="speed-symbol" style="
+                font-size: 4rem;
+                color: var(--clr-coral);
+                font-weight: 800;
+            "></div>
+        </div>
+        <div id="speed-options" style="
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            max-width: 600px;
+            margin: 0 auto;
+        "></div>
+    `;
+    
+    // Insert after study modes
+    document.querySelector('.study-modes').insertAdjacentElement('afterend', speedContainer);
+    
+    // Initialize game
+    speedScore = 0;
+    speedLives = 3;
+    speedTimeLimit = 3.0;
+    speedRound = 0;
+    startSpeedRound();
+}
+// Speed recognition variables
+let speedScore = 0;
+let speedLives = 3;
+let speedTimeLimit = 3.0;
+let speedTimer = null;
+let speedRound = 0;
+let speedCurrentAnswer = '';
+
+// Start a speed recognition round
+function startSpeedRound() {
+    if (speedLives <= 0) {
+        // Game over
+        document.getElementById('speed-flash-card').innerHTML = `
+            <h2 style="color: var(--clr-coral);">Game Over!</h2>
+            <p style="font-size: 1.5rem;">Final Score: ${speedScore}</p>
+        `;
+        document.getElementById('speed-options').innerHTML = `
+            <button onclick="setStudyMode('flashcards')" style="
+                grid-column: span 2;
+                padding: 15px 30px;
+                background: var(--clr-coral);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                font-size: 1.1rem;
+            ">Back to Flashcards</button>
+        `;
+        return;
+    }
+    
+    // Pick random term
+    const correctTerm = glossaryTerms[Math.floor(Math.random() * glossaryTerms.length)];
+    speedCurrentAnswer = correctTerm.name_us || correctTerm.name || 'Unknown';
+    
+    // Show abbreviation or symbol
+    const flashContent = correctTerm.abbreviation || correctTerm.symbol || correctTerm.id || '?';
+    document.getElementById('speed-symbol').textContent = flashContent.toUpperCase();
+    
+    // Generate wrong answers
+    const wrongAnswers = glossaryTerms
+        .filter(term => term !== correctTerm)
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 3)
+        .map(term => term.name_us || term.name || 'Unknown');
+    
+    // Mix answers
+    const allAnswers = [...wrongAnswers, speedCurrentAnswer].sort(() => 0.5 - Math.random());
+    
+    // Create option buttons
+    const optionsContainer = document.getElementById('speed-options');
+    optionsContainer.innerHTML = '';
+    
+    allAnswers.forEach(answer => {
+        const button = document.createElement('button');
+        button.textContent = answer;
+        button.style.cssText = `
+            padding: 20px;
+            background: transparent;
+            border: 2px solid var(--clr-coral);
+            color: var(--clr-primary-dark);
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        `;
+        button.onmouseover = () => {
+            button.style.background = 'var(--clr-coral)';
+            button.style.color = 'white';
+        };
+        button.onmouseout = () => {
+            button.style.background = 'transparent';
+            button.style.color = 'var(--clr-primary-dark)';
+        };
+        button.onclick = () => checkSpeedAnswer(answer);
+        optionsContainer.appendChild(button);
+    });
+    
+    // Start timer
+    startSpeedTimer();
+}
+
+// Start countdown timer
+function startSpeedTimer() {
+    let timeLeft = speedTimeLimit;
+    const timerDisplay = document.getElementById('speed-timer');
+    
+    // Clear any existing timer
+    if (speedTimer) clearInterval(speedTimer);
+    
+    speedTimer = setInterval(() => {
+        timeLeft -= 0.1;
+        timerDisplay.textContent = timeLeft.toFixed(1);
+        
+        if (timeLeft <= 0) {
+            clearInterval(speedTimer);
+            checkSpeedAnswer(null); // Time's up
+        }
+    }, 100);
+}
+
+// Check speed answer
+function checkSpeedAnswer(answer) {
+    // Stop timer
+    if (speedTimer) clearInterval(speedTimer);
+    
+    // Disable buttons
+    const buttons = document.querySelectorAll('#speed-options button');
+    buttons.forEach(btn => btn.disabled = true);
+    
+    if (answer === speedCurrentAnswer) {
+        // Correct!
+        speedScore++;
+        document.getElementById('speed-score').textContent = speedScore;
+        
+        // Speed up for next round (minimum 0.5 seconds)
+        speedTimeLimit = Math.max(0.5, speedTimeLimit - 0.1);
+        
+        // Flash green
+        document.getElementById('speed-flash-card').style.background = '#c8e6c9';
+    } else {
+        // Wrong or timeout
+        speedLives--;
+        const livesDisplay = document.getElementById('speed-lives');
+        livesDisplay.textContent = '❤️'.repeat(speedLives) + '💔'.repeat(3 - speedLives);
+        
+        // Flash red
+        document.getElementById('speed-flash-card').style.background = '#ffcdd2';
+        
+        // Show correct answer
+        buttons.forEach(btn => {
+            if (btn.textContent === speedCurrentAnswer) {
+                btn.style.background = '#4CAF50';
+                btn.style.borderColor = '#4CAF50';
+                btn.style.color = 'white';
+            }
+        });
+    }
+    
+    // Next round after delay
+    speedRound++;
+    setTimeout(() => {
+        document.getElementById('speed-flash-card').style.background = 'var(--clr-cream)';
+        startSpeedRound();
+    }, 1500);
 }
     
     // Insert after study modes
