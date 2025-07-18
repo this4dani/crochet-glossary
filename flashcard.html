@@ -500,7 +500,117 @@
             nextCard();
         }
         
-        // Study mode functions
+        // Create memory match game
+        function createMemoryMatch() {
+            // Create container for match game
+            const gameContainer = document.createElement('div');
+            gameContainer.id = 'match-game-container';
+            gameContainer.innerHTML = `
+                <div style="text-align: center; margin-bottom: 20px; color: var(--clr-warm-white);">
+                    <h3>Match the stitch name with its description!</h3>
+                    <p>Matches: <span id="match-score">0</span> / <span id="match-total">6</span></p>
+                </div>
+                <div id="match-grid" style="
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, 180px);
+                    gap: 15px;
+                    justify-content: center;
+                    margin: 0 auto;
+                    max-width: 800px;
+                "></div>
+            `;
+            
+            // Insert after study modes buttons
+            document.querySelector('.study-modes').insertAdjacentElement('afterend', gameContainer);
+            
+            // Generate 6 random pairs (12 cards total)
+            const matchGrid = document.getElementById('match-grid');
+            const pairs = [];
+            const selectedTerms = [...glossaryTerms].sort(() => 0.5 - Math.random()).slice(0, 6);
+            
+            // Create pairs
+            selectedTerms.forEach((term, index) => {
+                // Card with name
+                pairs.push({
+                    id: `name-${index}`,
+                    pairId: index,
+                    content: term.name_us || term.name || 'Unknown',
+                    type: 'name'
+                });
+                
+                // Card with description
+                pairs.push({
+                    id: `desc-${index}`,
+                    pairId: index,
+                    content: term.description || term.notes || term.instruction || 'No description',
+                    type: 'description'
+                });
+            });
+            
+            // Shuffle pairs
+            pairs.sort(() => 0.5 - Math.random());
+            
+            // Create cards
+            pairs.forEach(pair => {
+                const card = document.createElement('div');
+                card.className = 'memory-card';
+                card.dataset.pairId = pair.pairId;
+                card.dataset.cardId = pair.id;
+                card.innerHTML = `
+                    <div class="memory-card-inner" style="
+                        width: 180px;
+                        height: 250px;
+                        position: relative;
+                        transform-style: preserve-3d;
+                        transition: transform 0.6s;
+                        cursor: pointer;
+                    ">
+                        <div class="memory-card-front" style="
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            backface-visibility: hidden;
+                            background: var(--clr-coral);
+                            border-radius: 12px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-size: 3rem;
+                            color: white;
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                        ">
+                            ?
+                        </div>
+                        <div class="memory-card-back" style="
+                            position: absolute;
+                            width: 100%;
+                            height: 100%;
+                            backface-visibility: hidden;
+                            background: var(--clr-cream);
+                            border-radius: 12px;
+                            transform: rotateY(180deg);
+                            padding: 15px;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            text-align: center;
+                            color: var(--clr-primary-dark);
+                            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+                            font-size: ${pair.type === 'name' ? '1.2rem' : '0.9rem'};
+                            font-weight: ${pair.type === 'name' ? '600' : '400'};
+                            line-height: 1.4;
+                        ">
+                            ${pair.content}
+                        </div>
+                    </div>
+                `;
+                
+                card.addEventListener('click', handleMemoryCardClick);
+                matchGrid.appendChild(card);
+            });
+        }
+
+        // Handle study mode changes
         window.setStudyMode = function(mode) {
             studyMode = mode;
             
@@ -508,9 +618,86 @@
             document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
             event.target.classList.add('active');
             
-            // Different study modes could have different behaviors
-            console.log(`Study mode set to: ${mode}`);
+            if (mode === 'match') {
+                // Hide regular flashcard layout
+                document.querySelector('.flashcard-layout').style.display = 'none';
+                document.querySelector('.progress-info').style.display = 'none';
+                
+                // Create memory match game
+                createMemoryMatch();
+            } else {
+                // Show regular flashcard layout
+                document.querySelector('.flashcard-layout').style.display = 'grid';
+                document.querySelector('.progress-info').style.display = 'block';
+                
+                // Remove match game if it exists
+                const matchContainer = document.getElementById('match-game-container');
+                if (matchContainer) {
+                    matchContainer.remove();
+                }
+            }
         }
+        // Memory game state variables
+        let flippedCards = [];
+        let matchedPairs = 0;
+        let isChecking = false;
+
+        // Handle memory card clicks
+function handleMemoryCardClick(e) {
+    if (isChecking) return;
+    
+    const card = e.currentTarget;
+    const cardInner = card.querySelector('.memory-card-inner');
+    
+    // Don't flip already matched cards
+    if (card.classList.contains('matched')) return;
+    
+    // Don't flip the same card twice
+    if (flippedCards.includes(card)) return;
+    
+    // Flip the card
+    cardInner.style.transform = 'rotateY(180deg)';
+    flippedCards.push(card);
+    
+    // Check for match when 2 cards are flipped
+    if (flippedCards.length === 2) {
+        isChecking = true;
+        
+        const [card1, card2] = flippedCards;
+        const pairId1 = card1.dataset.pairId;
+        const pairId2 = card2.dataset.pairId;
+        
+        if (pairId1 === pairId2) {
+            // Match found
+            setTimeout(() => {
+                card1.classList.add('matched');
+                card2.classList.add('matched');
+                card1.style.opacity = '0.6';
+                card2.style.opacity = '0.6';
+                matchedPairs++;
+                
+                document.getElementById('match-score').textContent = matchedPairs;
+                
+                if (matchedPairs === 6) {
+                    setTimeout(() => {
+                        alert('Great job! You matched all the stitches!');
+                    }, 500);
+                }
+                
+                flippedCards = [];
+                isChecking = false;
+            }, 1000);
+        } else {
+            // No match - flip back
+            setTimeout(() => {
+                card1.querySelector('.memory-card-inner').style.transform = 'rotateY(0deg)';
+                card2.querySelector('.memory-card-inner').style.transform = 'rotateY(0deg)';
+                flippedCards = [];
+                isChecking = false;
+            }, 1500);
+        }
+    }
+}
         
         // Update progress display
         function updateProgress() {
