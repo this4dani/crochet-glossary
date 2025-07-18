@@ -35,10 +35,10 @@ class SimpleGlossary {
             });
         }
 
-        // Filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
+        // Filter buttons - FIXED: using correct class name
+        document.querySelectorAll('.glossary-filter-btn').forEach(btn => {
             btn.addEventListener('click', (e) => {
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.glossary-filter-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
                 this.currentFilter = e.target.dataset.filter;
                 this.filterAndRender();
@@ -183,43 +183,44 @@ class SimpleGlossary {
     }
 
     createCardHTML(term) {
-    // Extract data with multiple fallbacks
-    const usName = term.name_us || term.Name_US || term.name || 'Unknown Stitch';
-    const ukName = term.name_uk || term.Name_UK || usName;
-    const abbrev = term.id || term.ID || term.abbreviation || term.Abbreviation || '';
-    const symbol = term.symbol || term.Symbol || '•';
-    const description = term.description || term.Description || term.notes || 'No description available';
-    const difficulty = parseInt(term.difficulty || term.Difficulty || 1);
-    
-    // Generate stars
-    let stars = '';
-    for (let i = 1; i <= 5; i++) {
-        stars += `<span class="star ${i <= difficulty ? '' : 'empty'}">★</span>`;
+        // Extract data with multiple fallbacks
+        const usName = term.name_us || term.Name_US || term.name || 'Unknown Stitch';
+        const ukName = term.name_uk || term.Name_UK || usName;
+        const abbrev = term.id || term.ID || term.abbreviation || term.Abbreviation || '';
+        const symbol = term.symbol || term.Symbol || '•';
+        const description = term.description || term.Description || term.notes || 'No description available';
+        const difficulty = parseInt(term.difficulty || term.Difficulty || 1);
+        
+        // Generate stars
+        let stars = '';
+        for (let i = 1; i <= 5; i++) {
+            stars += `<span class="star ${i <= difficulty ? '' : 'empty'}">★</span>`;
+        }
+        
+        // FIXED: Removed name from front of card
+        return `
+            <div class="glossary-card" onclick="this.classList.toggle('flipped')">
+                <!-- Front of card -->
+                <div class="card-front">
+                    ${abbrev ? `<div class="front-abbr">${this.escapeHTML(abbrev.toUpperCase())}</div>` : ''}
+                    <div class="front-symbol">${this.escapeHTML(symbol)}</div>
+                </div>
+                
+                <!-- Back of card -->
+                <div class="card-back">
+                    <div class="back-name">${this.escapeHTML(usName)}</div>
+                    <div class="back-description">${this.escapeHTML(description)}</div>
+                    <div class="back-terms">
+                        <span><strong>US:</strong> ${this.escapeHTML(usName)}</span>
+                        ${usName !== ukName ? `<span><strong>UK:</strong> ${this.escapeHTML(ukName)}</span>` : ''}
+                    </div>
+                    <div class="back-stars">
+                        ${stars}
+                    </div>
+                </div>
+            </div>
+        `;
     }
-    
-    return `
-        <div class="glossary-card" onclick="this.classList.toggle('flipped')">
-            <!-- Front of card -->
-            <div class="card-front">
-                <div class="front-name">${this.escapeHTML(usName)}</div>
-                ${abbrev ? `<div class="front-abbr">${this.escapeHTML(abbrev.toUpperCase())}</div>` : ''}
-                <div class="front-symbol">${this.escapeHTML(symbol)}</div>
-            </div>
-            
-            <!-- Back of card -->
-            <div class="card-back">
-                <div class="back-description">${this.escapeHTML(description)}</div>
-                <div class="back-terms">
-                    <span><strong>US:</strong> ${this.escapeHTML(usName)}</span>
-                    ${usName !== ukName ? `<span><strong>UK:</strong> ${this.escapeHTML(ukName)}</span>` : ''}
-                </div>
-                <div class="back-stars">
-                    ${stars}
-                </div>
-            </div>
-        </div>
-    `;
-}
 
     updateStats() {
         const countElement = document.getElementById('term-count');
@@ -290,8 +291,8 @@ function setupPagination() {
         
         const totalPages = Math.ceil(allCards.length / cardsPerPage);
         
-        // Create navigation controls
-        const termsContainer = document.querySelector('.terms-container');
+        // FIXED: Using correct container class
+        const termsContainer = document.querySelector('.glossary-terms');
         
         // Remove any existing navigation
         const existingNav = document.getElementById('pagination-nav');
