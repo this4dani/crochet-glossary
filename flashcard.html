@@ -465,9 +465,9 @@
         
         // Flip card
         window.flipCard = function() {
-            const card = document.getElementById('card-element');
+            const cardInner = document.getElementById('card-inner');
             isFlipped = !isFlipped;
-            card.classList.toggle('flipped', isFlipped);
+            cardInner.classList.toggle('flipped', isFlipped);
         }
         
         // Navigation functions
