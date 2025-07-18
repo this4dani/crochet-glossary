@@ -403,6 +403,19 @@
                 width: 95%;
                 padding: 15px;
             }
+            
+            /* Slightly smaller fonts for tablet */
+            .front-abbr {
+                font-size: 2rem;
+            }
+            
+            .back-name {
+                font-size: 0.9rem;
+            }
+            
+            .back-description {
+                font-size: 0.75rem;
+            }
         }
 
         /* Extra small screens - single column */
@@ -416,6 +429,27 @@
             .glossary-card {
                 width: 130px !important;
                 height: 200px !important;
+            }
+            
+            /* Smaller fonts for mobile */
+            .front-abbr {
+                font-size: 1.8rem;
+            }
+            
+            .front-symbol {
+                font-size: 1.2rem;
+            }
+            
+            .back-name {
+                font-size: 0.85rem;
+            }
+            
+            .back-description {
+                font-size: 0.75rem;
+            }
+            
+            .back-terms {
+                font-size: 0.7rem;
             }
             
             .front-name {
@@ -500,11 +534,6 @@
         
         <!-- Grid Container with 3D effect -->
         <div class="grid-container">
-            <!-- Term count -->
-            <div class="term-count">
-                <span id="term-count">255</span> terms
-            </div>
-            
             <!-- Loading Message -->
             <div id="loading-message">Loading glossary terms...</div>
             
@@ -514,20 +543,21 @@
             <!-- No Results Message -->
             <div id="no-results">No terms found matching your search.</div>
             
-            <!-- CAROUSEL: Navigation Controls -->
-            <div class="carousel-nav">
-                <button class="nav-btn" id="prev-btn">‹</button>
-                <div class="page-info">
-                    Page <span id="current-page">1</span> of <span id="total-pages">1</span>
-                </div>
-                <button class="nav-btn" id="next-btn">›</button>
-            </div>
             
             <!-- CAROUSEL: Grid container for cards -->
             <div class="terms-container">
                 <div id="terms-grid">
                     <!-- Terms will be loaded here by glossary.js -->
                 </div>
+            </div>
+            
+            <!-- CAROUSEL: Navigation Controls (bottom - working one) -->
+            <div class="carousel-nav">
+                <button class="nav-btn" id="prev-btn">‹</button>
+                <div class="page-info">
+                    Page <span id="current-page">1</span> of <span id="total-pages">1</span>
+                </div>
+                <button class="nav-btn" id="next-btn">›</button>
             </div>
         </div>
     </div>
@@ -586,7 +616,6 @@
             totalPages = Math.ceil(allCards.length / cardsPerPage);
             
             document.getElementById('total-pages').textContent = totalPages;
-            document.getElementById('term-count').textContent = allCards.length;
             
             showPage(1);
             setupNavigation();
