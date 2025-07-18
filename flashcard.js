@@ -508,7 +508,7 @@ function generateTestQuestion() {
         const button = document.createElement('button');
         button.textContent = answer;
         button.style.cssText = `
-            padding: 15px 20px;
+            padding: 18px 20px;
             background: transparent;
             border: 2px solid var(--clr-coral);
             color: var(--clr-primary-dark);
@@ -584,28 +584,30 @@ function createSpeedRecognition() {
     speedLives = 3;
     speedTimeLimit = 3.0;
     speedRound = 0;
+    if (speedTimer) clearInterval(speedTimer);
     
     /* Create game container */
     const speedContainer = document.createElement('div');
     speedContainer.id = 'speed-game-container';
     speedContainer.innerHTML = `
-        <div style="text-align: center; margin-bottom: 30px; color: var(--clr-warm-white);">
+        <div style="text-align: center; margin-bottom: 20px; color: var(--clr-warm-white);">
             <h3>Quick ID Challenge!</h3>
             <p>Identify stitches as fast as you can!</p>
             <p>Score: <span id="speed-score">0</span> | Lives: <span id="speed-lives">❤️❤️❤️</span></p>
             <p>Time: <span id="speed-timer">3.0</span> seconds</p>
         </div>
         <div id="speed-flash-card" style="
-            max-width: 400px;
-            margin: 0 auto 30px;
+            max-width: 300px;
+            margin: 0 auto 20px;
             background: var(--clr-cream);
             border-radius: 15px;
-            padding: 60px 30px;
+            padding: 30px 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
             text-align: center;
         ">
+            <p style="margin: 0 0 5px 0; color: var(--clr-primary-dark); font-size: 0.9rem; opacity: 0.8;">What stitch is this?</p>
             <div id="speed-symbol" style="
-                font-size: 4rem;
+                font-size: 3rem;
                 color: var(--clr-coral);
                 font-weight: 800;
             "></div>
@@ -613,8 +615,8 @@ function createSpeedRecognition() {
         <div id="speed-options" style="
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 15px;
-            max-width: 600px;
+            gap: 10px;
+            max-width: 500px;
             margin: 0 auto;
         "></div>
     `;
@@ -631,19 +633,19 @@ function startSpeedRound() {
     if (speedLives <= 0) {
         /* Game over */
         document.getElementById('speed-flash-card').innerHTML = `
-            <h2 style="color: var(--clr-coral);">Game Over!</h2>
-            <p style="font-size: 1.5rem;">Final Score: ${speedScore}</p>
+            <h2 style="color: var(--clr-coral); margin: 0 0 15px 0;">Game Over!</h2>
+            <p style="font-size: 1.3rem; margin: 0;">Final Score: ${speedScore}</p>
         `;
         document.getElementById('speed-options').innerHTML = `
             <button onclick="setStudyMode('flashcards')" style="
                 grid-column: span 2;
-                padding: 15px 30px;
+                padding: 12px 25px;
                 background: var(--clr-coral);
                 color: white;
                 border: none;
                 border-radius: 6px;
                 cursor: pointer;
-                font-size: 1.1rem;
+                font-size: 1rem;
             ">Back to Flashcards</button>
         `;
         return;
@@ -675,22 +677,25 @@ function startSpeedRound() {
         const button = document.createElement('button');
         button.textContent = answer;
         button.style.cssText = `
-            padding: 20px;
-            background: transparent;
+            padding: 15px 20px;
+            background: var(--clr-cream);
             border: 2px solid var(--clr-coral);
             color: var(--clr-primary-dark);
             border-radius: 6px;
             cursor: pointer;
-            font-size: 1.1rem;
+            font-size: 1rem;
+            font-weight: 500;
             transition: all 0.3s ease;
         `;
         button.onmouseover = () => {
             button.style.background = 'var(--clr-coral)';
             button.style.color = 'white';
+            button.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.2)';
         };
         button.onmouseout = () => {
-            button.style.background = 'transparent';
+            button.style.background = 'var(--clr-cream)';
             button.style.color = 'var(--clr-primary-dark)';
+            button.style.boxShadow = '0 2px 4px rgba(0, 0, 0, 0.1)';
         };
         button.onclick = () => checkSpeedAnswer(answer);
         optionsContainer.appendChild(button);
@@ -705,12 +710,22 @@ function startSpeedTimer() {
     let timeLeft = speedTimeLimit;
     const timerDisplay = document.getElementById('speed-timer');
     
+    /* Reset timer styling */
+    timerDisplay.style.color = '';
+    timerDisplay.style.fontWeight = '';
+    
     /* Clear any existing timer */
     if (speedTimer) clearInterval(speedTimer);
     
     speedTimer = setInterval(() => {
         timeLeft -= 0.1;
         timerDisplay.textContent = timeLeft.toFixed(1);
+        
+        /* Add urgency styling when time is low */
+        if (timeLeft <= 1.0) {
+            timerDisplay.style.color = '#f44336';
+            timerDisplay.style.fontWeight = 'bold';
+        }
         
         if (timeLeft <= 0) {
             clearInterval(speedTimer);
@@ -753,6 +768,8 @@ function checkSpeedAnswer(answer) {
                 btn.style.background = '#4CAF50';
                 btn.style.borderColor = '#4CAF50';
                 btn.style.color = 'white';
+            } else {
+                btn.style.opacity = '0.5';
             }
         });
     }
