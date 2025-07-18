@@ -286,46 +286,50 @@
             color: var(--clr-primary-dark) !important;
         }
 
-        /* Card front content */
-        .front-name {
-            font-size: 1rem;
-            font-weight: 300;
-            color: var(--clr-primary-dark);
-            margin-bottom: 8px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            line-clamp: 3;
-            -webkit-box-orient: vertical;
-        }
-
+        /* Card front content - NO NAME, just abbr and symbol */
         .front-abbr {
-            font-size: 1.8rem;
-            font-weight: 400;
+            font-size: 2.2rem;
+            font-weight: 600;
             color: var(--clr-coral);
-            margin-bottom: 8px;
+            margin-bottom: 15px;
         }
 
         .front-symbol {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             color: var(--clr-mauve);
         }
 
-        /* Card back content */
-        .back-description {
-            font-size: 0.9rem;
+        /* Card back content - NAME goes here */
+        .back-name {
+            font-size: 0.95rem;
+            font-weight: 600;
             color: var(--clr-primary-dark);
-            margin-bottom: 15px;
+            margin-bottom: 12px;
+            text-align: center;
+            line-height: 1.2;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+        }
+
+        .back-description {
+            font-size: 0.8rem;
+            color: var(--clr-primary-dark);
+            margin-bottom: 12px;
             flex-grow: 1;
+            line-height: 1.3;
         }
 
         .back-terms {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--clr-primary-dark);
-            margin-bottom: 10px;
-            padding-top: 10px;
+            margin-bottom: 8px;
+            padding-top: 8px;
             border-top: 1px solid rgba(0, 0, 0, 0.1);
+            line-height: 1.2;
         }
 
         .back-terms strong {
