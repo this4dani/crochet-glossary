@@ -20,7 +20,7 @@
 
 /* Tips button - coral background */
 .glossary-tips-btn {
-    background: var(--clr-coral);
+    background: linear-gradient(135deg, var(--clr-coral), var(--clr-fuchsia));
     color: var(--clr-warm-white);
     padding: 12px 25px;
     cursor: pointer;
@@ -40,7 +40,8 @@
 
 .glossary-tips-btn:hover,
 .glossary-tips-btn.active {
-    background: var(--clr-fuchsia);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 /* Tips dropdown content */
@@ -351,8 +352,8 @@
 #nextPage,
 #prev-btn,
 #next-btn {
-    background: var(--clr-coral);
-    color: white;
+    background: linear-gradient(135deg, var(--clr-coral), var(--clr-fuchsia));
+    color: var(--clr-warm-white);
     border: none;
     padding: 10px 25px;
     border-radius: 25px;
@@ -365,8 +366,8 @@
 #nextPage:hover:not(:disabled),
 #prev-btn:hover:not(:disabled),
 #next-btn:hover:not(:disabled) {
-    background: var(--clr-fuchsia);
-    transform: scale(1.05);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-lg);
 }
 
 #prevPage:disabled,
