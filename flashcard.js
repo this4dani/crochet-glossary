@@ -596,29 +596,40 @@ function createSpeedRecognition() {
             <p>Score: <span id="speed-score">0</span> | Lives: <span id="speed-lives">❤️❤️❤️</span></p>
             <p>Time: <span id="speed-timer">3.0</span> seconds</p>
         </div>
-        <div id="speed-flash-card" style="
-            max-width: 300px;
-            margin: 0 auto 20px;
-            background: var(--clr-cream);
-            border-radius: 15px;
-            padding: 30px 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            text-align: center;
+        <div style="
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 30px;
+            max-width: 700px;
+            margin: 0 auto;
+            flex-wrap: wrap;
         ">
-            <p style="margin: 0 0 5px 0; color: var(--clr-primary-dark); font-size: 0.9rem; opacity: 0.8;">What stitch is this?</p>
-            <div id="speed-symbol" style="
-                font-size: 3rem;
-                color: var(--clr-coral);
-                font-weight: 800;
+            <div id="speed-flash-card" style="
+                min-width: 250px;
+                background: var(--clr-cream);
+                border-radius: 15px;
+                padding: 30px 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+                text-align: center;
+                flex-shrink: 0;
+            ">
+                <p style="margin: 0 0 5px 0; color: var(--clr-primary-dark); font-size: 0.9rem; opacity: 0.8;">What stitch is this?</p>
+                <div id="speed-symbol" style="
+                    font-size: 3rem;
+                    color: var(--clr-coral);
+                    font-weight: 800;
+                "></div>
+            </div>
+            <div id="speed-options" style="
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+                min-width: 250px;
+                max-width: 300px;
+                flex: 1;
             "></div>
         </div>
-        <div id="speed-options" style="
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            max-width: 500px;
-            margin: 0 auto;
-        "></div>
     `;
     
     /* Insert after study modes */
@@ -632,13 +643,14 @@ function createSpeedRecognition() {
 function startSpeedRound() {
     if (speedLives <= 0) {
         /* Game over */
+        const gameContainer = document.querySelector('#speed-game-container > div:last-child');
         document.getElementById('speed-flash-card').innerHTML = `
             <h2 style="color: var(--clr-coral); margin: 0 0 15px 0;">Game Over!</h2>
             <p style="font-size: 1.3rem; margin: 0;">Final Score: ${speedScore}</p>
         `;
         document.getElementById('speed-options').innerHTML = `
-            <button onclick="setStudyMode('flashcards')" style="
-                grid-column: span 2;
+            <button onclick="createSpeedRecognition()" style="
+                width: 100%;
                 padding: 12px 25px;
                 background: var(--clr-coral);
                 color: white;
@@ -646,7 +658,7 @@ function startSpeedRound() {
                 border-radius: 6px;
                 cursor: pointer;
                 font-size: 1rem;
-            ">Back to Flashcards</button>
+            ">Restart</button>
         `;
         return;
     }
@@ -769,7 +781,8 @@ function checkSpeedAnswer(answer) {
                 btn.style.borderColor = '#4CAF50';
                 btn.style.color = 'white';
             } else {
-                btn.style.opacity = '0.5';
+                btn.style.opacity = '0.4';
+                btn.style.textDecoration = 'line-through';
             }
         });
     }
